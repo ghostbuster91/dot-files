@@ -4,10 +4,10 @@ sudo apt-get update
 sudo apt-get install git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev
 
 git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-echo 'PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.zshenv
-echo 'eval "$(rbenv init -)"' >> ~/.zshenv
+echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.zshrc
+echo 'eval "$(rbenv init -)"' >> ~/.zshrc
 exec $SHELL
 
 git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-echo 'PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.zshenv
+echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.zshrc
 exec $SHELL
