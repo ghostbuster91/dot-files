@@ -1,3 +1,0 @@
-[submodule ".android-scripts"]
-	path = .android-scripts
-	url = git://github.com/ghostbuster91/android-scripts
