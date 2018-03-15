@@ -1,2 +1,0 @@
-PATH=~/.android-scripts:$PATH
-
