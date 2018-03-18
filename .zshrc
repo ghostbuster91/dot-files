@@ -11,3 +11,8 @@ antigen bundle vi-mode
 antigen bundle mafredri/zsh-async
 antigen bundle sindresorhus/pure
 antigen apply
+
+# Follow copied and moved files to destination directory
+cpf() { cp "$@" && goto "$_"; }
+mvf() { mv "$@" && goto "$_"; }
+goto() { [ -d "$1" ] && cd "$1" || cd "$(dirname "$1")"; }
