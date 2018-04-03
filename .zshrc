@@ -10,6 +10,7 @@ antigen bundle zsh-users/zsh-completions
 antigen bundle vi-mode
 antigen bundle mafredri/zsh-async
 antigen bundle sindresorhus/pure
+antigen bundle docker-compose
 antigen apply
 
 # Follow copied and moved files to destination directory
