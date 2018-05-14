@@ -15,6 +15,10 @@ export NVM_LAZY_LOAD=true
 antigen bundle lukechilds/zsh-nvm
 antigen apply
 
+setopt hist_ignore_all_dups
+setopt hist_reduce_blanks
+setopt hist_save_no_dups
+
 # Follow copied and moved files to destination directory
 cpf() { cp "$@" && goto "$_"; }
 mvf() { mv "$@" && goto "$_"; }
