@@ -11,3 +11,5 @@
 	rebase = true
 [help]
 	autocorrect = 8
+[commit]
+	template = ~/.git-commit-msg-template
