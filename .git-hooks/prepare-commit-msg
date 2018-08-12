@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+sed -i.bak '/^# Please/,/^#$/ d' $1 && rm $1.bak

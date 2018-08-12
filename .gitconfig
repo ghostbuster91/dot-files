@@ -5,6 +5,7 @@
 	excludesfile = ~/.gitignore_global
 	editor = vim
 	autocrlf = input
+	hookspath = ~/.git-hooks
 [push]
 	default = simple
 [pull]
