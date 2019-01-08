@@ -14,3 +14,5 @@
 	autocorrect = 8
 [commit]
 	template = ~/.git-commit-msg-template
+[alias]
+	gone = !bash ~/bin/git-gone.sh
