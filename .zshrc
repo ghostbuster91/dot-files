@@ -13,6 +13,7 @@ antigen bundle docker-compose
 export NVM_LAZY_LOAD=true
 antigen bundle lukechilds/zsh-nvm
 antigen bundle cswl/zsh-rbenv
+antigen bundle nobeans/zsh-sdkman
 antigen apply
 
 setopt hist_ignore_all_dups
