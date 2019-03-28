@@ -14,6 +14,7 @@ export NVM_LAZY_LOAD=true
 antigen bundle lukechilds/zsh-nvm
 antigen bundle cswl/zsh-rbenv
 antigen bundle nobeans/zsh-sdkman
+antigen bundle superbrothers/zsh-kubectl-prompt
 antigen apply
 
 setopt hist_ignore_all_dups
@@ -26,3 +27,6 @@ mvf() { mv "$@" && goto "$_"; }
 goto() { [ -d "$1" ] && cd "$1" || cd "$(dirname "$1")"; }
 gccd() { git clone "$1" && cd "$(basename $_ .git)"; }
 alias copy='xclip -i -selection clipboard'
+
+autoload -U colors; colors
+RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
