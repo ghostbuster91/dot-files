@@ -1,32 +1,73 @@
-source ~/bin/antigen.zsh
-antigen use oh-my-zsh
+# :: Zplug - ZSH plugin manager
+export ZPLUG_HOME=$HOME/.zplug
 
-antigen bundle command-not-found
-antigen bundle git
-antigen bundle pip
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle zsh-users/zsh-autosuggestions
-antigen bundle zsh-users/zsh-completions
-antigen bundle mafredri/zsh-async
-antigen bundle sindresorhus/pure
-antigen bundle docker-compose
+# Check if zplug is installed
+if [[ ! -d $ZPLUG_HOME ]]; then
+  git clone https://github.com/zplug/zplug $ZPLUG_HOME
+  source $ZPLUG_HOME/init.zsh && zplug update --self
+fi
+
+source $ZPLUG_HOME/init.zsh
+
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+
+zplug "zsh-users/zsh-syntax-highlighting"
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-completions"
+
+zplug "plugins/common-aliases",   from:oh-my-zsh
+zplug "plugins/git",   from:oh-my-zsh
+zplug "plugins/command-not-found",   from:oh-my-zsh
+zplug "plugins/pip",   from:oh-my-zsh
+zplug "plugins/docker-compose",   from:oh-my-zsh
+zplug "lib/clipboard", from:oh-my-zsh
+zplug "plugins/terraform", from:oh-my-zsh, lazy:true
+zplug "plugins/extract", from:oh-my-zsh
+zplug "plugins/sudo", from:oh-my-zsh
+
+zplug "modules/history", from:prezto
+zplug "modules/directory",  from:prezto
+
+zplug mafredri/zsh-async, from:github
+zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
+
+zplug "plugins/kubectl", from:oh-my-zsh, defer:2
+zplug "bonnefoa/kubectl-fzf", defer:3
+
 export NVM_LAZY_LOAD=true
-antigen bundle lukechilds/zsh-nvm
-antigen bundle cswl/zsh-rbenv
-antigen bundle nobeans/zsh-sdkman
-antigen bundle superbrothers/zsh-kubectl-prompt
-antigen apply
+zplug "lukechilds/zsh-nvm"
+zplug cswl/zsh-rbenv
+zplug nobeans/zsh-sdkman
+zplug superbrothers/zsh-kubectl-prompt
+zplug "hlissner/zsh-autopair", defer:2
+zplug "oz/safe-paste"
 
-setopt hist_ignore_all_dups
-setopt hist_reduce_blanks
-setopt hist_save_no_dups
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+#zplug load --verbose
+zplug load
 
 # Follow copied and moved files to destination directory
 cpf() { cp "$@" && goto "$_"; }
 mvf() { mv "$@" && goto "$_"; }
 goto() { [ -d "$1" ] && cd "$1" || cd "$(dirname "$1")"; }
 gccd() { git clone "$1" && cd "$(basename $_ .git)"; }
-alias copy='xclip -i -selection clipboard'
+
+# golang: initialize GOPATH
+export GOPATH=$HOME/go
+export PATH=$GOPATH/bin:$PATH
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 autoload -U colors; colors
 RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
+
+# Manual installation:
+# https://github.com/junegunn/fzf
+# https://github.com/bonnefoa/kubectl-fzf
