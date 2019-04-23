@@ -11,36 +11,38 @@ source $ZPLUG_HOME/init.zsh
 
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
-zplug "zsh-users/zsh-syntax-highlighting"
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-completions"
+zplug "zsh-users/zsh-completions"           
+zplug "zsh-users/zsh-autosuggestions"       
+zplug "zsh-users/zsh-syntax-highlighting"      
 
 zplug "plugins/common-aliases",   from:oh-my-zsh
 zplug "plugins/git",   from:oh-my-zsh
 zplug "plugins/command-not-found",   from:oh-my-zsh
-zplug "plugins/pip",   from:oh-my-zsh
 zplug "plugins/docker-compose",   from:oh-my-zsh
 zplug "lib/clipboard", from:oh-my-zsh
-zplug "plugins/terraform", from:oh-my-zsh, lazy:true
 zplug "plugins/extract", from:oh-my-zsh
 zplug "plugins/sudo", from:oh-my-zsh
 
 zplug "modules/history", from:prezto
 zplug "modules/directory",  from:prezto
 
-zplug mafredri/zsh-async, from:github
-zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
+zplug "mafredri/zsh-async", from:github
+zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
 
 zplug "plugins/kubectl", from:oh-my-zsh, defer:2
 zplug "bonnefoa/kubectl-fzf", defer:3
 
 export NVM_LAZY_LOAD=true
 zplug "lukechilds/zsh-nvm"
-zplug cswl/zsh-rbenv
-zplug nobeans/zsh-sdkman
-zplug superbrothers/zsh-kubectl-prompt
+zplug "cswl/zsh-rbenv"
+zplug "nobeans/zsh-sdkman"
+zplug "superbrothers/zsh-kubectl-prompt"
 zplug "hlissner/zsh-autopair", defer:2
 zplug "oz/safe-paste"
+
+# Enhanced cd
+zplug "b4b4r07/enhancd", use:init.sh
+# export ENHANCD_FILTER=fzf
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
@@ -49,9 +51,6 @@ if ! zplug check --verbose; then
         echo; zplug install
     fi
 fi
-
-#zplug load --verbose
-zplug load
 
 # Follow copied and moved files to destination directory
 cpf() { cp "$@" && goto "$_"; }
@@ -67,6 +66,9 @@ export PATH=$GOPATH/bin:$PATH
 
 autoload -U colors; colors
 RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
+
+#zplug load --verbose
+zplug load
 
 # Manual installation:
 # https://github.com/junegunn/fzf
