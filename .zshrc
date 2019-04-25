@@ -38,11 +38,10 @@ zplug "cswl/zsh-rbenv"
 zplug "nobeans/zsh-sdkman"
 zplug "superbrothers/zsh-kubectl-prompt"
 zplug "hlissner/zsh-autopair", defer:2
-zplug "oz/safe-paste"
 
 # Enhanced cd
 zplug "b4b4r07/enhancd", use:init.sh
-# export ENHANCD_FILTER=fzf
+export ENHANCD_FILTER=fzf
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
@@ -64,7 +63,7 @@ export PATH=$GOPATH/bin:$PATH
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-autoload -U colors; colors
+# autoload -U colors; colors
 RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
 
 #zplug load --verbose
