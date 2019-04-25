@@ -79,6 +79,10 @@ if ! zplug check --verbose; then
     fi
 fi
 
+# https://gist.github.com/anchor/4076792
+autoload -U select-word-style
+select-word-style bash
+
 
 zplug load
 RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
