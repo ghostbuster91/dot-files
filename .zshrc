@@ -11,24 +11,45 @@ source $ZPLUG_HOME/init.zsh
 
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
-zplug "zsh-users/zsh-completions"           
-zplug "zsh-users/zsh-autosuggestions"       
-zplug "zsh-users/zsh-syntax-highlighting"      
+zplug "b4b4r07/enhancd", use:init.sh
+export ENHANCD_FILTER=fzf
 
+zplug "zsh-users/zsh-completions",              defer:0
+zplug "zsh-users/zsh-autosuggestions",          defer:2, on:"zsh-users/zsh-completions"
+zplug "zsh-users/zsh-syntax-highlighting",      defer:3, on:"zsh-users/zsh-autosuggestions"
+
+zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/common-aliases",   from:oh-my-zsh
-zplug "plugins/git",   from:oh-my-zsh
-zplug "plugins/command-not-found",   from:oh-my-zsh
-zplug "plugins/docker-compose",   from:oh-my-zsh
-zplug "lib/clipboard", from:oh-my-zsh
-zplug "plugins/extract", from:oh-my-zsh
 zplug "plugins/sudo", from:oh-my-zsh
-
-zplug "modules/history", from:prezto
-zplug "modules/directory",  from:prezto
+zplug "plugins/docker", from:oh-my-zsh
+zplug "plugins/docker-compose", from:oh-my-zsh
+zplug "plugins/helm", from:oh-my-zsh
 
 zplug "mafredri/zsh-async", from:github
 zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
 
+zplug "modules/history", from:prezto
+
+alias ls="ls --color"
+alias ll="ls -l --color"
+alias la="ls -a --color"
+zplug "dbkaplun/smart-cd" # automatic ls in dirs, git status in repos
+
+zplug "stedolan/jq", \
+    from:gh-r, \
+    as:command, \
+    rename-to:jq, \
+    use:"jq-linux64", \
+    if:"[[ $OSTYPE == *linux* ]]"
+
+zplug "junegunn/fzf-bin", \
+    from:gh-r, \
+    as:command, \
+    rename-to:fzf, \
+    use:"*linux*amd64*", \
+    if:"[[ $OSTYPE == *linux* ]]"
+
+zplug "junegunn/fzf", use:shell/key-bindings.zsh
 zplug "plugins/kubectl", from:oh-my-zsh, defer:2
 zplug "bonnefoa/kubectl-fzf", defer:3
 
@@ -37,21 +58,10 @@ zplug "lukechilds/zsh-nvm"
 zplug "cswl/zsh-rbenv"
 zplug "nobeans/zsh-sdkman"
 zplug "superbrothers/zsh-kubectl-prompt"
-zplug "hlissner/zsh-autopair", defer:2
 
-# Enhanced cd
-zplug "b4b4r07/enhancd", use:init.sh
-export ENHANCD_FILTER=fzf
+zplug "changyuheng/fz", defer:1
+zplug "rupa/z", use:z.sh
 
-# Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
-fi
-
-# Follow copied and moved files to destination directory
 cpf() { cp "$@" && goto "$_"; }
 mvf() { mv "$@" && goto "$_"; }
 goto() { [ -d "$1" ] && cd "$1" || cd "$(dirname "$1")"; }
@@ -61,14 +71,19 @@ gccd() { git clone "$1" && cd "$(basename $_ .git)"; }
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$PATH
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+ # Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
 
-# autoload -U colors; colors
-RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
 
-#zplug load --verbose
 zplug load
+RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
 
 # Manual installation:
 # https://github.com/junegunn/fzf
 # https://github.com/bonnefoa/kubectl-fzf
+#"go get -u github.com/eekwong/kubectl-fzf/cmd/cache_builder"
