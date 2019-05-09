@@ -42,14 +42,6 @@ zplug "stedolan/jq", \
     use:"jq-linux64", \
     if:"[[ $OSTYPE == *linux* ]]"
 
-zplug "junegunn/fzf-bin", \
-    from:gh-r, \
-    as:command, \
-    rename-to:fzf, \
-    use:"*linux*amd64*", \
-    if:"[[ $OSTYPE == *linux* ]]"
-
-zplug "junegunn/fzf", use:shell/key-bindings.zsh
 zplug "plugins/kubectl", from:oh-my-zsh, defer:2
 zplug "bonnefoa/kubectl-fzf", defer:3
 
@@ -66,6 +58,14 @@ zplug "ahmetb/kubectx", \
 	from:gh-r, \
     as:command, \
     use:'(*).sh'
+
+zplug 'junegunn/fzf', \
+      as:command, \
+      use:'bin/{fzf,fzf-tmux}', \
+      if:"[[ $OSTYPE == linux* || $OSTYPE == darwin* ]]", \
+      hook-build:'./install --key-bindings --completion --no-update-rc'
+zplug "junegunn/fzf", from:github, use:"shell/completion.zsh"
+zplug "junegunn/fzf", from:github, use:"shell/key-bindings.zsh"
 
 cpf() { cp "$@" && goto "$_"; }
 mvf() { mv "$@" && goto "$_"; }
