@@ -62,6 +62,11 @@ zplug "superbrothers/zsh-kubectl-prompt"
 zplug "changyuheng/fz", defer:1
 zplug "rupa/z", use:z.sh
 
+zplug "ahmetb/kubectx", \
+	from:gh-r, \
+    as:command, \
+    use:'(*).sh'
+
 cpf() { cp "$@" && goto "$_"; }
 mvf() { mv "$@" && goto "$_"; }
 goto() { [ -d "$1" ] && cd "$1" || cd "$(dirname "$1")"; }
