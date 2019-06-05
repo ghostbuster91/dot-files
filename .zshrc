@@ -25,6 +25,7 @@ zplug "plugins/docker", from:oh-my-zsh
 zplug "plugins/docker-compose", from:oh-my-zsh
 zplug "plugins/helm", from:oh-my-zsh
 zplug "plugins/extract", from:oh-my-zsh
+zplug "plugins/docker", from:oh-my-zsh
 
 zplug "mafredri/zsh-async", from:github
 zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
