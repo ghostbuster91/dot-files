@@ -19,6 +19,7 @@ zplug "zsh-users/zsh-autosuggestions",          defer:2, on:"zsh-users/zsh-compl
 zplug "zsh-users/zsh-syntax-highlighting",      defer:3, on:"zsh-users/zsh-autosuggestions"
 
 zplug "plugins/git", from:oh-my-zsh
+zplug "plugins/common-aliases",   from:oh-my-zsh
 zplug "plugins/sudo", from:oh-my-zsh
 zplug "plugins/docker", from:oh-my-zsh
 zplug "plugins/docker-compose", from:oh-my-zsh
@@ -63,13 +64,7 @@ zplug "ahmetb/kubectx", \
 zplug "junegunn/fzf-bin", as:command, from:gh-r, rename-to:fzf
 zplug "junegunn/fzf", from:github, use:"shell/completion.zsh"
 zplug "junegunn/fzf", from:github, use:"shell/key-bindings.zsh"
-zplug "sharkdp/fd", as:command, from:gh-r, rename-to:fd
-
-
-cpf() { cp "$@" && goto "$_"; }
-mvf() { mv "$@" && goto "$_"; }
-goto() { [ -d "$1" ] && cd "$1" || cd "$(dirname "$1")"; }
-gccd() { git clone "$1" && cd "$(basename $_ .git)"; }
+zplug "sharkdp/fd", as:command, from:gh-r, rename-to:fdd
 
 # golang: initialize GOPATH
 export GOPATH=$HOME/go
@@ -97,4 +92,4 @@ RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
 
 
 export FZF_CTRL_T_OPTS="--ansi --preview-window 'right:60%' --preview 'bat --color=always --style=header,grid --line-range :300 {}'"
-export FZF_CTRL_T_COMMAND="fd -I --type file"
+export FZF_CTRL_T_COMMAND="fdd -I --type file"
