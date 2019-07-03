@@ -19,7 +19,6 @@ zplug "zsh-users/zsh-autosuggestions",          defer:2, on:"zsh-users/zsh-compl
 zplug "zsh-users/zsh-syntax-highlighting",      defer:3, on:"zsh-users/zsh-autosuggestions"
 
 zplug "plugins/git", from:oh-my-zsh
-zplug "plugins/common-aliases",   from:oh-my-zsh
 zplug "plugins/sudo", from:oh-my-zsh
 zplug "plugins/docker", from:oh-my-zsh
 zplug "plugins/docker-compose", from:oh-my-zsh
@@ -61,13 +60,11 @@ zplug "ahmetb/kubectx", \
     as:command, \
     use:'(*).sh'
 
-zplug 'junegunn/fzf', \
-      as:command, \
-      use:'bin/{fzf,fzf-tmux}', \
-      if:"[[ $OSTYPE == linux* || $OSTYPE == darwin* ]]", \
-      hook-build:'./install --key-bindings --completion --no-update-rc'
+zplug "junegunn/fzf-bin", as:command, from:gh-r, rename-to:fzf
 zplug "junegunn/fzf", from:github, use:"shell/completion.zsh"
 zplug "junegunn/fzf", from:github, use:"shell/key-bindings.zsh"
+zplug "sharkdp/fd", as:command, from:gh-r, rename-to:fd
+
 
 cpf() { cp "$@" && goto "$_"; }
 mvf() { mv "$@" && goto "$_"; }
@@ -94,7 +91,10 @@ select-word-style bash
 zplug load
 RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
 
-# Manual installation:
-# https://github.com/junegunn/fzf
-# https://github.com/bonnefoa/kubectl-fzf
 #"go get -u github.com/eekwong/kubectl-fzf/cmd/cache_builder"
+# added by travis gem
+[ -f /home/kghost/.travis/travis.sh ] && source /home/kghost/.travis/travis.sh
+
+
+export FZF_CTRL_T_OPTS="--ansi --preview-window 'right:60%' --preview 'bat --color=always --style=header,grid --line-range :300 {}'"
+export FZF_CTRL_T_COMMAND="fd -I --type file"
