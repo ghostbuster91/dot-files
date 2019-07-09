@@ -86,10 +86,11 @@ select-word-style bash
 zplug load
 RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
 
-#"go get -u github.com/eekwong/kubectl-fzf/cmd/cache_builder"
-# added by travis gem
-[ -f /home/kghost/.travis/travis.sh ] && source /home/kghost/.travis/travis.sh
-
-
 export FZF_CTRL_T_OPTS="--ansi --preview-window 'right:60%' --preview 'bat --color=always --style=header,grid --line-range :300 {}'"
 export FZF_CTRL_T_COMMAND="fdd -I --type file"
+
+autoload -U edit-command-line
+# Emacs style
+zle -N edit-command-line
+bindkey '^xe' edit-command-line
+bindkey '^x^e' edit-command-line
