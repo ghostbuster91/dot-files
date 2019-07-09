@@ -69,6 +69,9 @@ zplug "junegunn/fzf", from:github, use:"shell/key-bindings.zsh"
 zplug "sharkdp/fd", as:command, from:gh-r, rename-to:fdd
 
 zplug "zdharma/zsh-diff-so-fancy", as:command, use:bin/git-dsf
+zplug 'wfxr/forgit', defer:1
+zplug "MichaelAquilina/zsh-you-should-use"
+zplug 'b4b4r07/copy', as:command, use:'(*).sh', rename-to:'$1'
 
 # golang: initialize GOPATH
 export GOPATH=$HOME/go
