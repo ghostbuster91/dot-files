@@ -16,7 +16,9 @@ export ENHANCD_FILTER=fzf
 
 zplug "zsh-users/zsh-completions",              defer:0
 zplug "zsh-users/zsh-autosuggestions",          defer:2, on:"zsh-users/zsh-completions"
-zplug "zsh-users/zsh-syntax-highlighting",      defer:3, on:"zsh-users/zsh-autosuggestions"
+zplug "zdharma/fast-syntax-highlighting",       defer:3, on:"zsh-users/zsh-autosuggestions"
+export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+
 
 zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/common-aliases",   from:oh-my-zsh
