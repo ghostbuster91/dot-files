@@ -6,6 +6,7 @@
 	editor = vim
 	autocrlf = input
 	hookspath = ~/.git-hooks
+    pager = diff-so-fancy | less -FXRi
 [push]
 	default = simple
 [pull]

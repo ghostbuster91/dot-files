@@ -68,6 +68,8 @@ zplug "junegunn/fzf", from:github, use:"shell/completion.zsh"
 zplug "junegunn/fzf", from:github, use:"shell/key-bindings.zsh"
 zplug "sharkdp/fd", as:command, from:gh-r, rename-to:fdd
 
+zplug "zdharma/zsh-diff-so-fancy", as:command, use:bin/git-dsf
+
 # golang: initialize GOPATH
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$PATH
