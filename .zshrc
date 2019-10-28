@@ -51,8 +51,8 @@ zplug "bonnefoa/kubectl-fzf", defer:3
 
 export NVM_LAZY_LOAD=true
 zplug "lukechilds/zsh-nvm"
-zplug "cswl/zsh-rbenv"
-zplug "nobeans/zsh-sdkman"
+zplug "mattberther/zsh-rbenv"
+zplug "matthieusb/zsh-sdkman"
 zplug "superbrothers/zsh-kubectl-prompt"
 
 zplug "changyuheng/fz", defer:1
@@ -101,3 +101,6 @@ autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '^xe' edit-command-line
 bindkey '^x^e' edit-command-line
+
+
+export SBT_OPTS="-J-Xmx8G"
