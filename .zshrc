@@ -27,41 +27,45 @@ zplug "plugins/docker", from:oh-my-zsh
 zplug "plugins/docker-compose", from:oh-my-zsh
 zplug "plugins/helm", from:oh-my-zsh
 zplug "plugins/extract", from:oh-my-zsh
-zplug "plugins/docker", from:oh-my-zsh
 
 zplug "mafredri/zsh-async", from:github
 zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
 
 zplug "modules/history", from:prezto
 
-alias ls="ls --color"
-alias ll="ls -l --color"
-alias la="ls -a --color"
-zplug "dbkaplun/smart-cd" # automatic ls in dirs, git status in repos
+alias ls='exa'
+alias ll='exa -l'
+alias lll='exa -l | less'
+alias lla='exa -la'
+alias llt='exa -T'
+alias llfu='exa -bghHliS --git'
 
-zplug "stedolan/jq", \
-    from:gh-r, \
-    as:command, \
-    rename-to:jq, \
-    use:"jq-linux64", \
-    if:"[[ $OSTYPE == *linux* ]]"
+alias bat='batcat'
+#zplug "dbkaplun/smart-cd" # automatic ls in dirs, git status in repos
 
-zplug "plugins/kubectl", from:oh-my-zsh, defer:2
-zplug "bonnefoa/kubectl-fzf", defer:3
+#zplug "stedolan/jq", \
+#    from:gh-r, \
+#    as:command, \
+#    rename-to:jq, \
+#    use:"jq-linux64", \
+#    if:"[[ $OSTYPE == *linux* ]]"
 
-export NVM_LAZY_LOAD=true
-zplug "lukechilds/zsh-nvm"
-zplug "mattberther/zsh-rbenv"
-zplug "matthieusb/zsh-sdkman"
-zplug "superbrothers/zsh-kubectl-prompt"
+#zplug "plugins/kubectl", from:oh-my-zsh, defer:2
+#zplug "bonnefoa/kubectl-fzf", defer:3
+
+#export NVM_LAZY_LOAD=true
+#zplug "lukechilds/zsh-nvm"
+#zplug "mattberther/zsh-rbenv"
+#zplug "matthieusb/zsh-sdkman"
+#zplug "superbrothers/zsh-kubectl-prompt"
 
 zplug "changyuheng/fz", defer:1
 zplug "rupa/z", use:z.sh
 
-zplug "ahmetb/kubectx", \
-	from:gh-r, \
-    as:command, \
-    use:'(*).sh'
+#zplug "ahmetb/kubectx", \
+#	from:gh-r, \
+#    as:command, \
+#    use:'(*).sh'
 
 zplug "junegunn/fzf-bin", as:command, from:gh-r, rename-to:fzf
 zplug "junegunn/fzf", from:github, use:"shell/completion.zsh"
@@ -91,7 +95,7 @@ select-word-style bash
 
 
 zplug load
-RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
+#RPROMPT='%{$fg[blue]%}($ZSH_KUBECTL_PROMPT)%{$reset_color%}'
 
 export FZF_CTRL_T_OPTS="--ansi --preview-window 'right:60%' --preview 'bat --color=always --style=header,grid --line-range :300 {}'"
 export FZF_CTRL_T_COMMAND="fdd -I --type file"
@@ -103,4 +107,8 @@ bindkey '^xe' edit-command-line
 bindkey '^x^e' edit-command-line
 
 
-export SBT_OPTS="-J-Xmx8G"
+#export SBT_OPTS="-J-Xmx8G"
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/kghost/.sdkman"
+[[ -s "/home/kghost/.sdkman/bin/sdkman-init.sh" ]] && source "/home/kghost/.sdkman/bin/sdkman-init.sh"
+
