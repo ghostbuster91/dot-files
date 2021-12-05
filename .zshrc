@@ -16,7 +16,7 @@ export ENHANCD_FILTER=fzf
 
 zplug "zsh-users/zsh-completions",              defer:0
 zplug "zsh-users/zsh-autosuggestions",          defer:2, on:"zsh-users/zsh-completions"
-zplug "zdharma/fast-syntax-highlighting",       defer:3, on:"zsh-users/zsh-autosuggestions"
+zplug "zdharma-continuum/fast-syntax-highlighting",       defer:3, on:"zsh-users/zsh-autosuggestions"
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 
 
@@ -33,14 +33,6 @@ zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
 
 zplug "modules/history", from:prezto
 
-alias ls='exa'
-alias ll='exa -l'
-alias lll='exa -l | less'
-alias lla='exa -la'
-alias llt='exa -T'
-alias llfu='exa -bghHliS --git'
-
-alias bat='batcat'
 #zplug "dbkaplun/smart-cd" # automatic ls in dirs, git status in repos
 
 #zplug "stedolan/jq", \
@@ -53,8 +45,8 @@ alias bat='batcat'
 #zplug "plugins/kubectl", from:oh-my-zsh, defer:2
 #zplug "bonnefoa/kubectl-fzf", defer:3
 
-#export NVM_LAZY_LOAD=true
-#zplug "lukechilds/zsh-nvm"
+export NVM_LAZY_LOAD=true
+zplug "lukechilds/zsh-nvm"
 #zplug "mattberther/zsh-rbenv"
 #zplug "matthieusb/zsh-sdkman"
 #zplug "superbrothers/zsh-kubectl-prompt"
@@ -72,8 +64,8 @@ zplug "junegunn/fzf", from:github, use:"shell/completion.zsh"
 zplug "junegunn/fzf", from:github, use:"shell/key-bindings.zsh"
 zplug "sharkdp/fd", as:command, from:gh-r, rename-to:fdd
 
-zplug "zdharma/zsh-diff-so-fancy", as:command, use:bin/git-dsf
-zplug 'wfxr/forgit', defer:1
+zplug "zdharma-continuum/zsh-diff-so-fancy", as:command, use:"bin/"
+#zplug 'wfxr/forgit', defer:1
 zplug "MichaelAquilina/zsh-you-should-use"
 zplug 'b4b4r07/copy', as:command, use:'(*).sh', rename-to:'$1'
 
@@ -107,8 +99,7 @@ bindkey '^xe' edit-command-line
 bindkey '^x^e' edit-command-line
 
 
-#export SBT_OPTS="-J-Xmx8G"
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/kghost/.sdkman"
-[[ -s "/home/kghost/.sdkman/bin/sdkman-init.sh" ]] && source "/home/kghost/.sdkman/bin/sdkman-init.sh"
 
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/kghost0/.sdkman"
+[[ -s "/home/kghost0/.sdkman/bin/sdkman-init.sh" ]] && source "/home/kghost0/.sdkman/bin/sdkman-init.sh"
