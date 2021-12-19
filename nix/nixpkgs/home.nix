@@ -56,4 +56,30 @@
       st = "status";
     };
   };
+
+  programs.zsh = {
+    enable = true;
+    enableAutosuggestions = true;
+    zplug = {
+      enable = true;
+      plugins = [
+        { name = "romkatv/powerlevel10k"; tags = [ as:theme depth:1 ]; } # Installations with additional options. For the list of options, please refer to Zplug README.
+      ];
+    };
+    initExtraBeforeCompInit = ''
+      # powerlevel10k
+      source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
+      source ${./p10k.zsh}
+    '';
+
+    localVariables = {
+      POWERLEVEL9K_MODE = "awesome-patched";
+    };
+  };
+
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
 }
