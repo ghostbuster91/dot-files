@@ -80,6 +80,7 @@
         { name = "romkatv/powerlevel10k"; tags = [ as:theme depth:1 at:v.1.15.0 ]; } # Installations with additional options. For the list of options, please refer to Zplug README.
 	{ name = "plugins/common-aliases"; tags = [ from:oh-my-zsh at:904f8685f75ff5dd3f544f8c6f2cabb8e5952e9a ]; }
 	{ name = "plugins/git"; tags = [ from:oh-my-zsh at:904f8685f75ff5dd3f544f8c6f2cabb8e5952e9a ]; }
+	{ name = "plugins/extract"; tags = [ from:oh-my-zsh at:904f8685f75ff5dd3f544f8c6f2cabb8e5952e9a ]; }
 	{ name = "MichaelAquilina/zsh-you-should-use"; tags = [ at:1.7.3 ]; }
 	{ name = "rupa/z"; tags = [ use:z.sh at:v1.11 ]; }
 	{ name = "changyuheng/fz"; tags = [ defer:1 at:2a4c1bc73664bb938bfcc7c99f473d0065f9dbfd ]; }
