@@ -18,4 +18,42 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  home.packages = with pkgs;  [
+    # Rust CLI Tools! I love rust.
+    exa
+    bat
+    tokei
+    xsv
+    fd
+
+    # Development
+    neovim
+    tmux
+    jq
+    git-crypt
+
+    # Files
+    zstd
+    restic
+
+    # Media
+    youtube-dl
+    imagemagick
+
+    # Overview
+    htop
+    wtf
+    lazygit
+    neofetch
+  ];
+
+  programs.git = {
+    enable = true;
+    userName = "ghostbuster91";
+    userEmail = "ghostbuster91@users.noreply.github.com";
+    aliases = {
+      st = "status";
+    };
+  };
 }
