@@ -19,7 +19,7 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  home.packages = with pkgs;  [
+  home.packages = with pkgs; [
     # Rust CLI Tools! I love rust.
     exa
     bat
@@ -45,6 +45,7 @@
     wtf
     lazygit
     neofetch
+    nixfmt
   ];
 
   programs.git = {
@@ -52,22 +53,12 @@
     userName = "ghostbuster91";
     userEmail = "ghostbuster91@users.noreply.github.com";
     extraConfig = {
-      core = {
-        editor = "nvim";
-      };
-      color = {
-        ui = true;
-      };
-      push = {
-        default = "simple";
-      };
-      pull = {
-        ff = "only";
-      };
-      init = {
-        defaultBranch = "main";
-      };
-    }; 
+      core = { editor = "nvim"; };
+      color = { ui = true; };
+      push = { default = "simple"; };
+      pull = { ff = "only"; };
+      init = { defaultBranch = "main"; };
+    };
   };
 
   programs.zsh = {
@@ -77,15 +68,45 @@
     zplug = {
       enable = true;
       plugins = [
-        { name = "romkatv/powerlevel10k"; tags = [ as:theme depth:1 at:v.1.15.0 ]; } # Installations with additional options. For the list of options, please refer to Zplug README.
-	{ name = "plugins/common-aliases"; tags = [ from:oh-my-zsh at:904f8685f75ff5dd3f544f8c6f2cabb8e5952e9a ]; }
-	{ name = "plugins/git"; tags = [ from:oh-my-zsh at:904f8685f75ff5dd3f544f8c6f2cabb8e5952e9a ]; }
-	{ name = "plugins/extract"; tags = [ from:oh-my-zsh at:904f8685f75ff5dd3f544f8c6f2cabb8e5952e9a ]; }
-	{ name = "MichaelAquilina/zsh-you-should-use"; tags = [ at:1.7.3 ]; }
-	{ name = "rupa/z"; tags = [ use:z.sh at:v1.11 ]; }
-	{ name = "changyuheng/fz"; tags = [ defer:1 at:2a4c1bc73664bb938bfcc7c99f473d0065f9dbfd ]; }
-	{ name = "b4b4r07/enhancd"; tags = [ use:init.sh at:v2.2.4 ]; }
-	{ name = "Aloxaf/fzf-tab"; tags = [ at:a677cf770cfce1e3668ba576fecfb7a14f4f39e2 ]; }
+        {
+          name = "romkatv/powerlevel10k";
+          tags = [ "as:theme" "depth:1" "at:v.1.15.0" ];
+        } # Installations with additional options. For the list of options, please refer to Zplug README.
+        {
+          name = "plugins/common-aliases";
+          tags =
+            [ "from:oh-my-zsh" "at:904f8685f75ff5dd3f544f8c6f2cabb8e5952e9a" ];
+        }
+        {
+          name = "plugins/git";
+          tags =
+            [ "from:oh-my-zsh" "at:904f8685f75ff5dd3f544f8c6f2cabb8e5952e9a" ];
+        }
+        {
+          name = "plugins/extract";
+          tags =
+            [ "from:oh-my-zsh" "at:904f8685f75ff5dd3f544f8c6f2cabb8e5952e9a" ];
+        }
+        {
+          name = "MichaelAquilina/zsh-you-should-use";
+          tags = [ "at:1.7.3" ];
+        }
+        {
+          name = "rupa/z";
+          tags = [ "use:z.sh" "at:v1.11" ];
+        }
+        {
+          name = "changyuheng/fz";
+          tags = [ "defer:1" "at:2a4c1bc73664bb938bfcc7c99f473d0065f9dbfd" ];
+        }
+        {
+          name = "b4b4r07/enhancd";
+          tags = [ "use:init.sh" "at:v2.2.4" ];
+        }
+        {
+          name = "Aloxaf/fzf-tab";
+          tags = [ "at:a677cf770cfce1e3668ba576fecfb7a14f4f39e2" ];
+        }
       ];
     };
     initExtraBeforeCompInit = ''
@@ -94,12 +115,8 @@
       source ${./p10k.zsh}
     '';
 
-    localVariables = {
-      POWERLEVEL9K_MODE = "awesome-patched";
-    };
-    history = {
-      extended = true;
-    };
+    localVariables = { POWERLEVEL9K_MODE = "awesome-patched"; };
+    history = { extended = true; };
   };
 
   programs.fzf = {
@@ -124,6 +141,7 @@
           colorscheme onedark
         '';
       }
+      neoformat
     ];
   };
 
