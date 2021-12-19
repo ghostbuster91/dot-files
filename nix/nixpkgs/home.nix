@@ -27,6 +27,8 @@
     xsv
     fd
 
+    tree
+    _1password
     # Development
     tmux
     jq
@@ -117,6 +119,11 @@
 
     localVariables = { POWERLEVEL9K_MODE = "awesome-patched"; };
     history = { extended = true; };
+    shellAliases = {
+      ls = "exa";
+      l = "exa -l";
+      la = "exa -la";
+    };
   };
 
   programs.fzf = {
@@ -154,5 +161,13 @@
       mru-sources = "@a(ss) []";
       sources = "[('xkb', 'pl')]";
     };
+  };
+
+  services.redshift = {
+    enable = true;
+    latitude = "52.2370";
+    longitude = "21.0175";
+    temperature.night = 3000;
+    temperature.day = 5000;
   };
 }
