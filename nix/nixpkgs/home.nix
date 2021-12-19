@@ -126,4 +126,15 @@
       }
     ];
   };
+
+  dconf.settings = {
+    "org.gnome.desktop.input-sources" = {
+      show-all-sources = "false";
+      xkb-options = "['numpad:shift3', 'numpad:microsoft']";
+      per-window = "false";
+      current = "uint32 0";
+      mru-sources = "@a(ss) []";
+      sources = "[('xkb', 'pl')]";
+    };
+  };
 }
