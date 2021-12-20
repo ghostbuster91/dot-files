@@ -142,7 +142,13 @@
 
   programs.neovim = {
     enable = true;
-    extraConfig = "syntax on";
+    extraConfig = ''
+      syntax on
+      augroup fmt
+        autocmd!
+        autocmd BufWritePre * undojoin | Neoformat
+      augroup END
+    '';
     plugins = with pkgs.vimPlugins; [
       vim-nix
       rec {
