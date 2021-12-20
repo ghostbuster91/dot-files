@@ -109,6 +109,10 @@
           name = "Aloxaf/fzf-tab";
           tags = [ "at:a677cf770cfce1e3668ba576fecfb7a14f4f39e2" ];
         }
+        {
+          name = "hlissner/zsh-autopair";
+          tags = [ "at:9d003fc02dbaa6db06e6b12e8c271398478e0b5d" ];
+        }
       ];
     };
     initExtraBeforeCompInit = ''
