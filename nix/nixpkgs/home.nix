@@ -113,6 +113,11 @@
           name = "hlissner/zsh-autopair";
           tags = [ "at:9d003fc02dbaa6db06e6b12e8c271398478e0b5d" ];
         }
+
+        {
+          name = "MichaelAquilina/zsh-auto-notify";
+          tags = [ "at:0.8.0" ];
+        }
       ];
     };
     initExtraBeforeCompInit = ''
@@ -183,4 +188,7 @@
     temperature.night = 3000;
     temperature.day = 5000;
   };
+  programs.noti = { enable = true; };
+
+  systemd.user.startServices = "sd-switch";
 }
