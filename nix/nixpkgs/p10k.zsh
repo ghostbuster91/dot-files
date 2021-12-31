@@ -56,6 +56,8 @@
     # =========================[ Line #2 ]=========================
     newline                   # \n
     virtualenv                # python virtual environment
+    nix_shell		      # nix shell
+    direnv		      # direnv status
     prompt_char               # prompt symbol
   )
 

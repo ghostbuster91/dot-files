@@ -34,7 +34,6 @@
     tree
     _1password
     # Development
-    tmux
     jq
     git-crypt
 
@@ -52,6 +51,7 @@
     lazygit
     neofetch
     nixfmt
+    tmux
   ];
 
   programs.git = {
@@ -72,6 +72,11 @@
     };
   };
 
+  programs.tmux = {
+    enable = true;
+    terminal = "screen-256color";
+  };
+
   programs.zsh = {
     enable = true;
     enableAutosuggestions = true;
@@ -79,6 +84,10 @@
     zplug = {
       enable = true;
       plugins = [
+        {
+          name = "chisui/zsh-nix-shell";
+          tags = [ "at:v0.4.0" ];
+        }
         {
           name = "romkatv/powerlevel10k";
           tags = [ "as:theme" "depth:1" "at:v.1.15.0" ];
@@ -137,6 +146,8 @@
       bindkey "^[[3~" delete-char
       # turn off beeping
       unsetopt BEEP
+
+      AUTO_NOTIFY_IGNORE+=("tmux", "nix-shell")
     '';
 
     localVariables = { POWERLEVEL9K_MODE = "awesome-patched"; };
@@ -179,6 +190,7 @@
         '';
       }
       neoformat
+      fzf-vim
     ];
   };
 
