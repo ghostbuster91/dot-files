@@ -19,7 +19,11 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  imports = [ ./scala ];
+
   home.packages = with pkgs; [
+    diff-so-fancy
+    git-gone
     # Rust CLI Tools! I love rust.
     exa
     bat
@@ -55,11 +59,16 @@
     userName = "ghostbuster91";
     userEmail = "ghostbuster91@users.noreply.github.com";
     extraConfig = {
-      core = { editor = "nvim"; };
+      merge = { conflictStyle = "diff3"; };
+      core = {
+        editor = "nvim";
+        pager = "diff-so-fancy | less -FXRi";
+      };
       color = { ui = true; };
       push = { default = "simple"; };
       pull = { ff = "only"; };
       init = { defaultBranch = "main"; };
+      alias = { gone = "!bash ~/bin/git-gone.sh"; };
     };
   };
 
@@ -124,6 +133,10 @@
       # powerlevel10k
       source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
       source ${./p10k.zsh}
+      # fix delete key
+      bindkey "^[[3~" delete-char
+      # turn off beeping
+      unsetopt BEEP
     '';
 
     localVariables = { POWERLEVEL9K_MODE = "awesome-patched"; };
@@ -147,6 +160,8 @@
 
   programs.neovim = {
     enable = true;
+    viAlias = true;
+    vimAlias = true;
     extraConfig = ''
       syntax on
       augroup fmt
