@@ -78,6 +78,7 @@
   programs.tmux = {
     enable = true;
     terminal = "screen-256color";
+    baseIndex = 1;
   };
 
   programs.zsh = {
@@ -173,6 +174,7 @@
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
+    tmux = { enableShellIntegration = true; };
   };
 
   programs.direnv = {
