@@ -1,6 +1,7 @@
 { pkgs, ... }:
 
 {
+  targets.genericLinux.enable = true;
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "kghost";
@@ -18,6 +19,8 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  home.sessionVariables = { EDITOR = "nvim"; };
 
   imports = [ ./scala ];
 
@@ -98,6 +101,11 @@
             [ "from:oh-my-zsh" "at:904f8685f75ff5dd3f544f8c6f2cabb8e5952e9a" ];
         }
         {
+          name = "plugins/tmux";
+          tags =
+            [ "from:oh-my-zsh" "at:904f8685f75ff5dd3f544f8c6f2cabb8e5952e9a" ];
+        }
+        {
           name = "plugins/git";
           tags =
             [ "from:oh-my-zsh" "at:904f8685f75ff5dd3f544f8c6f2cabb8e5952e9a" ];
@@ -138,6 +146,9 @@
         }
       ];
     };
+    initExtraFirst = ''
+      ZSH_TMUX_AUTOSTART=true
+    '';
     initExtraBeforeCompInit = ''
       # powerlevel10k
       source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
