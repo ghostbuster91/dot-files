@@ -160,6 +160,9 @@
       unsetopt BEEP
 
       AUTO_NOTIFY_IGNORE+=("tmux", "nix-shell")
+
+      autoload -U select-word-style
+      select-word-style bash
     '';
 
     localVariables = { POWERLEVEL9K_MODE = "awesome-patched"; };
