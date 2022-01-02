@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   targets.genericLinux.enable = true;
@@ -25,11 +25,10 @@
   imports = [ ./scala ];
 
   home.packages = with pkgs; [
-    diff-so-fancy
-    git-gone
-    # Rust CLI Tools! I love rust.
-    exa
-    bat
+    diff-so-fancy # pretty diffs
+    git-gone # get rid of orphan local branches
+    exa # better ls
+    bat # better cat
     tokei
     xsv
     fd
@@ -54,7 +53,6 @@
     lazygit
     neofetch
     nixfmt
-    tmux
   ];
 
   programs.git = {
@@ -79,6 +77,7 @@
     enable = true;
     terminal = "screen-256color";
     baseIndex = 1;
+    escapeTime = 0;
   };
 
   programs.zsh = {
@@ -149,6 +148,8 @@
     };
     initExtraFirst = ''
       ZSH_TMUX_AUTOSTART=true
+      ZSH_TMUX_CONFIG=${config.xdg.configHome}/tmux/tmux.conf
+      AUTO_NOTIFY_IGNORE+=("tmux", "nix-shell")
     '';
     initExtraBeforeCompInit = ''
       # powerlevel10k
@@ -158,8 +159,6 @@
       bindkey "^[[3~" delete-char
       # turn off beeping
       unsetopt BEEP
-
-      AUTO_NOTIFY_IGNORE+=("tmux", "nix-shell")
 
       autoload -U select-word-style
       select-word-style bash
