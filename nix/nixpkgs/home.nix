@@ -78,6 +78,9 @@
     terminal = "screen-256color";
     baseIndex = 1;
     escapeTime = 0;
+    extraConfig = ''
+      set -g mouse on
+    '';
   };
 
   programs.zsh = {
