@@ -29,19 +29,19 @@
     git-gone # get rid of orphan local branches
     exa # better ls
     bat # better cat
-    tokei
-    xsv
-    fd
+    tokei # better cloc
+    xsv # csv manipulation
+    fd # faster find
 
-    tree
-    _1password
-    # Development
-    jq
-    git-crypt
+    tree # display tree structure of directory
+    _1password # 1password cli
+    jq # pretty-print json
+    hexyl # pretty-print hex
+
+    git-crypt # encrypt files in git repository
 
     # Files
-    zstd
-    restic
+    dua # disk usage analyzer
 
     # Media
     youtube-dl
