@@ -86,7 +86,7 @@
     plugins = [ pkgs.tmuxPlugins.yank ];
     extraConfig = ''
       set -g mouse on
-      # only this line might not be enough
+      set-option -g renumber-windows on
     '';
   };
 
