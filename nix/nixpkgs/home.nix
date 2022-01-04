@@ -2,6 +2,7 @@
 
 {
   targets.genericLinux.enable = true;
+  fonts.fontconfig.enable = true;
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "kghost";
@@ -25,6 +26,7 @@
   imports = [ ./scala ];
 
   home.packages = with pkgs; [
+    (nerdfonts.override { fonts = [ "FiraCode" ]; })
     diff-so-fancy # pretty diffs
     git-gone # get rid of orphan local branches
     exa # better ls
@@ -53,6 +55,7 @@
     lazygit
     neofetch
     nixfmt
+    xsel # for tmux-yank to work
   ];
 
   programs.git = {
@@ -78,6 +81,9 @@
     terminal = "screen-256color";
     baseIndex = 1;
     escapeTime = 0;
+    keyMode = "vi";
+    sensibleOnTop = true;
+    plugins = [ pkgs.tmuxPlugins.tmux-fzf pkgs.tmuxPlugins.yank ];
     extraConfig = ''
       set -g mouse on
     '';
@@ -192,6 +198,7 @@
     viAlias = true;
     vimAlias = true;
     extraConfig = ''
+      set mouse=a
       syntax on
       augroup fmt
         autocmd!
