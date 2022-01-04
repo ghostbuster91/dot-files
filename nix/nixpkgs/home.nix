@@ -83,7 +83,7 @@
     escapeTime = 0;
     keyMode = "vi";
     sensibleOnTop = true;
-    plugins = [ pkgs.tmuxPlugins.tmux-fzf pkgs.tmuxPlugins.yank ];
+    plugins = [ pkgs.tmuxPlugins.yank ];
     extraConfig = ''
       set -g mouse on
     '';
