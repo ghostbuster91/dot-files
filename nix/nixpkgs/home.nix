@@ -78,7 +78,7 @@
 
   programs.tmux = {
     enable = true;
-    terminal = "screen-256color";
+    terminal = "xterm-256color";
     baseIndex = 1;
     escapeTime = 0;
     keyMode = "vi";
@@ -86,6 +86,7 @@
     plugins = [ pkgs.tmuxPlugins.yank ];
     extraConfig = ''
       set -g mouse on
+      # only this line might not be enough
     '';
   };
 
@@ -230,6 +231,17 @@
         mru-sources = "@a(ss) []";
         sources = "[('xkb', 'pl')]";
       };
+      "org/gnome/settings-daemon/plugins/media-keys" = {
+        custom-keybindings = [
+          "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+        ];
+      };
+      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" =
+        {
+          binding = "<Primary><Alt>f";
+          command = "alacritty";
+          name = "open-terminal";
+        };
     };
   };
 
