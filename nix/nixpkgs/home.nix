@@ -23,10 +23,10 @@
 
   home.sessionVariables = { EDITOR = "nvim"; };
 
-  imports = [ ./scala ];
+  imports = [ ./scala ./alacritty ];
 
   home.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     diff-so-fancy # pretty diffs
     git-gone # get rid of orphan local branches
     exa # better ls
