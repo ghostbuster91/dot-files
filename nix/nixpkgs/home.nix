@@ -154,6 +154,7 @@
     localVariables = { POWERLEVEL9K_MODE = "awesome-patched"; };
     history = { extended = true; };
     shellAliases = {
+      lsd = "exa --long --header --git --all";
       ls = "exa";
       l = "exa -l";
       la = "exa -la";
@@ -195,6 +196,7 @@
       }
       neoformat
       fzf-vim
+      vim-kitty-navigator
     ];
   };
 
