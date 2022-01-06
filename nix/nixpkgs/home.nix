@@ -136,6 +136,10 @@
           name = "MichaelAquilina/zsh-auto-notify";
           tags = [ "at:0.8.0" ];
         }
+        {
+          name = "wfxr/forgit";
+          tags = [ "at:7b26cd46ac768af51b8dd4b84b6567c4e1c19642" "defer:1" ];
+        }
       ];
     };
     initExtraFirst = ''
