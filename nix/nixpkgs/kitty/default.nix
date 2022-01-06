@@ -14,6 +14,8 @@
       shell = "${pkgs.zsh}/bin/zsh";
       shell_integration = "enabled";
 
+      enable_audio_bell = "false";
+
       # ubuntu theme
       background = "#300a24";
       foreground = "#eeeeec";
