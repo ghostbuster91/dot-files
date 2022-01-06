@@ -1,6 +1,7 @@
-{ pkgs, config, ... }:
+{ pkgs, config, ... }: {
 
-{
+  nixpkgs.overlays = [ (import ./overlays/kitty.nix) ];
+
   targets.genericLinux.enable = true;
   fonts.fontconfig.enable = true;
   # Home Manager needs a bit of information about you and the
