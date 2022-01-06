@@ -16,6 +16,9 @@
 
       enable_audio_bell = "false";
 
+      tab_bar_style = "powerline";
+      tab_title_template = "{index}:{title}";
+
       # ubuntu theme
       background = "#300a24";
       foreground = "#eeeeec";
