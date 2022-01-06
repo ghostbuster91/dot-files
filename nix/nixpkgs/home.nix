@@ -23,7 +23,7 @@
 
   home.sessionVariables = { EDITOR = "nvim"; };
 
-  imports = [ ./scala ./alacritty ];
+  imports = [ ./scala ./kitty ];
 
   home.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
@@ -55,7 +55,6 @@
     lazygit
     neofetch
     nixfmt
-    xsel # for tmux-yank to work
   ];
 
   programs.git = {
@@ -76,20 +75,6 @@
     };
   };
 
-  programs.tmux = {
-    enable = true;
-    terminal = "xterm-256color";
-    baseIndex = 1;
-    escapeTime = 0;
-    keyMode = "vi";
-    sensibleOnTop = true;
-    plugins = [ pkgs.tmuxPlugins.yank ];
-    extraConfig = ''
-      set -g mouse on
-      set-option -g renumber-windows on
-    '';
-  };
-
   programs.zsh = {
     enable = true;
     enableAutosuggestions = true;
@@ -104,14 +89,9 @@
         {
           name = "romkatv/powerlevel10k";
           tags = [ "as:theme" "depth:1" "at:v.1.15.0" ];
-        } # Installations with additional options. For the list of options, please refer to Zplug README.
-        {
-          name = "plugins/common-aliases";
-          tags =
-            [ "from:oh-my-zsh" "at:904f8685f75ff5dd3f544f8c6f2cabb8e5952e9a" ];
         }
         {
-          name = "plugins/tmux";
+          name = "plugins/common-aliases";
           tags =
             [ "from:oh-my-zsh" "at:904f8685f75ff5dd3f544f8c6f2cabb8e5952e9a" ];
         }
@@ -157,9 +137,13 @@
       ];
     };
     initExtraFirst = ''
-      ZSH_TMUX_AUTOSTART=true
-      ZSH_TMUX_CONFIG=${config.xdg.configHome}/tmux/tmux.conf
-      AUTO_NOTIFY_IGNORE+=("tmux", "nix-shell")
+      AUTO_NOTIFY_IGNORE+=("nix-shell")
+      if test -n "$KITTY_INSTALLATION_DIR"; then
+        export KITTY_SHELL_INTEGRATION="enabled"
+        autoload -Uz -- "$KITTY_INSTALLATION_DIR"/shell-integration/zsh/kitty-integration
+        kitty-integration
+        unfunction kitty-integration
+      fi
     '';
     initExtraBeforeCompInit = ''
       # powerlevel10k
@@ -186,7 +170,6 @@
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
-    tmux = { enableShellIntegration = true; };
   };
 
   programs.direnv = {
@@ -205,6 +188,8 @@
         autocmd!
         autocmd BufWritePre * undojoin | Neoformat
       augroup END
+
+      set relativenumber
     '';
     plugins = with pkgs.vimPlugins; [
       vim-nix
@@ -239,7 +224,7 @@
       "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" =
         {
           binding = "<Primary><Alt>f";
-          command = "alacritty";
+          command = "kitty";
           name = "open-terminal";
         };
     };
