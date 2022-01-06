@@ -1,6 +1,9 @@
 { pkgs, config, ... }: {
 
-  nixpkgs.overlays = [ (import ./overlays/kitty.nix) ];
+  nixpkgs = {
+    overlays = [ (import ./overlays/kitty.nix) ];
+    config = { allowUnfree = true; };
+  };
 
   targets.genericLinux.enable = true;
   fonts.fontconfig.enable = true;
