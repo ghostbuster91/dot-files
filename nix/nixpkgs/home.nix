@@ -149,6 +149,8 @@
 
       autoload -U select-word-style
       select-word-style bash
+
+      FORGIT_STASH_FZF_OPTS='--bind="ctrl-d:reload(git stash drop $(cut -d: -f1 <<<{}) 1>/dev/null && git stash list)"'
     '';
 
     localVariables = { POWERLEVEL9K_MODE = "awesome-patched"; };
