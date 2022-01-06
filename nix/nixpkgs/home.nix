@@ -57,6 +57,7 @@
     htop
     neofetch
     nixfmt
+    noti # notifications
   ];
 
   programs.git = {
@@ -131,26 +132,12 @@
           name = "hlissner/zsh-autopair";
           tags = [ "at:9d003fc02dbaa6db06e6b12e8c271398478e0b5d" ];
         }
-
-        {
-          name = "MichaelAquilina/zsh-auto-notify";
-          tags = [ "at:0.8.0" ];
-        }
         {
           name = "wfxr/forgit";
           tags = [ "at:7b26cd46ac768af51b8dd4b84b6567c4e1c19642" "defer:1" ];
         }
       ];
     };
-    initExtraFirst = ''
-      AUTO_NOTIFY_IGNORE+=("nix-shell")
-      if test -n "$KITTY_INSTALLATION_DIR"; then
-        export KITTY_SHELL_INTEGRATION="enabled"
-        autoload -Uz -- "$KITTY_INSTALLATION_DIR"/shell-integration/zsh/kitty-integration
-        kitty-integration
-        unfunction kitty-integration
-      fi
-    '';
     initExtraBeforeCompInit = ''
       # powerlevel10k
       source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
