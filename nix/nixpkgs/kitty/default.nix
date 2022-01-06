@@ -33,6 +33,8 @@
       tab_bar_style = "powerline";
       tab_title_template = "{index}:{title}";
 
+      enabled_layouts = "Tall, Grid, Fat, Horizontal, Vertical";
+
       # ubuntu theme
       background = "#300a24";
       foreground = "#eeeeec";
