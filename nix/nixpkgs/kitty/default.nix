@@ -1,6 +1,20 @@
 { pkgs, ... }: {
   programs.kitty = {
     enable = true;
+
+    keybindings = {
+      "ctrl+c" = "copy_or_interrupt";
+      "ctrl+alt+1" = "goto_tab 1";
+      "ctrl+alt+2" = "goto_tab 2";
+      "ctrl+alt+3" = "goto_tab 3";
+      "ctrl+alt+4" = "goto_tab 4";
+      "ctrl+alt+5" = "goto_tab 5";
+      "ctrl+alt+6" = "goto_tab 6";
+      "ctrl+alt+7" = "goto_tab 7";
+      "ctrl+alt+8" = "goto_tab 8";
+      "ctrl+alt+9" = "goto_tab 9";
+    };
+
     settings = {
       scrollback_pager =
         "~/pager.sh 'INPUT_LINE_NUMBER' 'CURSOR_LINE' 'CURSOR_COLUMN'";
