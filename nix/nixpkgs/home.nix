@@ -55,8 +55,6 @@
 
     # Overview
     htop
-    wtf
-    lazygit
     neofetch
     nixfmt
   ];
