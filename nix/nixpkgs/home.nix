@@ -58,6 +58,7 @@
     nix-index
     nix-review
     nix-tree
+    nixfmt
 
     # Media
     youtube-dl
@@ -66,8 +67,9 @@
     # Overview
     htop
     neofetch
-    nixfmt
+
     noti # notifications
+    xsel # for tmux-yank
   ];
 
   programs.git = {
@@ -169,6 +171,7 @@
       autoload -U select-word-style
       select-word-style bash
 
+      # ctrl-d drop stash entry
       FORGIT_STASH_FZF_OPTS='--bind="ctrl-d:reload(git stash drop $(cut -d: -f1 <<<{}) 1>/dev/null && git stash list)"'
     '';
 
@@ -233,6 +236,7 @@
       pkgs.tmuxPlugins.better-mouse-mode
       pkgs.tmuxPlugins.fingers
       pkgs.tmuxPlugins.vim-tmux-navigator
+      pkgs.tmuxPlugins.onedark-theme
     ];
     extraConfig = ''
       set -g mouse on
