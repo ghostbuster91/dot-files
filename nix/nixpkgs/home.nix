@@ -25,7 +25,11 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  home.sessionVariables = { EDITOR = "nvim"; };
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    FZF_TMUX = "1";
+    FZF_TMUX_HEIGHT = "30%";
+  };
 
   imports = [ ./scala ./alacritty ];
 
@@ -142,8 +146,17 @@
           name = "wfxr/forgit";
           tags = [ "at:7b26cd46ac768af51b8dd4b84b6567c4e1c19642" "defer:1" ];
         }
+        {
+          name = "plugins/tmux";
+          tags =
+            [ "from:oh-my-zsh" "at:904f8685f75ff5dd3f544f8c6f2cabb8e5952e9a" ];
+        }
       ];
     };
+    initExtraFirst = ''
+      ZSH_TMUX_AUTOSTART=true
+      ZSH_TMUX_CONFIG=${config.xdg.configHome}/tmux/tmux.conf
+    '';
     initExtraBeforeCompInit = ''
       # powerlevel10k
       source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
@@ -204,8 +217,21 @@
       }
       neoformat
       fzf-vim
-      vim-kitty-navigator
     ];
+  };
+
+  programs.tmux = {
+    enable = true;
+    terminal = "xterm-256color";
+    baseIndex = 1;
+    escapeTime = 0;
+    keyMode = "vi";
+    sensibleOnTop = true;
+    plugins = [ pkgs.tmuxPlugins.yank pkgs.tmuxPlugins.better-mouse-mode ];
+    extraConfig = ''
+      set -g mouse on
+      set-option -g renumber-windows on
+    '';
   };
 
   dconf = {
