@@ -231,6 +231,10 @@
     extraConfig = ''
       set -g mouse on
       set-option -g renumber-windows on
+      unbind '%'
+      unbind '"'
+      bind | split-window -b -h -c "#{pane_current_path}"
+      bind - split-window -b -v -c "#{pane_current_path}"
     '';
   };
 
