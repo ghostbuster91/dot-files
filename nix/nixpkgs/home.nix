@@ -217,6 +217,7 @@
       }
       neoformat
       fzf-vim
+      vim-tmux-navigator
     ];
   };
 
@@ -227,11 +228,19 @@
     escapeTime = 0;
     keyMode = "vi";
     sensibleOnTop = true;
-    plugins = [ pkgs.tmuxPlugins.yank pkgs.tmuxPlugins.better-mouse-mode ];
+    plugins = [
+      pkgs.tmuxPlugins.yank
+      pkgs.tmuxPlugins.better-mouse-mode
+      pkgs.tmuxPlugins.fingers
+      pkgs.tmuxPlugins.vim-tmux-navigator
+    ];
     extraConfig = ''
       set -g mouse on
       set-option -g renumber-windows on
 
+
+      # Make sure CTRL-Shift and such works
+      set-window-option -g xterm-keys on
 
       # use | and - for splitting panes
       unbind '%'
@@ -239,9 +248,20 @@
       bind | split-window -b -h -c "#{pane_current_path}"
       bind - split-window -b -v -c "#{pane_current_path}"
 
-      # reload config
-      bind r source-file ${config.xdg.configHome}/tmux/tmux.conf \; display-message "reloaded config"
+      # vi style pane selection
+      bind h select-pane -L
+      bind j select-pane -D
+      bind k select-pane -U
+      bind l select-pane -R
 
+      # get a pane from an other window
+      bind g choose-window "join-pane -b -s '%%'"
+
+      # vi style pane selection
+      bind -r C-h resize-pane -L 12
+      bind -r C-j resize-pane -D 8
+      bind -r C-k resize-pane -U 8
+      bind -r C-l resize-pane -R 12
     '';
   };
 
