@@ -49,6 +49,12 @@
     # Files
     dua # disk usage analyzer
 
+    # nix stuff
+    nix-du
+    nix-index
+    nix-review
+    nix-tree
+
     # Media
     youtube-dl
     imagemagick
