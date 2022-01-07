@@ -1,7 +1,7 @@
 { pkgs, config, ... }: {
 
   nixpkgs = {
-    overlays = [ (import ./overlays/kitty.nix) ];
+    overlays = [ (import ./overlays/alacritty.nix) ];
     config = { allowUnfree = true; };
   };
 
@@ -27,7 +27,7 @@
 
   home.sessionVariables = { EDITOR = "nvim"; };
 
-  imports = [ ./scala ./kitty ];
+  imports = [ ./scala ./alacritty ];
 
   home.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
@@ -227,7 +227,7 @@
       "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" =
         {
           binding = "<Primary><Alt>f";
-          command = "kitty";
+          command = "alacritty";
           name = "open-terminal";
         };
     };

@@ -9,15 +9,15 @@ let
       }
     }/nixGL.nix" { }).nixGLIntel;
 in {
-  kitty = (self.symlinkJoin {
-    name = "kitty";
+  alacritty = (self.symlinkJoin {
+    name = "alacritty";
     paths = [
-      (self.writeShellScriptBin "kitty" ''
+      (self.writeShellScriptBin "alacritty" ''
         #!/bin/sh
 
-        ${nixGLIntel}/bin/nixGLIntel ${super.kitty}/bin/kitty "$@"
+        ${nixGLIntel}/bin/nixGLIntel ${super.alacritty}/bin/alacritty "$@"
       '')
-      super.kitty
+      super.alacritty
     ];
   });
 }
