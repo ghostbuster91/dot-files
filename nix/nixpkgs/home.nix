@@ -231,10 +231,17 @@
     extraConfig = ''
       set -g mouse on
       set-option -g renumber-windows on
+
+
+      # use | and - for splitting panes
       unbind '%'
       unbind '"'
       bind | split-window -b -h -c "#{pane_current_path}"
       bind - split-window -b -v -c "#{pane_current_path}"
+
+      # reload config
+      bind r source-file ${config.xdg.configHome}/tmux/tmux.conf \; display-message "reloaded config"
+
     '';
   };
 
