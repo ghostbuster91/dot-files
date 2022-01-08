@@ -208,6 +208,11 @@
       augroup END
 
       set relativenumber
+
+      nnoremap <silent> <C-Left> :TmuxNavigateLeft<cr>
+      nnoremap <silent> <C-Down> :TmuxNavigateDown<cr>
+      nnoremap <silent> <C-Up> :TmuxNavigateUp<cr>
+      nnoremap <silent> <C-Right> :TmuxNavigateRight<cr>
     '';
     plugins = with pkgs.vimPlugins; [
       vim-nix
@@ -234,8 +239,6 @@
     plugins = [
       pkgs.tmuxPlugins.yank
       pkgs.tmuxPlugins.better-mouse-mode
-      pkgs.tmuxPlugins.fingers
-      pkgs.tmuxPlugins.vim-tmux-navigator
       pkgs.tmuxPlugins.onedark-theme
     ];
     extraConfig = ''
@@ -252,20 +255,26 @@
       bind | split-window -b -h -c "#{pane_current_path}"
       bind - split-window -b -v -c "#{pane_current_path}"
 
-      # vi style pane selection
-      bind h select-pane -L
-      bind j select-pane -D
-      bind k select-pane -U
-      bind l select-pane -R
-
-      # get a pane from an other window
       bind g choose-window "join-pane -b -s '%%'"
 
-      # vi style pane selection
-      bind -r C-h resize-pane -L 12
-      bind -r C-j resize-pane -D 8
-      bind -r C-k resize-pane -U 8
-      bind -r C-l resize-pane -R 12
+      # Smart pane switching with awareness of Vim splits.
+      # See: https://github.com/christoomey/vim-tmux-navigator
+      is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
+      | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
+      bind-key -n 'C-Left' if-shell "$is_vim" 'send-keys C-Left'  'select-pane -L'
+      bind-key -n 'C-Up' if-shell "$is_vim" 'send-keys C-Up'  'select-pane -D'
+      bind-key -n 'C-Down' if-shell "$is_vim" 'send-keys C-Down'  'select-pane -U'
+      bind-key -n 'C-Right' if-shell "$is_vim" 'send-keys C-Right'  'select-pane -R'
+      tmux_version='$(tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p")'
+      if-shell -b '[ "$(echo "$tmux_version < 3.0" | bc)" = 1 ]' \
+        "bind-key -n 'C-\\' if-shell \"$is_vim\" 'send-keys C-\\'  'select-pane -l'"
+      if-shell -b '[ "$(echo "$tmux_version >= 3.0" | bc)" = 1 ]' \
+        "bind-key -n 'C-\\' if-shell \"$is_vim\" 'send-keys C-\\\\'  'select-pane -l'"
+
+      bind-key -T copy-mode-vi 'C-Left' select-pane -L
+      bind-key -T copy-mode-vi 'C-Down' select-pane -D
+      bind-key -T copy-mode-vi 'C-Up' select-pane -U
+      bind-key -T copy-mode-vi 'C-Right' select-pane -R
     '';
   };
 
