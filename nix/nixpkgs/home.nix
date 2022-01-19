@@ -1,7 +1,10 @@
 { pkgs, config, ... }: {
 
   nixpkgs = {
-    overlays = [ (import ./overlays/alacritty.nix) ];
+    overlays = [
+      (import ./overlays/alacritty.nix)
+      (self: super: { derivations = import ./derivations { pkgs = super; }; })
+    ];
     config = { allowUnfree = true; };
   };
 
@@ -59,6 +62,7 @@
     nix-review
     nix-tree
     nixfmt
+    nix-prefetch
 
     # Media
     youtube-dl
@@ -239,7 +243,19 @@
     plugins = [
       pkgs.tmuxPlugins.yank
       pkgs.tmuxPlugins.better-mouse-mode
-      pkgs.tmuxPlugins.onedark-theme
+      {
+        plugin = pkgs.tmuxPlugins.onedark-theme;
+        extraConfig = ''
+          set -g @onedark_widgets "#{prefix_highlight} #{free_mem}"
+        '';
+      }
+      pkgs.derivations.tmux-status-variable
+      {
+        plugin = pkgs.tmuxPlugins.prefix-highlight;
+        extraConfig = ''
+          set -g @prefix_highlight_show_copy_mode 'on'
+        '';
+      }
     ];
     extraConfig = ''
       set -g mouse on
@@ -275,6 +291,7 @@
       bind-key -T copy-mode-vi 'C-Down' select-pane -D
       bind-key -T copy-mode-vi 'C-Up' select-pane -U
       bind-key -T copy-mode-vi 'C-Right' select-pane -R
+
     '';
   };
 
