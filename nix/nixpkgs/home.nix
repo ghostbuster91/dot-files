@@ -34,7 +34,7 @@
     FZF_TMUX_HEIGHT = "30%";
   };
 
-  imports = [ ./scala ./alacritty ];
+  imports = [ ./programs/scala ./programs/alacritty ];
 
   home.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
