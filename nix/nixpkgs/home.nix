@@ -212,11 +212,12 @@
       augroup END
 
       set relativenumber
+      set number
 
-      nnoremap <silent> <C-Left> :TmuxNavigateLeft<cr>
-      nnoremap <silent> <C-Down> :TmuxNavigateDown<cr>
-      nnoremap <silent> <C-Up> :TmuxNavigateUp<cr>
-      nnoremap <silent> <C-Right> :TmuxNavigateRight<cr>
+      nnoremap <silent> <A-Left> :TmuxNavigateLeft<cr>
+      nnoremap <silent> <A-Down> :TmuxNavigateDown<cr>
+      nnoremap <silent> <A-Up> :TmuxNavigateUp<cr>
+      nnoremap <silent> <A-Right> :TmuxNavigateRight<cr>
     '';
     plugins = with pkgs.vimPlugins; [
       vim-nix
@@ -265,33 +266,40 @@
       # Make sure CTRL-Shift and such works
       set-window-option -g xterm-keys on
 
-      # use | and - for splitting panes
+      # use \ and - for splitting panes
       unbind '%'
       unbind '"'
-      bind | split-window -b -h -c "#{pane_current_path}"
-      bind - split-window -b -v -c "#{pane_current_path}"
+      bind \\ split-window -h
+      bind - split-window -v
 
       bind g choose-window "join-pane -b -s '%%'"
 
+      # Switch windows alt+number
+      bind-key -n M-1 if-shell 'tmux select-window -t 1' ''' 'new-window -t 1'
+      bind-key -n M-2 if-shell 'tmux select-window -t 2' ''' 'new-window -t 2'
+      bind-key -n M-3 if-shell 'tmux select-window -t 3' ''' 'new-window -t 3'
+      bind-key -n M-4 if-shell 'tmux select-window -t 4' ''' 'new-window -t 4'
+      bind-key -n M-5 if-shell 'tmux select-window -t 5' ''' 'new-window -t 5'
+      bind-key -n M-6 if-shell 'tmux select-window -t 6' ''' 'new-window -t 6'
+      bind-key -n M-7 if-shell 'tmux select-window -t 7' ''' 'new-window -t 7'
+      bind-key -n M-8 if-shell 'tmux select-window -t 8' ''' 'new-window -t 8'
+      bind-key -n M-9 if-shell 'tmux select-window -t 9' ''' 'new-window -t 9'
+      bind-key -n M-0 if-shell 'tmux select-window -t 10' ''' 'new-window -t 10'
+
+
       # Smart pane switching with awareness of Vim splits.
       # See: https://github.com/christoomey/vim-tmux-navigator
-      is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
-      | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
-      bind-key -n 'C-Left' if-shell "$is_vim" 'send-keys C-Left'  'select-pane -L'
-      bind-key -n 'C-Up' if-shell "$is_vim" 'send-keys C-Up'  'select-pane -D'
-      bind-key -n 'C-Down' if-shell "$is_vim" 'send-keys C-Down'  'select-pane -U'
-      bind-key -n 'C-Right' if-shell "$is_vim" 'send-keys C-Right'  'select-pane -R'
-      tmux_version='$(tmux -V | sed -En "s/^tmux ([0-9]+(.[0-9]+)?).*/\1/p")'
-      if-shell -b '[ "$(echo "$tmux_version < 3.0" | bc)" = 1 ]' \
-        "bind-key -n 'C-\\' if-shell \"$is_vim\" 'send-keys C-\\'  'select-pane -l'"
-      if-shell -b '[ "$(echo "$tmux_version >= 3.0" | bc)" = 1 ]' \
-        "bind-key -n 'C-\\' if-shell \"$is_vim\" 'send-keys C-\\\\'  'select-pane -l'"
+      is_vim="ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
 
-      bind-key -T copy-mode-vi 'C-Left' select-pane -L
-      bind-key -T copy-mode-vi 'C-Down' select-pane -D
-      bind-key -T copy-mode-vi 'C-Up' select-pane -U
-      bind-key -T copy-mode-vi 'C-Right' select-pane -R
+      bind-key -n M-Up if-shell "$is_vim" "send-keys M-Up"  "select-pane -U"
+      bind-key -n M-Down if-shell "$is_vim" "send-keys M-Down"  "select-pane -D"
+      bind-key -n M-Left if-shell "$is_vim" "send-keys M-Left"  "select-pane -L"
+      bind-key -n M-Right if-shell "$is_vim" "send-keys M-Right"  "select-pane -R"
 
+      bind-key -n C-Up resize-pane -U
+      bind-key -n C-Down resize-pane -D
+      bind-key -n C-Left resize-pane -L
+      bind-key -n C-Right resize-pane -R
     '';
   };
 
