@@ -34,8 +34,13 @@
     FZF_TMUX_HEIGHT = "30%";
   };
 
-  imports =
-    [ ./programs/scala ./programs/alacritty ./programs/tmux ./programs/zsh ];
+  imports = [
+    ./programs/scala
+    ./programs/alacritty
+    ./programs/tmux
+    ./programs/zsh
+    ./programs/neovim
+  ];
 
   home.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
@@ -103,41 +108,6 @@
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
-  };
-
-  programs.neovim = {
-    enable = true;
-    viAlias = true;
-    vimAlias = true;
-    extraConfig = ''
-      set mouse=a
-      syntax on
-      augroup fmt
-        autocmd!
-        autocmd BufWritePre * undojoin | Neoformat
-      augroup END
-
-      set relativenumber
-      set number
-
-      nnoremap <silent> <A-Left> :TmuxNavigateLeft<cr>
-      nnoremap <silent> <A-Down> :TmuxNavigateDown<cr>
-      nnoremap <silent> <A-Up> :TmuxNavigateUp<cr>
-      nnoremap <silent> <A-Right> :TmuxNavigateRight<cr>
-    '';
-    plugins = with pkgs.vimPlugins; [
-      vim-nix
-      rec {
-        plugin = onedark-vim;
-        config = ''
-          packadd! ${plugin.pname}
-          colorscheme onedark
-        '';
-      }
-      neoformat
-      fzf-vim
-      vim-tmux-navigator
-    ];
   };
 
   dconf = {
