@@ -1,0 +1,79 @@
+local lspconfig = require("lspconfig")
+
+require("null-ls").setup({
+	sources = {
+		require("null-ls").builtins.formatting.stylua,
+	},
+})
+
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+	local function buf_set_keymap(...)
+		vim.api.nvim_buf_set_keymap(bufnr, ...)
+	end
+	local function buf_set_option(...)
+		vim.api.nvim_buf_set_option(bufnr, ...)
+	end
+
+	-- Mappings.
+	local opts = { noremap = true, silent = true }
+
+	-- See `:help vim.lsp.*` for documentation on any of the below functions
+	buf_set_keymap("n", "<Leader>rnm", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+	buf_set_keymap("n", "<Leader>gtD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+	buf_set_keymap("n", "<Leader>gtd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+	buf_set_keymap("n", "<Leader>f", "<cmd>lua vim.lsp.buf.formatting_sync()<CR>", opts)
+
+	if client.resolved_capabilities.document_formatting then
+            vim.cmd([[
+            augroup LspFormatting
+                autocmd! * <buffer>
+                autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
+            augroup END
+            ]])
+        end
+end
+
+-- Use a loop to conveniently call 'setup' on multiple servers and
+-- map buffer local keybindings when the language server attaches
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+local servers = { "bashls", "vimls", "rnix", "yamlls", "sumneko_lua" }
+for _, lsp in ipairs(servers) do
+	lspconfig[lsp].setup({
+		on_attach = on_attach,
+		capabilities = capabilities,
+		-- after 150ms of no calls to lsp, send call
+		-- compare with throttling that is done by default in compe
+		-- flags = {
+		--   debounce_text_changes = 150,
+		-- }
+	})
+end
+
+require("gitsigns").setup()
+
+require("which-key").setup()
+
+require("nvim-treesitter.configs").setup({
+	ensure_installed = {
+		"nix",
+		"yaml",
+		"bash",
+		"lua",
+	},
+	highlight = {
+		enable = true, -- false will disable the whole extension                 -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+		-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+		-- Using this option may slow down your editor, and you may see some duplicate highlights.
+		-- Instead of true it can also be a list of languages
+		additional_vim_regex_highlighting = false,
+		disable = {}, -- treesitter interferes with VimTex
+	},
+
+	-- tree-sitter-nix doesn't work with indent enabled.
+	indent = {
+		enable = false,
+	},
+})
