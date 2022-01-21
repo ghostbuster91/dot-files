@@ -34,6 +34,7 @@
       lightspeed-nvim
       which-key-nvim
       nvim-autopairs
+      vim-sandwich
     ];
   };
 }
