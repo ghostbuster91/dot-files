@@ -31,6 +31,7 @@
       neoformat
       fzf-vim
       vim-tmux-navigator
+      lightspeed-nvim
     ];
   };
 }
