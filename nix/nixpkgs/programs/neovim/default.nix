@@ -32,6 +32,7 @@
       fzf-vim
       vim-tmux-navigator
       lightspeed-nvim
+      which-key-nvim
     ];
   };
 }
