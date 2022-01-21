@@ -22,8 +22,9 @@
       nnoremap <silent> <A-Right> :TmuxNavigateRight<cr>
 
       lua << EOF
-      -- gitsigns-nvim
       require('gitsigns').setup()
+
+      require("which-key").setup()
       EOF
     '';
     plugins = with pkgs.vimPlugins; [
