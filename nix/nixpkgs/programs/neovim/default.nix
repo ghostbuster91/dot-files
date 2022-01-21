@@ -29,7 +29,8 @@
         '';
       }
       neoformat
-      fzf-vim
+      telescope-nvim
+      telescope-fzf-native-nvim
       vim-tmux-navigator
       lightspeed-nvim
       which-key-nvim
