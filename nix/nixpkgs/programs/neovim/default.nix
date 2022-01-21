@@ -36,6 +36,7 @@
       which-key-nvim
       nvim-autopairs
       vim-sandwich
+      gitsigns-nvim
     ];
   };
 }
