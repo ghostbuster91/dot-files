@@ -5,6 +5,8 @@
     vimAlias = true;
     extraConfig = ''
       set mouse=a
+
+
       syntax on
       augroup fmt
         autocmd!
@@ -18,6 +20,11 @@
       nnoremap <silent> <A-Down> :TmuxNavigateDown<cr>
       nnoremap <silent> <A-Up> :TmuxNavigateUp<cr>
       nnoremap <silent> <A-Right> :TmuxNavigateRight<cr>
+
+      lua << EOF
+      -- gitsigns-nvim
+      require('gitsigns').setup()
+      EOF
     '';
     plugins = with pkgs.vimPlugins; [
       vim-nix
