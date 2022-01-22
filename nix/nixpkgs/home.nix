@@ -81,6 +81,8 @@
 
     noti # notifications
     xsel # for tmux-yank
+
+    teamspeak_client # ts3client, works only when invoked from cmd
   ];
 
 
