@@ -1,8 +1,9 @@
 local lspconfig = require("lspconfig")
+local nullLs = require("null-ls")
 
-require("null-ls").setup({
+nullLs.setup({
 	sources = {
-		require("null-ls").builtins.formatting.stylua,
+		nullLs.builtins.formatting.stylua,
 	},
 })
 
@@ -55,6 +56,8 @@ end
 require("gitsigns").setup()
 
 require("which-key").setup()
+
+require("nvim-autopairs").setup()
 
 require("nvim-treesitter.configs").setup({
 	ensure_installed = {
