@@ -98,6 +98,21 @@
       init = { defaultBranch = "main"; };
       alias = { gone = "!bash ~/bin/git-gone.sh"; };
     };
+    includes = [
+      {
+        condition = "gitdir:~/dev/";
+        contents = {
+          user = {
+            name = "Kasper Kondzielski";
+            email = "kasper.kondzielski@iohk.io";
+            signingKey = "5A22DAA4D02BA94A";
+          };
+          commit = {
+            gpgSign = true;
+          };
+        };
+      }
+    ];
   };
 
   programs.fzf = {
