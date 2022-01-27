@@ -3,6 +3,9 @@
   programs.alacritty = {
     enable = true;
     settings = {
+      env = {
+        ZSH_TMUX_AUTOSTART = "true";
+      };
       font = {
         size = 12;
 

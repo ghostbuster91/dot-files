@@ -65,7 +65,6 @@
       ];
     };
     initExtraFirst = ''
-      ZSH_TMUX_AUTOSTART=true
       ZSH_TMUX_CONFIG=${config.xdg.configHome}/tmux/tmux.conf
     '';
     initExtraBeforeCompInit = ''
@@ -84,7 +83,9 @@
       FORGIT_STASH_FZF_OPTS='--bind="ctrl-d:reload(git stash drop $(cut -d: -f1 <<<{}) 1>/dev/null && git stash list)"'
     '';
 
-    localVariables = { POWERLEVEL9K_MODE = "awesome-patched"; };
+    localVariables = {
+      POWERLEVEL9K_MODE = "awesome-patched";
+    };
     history = { extended = true; };
     shellAliases = {
       lsd = "exa --long --header --git --all";
