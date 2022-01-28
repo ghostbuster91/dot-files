@@ -52,6 +52,7 @@
     tokei # better cloc
     xsv # csv manipulation
     fd # faster find
+    ripgrep # better grep
 
     tree # display tree structure of directory
     _1password # 1password cli
