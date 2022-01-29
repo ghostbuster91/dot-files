@@ -7,6 +7,7 @@
     pkgs.rnix-lsp
     pkgs.sumneko-lua-language-server
     pkgs.stylua
+    pkgs.shfmt
   ];
 
   programs.neovim = {

@@ -4,6 +4,7 @@ local nullLs = require("null-ls")
 nullLs.setup({
 	sources = {
 		nullLs.builtins.formatting.stylua,
+		nullLs.builtins.formatting.shfmt
 	},
 })
 
