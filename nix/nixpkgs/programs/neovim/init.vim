@@ -1,5 +1,3 @@
-let mapleader = "/"
-
 set mouse=a
       	
 syntax on

@@ -1,5 +1,8 @@
-{ pkgs, config, ... }: {
-
+{ pkgs, config, ... }:
+let
+  leaderKey = "/";
+in
+{
   home.packages = [
     pkgs.nodePackages.bash-language-server
     pkgs.nodePackages.vim-language-server
@@ -14,7 +17,10 @@
     enable = true;
     viAlias = true;
     vimAlias = true;
-    extraConfig = "${builtins.readFile ./init.vim}" + ''
+    extraConfig = ''
+      	let mapleader = "${leaderKey}"
+    '' +
+    "${builtins.readFile ./init.vim}" + ''
       lua << EOF
       ${builtins.readFile ./init.lua}
       EOF
@@ -27,7 +33,14 @@
           colorscheme onedark
         '';
       }
-      telescope-nvim
+      {
+        plugin = telescope-nvim;
+        config = ''
+          nnoremap ${leaderKey}tf <cmd>Telescope find_files<cr>
+          nnoremap ${leaderKey}tg <cmd>Telescope live_grep<cr>
+          nnoremap ${leaderKey}tb <cmd>Telescope buffers<cr>
+        '';
+      }
       telescope-fzf-native-nvim
       {
         plugin = vim-tmux-navigator;
@@ -44,8 +57,8 @@
       {
         plugin = vim-sandwich;
         config = ''
-          	runtime macros/sandwich/keymap/surround.vim
-          	'';
+          runtime macros/sandwich/keymap/surround.vim
+        '';
       }
       gitsigns-nvim
 
@@ -68,6 +81,18 @@
             tree-sitter-bash
           ]
       ))
+      nvim-web-devicons
+      {
+        plugin = trouble-nvim;
+        config = ''
+          nnoremap ${leaderKey}xx <cmd>TroubleToggle<cr>
+          nnoremap ${leaderKey}xw <cmd>TroubleToggle workspace_diagnostics<cr>
+          nnoremap ${leaderKey}xd <cmd>TroubleToggle document_diagnostics<cr>
+          nnoremap ${leaderKey}xq <cmd>TroubleToggle quickfix<cr>
+          nnoremap ${leaderKey}xl <cmd>TroubleToggle loclist<cr>
+          nnoremap gR <cmd>TroubleToggle lsp_references<cr>         	
+        '';
+      }
     ];
   };
 }

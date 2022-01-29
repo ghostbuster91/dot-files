@@ -1,3 +1,9 @@
+-- globals
+local global_opt = vim.opt_global
+global_opt.clipboard = "unnamed"
+
+
+-- lsp
 local lspconfig = require("lspconfig")
 local nullLs = require("null-ls")
 
