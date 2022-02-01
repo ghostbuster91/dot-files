@@ -2,7 +2,6 @@
 local global_opt = vim.opt_global
 global_opt.clipboard = "unnamed"
 
-
 -- lsp
 local lspconfig = require("lspconfig")
 local nullLs = require("null-ls")
@@ -10,7 +9,7 @@ local nullLs = require("null-ls")
 nullLs.setup({
 	sources = {
 		nullLs.builtins.formatting.stylua,
-		nullLs.builtins.formatting.shfmt
+		nullLs.builtins.formatting.shfmt,
 	},
 })
 
@@ -34,13 +33,13 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap("n", "<Leader>f", "<cmd>lua vim.lsp.buf.formatting_sync()<CR>", opts)
 
 	if client.resolved_capabilities.document_formatting then
-            vim.cmd([[
+		vim.cmd([[
             augroup LspFormatting
                 autocmd! * <buffer>
                 autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
             augroup END
             ]])
-        end
+	end
 end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
@@ -85,5 +84,16 @@ require("nvim-treesitter.configs").setup({
 	-- tree-sitter-nix doesn't work with indent enabled.
 	indent = {
 		enable = false,
+	},
+})
+
+local trouble = require("trouble.providers.telescope")
+
+require("telescope").setup({
+	defaults = {
+		mappings = {
+			i = { ["<c-t>"] = trouble.open_with_trouble },
+			n = { ["<c-t>"] = trouble.open_with_trouble },
+		},
 	},
 })
