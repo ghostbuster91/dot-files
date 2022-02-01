@@ -88,14 +88,18 @@ require("nvim-treesitter.configs").setup({
 })
 
 local trouble = require("trouble.providers.telescope")
+local actions = require("telescope.actions")
 
 require("telescope").setup({
 	defaults = {
 		mappings = {
-			i = { ["<c-t>"] = trouble.open_with_trouble },
+			i = {
+				["<c-t>"] = trouble.open_with_trouble,
+				["<esc>"] = actions.close,
+			},
 			n = { ["<c-t>"] = trouble.open_with_trouble },
 		},
 	},
 })
 
-require('telescope').load_extension('fzf')
+require("telescope").load_extension("fzf")
