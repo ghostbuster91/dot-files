@@ -30,6 +30,16 @@
             [ "from:oh-my-zsh" "at:904f8685f75ff5dd3f544f8c6f2cabb8e5952e9a" ];
         }
         {
+          name = "plugins/docker";
+          tags =
+            [ "from:oh-my-zsh" "at:904f8685f75ff5dd3f544f8c6f2cabb8e5952e9a" ];
+        }
+        {
+          name = "plugins/docker-compose";
+          tags =
+            [ "from:oh-my-zsh" "at:904f8685f75ff5dd3f544f8c6f2cabb8e5952e9a" ];
+        }
+        {
           name = "MichaelAquilina/zsh-you-should-use";
           tags = [ "at:1.7.3" ];
         }
