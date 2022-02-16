@@ -12,7 +12,7 @@
         }
         {
           name = "romkatv/powerlevel10k";
-          tags = [ "as:theme" "depth:1" "at:v.1.15.0" ];
+          tags = [ "as:theme" "depth:1" "at:v.1.16.1" ];
         }
         {
           name = "plugins/common-aliases";
