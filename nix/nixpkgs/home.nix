@@ -30,8 +30,7 @@
 
   home.sessionVariables = {
     EDITOR = "nvim";
-    FZF_TMUX = "1";
-    FZF_TMUX_HEIGHT = "30%";
+    DOCKER_HOST = "unix://$XDG_RUNTIME_DIR/docker.sock";
   };
 
   imports = [
@@ -83,10 +82,11 @@
     noti # notifications
     xsel # for tmux-yank
 
-    teamspeak_client # ts3client, works only when invoked from cmd
+    #teamspeak_client # ts3client, works only when invoked from cmd
     docker # World's #1 container tool
     docker-compose # Local multi-container Docker environments
     #shadow #required by docker, doesnt work due to 'failed: newuidmap: write to uid_map failed: Operation not permitted', use apt install uidmap for now
+    sublime
   ];
 
 

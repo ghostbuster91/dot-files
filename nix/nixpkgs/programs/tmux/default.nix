@@ -1,4 +1,8 @@
 { pkgs, ... }: {
+  home.sessionVariables = {
+    FZF_TMUX = "1";
+    FZF_TMUX_HEIGHT = "30%";
+  };
   programs.tmux = {
     enable = true;
     terminal = "xterm-256color";
