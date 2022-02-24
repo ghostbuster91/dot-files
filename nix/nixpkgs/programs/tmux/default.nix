@@ -26,6 +26,7 @@
           set -g @prefix_highlight_show_copy_mode 'on'
         '';
       }
+      pkgs.derivations.tmux-thumbs
     ];
     extraConfig = ''
       set -g mouse on
