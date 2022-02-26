@@ -4,15 +4,9 @@ let
 in
 {
   home.packages = [
-    pkgs.nodePackages.bash-language-server
-    pkgs.nodePackages.vim-language-server
-    pkgs.nodePackages.yaml-language-server
-    pkgs.rnix-lsp
-    pkgs.sumneko-lua-language-server
-    pkgs.stylua
-    pkgs.shfmt
+    pkgs.nodePackages.typescript
+    pkgs.nodePackages.typescript-language-server
   ];
-
   programs.neovim = {
     enable = true;
     viAlias = true;
@@ -22,9 +16,31 @@ in
     '' +
     "${builtins.readFile ./init.vim}" + ''
       lua << EOF
-      ${builtins.readFile ./init.lua}
+             	  ${builtins.readFile ./init.lua}
+
+      		  require("lspconfig")["tsserver"].setup({
+      			on_attach = on_attach,
+      			capabilities = capabilities,
+      			cmd = { 
+      				"${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server", 
+      				"--stdio", 
+      				"--tsserver-path", 
+      				"${pkgs.nodePackages.typescript}/lib/node_modules/typescript/lib/" 
+      			}
+      		  })
       EOF
     '';
+    extraPackages = [
+      pkgs.nodePackages.bash-language-server
+      pkgs.nodePackages.vim-language-server
+      pkgs.nodePackages.yaml-language-server
+      pkgs.rnix-lsp
+      pkgs.sumneko-lua-language-server
+      pkgs.stylua
+      pkgs.shfmt
+      pkgs.nodePackages.eslint
+      pkgs.nodePackages.prettier
+    ];
     plugins = with pkgs.vimPlugins; [
       rec {
         plugin = onedark-vim;

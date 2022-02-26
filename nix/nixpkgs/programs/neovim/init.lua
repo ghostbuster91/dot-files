@@ -10,6 +10,9 @@ nullLs.setup({
 	sources = {
 		nullLs.builtins.formatting.stylua,
 		nullLs.builtins.formatting.shfmt,
+		nullLs.builtins.diagnostics.eslint,
+		nullLs.builtins.code_actions.eslint,
+		nullLs.builtins.formatting.prettier,
 	},
 })
 
@@ -28,6 +31,7 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap("n", "<Leader>gtD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
 	buf_set_keymap("n", "<Leader>gtd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
 	buf_set_keymap("n", "<Leader>f", "<cmd>lua vim.lsp.buf.formatting_sync()<CR>", opts)
+-- TOOD bind key to invoke completion
 
 	if client.resolved_capabilities.document_formatting then
 		-- TODO how to make this configurable by a variable
@@ -44,7 +48,7 @@ end
 -- map buffer local keybindings when the language server attaches
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
-local servers = { "bashls", "vimls", "rnix", "yamlls", "sumneko_lua" }
+local servers = { "bashls", "vimls", "rnix", "yamlls", "sumneko_lua"}
 for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup({
 		on_attach = on_attach,
