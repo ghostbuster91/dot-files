@@ -3,6 +3,7 @@
     enable = true;
     enableAutosuggestions = true;
     enableSyntaxHighlighting = true;
+    defaultKeymap = "emacs";
     zplug = {
       enable = true;
       plugins = [
