@@ -56,9 +56,9 @@ in
       nvim-autopairs
       {
         plugin = vim-sandwich;
-        config = ''
-          runtime macros/sandwich/keymap/surround.vim
-        '';
+        #config = ''
+        #  runtime macros/sandwich/keymap/surround.vim
+        #'';
       }
       gitsigns-nvim
 
