@@ -79,6 +79,8 @@ in
             tree-sitter-yaml
             tree-sitter-comment
             tree-sitter-bash
+            tree-sitter-javascript
+            tree-sitter-typescript
           ]
       ))
       nvim-web-devicons
