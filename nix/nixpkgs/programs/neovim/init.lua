@@ -33,6 +33,7 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap("n", "<Leader>f", "<cmd>lua vim.lsp.buf.formatting_sync()<CR>", opts)
 
 	if client.resolved_capabilities.document_formatting then
+		-- TODO how to make this configurable by a variable
 		vim.cmd([[
             augroup LspFormatting
                 autocmd! * <buffer>
