@@ -1,6 +1,6 @@
 { pkgs, config, ... }:
 let
-  leaderKey = "/";
+  leaderKey = "<space>";
 in
 {
   home.packages = [
