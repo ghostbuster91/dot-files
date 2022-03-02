@@ -1,6 +1,6 @@
 { pkgs, config, ... }:
 let
-  leaderKey = "<space>";
+  leaderKey = ";";
 in
 {
   home.packages = [
@@ -38,7 +38,7 @@ in
         config = ''
           nnoremap ${leaderKey}tf <cmd>Telescope find_files<cr>
           nnoremap ${leaderKey}tg <cmd>Telescope live_grep<cr>
-          nnoremap ${leaderKey}tb <cmd>Telescope buffers<cr>
+          nnoremap ${leaderKey}th <cmd>Telescope buffers<cr>
         '';
       }
       telescope-fzf-native-nvim
@@ -61,6 +61,7 @@ in
         #'';
       }
       gitsigns-nvim
+      plenary-nvim
 
       # lsp stuff
       nvim-cmp
