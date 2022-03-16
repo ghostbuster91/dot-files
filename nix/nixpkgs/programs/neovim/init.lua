@@ -16,6 +16,7 @@ nullLs.setup({
 	},
 })
 
+FormatOnSave = true
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -31,9 +32,9 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap("n", "<Leader>gtD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
 	buf_set_keymap("n", "<Leader>gtd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
 	buf_set_keymap("n", "<Leader>f", "<cmd>lua vim.lsp.buf.formatting_sync()<CR>", opts)
--- TOOD bind key to invoke completion
+	-- TOOD bind key to invoke completion
 
-	if client.resolved_capabilities.document_formatting then
+	if client.resolved_capabilities.document_formatting and FormatOnSave then
 		-- TODO how to make this configurable by a variable
 		vim.cmd([[
             augroup LspFormatting
@@ -48,7 +49,7 @@ end
 -- map buffer local keybindings when the language server attaches
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
-local servers = { "bashls", "vimls", "rnix", "yamlls", "sumneko_lua"}
+local servers = { "bashls", "vimls", "rnix", "yamlls", "sumneko_lua" }
 for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup({
 		on_attach = on_attach,
@@ -61,40 +62,39 @@ for _, lsp in ipairs(servers) do
 	})
 end
 
-require("gitsigns").setup{
-  on_attach = function(bufnr)
+require("gitsigns").setup({
+	on_attach = function(bufnr)
+		local function map(mode, lhs, rhs, opts)
+			opts = vim.tbl_extend("force", { noremap = true, silent = true }, opts or {})
+			vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts)
+		end
 
-    local function map(mode, lhs, rhs, opts)
-        opts = vim.tbl_extend('force', {noremap = true, silent = true}, opts or {})
-        vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts)
-    end
+		local opts = { noremap = true, silent = true }
+		-- Navigation
+		map("n", "]c", "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", { expr = true })
+		map("n", "[c", "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", { expr = true })
 
-    local opts = { noremap = true, silent = true }
-    -- Navigation
-    map('n', ']c', "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", {expr=true})
-    map('n', '[c', "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", {expr=true})
+		-- Actions
+		map("n", "<Leader>hs", ":Gitsigns stage_hunk<CR>", opts)
+		map("v", "<Leader>hs", ":Gitsigns stage_hunk<CR>", opts)
+		map("n", "<Leader>hr", ":Gitsigns reset_hunk<CR>", opts)
+		map("v", "<Leader>hr", ":Gitsigns reset_hunk<CR>", opts)
+		-- TODO why this doesnt work and freezes vim!?
+		map("n", "<leader>hS", "<cmd>Gitsigns stage_buffer<CR>")
+		map("n", "<leader>hu", "<cmd>Gitsigns undo_stage_hunk<CR>")
+		map("n", "<leader>hR", "<cmd>Gitsigns reset_buffer<CR>")
+		map("n", "<leader>hp", "<cmd>Gitsigns preview_hunk<CR>", opts)
+		map("n", "<leader>hb", '<cmd>lua require"gitsigns".blame_line{full=true}<CR>')
+		map("n", "<leader>tb", "<cmd>Gitsigns toggle_current_line_blame<CR>")
+		map("n", "<leader>hd", "<cmd>Gitsigns diffthis<CR>")
+		map("n", "<leader>hD", '<cmd>lua require"gitsigns".diffthis("~")<CR>')
+		map("n", "<leader>td", "<cmd>Gitsigns toggle_deleted<CR>")
 
-    -- Actions
-    map('n', '<Leader>hs', ':Gitsigns stage_hunk<CR>', opts)
-    map('v', '<Leader>hs', ':Gitsigns stage_hunk<CR>', opts)
-    map('n', '<Leader>hr', ':Gitsigns reset_hunk<CR>', opts)
-    map('v', '<Leader>hr', ':Gitsigns reset_hunk<CR>', opts)
-    -- TODO why this doesnt work and freezes vim!?
-    map('n', '<leader>hS', '<cmd>Gitsigns stage_buffer<CR>')
-    map('n', '<leader>hu', '<cmd>Gitsigns undo_stage_hunk<CR>')
-    map('n', '<leader>hR', '<cmd>Gitsigns reset_buffer<CR>')
-    map('n', '<leader>hp', '<cmd>Gitsigns preview_hunk<CR>', opts)
-    map('n', '<leader>hb', '<cmd>lua require"gitsigns".blame_line{full=true}<CR>')
-    map('n', '<leader>tb', '<cmd>Gitsigns toggle_current_line_blame<CR>')
-    map('n', '<leader>hd', '<cmd>Gitsigns diffthis<CR>')
-    map('n', '<leader>hD', '<cmd>lua require"gitsigns".diffthis("~")<CR>')
-    map('n', '<leader>td', '<cmd>Gitsigns toggle_deleted<CR>')
-
-    -- Text object
-    map('o', 'ih', ':<C-U>Gitsigns select_hunk<CR>', opts)
-    map('x', 'ih', ':<C-U>Gitsigns select_hunk<CR>', opts)
-  end
-}
+		-- Text object
+		map("o", "ih", ":<C-U>Gitsigns select_hunk<CR>", opts)
+		map("x", "ih", ":<C-U>Gitsigns select_hunk<CR>", opts)
+	end,
+})
 
 require("which-key").setup()
 
@@ -107,7 +107,7 @@ require("nvim-treesitter.configs").setup({
 		"bash",
 		"lua",
 		"typescript",
-		"javascript"
+		"javascript",
 	},
 	highlight = {
 		enable = true, -- false will disable the whole extension                 -- Setting this to true will run `:h syntax` and tree-sitter at the same time.

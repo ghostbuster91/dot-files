@@ -14,20 +14,29 @@ in
     extraConfig = ''
       	let mapleader = "${leaderKey}"
     '' +
-    "${builtins.readFile ./init.vim}" + ''
+    "${builtins.readFile ./init.vim}" +
+    ''
       lua << EOF
-             	  ${builtins.readFile ./init.lua}
-
-      		  require("lspconfig")["tsserver"].setup({
-      			on_attach = on_attach,
-      			capabilities = capabilities,
+      	${builtins.readFile ./init.lua}
+      	local capabilitiesWithoutFomatting = vim.lsp.protocol.make_client_capabilities()
+      	capabilitiesWithoutFomatting.textDocument.formatting = false
+      	capabilitiesWithoutFomatting.textDocument.rangeFormatting = false
+      	capabilitiesWithoutFomatting.textDocument.range_formatting = false
+      		
+      	require("lspconfig")["tsserver"].setup({
+      			on_attach = function (client, buffer)
+      				client.resolved_capabilities.document_formatting = false
+      				client.resolved_capabilities.document_range_formatting = false
+      				on_attach(client, buffer)
+      			end,
+      			capabilities = capabilitiesWithoutFormatting,
       			cmd = { 
       				"${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server", 
       				"--stdio", 
       				"--tsserver-path", 
       				"${pkgs.nodePackages.typescript}/lib/node_modules/typescript/lib/" 
       			}
-      		  })
+      		})
       EOF
     '';
     extraPackages = [
