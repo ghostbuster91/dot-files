@@ -33,8 +33,8 @@
       # use \ and - for splitting panes
       unbind '%'
       unbind '"'
-      bind \\ split-window -h
-      bind - split-window -v
+      bind \\ split-window -h -c "#{pane_current_path}"
+      bind - split-window -v -c "#{pane_current_path}"
 
       bind g choose-window "join-pane -b -s '%%'"
 
