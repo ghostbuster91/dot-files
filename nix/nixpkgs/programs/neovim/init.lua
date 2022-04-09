@@ -188,3 +188,5 @@ require("lualine").setup({
 	tabline = {},
 	extensions = {},
 })
+
+ require('Comment').setup()

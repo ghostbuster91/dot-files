@@ -112,6 +112,7 @@ in
       lualine-nvim
       lualine-lsp-progress
       nvim-gps
+      comment-nvim
     ];
   };
 }
