@@ -5,7 +5,9 @@
       (import ./overlays/alacritty.nix)
       (self: super: { derivations = import ./derivations { pkgs = super; }; })
     ];
-    config = { allowUnfree = true; };
+    config = {
+      allowUnfree = true;
+    };
   };
 
   targets.genericLinux.enable = true;
@@ -83,8 +85,8 @@
     xsel # for tmux-yank
 
     #teamspeak_client # ts3client, works only when invoked from cmd
-    docker # World's #1 container tool
-    docker-compose # Local multi-container Docker environments
+    #docker # World's #1 container tool
+    #docker-compose # Local multi-container Docker environments
     #shadow #required by docker, doesnt work due to 'failed: newuidmap: write to uid_map failed: Operation not permitted', use apt install uidmap for now
     sublime
   ];
