@@ -99,7 +99,6 @@ in
         plugins:
           with plugins; [
             tree-sitter-lua
-      #      tree-sitter-nix
             tree-sitter-vim
             tree-sitter-html
             tree-sitter-yaml
@@ -110,17 +109,7 @@ in
           ]
       ))
       nvim-web-devicons
-      {
-        plugin = trouble-nvim;
-        config = ''
-          nnoremap ${leaderKey}xx <cmd>TroubleToggle<cr>
-          nnoremap ${leaderKey}xw <cmd>TroubleToggle workspace_diagnostics<cr>
-          nnoremap ${leaderKey}xd <cmd>TroubleToggle document_diagnostics<cr>
-          nnoremap ${leaderKey}xq <cmd>TroubleToggle quickfix<cr>
-          nnoremap ${leaderKey}xl <cmd>TroubleToggle loclist<cr>
-          nnoremap gR <cmd>TroubleToggle lsp_references<cr>         	
-        '';
-      }
+      lualine-nvim
     ];
   };
 }
