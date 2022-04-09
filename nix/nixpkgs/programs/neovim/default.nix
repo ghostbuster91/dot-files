@@ -111,6 +111,7 @@ in
       nvim-web-devicons
       lualine-nvim
       lualine-lsp-progress
+      nvim-gps
     ];
   };
 }
