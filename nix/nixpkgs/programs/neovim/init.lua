@@ -129,7 +129,16 @@ require("nvim-treesitter.configs").setup({
 
 	-- tree-sitter-nix doesn't work with indent enabled.
 	indent = {
-		enable = false,
+		enable = true,
+	},
+	incremental_selection = {
+		enable = true,
+		keymaps = {
+			init_selection = "<CR>",
+			node_incremental = "<CR>",
+			node_decremental = "<BS>",
+			scope_incremental = "<TAB>",
+		},
 	},
 })
 
@@ -147,7 +156,6 @@ require("telescope").setup({
 
 require("telescope").load_extension("fzf")
 
-
 local gps = require("nvim-gps")
 gps.setup()
 
@@ -164,7 +172,7 @@ require("lualine").setup({
 	sections = {
 		lualine_a = { "mode" },
 		lualine_b = { "branch", "diff", "diagnostics" },
-		lualine_c = { "filename", 'lsp_progress', { gps.get_location, cond = gps.is_available } },
+		lualine_c = { "filename", "lsp_progress", { gps.get_location, cond = gps.is_available } },
 		lualine_x = { "encoding", "fileformat", "filetype" },
 		lualine_y = { "progress" },
 		lualine_z = { "location" },
