@@ -99,7 +99,7 @@ in
         plugins:
           with plugins; [
             tree-sitter-lua
-            tree-sitter-nix
+      #      tree-sitter-nix
             tree-sitter-vim
             tree-sitter-html
             tree-sitter-yaml
