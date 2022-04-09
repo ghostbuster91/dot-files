@@ -1,8 +1,4 @@
 { pkgs, ... }: {
-  home.sessionVariables = {
-    FZF_TMUX = "1";
-    FZF_TMUX_HEIGHT = "30%";
-  };
   programs.tmux = {
     enable = true;
     terminal = "xterm-256color";
@@ -32,8 +28,6 @@
       set -g mouse on
       set-option -g renumber-windows on
 
-
-      # Make sure CTRL-Shift and such works
       set-window-option -g xterm-keys on
 
       # use \ and - for splitting panes
@@ -70,6 +64,12 @@
       bind-key -n C-Down resize-pane -D
       bind-key -n C-Left resize-pane -L
       bind-key -n C-Right resize-pane -R
+
+      # Rename tmux windows to the current directory
+      # https://stackoverflow.com/a/45010147 {
+      set-option -g automatic-rename on
+      set-option -g automatic-rename-format '#{b:pane_current_path}'
+      # }
     '';
   };
 }
