@@ -16,6 +16,15 @@ nullLs.setup({
 	},
 })
 
+-- Saving files as root with w!! {
+vim.api.nvim_set_keymap("c", "w!!", "%!sudo tee > /dev/null %", { noremap = true })
+-- }
+
+-- <CTRL> + a and <CTRL> + e move to the beginning and the end of the line
+vim.api.nvim_set_keymap("c", "<C-a>", "<HOME>", { noremap = true })
+vim.api.nvim_set_keymap("c", "<C-e>", "<END>", { noremap = true })
+-- }
+
 FormatOnSave = true
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
