@@ -92,6 +92,8 @@ in
       # lsp stuff
       nvim-cmp
       cmp-nvim-lsp
+      cmp-buffer
+      cmp-path
       nvim-lspconfig
       null-ls-nvim
 
