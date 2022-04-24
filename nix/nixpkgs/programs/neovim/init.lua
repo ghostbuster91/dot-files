@@ -37,10 +37,19 @@ local on_attach = function(client, bufnr)
 	local opts = { noremap = true, silent = true }
 
 	-- See `:help vim.lsp.*` for documentation on any of the below functions
-	buf_set_keymap("n", "<Leader>rnm", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+	buf_set_keymap("n", "<Leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
 	buf_set_keymap("n", "<Leader>gtD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
 	buf_set_keymap("n", "<Leader>gtd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
 	buf_set_keymap("n", "<Leader>f", "<cmd>lua vim.lsp.buf.formatting_sync()<CR>", opts)
+	buf_set_keymap("n", "<Leader>gds", "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>", opts)
+	buf_set_keymap(
+		"n",
+		"<Leader>gws",
+		"<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols()<cr>",
+		opts
+	)
+
+	buf_set_keymap("n", "<Leader>glr", "<cmd>lua require('telescope.builtin').lsp_references()<cr>", opts)
 	-- TOOD bind key to invoke completion
 
 	if client.resolved_capabilities.document_formatting and FormatOnSave then
@@ -194,12 +203,19 @@ require("Comment").setup()
 -- luasnip setup
 local luasnip = require("luasnip")
 -- nvim-cmp setup
+local lspkind = require("lspkind")
 local cmp = require("cmp")
 cmp.setup({
 	snippet = {
 		expand = function(args)
 			luasnip.lsp_expand(args.body)
 		end,
+	},
+	formatting = {
+		format = lspkind.cmp_format({
+			mode = "symbol", -- show only symbol annotations
+			maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+		}),
 	},
 	mapping = {
 		["<C-p>"] = cmp.mapping.select_prev_item(),
@@ -208,8 +224,12 @@ cmp.setup({
 		["<C-f>"] = cmp.mapping.scroll_docs(4),
 		["<C-Space>"] = cmp.mapping.complete(),
 		["<C-e>"] = cmp.mapping.close(),
-		["<CR>"] = cmp.mapping.confirm({
+		["<S-CR>"] = cmp.mapping.confirm({
 			behavior = cmp.ConfirmBehavior.Replace,
+			select = true,
+		}),
+		["<CR>"] = cmp.mapping.confirm({
+			behavior = cmp.ConfirmBehavior.Insert,
 			select = true,
 		}),
 		["<Tab>"] = function(fallback)
@@ -233,9 +253,8 @@ cmp.setup({
 	},
 	sources = {
 		{ name = "nvim_lsp", priority = 10 },
+		{ name = "buffer", priority = 9 },
 		{ name = "luasnip" },
-		{ name = "buffer" },
 		{ name = "path" },
 	},
 })
-

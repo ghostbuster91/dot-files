@@ -64,6 +64,7 @@ in
           nnoremap ${leaderKey}tf <cmd>Telescope find_files<cr>
           nnoremap ${leaderKey}tg <cmd>Telescope live_grep<cr>
           nnoremap ${leaderKey}th <cmd>Telescope buffers<cr>
+          nnoremap ${leaderKey}gh <cmd>lua require('telescope.builtin').git_commits()<cr>
         '';
       }
       telescope-fzf-native-nvim
@@ -114,6 +115,7 @@ in
       nvim-gps
       comment-nvim
       luasnip
+      lspkind-nvim
     ];
   };
 }
