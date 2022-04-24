@@ -44,6 +44,16 @@
           white = "#eeeeec";
         };
       };
+      key_bindings = [{
+        key = "Return";
+        mods = "Shift";
+        chars = "\\x1b[13;2u";
+      }
+        {
+          key = "Return";
+          mods = "Control";
+          chars = "\\x1b[13;5u";
+        }];
     };
   };
 }

@@ -70,6 +70,9 @@
       set-option -g automatic-rename on
       set-option -g automatic-rename-format '#{b:pane_current_path}'
       # }
+
+      bind -n S-Enter send-keys Escape "[13;2u"
+      bind -n C-Enter send-keys Escape "[13;5u"
     '';
   };
 }
