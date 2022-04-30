@@ -3,10 +3,6 @@ let
   leaderKey = ";";
 in
 {
-  home.packages = [
-    pkgs.nodePackages.typescript
-    pkgs.nodePackages.typescript-language-server
-  ];
   programs.neovim = {
     enable = true;
     viAlias = true;
@@ -40,6 +36,8 @@ in
       EOF
     '';
     extraPackages = [
+      pkgs.nodePackages.typescript
+      pkgs.nodePackages.typescript-language-server
       pkgs.nodePackages.bash-language-server
       pkgs.nodePackages.vim-language-server
       pkgs.nodePackages.yaml-language-server
@@ -118,6 +116,7 @@ in
       comment-nvim
       luasnip
       lspkind-nvim
+      pkgs.derivations.nvim-neoclip
     ];
   };
 }

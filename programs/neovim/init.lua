@@ -258,3 +258,7 @@ cmp.setup({
 		{ name = "path" },
 	},
 })
+
+require("neoclip").setup()
+require("telescope").load_extension("neoclip")
+vim.keymap.set("n", '<leader>"', require("telescope").extensions.neoclip.star)
