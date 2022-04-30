@@ -84,15 +84,19 @@
     sublime
   ];
 
-
-  programs.fzf = {
-    enable = true;
-    enableZshIntegration = true;
-  };
-
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
+  programs = {
+    fzf = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
+    nix-index = {
+      enable = true;
+      enableZshIntegration = true;
+    };
   };
 
   dconf = {
@@ -127,7 +131,6 @@
     temperature.night = 3000;
     temperature.day = 5000;
   };
-  programs.noti = { enable = true; };
 
   systemd.user.startServices = "sd-switch";
 }
