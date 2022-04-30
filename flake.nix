@@ -7,9 +7,13 @@
       url = "github:nix-community/home-manager/778af87a981eb2bfa3566dff8c3fb510856329ef";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixGL = {
+      url = "github:guibou/nixGL/c4aa5aa15af5d75e2f614a70063a2d341e8e3461";
+      flake = false;
+    };
   };
 
-  outputs = { home-manager, ... }:
+  outputs = { home-manager, nixGL, ... }:
     let
       system = "x86_64-linux";
       username = "kghost";
@@ -18,6 +22,10 @@
       homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
         # Specify the path to your home configuration here
         configuration = import ./home.nix;
+
+        extraSpecialArgs = {
+          inherit nixGL;
+        };
 
         inherit system username;
         homeDirectory = "/home/${username}";

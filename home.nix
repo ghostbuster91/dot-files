@@ -1,8 +1,8 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, nixGL, ... }: {
 
   nixpkgs = {
     overlays = [
-      (import ./overlays/alacritty.nix)
+      (import ./overlays/alacritty.nix { nixGL = (import nixGL { inherit pkgs; }); })
       (self: super: { derivations = import ./derivations { pkgs = super; }; })
     ];
     config = {
