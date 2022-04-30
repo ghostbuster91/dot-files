@@ -1,18 +1,17 @@
-{ nixGL }: self: super:
+{ nixGL, pkgs }:
 
 let
   nixGLIntel = nixGL.packages.x86_64-linux.nixGLIntel;
 in
-{
-  alacritty = (self.symlinkJoin {
-    name = "alacritty";
-    paths = [
-      (self.writeShellScriptBin "alacritty" ''
-        #!/bin/sh
+(pkgs.symlinkJoin {
+  name = "alacritty";
+  paths = [
+    (pkgs.writeShellScriptBin "alacritty" ''
+      #!/bin/sh
 
-        ${nixGLIntel}/bin/nixGLIntel ${super.alacritty}/bin/alacritty "$@"
-      '')
-      super.alacritty
-    ];
-  });
-}
+      ${nixGLIntel}/bin/nixGLIntel ${pkgs.alacritty}/bin/alacritty "$@"
+    '')
+    pkgs.alacritty
+  ];
+})
+
