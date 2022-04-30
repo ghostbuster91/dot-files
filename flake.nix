@@ -2,10 +2,11 @@
   description = "Home Manager configuration of Jane Doe";
 
   inputs = {
-    # Specify the source of Home Manager and Nixpkgs
-    home-manager.url = "github:nix-community/home-manager/778af87a981eb2bfa3566dff8c3fb510856329ef";
     nixpkgs.url = "github:nixos/nixpkgs/30d3d79b7d3607d56546dd2a6b49e156ba0ec634";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "github:nix-community/home-manager/778af87a981eb2bfa3566dff8c3fb510856329ef";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { home-manager, ... }:
