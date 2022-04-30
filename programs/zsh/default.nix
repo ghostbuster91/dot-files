@@ -1,9 +1,21 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, lib, ... }: {
   programs.zsh = {
     enable = true;
     enableAutosuggestions = true;
     enableSyntaxHighlighting = true;
     defaultKeymap = "emacs";
+    plugins = [
+      {
+        name = "powerlevel10k";
+        src = pkgs.zsh-powerlevel10k;
+        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+      }
+      {
+        name = "powerlevel10k-config";
+        src = lib.cleanSource ./p10k-config;
+        file = "p10k.zsh";
+      }
+    ];
     zplug = {
       enable = true;
       plugins = [
@@ -79,9 +91,6 @@
       ZSH_TMUX_CONFIG=${config.xdg.configHome}/tmux/tmux.conf
     '';
     initExtraBeforeCompInit = ''
-      # powerlevel10k
-      source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-      source ${./p10k.zsh}
       # fix delete key
       bindkey "^[[3~" delete-char
       # turn off beeping
