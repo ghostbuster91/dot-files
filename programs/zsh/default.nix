@@ -25,10 +25,6 @@
           tags = [ "at:v0.4.0" ];
         }
         {
-          name = "romkatv/powerlevel10k";
-          tags = [ "as:theme" "depth:1" "at:v.1.16.1" ];
-        }
-        {
           name = "plugins/common-aliases";
           tags =
             [ "from:oh-my-zsh" "at:904f8685f75ff5dd3f544f8c6f2cabb8e5952e9a" ];
