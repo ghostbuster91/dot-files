@@ -1,4 +1,8 @@
 # dot-files
-`ln -s ~/workspace/dot-files/nix/nixpkgs ~/.config/nixpkgs`
+`ln -s ~/workspace/dot-files ~/.config/nixpkgs`
 
-`ln -s ~/workspace/dot-files/nix/.nix-channels ~/.nix-channels`
+Building for the first time:
+```shell
+nix build .#homeConfigurations.kghost.activationPackage
+result/active
+```
