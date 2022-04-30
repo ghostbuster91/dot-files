@@ -3,6 +3,7 @@
     enable = true;
     enableAutosuggestions = true;
     enableSyntaxHighlighting = true;
+    enableVteIntegration = true;
     defaultKeymap = "emacs";
     plugins = [
       {
