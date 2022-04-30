@@ -2,7 +2,7 @@
 
   nixpkgs = {
     overlays = [
-      (import ./overlays/alacritty.nix { nixGL = (import nixGL { inherit pkgs; }); })
+      (import ./overlays/alacritty.nix { inherit nixGL; })
       (self: super: { derivations = import ./derivations { pkgs = super; }; })
     ];
     config = {

@@ -1,7 +1,7 @@
 { nixGL }: self: super:
 
 let
-  nixGLIntel = nixGL.nixGLIntel;
+  nixGLIntel = nixGL.packages.x86_64-linux.nixGLIntel;
 in
 {
   alacritty = (self.symlinkJoin {

@@ -8,8 +8,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixGL = {
-      url = "github:guibou/nixGL/c4aa5aa15af5d75e2f614a70063a2d341e8e3461";
-      flake = false;
+      url = "github:guibou/nixGL";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
