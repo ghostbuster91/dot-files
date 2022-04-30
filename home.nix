@@ -48,7 +48,6 @@
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     diff-so-fancy # pretty diffs
     git-gone # get rid of orphan local branches
-    exa # better ls
     bat # better cat
     tokei # better cloc
     xsv # csv manipulation
@@ -85,6 +84,10 @@
   ];
 
   programs = {
+    exa = {
+      enable = true;
+      enableAliases = true;
+    };
     fzf = {
       enable = true;
       enableZshIntegration = true;
