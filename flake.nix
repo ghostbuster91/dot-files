@@ -13,7 +13,7 @@
     };
   };
 
-  outputs = { home-manager, nixGL, ... }:
+  outputs = inputs @ { home-manager, nixGL, ... }:
     let
       system = "x86_64-linux";
       username = "kghost";
@@ -25,6 +25,7 @@
 
         extraSpecialArgs = {
           inherit nixGL;
+          inherit inputs;
         };
 
         inherit system username;

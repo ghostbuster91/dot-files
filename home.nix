@@ -1,4 +1,4 @@
-{ pkgs, config, nixGL, ... }: {
+{ pkgs, config, nixGL, inputs, lib, ... }: {
 
   nixpkgs = {
     overlays = [
@@ -29,6 +29,24 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  home.file.".config/nix/registry.json".text = builtins.toJSON {
+    flakes =
+      lib.mapAttrsToList
+        (n: v: {
+          exact = true;
+          from = {
+            id = n;
+            type = "indirect";
+          };
+          to = {
+            path = v.outPath;
+            type = "path";
+          };
+        })
+        inputs;
+    version = 2;
+  };
 
   home.sessionVariables = {
     EDITOR = "nvim";
