@@ -8,7 +8,6 @@ local nullLs = require("null-ls")
 
 nullLs.setup({
 	sources = {
-		nullLs.builtins.formatting.stylua,
 		nullLs.builtins.formatting.shfmt,
 		nullLs.builtins.diagnostics.eslint,
 		nullLs.builtins.code_actions.eslint,
