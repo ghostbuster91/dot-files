@@ -24,7 +24,6 @@ vim.api.nvim_set_keymap("c", "<C-a>", "<HOME>", { noremap = true })
 vim.api.nvim_set_keymap("c", "<C-e>", "<END>", { noremap = true })
 -- }
 
-FormatOnSave = true
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -49,10 +48,8 @@ local on_attach = function(client, bufnr)
 	)
 
 	buf_set_keymap("n", "<Leader>glr", "<cmd>lua require('telescope.builtin').lsp_references()<cr>", opts)
-	-- TOOD bind key to invoke completion
 
-	if client.resolved_capabilities.document_formatting and FormatOnSave then
-		-- TODO how to make this configurable by a variable
+	if client.resolved_capabilities.document_formatting then
 		vim.cmd([[
             augroup LspFormatting
                 autocmd! * <buffer>
@@ -262,3 +259,5 @@ cmp.setup({
 require("neoclip").setup()
 require("telescope").load_extension("neoclip")
 vim.keymap.set("n", '<leader>"', require("telescope").extensions.neoclip.star)
+
+require("indent_blankline").setup()

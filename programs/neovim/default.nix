@@ -118,6 +118,7 @@ in
       lspkind-nvim
       pkgs.derivations.nvim-neoclip
       cmp-tmux
+      indent-blankline-nvim
     ];
   };
 }
