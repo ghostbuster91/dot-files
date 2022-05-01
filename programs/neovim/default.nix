@@ -119,6 +119,8 @@ in
       pkgs.derivations.nvim-neoclip
       cmp-tmux
       indent-blankline-nvim
+      presenting-vim
+      glow-nvim
     ];
   };
 }
