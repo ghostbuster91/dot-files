@@ -117,6 +117,7 @@ in
       luasnip
       lspkind-nvim
       pkgs.derivations.nvim-neoclip
+      cmp-tmux
     ];
   };
 }
