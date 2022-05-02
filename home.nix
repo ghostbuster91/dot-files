@@ -113,6 +113,9 @@
     direnv = {
       enable = true;
       nix-direnv.enable = true;
+      stdlib = ''
+        unset LD_LIBRARY_PATH
+      '';
     };
     nix-index = {
       enable = true;
