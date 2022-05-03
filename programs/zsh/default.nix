@@ -16,6 +16,10 @@
         src = lib.cleanSource ./p10k-config;
         file = "p10k.zsh";
       }
+      {
+        name = "fzf-tab";
+        src = "${pkgs.zsh-fzf-tab}/share/fzf-tab";
+      }
     ];
     zplug = {
       enable = true;
@@ -66,10 +70,6 @@
           tags = [ "use:init.sh" "at:v2.2.4" ];
         }
         {
-          name = "Aloxaf/fzf-tab";
-          tags = [ "at:a677cf770cfce1e3668ba576fecfb7a14f4f39e2" ];
-        }
-        {
           name = "hlissner/zsh-autopair";
           tags = [ "at:9d003fc02dbaa6db06e6b12e8c271398478e0b5d" ];
         }
@@ -85,21 +85,26 @@
       ];
     };
     initExtraFirst = ''
-      ZSH_TMUX_CONFIG=${config.xdg.configHome}/tmux/tmux.conf
+      	ZSH_TMUX_CONFIG=${config.xdg.configHome}/tmux/tmux.conf
     '';
     initExtraBeforeCompInit = ''
-      # fix delete key
-      bindkey "^[[3~" delete-char
-      # turn off beeping
-      unsetopt BEEP
+      	# fix delete key
+      	bindkey "^[[3~" delete-char
+      	# turn off beeping
+      	unsetopt BEEP
 
-      autoload -U select-word-style
-      select-word-style bash
+      	autoload -U select-word-style
+      	select-word-style bash
 
-      # ctrl-d drop stash entry
-      FORGIT_STASH_FZF_OPTS='--bind="ctrl-d:reload(git stash drop $(cut -d: -f1 <<<{}) 1>/dev/null && git stash list)"'
+      	# ctrl-d drop stash entry
+      	FORGIT_STASH_FZF_OPTS='--bind="ctrl-d:reload(git stash drop $(cut -d: -f1 <<<{}) 1>/dev/null && git stash list)"'
 
-      setopt HIST_IGNORE_ALL_DUPS
+      	setopt HIST_IGNORE_ALL_DUPS
+      	autoload -U edit-command-line
+      	# Emacs style
+      	zle -N edit-command-line
+      	bindkey '^xe' edit-command-line
+      	bindkey '^x^e' edit-command-line
     '';
 
     localVariables = {
