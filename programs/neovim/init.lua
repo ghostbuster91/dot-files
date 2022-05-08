@@ -47,6 +47,7 @@ local on_attach = function(client, bufnr)
 		opts
 	)
 
+	buf_set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
 	buf_set_keymap("n", "<Leader>glr", "<cmd>lua require('telescope.builtin').lsp_references()<cr>", opts)
 
 	if client.resolved_capabilities.document_formatting then
