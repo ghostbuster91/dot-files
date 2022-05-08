@@ -108,7 +108,7 @@
     '';
 
     localVariables = {
-      POWERLEVEL9K_MODE = "awesome-patched";
+      FZF_DEFAULT_COMMAND = "fd --type f --hidden --exclude .git --exclude node_modules --exclude '*.class'";
     };
     history = { extended = true; };
   };
