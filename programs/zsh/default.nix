@@ -108,7 +108,9 @@
     '';
 
     localVariables = {
-      FZF_DEFAULT_COMMAND = "fd --type f --hidden --exclude .git --exclude node_modules --exclude '*.class'";
+      FZF_DEFAULT_COMMAND = "${pkgs.fd}/bin/fd --type f --hidden --exclude .git --exclude node_modules --exclude '*.class'";
+      FZF_CTRL_T_OPTS = "--ansi --preview '${pkgs.bat}/bin/bat --style=numbers --color=always --line-range :500 {}'";
+      FZF_CTRL_T_COMMAND = "${pkgs.fd}/bin/fd -I --type file";
     };
     history = { extended = true; };
   };
