@@ -1,10 +1,12 @@
 # dot-files
-`ln -s ~/workspace/dot-files ~/.config/nixpkgs`
+
+Install nix:
+https://nixos.org/manual/nix/stable/installation/installing-binary.html#multi-user-installation
 
 Building for the first time:
 ```sh
 nix build .#homeConfigurations.kghost.activationPackage
-result/active
+result/activate
 ```
 After that configurations can be switched using:
 ```sh
