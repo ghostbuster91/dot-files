@@ -20,6 +20,43 @@
         "type": "github"
       }
     },
+    "lowdown-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1633514407,
+        "narHash": "sha256-Dw32tiMjdK9t3ETl5fzGrutQTzh2rufgZV4A/BbxuD4=",
+        "owner": "kristapsdz",
+        "repo": "lowdown",
+        "rev": "d2c2b44ff6c27b936ec27358a2653caaef8f73b8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kristapsdz",
+        "repo": "lowdown",
+        "type": "github"
+      }
+    },
+    "nix": {
+      "inputs": {
+        "lowdown-src": "lowdown-src",
+        "nixpkgs": "nixpkgs",
+        "nixpkgs-regression": "nixpkgs-regression"
+      },
+      "locked": {
+        "lastModified": 1654014617,
+        "narHash": "sha256-qNL3lQPBsnStkru3j1ajN/H+knXI+X3dku8/dBfSw3g=",
+        "owner": "nixos",
+        "repo": "nix",
+        "rev": "624e38aa43f304fbb78b4779172809add042b513",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "2.9-maintenance",
+        "repo": "nix",
+        "type": "github"
+      }
+    },
     "nixGL": {
       "inputs": {
         "nixpkgs": [
@@ -42,6 +79,36 @@
     },
     "nixpkgs": {
       "locked": {
+        "lastModified": 1645296114,
+        "narHash": "sha256-y53N7TyIkXsjMpOG7RhvqJFGDacLs9HlyHeSTBioqYU=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "530a53dcbc9437363471167a5e4762c5fcfa34a1",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "nixos-21.05-small",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs-regression": {
+      "locked": {
+        "lastModified": 1643052045,
+        "narHash": "sha256-uGJ0VXIhWKGXxkeNnq4TvV3CIOkUJ3PAoLZ3HMzNVMw=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "215d4d0fd80ca5163643b03a33fde804a29cc1e2",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "rev": "215d4d0fd80ca5163643b03a33fde804a29cc1e2",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
         "lastModified": 1651007983,
         "narHash": "sha256-GNay7yDPtLcRcKCNHldug85AhAvBpTtPEJWSSDYBw8U=",
         "owner": "nixos",
@@ -59,8 +126,9 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
+        "nix": "nix",
         "nixGL": "nixGL",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs_2"
       }
     }
   },

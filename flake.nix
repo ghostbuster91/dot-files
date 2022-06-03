@@ -2,6 +2,7 @@
   description = "Home Manager configuration of Jane Doe";
 
   inputs = {
+    nix.url = "github:nixos/nix/2.9-maintenance";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -13,7 +14,7 @@
     };
   };
 
-  outputs = inputs @ { home-manager, nixGL, ... }:
+  outputs = inputs @ { home-manager, ... }:
     let
       system = "x86_64-linux";
       username = "kghost";
@@ -24,7 +25,6 @@
         configuration = import ./home.nix;
 
         extraSpecialArgs = {
-          inherit nixGL;
           inherit inputs;
         };
 
