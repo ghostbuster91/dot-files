@@ -105,6 +105,8 @@
     xsel # for tmux-yank
 
     sublime
+    gh
+    tig
   ];
 
   programs = {
