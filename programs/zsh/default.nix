@@ -113,5 +113,8 @@
       FZF_CTRL_T_COMMAND = "${pkgs.fd}/bin/fd -I --type file";
     };
     history = { extended = true; };
+    shellAliases = {
+      lsd = "${pkgs.exa}/bin/exa --long --header --git --all";
+    };
   };
 }
