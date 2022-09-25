@@ -7,7 +7,6 @@
     keyMode = "vi";
     sensibleOnTop = true;
     plugins = [
-      pkgs.tmuxPlugins.yank
       pkgs.tmuxPlugins.better-mouse-mode
       {
         plugin = pkgs.tmuxPlugins.onedark-theme;
@@ -27,6 +26,7 @@
     extraConfig = ''
       set -g mouse on
       set-option -g renumber-windows on
+      set -g set-clipboard external
 
       set-window-option -g xterm-keys on
 
