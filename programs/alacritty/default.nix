@@ -20,8 +20,8 @@
       };
       colors = {
         primary = {
-          foreground = "#eeeeec";
-          background = "#300a24";
+          foreground = "#d3d7cf";
+          background = "#2e3436";
         };
         normal = {
           black = "#2e3436";

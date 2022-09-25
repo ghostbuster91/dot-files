@@ -28,6 +28,7 @@
         '';
       }
       pkgs.tmuxPlugins.tmux-thumbs
+      pkgs.tmuxPlugins.jump
     ];
     extraConfig = ''
       set -g mouse on
