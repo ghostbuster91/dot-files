@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, config, ... }: {
   programs.tmux = {
     enable = true;
     terminal = "xterm-256color";
@@ -7,7 +7,12 @@
     keyMode = "vi";
     sensibleOnTop = true;
     plugins = [
-      pkgs.tmuxPlugins.yank
+      {
+        plugin = pkgs.tmuxPlugins.yank;
+        extraConfig = ''
+          set -g @yank_action 'copy-pipe'
+        '';
+      }
       pkgs.tmuxPlugins.better-mouse-mode
       {
         plugin = pkgs.tmuxPlugins.onedark-theme;
@@ -29,6 +34,7 @@
       set-option -g renumber-windows on
 
       set-window-option -g xterm-keys on
+      bind-key r source-file ${config.xdg.configHome}/tmux/tmux.conf \; display-message "~/.tmux.conf reloaded"
 
       # use \ and - for splitting panes
       unbind '%'
