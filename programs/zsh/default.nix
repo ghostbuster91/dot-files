@@ -124,6 +124,9 @@
       zle -N edit-command-line
       bindkey '^xe' edit-command-line
       bindkey '^x^e' edit-command-line
+
+      autoload -U select-word-style
+      select-word-style bash
     '';
 
     localVariables = {
