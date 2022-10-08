@@ -50,7 +50,7 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
 	buf_set_keymap("n", "<Leader>glr", "<cmd>lua require('telescope.builtin').lsp_references()<cr>", opts)
 
-	if client.server_capabilities.document_formatting then
+	if client.resolved_capabilities.document_formatting then
 		vim.cmd([[
             augroup LspFormatting
                 autocmd! * <buffer>
@@ -116,7 +116,14 @@ require("which-key").setup()
 require("nvim-autopairs").setup()
 
 require("nvim-treesitter.configs").setup({
-	ensure_installed = {}, -- Revert to full list once https://github.com/NixOS/nixpkgs/issues/189838 will be resolved
+	ensure_installed = {
+		"nix",
+		"yaml",
+		"bash",
+		"lua",
+		"typescript",
+		"javascript",
+	},
 	highlight = {
 		enable = true, -- false will disable the whole extension                 -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
 		-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).

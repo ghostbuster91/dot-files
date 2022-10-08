@@ -1,5 +1,5 @@
 {
-  description = "Home Manager configuration of Kasper Kondzielski";
+  description = "Home Manager configuration of Jane Doe";
 
   inputs = {
     nix.url = "github:nixos/nix/2.9-maintenance";
@@ -14,36 +14,29 @@
     };
   };
 
-  outputs = inputs @ { home-manager, nixpkgs, ... }:
+  outputs = inputs @ { home-manager, ... }:
     let
       system = "x86_64-linux";
       username = "kghost";
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-        overlays = [
-          (self: super: { alacritty = import ./overlays/alacritty.nix { nixGL = inputs.nixGL; pkgs = super; }; })
-          (self: super: { derivations = import ./derivations { pkgs = super; }; })
-        ];
-      };
     in
     {
       homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
+        # Specify the path to your home configuration here
+        configuration = import ./home.nix;
+
         extraSpecialArgs = {
           inherit inputs;
         };
 
-        modules = [
-          ./home.nix
-          {
-            home = {
-              inherit username;
-              homeDirectory = "/home/${username}";
-              stateVersion = "22.05";
-            };
-          }
-        ];
+        inherit system username;
+        homeDirectory = "/home/${username}";
+        # Update the state version as needed.
+        # See the changelog here:
+        # https://nix-community.github.io/home-manager/release-notes.html#sec-release-21.05
+        stateVersion = "22.05";
+
+        # Optionally use extraSpecialArgs
+        # to pass through arguments to home.nix
       };
     };
 }
