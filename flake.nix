@@ -1,5 +1,5 @@
 {
-  description = "Home Manager configuration of Jane Doe";
+  description = "Home Manager configuration of Kasper Kondzielski";
 
   inputs = {
     nix.url = "github:nixos/nix/2.9-maintenance";
