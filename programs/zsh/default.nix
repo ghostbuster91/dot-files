@@ -20,6 +20,21 @@
         name = "fzf-tab";
         src = "${pkgs.zsh-fzf-tab}/share/fzf-tab";
       }
+      {
+        name = "enhancd";
+        file = "init.sh";
+        src = pkgs.fetchFromGitHub {
+          owner = "b4b4r07";
+          repo = "enhancd";
+          rev = "v2.2.4";
+          sha256 = "sha256-9/JGJgfAjXLIioCo3gtzCXJdcmECy6s59Oj0uVOfuuo=";
+        };
+      }
+      {
+        name = "zsh-you-should-use";
+        src = "${pkgs.zsh-you-should-use}";
+        file = "share/zsh/plugins/you-should-use/you-should-use.plugin.zsh";
+      }
     ];
     zplug = {
       enable = true;
@@ -53,10 +68,7 @@
           tags =
             [ "from:oh-my-zsh" "at:904f8685f75ff5dd3f544f8c6f2cabb8e5952e9a" ];
         }
-        {
-          name = "MichaelAquilina/zsh-you-should-use";
-          tags = [ "at:1.7.3" ];
-        }
+
         {
           name = "rupa/z";
           tags = [ "use:z.sh" "at:v1.11" ];
@@ -64,10 +76,6 @@
         {
           name = "changyuheng/fz";
           tags = [ "defer:1" "at:2a4c1bc73664bb938bfcc7c99f473d0065f9dbfd" ];
-        }
-        {
-          name = "b4b4r07/enhancd";
-          tags = [ "use:init.sh" "at:v2.2.4" ];
         }
         {
           name = "hlissner/zsh-autopair";
@@ -111,6 +119,11 @@
       function zvm_after_init() {
         zvm_bindkey viins '^R' fzf-history-widget
       }
+
+      # Emacs style
+      zle -N edit-command-line
+      bindkey '^xe' edit-command-line
+      bindkey '^x^e' edit-command-line
     '';
 
     localVariables = {
