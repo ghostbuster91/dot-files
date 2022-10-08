@@ -4,7 +4,7 @@
     enableAutosuggestions = true;
     enableSyntaxHighlighting = true;
     enableVteIntegration = true;
-    defaultKeymap = "emacs";
+    defaultKeymap = "viins";
     plugins = [
       {
         name = "powerlevel10k";
@@ -82,29 +82,35 @@
           tags =
             [ "from:oh-my-zsh" "at:904f8685f75ff5dd3f544f8c6f2cabb8e5952e9a" ];
         }
+        {
+          name = "jeffreytse/zsh-vi-mode";
+          tags = [ "at:0b1381bd2b23b966881e2bca426216a47f7f3403" ];
+        }
+
       ];
     };
     initExtraFirst = ''
       	ZSH_TMUX_CONFIG=${config.xdg.configHome}/tmux/tmux.conf
     '';
     initExtraBeforeCompInit = ''
-      	# fix delete key
-      	bindkey "^[[3~" delete-char
-      	# turn off beeping
-      	unsetopt BEEP
+      # fix delete key
+      bindkey "^[[3~" delete-char
 
-      	autoload -U select-word-style
-      	select-word-style bash
+      # turn off beeping
+      unsetopt BEEP
 
-      	# ctrl-d drop stash entry
-      	FORGIT_STASH_FZF_OPTS='--bind="ctrl-d:reload(git stash drop $(cut -d: -f1 <<<{}) 1>/dev/null && git stash list)"'
+      # ctrl-d drop stash entry
+      FORGIT_STASH_FZF_OPTS='--bind="ctrl-d:reload(git stash drop $(cut -d: -f1 <<<{}) 1>/dev/null && git stash list)"'
+      setopt HIST_IGNORE_ALL_DUPS
+      autoload -U edit-command-line
 
-      	setopt HIST_IGNORE_ALL_DUPS
-      	autoload -U edit-command-line
-      	# Emacs style
-      	zle -N edit-command-line
-      	bindkey '^xe' edit-command-line
-      	bindkey '^x^e' edit-command-line
+      ZVM_CURSOR_STYLE_ENABLED=false
+
+      # Rebind history search, fix for:
+      # https://github.com/jeffreytse/zsh-vi-mode/issues/127
+      function zvm_after_init() {
+        zvm_bindkey viins '^R' fzf-history-widget
+      }
     '';
 
     localVariables = {
