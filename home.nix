@@ -1,14 +1,5 @@
 { pkgs, config, inputs, lib, ... }: {
 
-  nixpkgs = {
-    overlays = [
-      (self: super: { alacritty = import ./overlays/alacritty.nix { nixGL = inputs.nixGL; pkgs = super; }; })
-      (self: super: { derivations = import ./derivations { pkgs = super; }; })
-    ];
-    config = {
-      allowUnfree = true;
-    };
-  };
 
   targets.genericLinux.enable = true;
   fonts.fontconfig.enable = true;
@@ -89,7 +80,7 @@
     # nix stuff
     nix-du
     nix-index
-    nix-review
+    nixpkgs-review
     nix-tree
     nixfmt
     nix-prefetch
