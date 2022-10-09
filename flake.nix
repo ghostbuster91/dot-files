@@ -23,7 +23,7 @@
         config.allowUnfree = true;
         overlays = [
           (self: super: { alacritty = import ./overlays/alacritty.nix { inherit (inputs) nixGL; pkgs = super; }; })
-          (self: super: { derivations = import ./derivations { pkgs = super; }; })
+          (self: super: { derivations = import ./derivations { pkgs = super; inherit (nixpkgs) lib; }; })
         ];
       };
     in

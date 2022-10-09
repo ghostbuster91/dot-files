@@ -38,7 +38,7 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap("n", "<Leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
 	buf_set_keymap("n", "<Leader>gtD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
 	buf_set_keymap("n", "<Leader>gtd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-	buf_set_keymap("n", "<Leader>f", "<cmd>lua vim.lsp.buf.formatting_sync()<CR>", opts)
+	buf_set_keymap("n", "<Leader>f", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
 	buf_set_keymap("n", "<Leader>gds", "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>", opts)
 	buf_set_keymap(
 		"n",
@@ -54,7 +54,7 @@ local on_attach = function(client, bufnr)
 		vim.cmd([[
             augroup LspFormatting
                 autocmd! * <buffer>
-                autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
+                autocmd BufWritePre <buffer> lua vim.lsp.buf.format()
             augroup END
             ]])
 	end
@@ -162,9 +162,17 @@ require("telescope").setup({
 			},
 		},
 	},
+	extensions = {
+		["ui-select"] = {
+			require("telescope.themes").get_dropdown {
+				-- even more opts
+			}
+		}
+	}
 })
 
 require("telescope").load_extension("fzf")
+require("telescope").load_extension("ui-select")
 
 local gps = require("nvim-gps")
 gps.setup()
@@ -270,3 +278,14 @@ require("indent_blankline").setup()
 require("nvim-tree").setup()
 
 require("symbols-outline").setup()
+
+require('dressing').setup()
+
+require("noice").setup()
+
+require('dressing').setup({
+	input = {
+		-- Change default highlight groups (see :help winhl)
+		winhighlight = "FloatBorder:DiagnosticError",
+	},
+})

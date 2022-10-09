@@ -6,6 +6,8 @@ set relativenumber
 set number
 set wildcharm=<C-Z>
 
+set termguicolors
+
 cnoremap <expr> <Up>    pumvisible() ? "\<Left>"  : "\<Up>"
 cnoremap <expr> <Down>  pumvisible() ? "\<Right>" : "\<Down>"
 cnoremap <expr> <Left>  pumvisible() ? "\<Up>"    : "\<Left>"

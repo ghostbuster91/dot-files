@@ -36,14 +36,14 @@
         file = "share/zsh/plugins/you-should-use/you-should-use.plugin.zsh";
       }
       {
-	name = "zsh-nix-shell";
-	src = pkgs.zsh-nix-shell;
-	file = "share/zsh-nix-shell/nix-shell.plugin.zsh";
+        name = "zsh-nix-shell";
+        src = pkgs.zsh-nix-shell;
+        file = "share/zsh-nix-shell/nix-shell.plugin.zsh";
       }
       {
-      	name = "zsh-vi-mode";
-	src = pkgs.zsh-vi-mode;
-	file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
+        name = "zsh-vi-mode";
+        src = pkgs.zsh-vi-mode;
+        file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
       }
     ];
     zplug = {

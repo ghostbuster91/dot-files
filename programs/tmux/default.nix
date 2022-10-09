@@ -1,7 +1,7 @@
 { pkgs, config, ... }: {
   programs.tmux = {
     enable = true;
-    terminal = "xterm-256color";
+    terminal = "tmux-256color";
     baseIndex = 1;
     escapeTime = 0;
     keyMode = "vi";
@@ -36,6 +36,9 @@
       # https://github.com/roxma/vim-tmux-clipboard/#requirements 
       set -g focus-events on
       
+      # Enable 256 colors in tmux inside alacritty https://gist.github.com/bbqtd/a4ac060d6f6b9ea6fe3aabe735aa9d95
+      # also here is nice function to verify that it works: https://jdhao.github.io/2018/10/19/tmux_nvim_true_color/
+      set-option -a terminal-overrides ",alacritty:RGB"      
       set-option -g renumber-windows on
 
       set-window-option -g xterm-keys on

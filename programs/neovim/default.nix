@@ -124,6 +124,11 @@ in
       nvim-tree-lua
       vim-tmux-clipboard
       symbols-outline-nvim
+      dressing-nvim
+      telescope-ui-select-nvim
+      pkgs.derivations.nvim-noice
+      nui-nvim
+      nvim-notify
     ];
   };
 }
