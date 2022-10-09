@@ -106,6 +106,7 @@ in
             tree-sitter-comment
             tree-sitter-bash
             tree-sitter-javascript
+	    tree-sitter-nix
             tree-sitter-typescript
           ]
       ))
