@@ -120,6 +120,9 @@
         zvm_bindkey viins '^R' fzf-history-widget
       }
 
+      # https://github.com/jeffreytse/zsh-vi-mode#surround
+      ZVM_VI_SURROUND_BINDKEY="classic"
+
       # Emacs style
       zle -N edit-command-line
       bindkey '^xe' edit-command-line
