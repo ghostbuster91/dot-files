@@ -50,7 +50,7 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
 	buf_set_keymap("n", "<Leader>glr", "<cmd>lua require('telescope.builtin').lsp_references()<cr>", opts)
 
-	if client.server_capabilities.document_formatting then
+	if client.server_capabilities.documentFormattingProvider then
 		vim.cmd([[
             augroup LspFormatting
                 autocmd! * <buffer>
@@ -255,3 +255,5 @@ require("telescope").load_extension("neoclip")
 vim.keymap.set("n", '<leader>"', require("telescope").extensions.neoclip.star)
 
 require("indent_blankline").setup()
+
+require("nvim-tree").setup()

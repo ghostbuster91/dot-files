@@ -106,7 +106,7 @@ in
             tree-sitter-comment
             tree-sitter-bash
             tree-sitter-javascript
-	    tree-sitter-nix
+            tree-sitter-nix
             tree-sitter-typescript
           ]
       ))
@@ -120,8 +120,7 @@ in
       pkgs.derivations.nvim-neoclip
       cmp-tmux
       indent-blankline-nvim
-      presenting-vim
-      glow-nvim
+      nvim-tree-lua
     ];
   };
 }
