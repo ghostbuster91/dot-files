@@ -1,9 +1,9 @@
 { nixGL, pkgs }:
 
 let
-  nixGLIntel = nixGL.packages.x86_64-linux.nixGLIntel;
+  inherit (nixGL.packages.x86_64-linux) nixGLIntel;
 in
-(pkgs.symlinkJoin {
+pkgs.symlinkJoin {
   name = "alacritty";
   paths = [
     (pkgs.writeShellScriptBin "alacritty" ''
@@ -13,5 +13,5 @@ in
     '')
     pkgs.alacritty
   ];
-})
+}
 

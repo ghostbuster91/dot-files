@@ -5,7 +5,7 @@ let
 in
 pkgs.tmuxPlugins.mkTmuxPlugin {
   pluginName = pname;
-  version = version;
+  inherit version;
   rtpFilePath = "tmux-status-variables.tmux";
   src = pkgs.fetchFromGitHub {
     owner = "odedlaz";

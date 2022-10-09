@@ -5,7 +5,7 @@
     plugins = [{
       org = "ch.epfl.scala";
       artifact = "sbt-bloop";
-      version = pkgs.bloop.version;
+      inherit (pkgs.bloop) version;
     }];
   };
 }
