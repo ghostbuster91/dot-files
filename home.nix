@@ -98,6 +98,7 @@
     sublime
     gh
     tig
+    statix # nix linter
   ];
 
   programs = {

@@ -32,6 +32,10 @@
     ];
     extraConfig = ''
       set -g mouse on
+
+      # https://github.com/roxma/vim-tmux-clipboard/#requirements 
+      set -g focus-events on
+      
       set-option -g renumber-windows on
 
       set-window-option -g xterm-keys on

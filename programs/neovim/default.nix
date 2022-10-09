@@ -121,6 +121,8 @@ in
       cmp-tmux
       indent-blankline-nvim
       nvim-tree-lua
+      vim-tmux-clipboard
+      symbols-outline-nvim
     ];
   };
 }

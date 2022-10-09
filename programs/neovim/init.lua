@@ -257,3 +257,5 @@ vim.keymap.set("n", '<leader>"', require("telescope").extensions.neoclip.star)
 require("indent_blankline").setup()
 
 require("nvim-tree").setup()
+
+require("symbols-outline").setup()
