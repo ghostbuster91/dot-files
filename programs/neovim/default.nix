@@ -110,6 +110,7 @@ in
             tree-sitter-typescript
           ]
       ))
+      nvim-treesitter-textobjects
       nvim-web-devicons
       lualine-nvim
       lualine-lsp-progress

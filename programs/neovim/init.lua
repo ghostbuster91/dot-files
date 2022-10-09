@@ -139,6 +139,17 @@ require("nvim-treesitter.configs").setup({
 			scope_incremental = "<TAB>",
 		},
 	},
+	textobjects = {
+		swap = {
+			enable = true,
+			swap_next = {
+				["<leader>a"] = "@parameter.inner",
+			},
+			swap_previous = {
+				["<leader>A"] = "@parameter.inner",
+			},
+		},
+	}
 })
 
 local actions = require("telescope.actions")
