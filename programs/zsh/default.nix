@@ -32,17 +32,23 @@
       }
       {
         name = "zsh-you-should-use";
-        src = "${pkgs.zsh-you-should-use}";
+        src = pkgs.zsh-you-should-use;
         file = "share/zsh/plugins/you-should-use/you-should-use.plugin.zsh";
+      }
+      {
+	name = "zsh-nix-shell";
+	src = pkgs.zsh-nix-shell;
+	file = "share/zsh-nix-shell/nix-shell.plugin.zsh";
+      }
+      {
+      	name = "zsh-vi-mode";
+	src = pkgs.zsh-vi-mode;
+	file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
       }
     ];
     zplug = {
       enable = true;
       plugins = [
-        {
-          name = "chisui/zsh-nix-shell";
-          tags = [ "at:v0.4.0" ];
-        }
         {
           name = "plugins/common-aliases";
           tags =
@@ -68,7 +74,6 @@
           tags =
             [ "from:oh-my-zsh" "at:904f8685f75ff5dd3f544f8c6f2cabb8e5952e9a" ];
         }
-
         {
           name = "rupa/z";
           tags = [ "use:z.sh" "at:v1.11" ];
@@ -79,7 +84,7 @@
         }
         {
           name = "hlissner/zsh-autopair";
-          tags = [ "at:9d003fc02dbaa6db06e6b12e8c271398478e0b5d" ];
+          tags = [ "at:9d003fc02dbaa6db06e6b12e8c271398478e0b5d" "defer:2" ];
         }
         {
           name = "wfxr/forgit";
@@ -90,11 +95,6 @@
           tags =
             [ "from:oh-my-zsh" "at:904f8685f75ff5dd3f544f8c6f2cabb8e5952e9a" ];
         }
-        {
-          name = "jeffreytse/zsh-vi-mode";
-          tags = [ "at:0b1381bd2b23b966881e2bca426216a47f7f3403" ];
-        }
-
       ];
     };
     initExtraFirst = ''
