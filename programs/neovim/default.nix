@@ -113,7 +113,6 @@ in
       nvim-treesitter-textobjects
       nvim-web-devicons
       lualine-nvim
-      lualine-lsp-progress
       nvim-gps
       comment-nvim
       luasnip
@@ -129,6 +128,13 @@ in
       pkgs.derivations.nvim-noice
       nui-nvim
       nvim-notify
+      fidget-nvim
+      nvim-lightbulb
+      pkgs.derivations.nvim-eyeliner
+      neoscroll-nvim
+      neogit
+      undotree
+      diffview-nvim
     ];
   };
 }

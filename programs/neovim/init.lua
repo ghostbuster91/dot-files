@@ -193,7 +193,7 @@ require("lualine").setup({
 	sections = {
 		lualine_a = { "mode" },
 		lualine_b = { "branch", "diff", "diagnostics" },
-		lualine_c = { "filename", "lsp_progress", { gps.get_location, cond = gps.is_available } },
+		lualine_c = { "filename", { gps.get_location, cond = gps.is_available } },
 		lualine_x = { "encoding", "fileformat", "filetype" },
 		lualine_y = { "progress" },
 		lualine_z = { "location" },
@@ -293,3 +293,16 @@ require('dressing').setup({
 		winhighlight = "FloatBorder:DiagnosticError",
 	},
 })
+require("fidget").setup()
+require('nvim-lightbulb').setup({ autocmd = { enabled = true } })
+require 'eyeliner'.setup {
+	highlight_on_key = true
+}
+require('neoscroll').setup()
+
+require("diffview").setup()
+require('neogit').setup {
+	integrations = {
+		diffview = true
+	}
+}
