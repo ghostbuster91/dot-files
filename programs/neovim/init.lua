@@ -24,6 +24,9 @@ vim.api.nvim_set_keymap("c", "<C-a>", "<HOME>", { noremap = true })
 vim.api.nvim_set_keymap("c", "<C-e>", "<END>", { noremap = true })
 -- }
 
+vim.api.nvim_set_keymap("n", "<Leader>/", "<cmd>lua require('telescope.builtin').commands()<cr>",
+	{ noremap = true })
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -282,6 +285,7 @@ require("symbols-outline").setup()
 require('dressing').setup()
 
 require("noice").setup()
+require("telescope").load_extension("noice")
 
 require('dressing').setup({
 	input = {
