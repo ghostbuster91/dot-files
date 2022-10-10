@@ -4,7 +4,7 @@
     enableAutosuggestions = true;
     enableSyntaxHighlighting = true;
     enableVteIntegration = true;
-    defaultKeymap = "viins";
+    defaultKeymap = "emacs";
     plugins = [
       {
         name = "powerlevel10k";
@@ -39,11 +39,6 @@
         name = "zsh-nix-shell";
         src = pkgs.zsh-nix-shell;
         file = "share/zsh-nix-shell/nix-shell.plugin.zsh";
-      }
-      {
-        name = "zsh-vi-mode";
-        src = pkgs.zsh-vi-mode;
-        file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
       }
     ];
     zplug = {
@@ -111,17 +106,6 @@
       FORGIT_STASH_FZF_OPTS='--bind="ctrl-d:reload(git stash drop $(cut -d: -f1 <<<{}) 1>/dev/null && git stash list)"'
       setopt HIST_IGNORE_ALL_DUPS
       autoload -U edit-command-line
-
-      ZVM_CURSOR_STYLE_ENABLED=false
-
-      # Rebind history search, fix for:
-      # https://github.com/jeffreytse/zsh-vi-mode/issues/127
-      function zvm_after_init() {
-        zvm_bindkey viins '^R' fzf-history-widget
-      }
-
-      # https://github.com/jeffreytse/zsh-vi-mode#surround
-      ZVM_VI_SURROUND_BINDKEY="classic"
 
       # Emacs style
       zle -N edit-command-line
