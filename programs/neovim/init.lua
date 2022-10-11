@@ -326,6 +326,7 @@ require('neoscroll').setup()
 
 require("diffview").setup()
 require('neogit').setup {
+	disable_commit_confirmation = true,
 	integrations = {
 		diffview = true
 	}
