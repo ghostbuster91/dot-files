@@ -282,20 +282,44 @@ require("nvim-tree").setup()
 
 require("symbols-outline").setup()
 
-require('dressing').setup()
-
-require("noice").setup()
-require("telescope").load_extension("noice")
-
-require('dressing').setup({
-	input = {
-		-- Change default highlight groups (see :help winhl)
-		winhighlight = "FloatBorder:DiagnosticError",
+require("noice").setup({
+	views = {
+		cmdline_popup = {
+			position = {
+				row = 5,
+				col = "50%",
+			},
+			size = {
+				width = 60,
+				height = "auto",
+			},
+		},
+		popupmenu = {
+			relative = "editor",
+			position = {
+				row = 8,
+				col = "50%",
+			},
+			size = {
+				width = 60,
+				height = 10,
+			},
+			border = {
+				style = "rounded",
+				padding = { 0, 1 },
+			},
+			win_options = {
+				winhighlight = { Normal = "Normal", FloatBorder = "DiagnosticInfo" },
+			},
+		},
 	},
 })
+require("telescope").load_extension("noice")
+
+
 require("fidget").setup()
 require('nvim-lightbulb').setup({ autocmd = { enabled = true } })
-require 'eyeliner'.setup {
+require('eyeliner').setup {
 	highlight_on_key = true
 }
 require('neoscroll').setup()
