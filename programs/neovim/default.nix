@@ -131,7 +131,7 @@ in
       nvim-lightbulb
       pkgs.derivations.nvim-eyeliner
       neoscroll-nvim
-      neogit
+      pkgs.derivations.nvim-neogit
       undotree
       diffview-nvim
     ];
