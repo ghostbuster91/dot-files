@@ -15,6 +15,7 @@
       pull = { ff = "only"; };
       init = { defaultBranch = "main"; };
       alias = { gone = "!bash ~/bin/git-gone.sh"; };
+      submodule = { recurse = true; };
     };
     includes = [
       {
