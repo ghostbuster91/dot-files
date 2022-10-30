@@ -27,7 +27,13 @@
           set -g @prefix_highlight_show_copy_mode 'on'
         '';
       }
-      pkgs.tmuxPlugins.tmux-thumbs
+      {
+        plugin = pkgs.tmuxPlugins.tmux-thumbs;
+        extraConfig = ''
+          set -g @thumbs-command 'echo -n {} | xsel'
+          set -g @thumbs-regexp-1 'sha256-\S{44}=' # Match nix sha256
+        '';
+      }
       pkgs.tmuxPlugins.jump
     ];
     extraConfig = ''
