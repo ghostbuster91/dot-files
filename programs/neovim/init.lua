@@ -1,6 +1,7 @@
 -- globals
 local global_opt = vim.opt_global
 global_opt.clipboard = "unnamed"
+global_opt.timeoutlen = 200
 
 -- lsp
 local lspconfig = require("lspconfig")
