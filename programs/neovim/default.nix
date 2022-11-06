@@ -1,6 +1,6 @@
 { pkgs, config, ... }:
 let
-  leaderKey = ";";
+  leaderKey = "\\<Space>";
 in
 {
   programs.neovim = {
@@ -59,10 +59,12 @@ in
       {
         plugin = telescope-nvim;
         config = ''
-          nnoremap ${leaderKey}tf <cmd>Telescope find_files<cr>
-          nnoremap ${leaderKey}tg <cmd>Telescope live_grep<cr>
-          nnoremap ${leaderKey}th <cmd>Telescope buffers<cr>
-          nnoremap ${leaderKey}gh <cmd>lua require('telescope.builtin').git_commits()<cr>
+          "It has to be set in the first plugin's config as plugins get sourced before any other configuration and the leader customization doesn't work otherwise
+          let mapleader = "${leaderKey}" 
+          nnoremap <Leader>tf <cmd>Telescope find_files<cr>
+          nnoremap <Leader>tg <cmd>Telescope live_grep<cr>
+          nnoremap <Leader>th <cmd>Telescope buffers<cr>
+          nnoremap <Leader>gh <cmd>lua require('telescope.builtin').git_commits()<cr>
         '';
       }
       telescope-fzf-native-nvim
