@@ -137,6 +137,7 @@ in
       pkgs.derivations.nvim-neogit
       undotree
       diffview-nvim
+      pkgs.derivations.nvim-goto-preview
     ];
   };
 }
