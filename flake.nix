@@ -2,7 +2,7 @@
   description = "Home Manager configuration of Kasper Kondzielski";
 
   inputs = {
-    nix.url = "github:nixos/nix/2.9-maintenance";
+    nix.url = "github:nixos/nix/2.11-maintenance";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
