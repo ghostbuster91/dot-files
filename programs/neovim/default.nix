@@ -110,6 +110,7 @@ in
             tree-sitter-javascript
             tree-sitter-nix
             tree-sitter-typescript
+            tree-sitter-c
           ]
       ))
       nvim-treesitter-textobjects
