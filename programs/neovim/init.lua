@@ -16,17 +16,18 @@ nullLs.setup({
 	},
 })
 
+local map = vim.api.nvim_set_keymap
+
 -- Saving files as root with w!! {
-vim.api.nvim_set_keymap("c", "w!!", "%!sudo tee > /dev/null %", { noremap = true })
+map("c", "w!!", "%!sudo tee > /dev/null %", { noremap = true })
 -- }
 
 -- <CTRL> + a and <CTRL> + e move to the beginning and the end of the line
-vim.api.nvim_set_keymap("c", "<C-a>", "<HOME>", { noremap = true })
-vim.api.nvim_set_keymap("c", "<C-e>", "<END>", { noremap = true })
+map("c", "<C-a>", "<HOME>", { noremap = true })
+map("c", "<C-e>", "<END>", { noremap = true })
 -- }
 
-vim.api.nvim_set_keymap("n", "<Leader>/", "<cmd>lua require('telescope.builtin').commands()<cr>",
-	{ noremap = true })
+map("n", "<Leader>/", "<cmd>lua require('telescope.builtin').commands()<cr>", { noremap = true })
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -279,7 +280,11 @@ vim.keymap.set("n", '<leader>"', require("telescope").extensions.neoclip.star)
 
 require("indent_blankline").setup()
 
-require("nvim-tree").setup()
+local nvim_tree = require("nvim-tree")
+nvim_tree.setup()
+vim.keymap.set("n", '<leader>tt', function()
+	nvim_tree.toggle(true, true)
+end)
 
 require("symbols-outline").setup()
 
