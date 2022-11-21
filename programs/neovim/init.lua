@@ -300,12 +300,17 @@ require('eyeliner').setup {
 require('neoscroll').setup()
 
 require("diffview").setup()
-require('neogit').setup {
+
+local neogit = require('neogit')
+neogit.setup {
 	disable_commit_confirmation = true,
 	integrations = {
 		diffview = true
 	}
 }
+vim.keymap.set("n", '<leader>n', function()
+	neogit.open()
+end)
 require('goto-preview').setup {
 	default_mappings = true;
 }
