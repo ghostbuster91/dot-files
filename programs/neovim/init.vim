@@ -14,4 +14,14 @@ cnoremap <expr> <Left>  pumvisible() ? "\<Up>"    : "\<Left>"
 cnoremap <expr> <Right> pumvisible() ? "\<Down>"  : "\<Right>"
 
 "This unsets the "last search pattern" register by hitting return
-nnoremap <CR> :noh<CR><CR>
+nnoremap <ESC> :noh<ESC>
+
+" decrease width
+nnoremap <C-Left> <C-W><
+" increase width
+nnoremap <C-Right> <C-W>>
+" decrease height
+nnoremap <C-Up> <C-W>-
+" increase height
+nnoremap <C-Down> <C-W>+
+

@@ -13,26 +13,10 @@ in
     "${builtins.readFile ./init.vim}" +
     ''
       lua << EOF
-      	${builtins.readFile ./init.lua}
-      	local capabilitiesWithoutFomatting = vim.lsp.protocol.make_client_capabilities()
-      	capabilitiesWithoutFomatting.textDocument.formatting = false
-      	capabilitiesWithoutFomatting.textDocument.rangeFormatting = false
-      	capabilitiesWithoutFomatting.textDocument.range_formatting = false
-      		
-      	require("lspconfig")["tsserver"].setup({
-      			on_attach = function (client, buffer)
-      				client.resolved_capabilities.document_formatting = false
-      				client.resolved_capabilities.document_range_formatting = false
-      				on_attach(client, buffer)
-      			end,
-      			capabilities = capabilitiesWithoutFormatting,
-      			cmd = { 
-      				"${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server", 
-      				"--stdio", 
-      				"--tsserver-path", 
-      				"${pkgs.nodePackages.typescript}/lib/node_modules/typescript/lib/" 
-      			}
-      		})
+        local tsserver_path = "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server"
+        local typescript_path = "${pkgs.nodePackages.typescript}/lib/node_modules/typescript/lib"
+        local metals_binary_path = "${pkgs.metals}/bin/metals"
+        ${builtins.readFile ./init.lua}
       EOF
     '';
     extraPackages = [
@@ -130,7 +114,7 @@ in
       pkgs.derivations.nvim-noice
       nui-nvim
       nvim-notify
-      fidget-nvim
+      pkgs.derivations.nvim-fidget
       nvim-lightbulb
       pkgs.derivations.nvim-eyeliner
       neoscroll-nvim
@@ -138,6 +122,8 @@ in
       undotree
       diffview-nvim
       pkgs.derivations.nvim-goto-preview
+      nvim-dap
+      pkgs.derivations.nvim-metals
     ];
   };
 }

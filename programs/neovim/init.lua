@@ -1,5 +1,9 @@
 -- globals
+local api = vim.api
+local cmd = vim.cmd
+local map = api.nvim_set_keymap
 local global_opt = vim.opt_global
+
 global_opt.clipboard = "unnamed"
 global_opt.timeoutlen = 200
 
@@ -16,7 +20,6 @@ nullLs.setup({
 	},
 })
 
-local map = vim.api.nvim_set_keymap
 
 -- Saving files as root with w!! {
 map("c", "w!!", "%!sudo tee > /dev/null %", { noremap = true })
@@ -33,7 +36,7 @@ map("n", "<Leader>/", "<cmd>lua require('telescope.builtin').commands()<cr>", { 
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
 	local function buf_set_keymap(...)
-		vim.api.nvim_buf_set_keymap(bufnr, ...)
+		api.nvim_buf_set_keymap(bufnr, ...)
 	end
 
 	-- Mappings.
@@ -53,10 +56,10 @@ local on_attach = function(client, bufnr)
 	)
 
 	buf_set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-	buf_set_keymap("n", "<Leader>glr", "<cmd>lua require('telescope.builtin').lsp_references()<cr>", opts)
+	buf_set_keymap("n", "<Leader>gr", "<cmd>lua require('telescope.builtin').lsp_references()<cr>", opts)
 
 	if client.server_capabilities.documentFormattingProvider then
-		vim.cmd([[
+		cmd([[
             augroup LspFormatting
                 autocmd! * <buffer>
                 autocmd BufWritePre <buffer> lua vim.lsp.buf.format()
@@ -67,8 +70,8 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+-- local capabilities = vim.lsp.protocol.make_client_capabilities()
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local servers = { "bashls", "vimls", "rnix", "yamlls", "sumneko_lua" }
 for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup({
@@ -82,11 +85,83 @@ for _, lsp in ipairs(servers) do
 	})
 end
 
+-- metals
+
+local capabilities_no_format = vim.lsp.protocol.make_client_capabilities()
+capabilities_no_format.textDocument.formatting = false
+capabilities_no_format.textDocument.rangeFormatting = false
+capabilities_no_format.textDocument.range_formatting = false
+
+require("lspconfig")["tsserver"].setup({
+	on_attach = function(client, buffer)
+		client.resolved_capabilities.document_formatting = false
+		client.resolved_capabilities.document_range_formatting = false
+		on_attach(client, buffer)
+	end,
+	capabilities = capabilities_no_format,
+	cmd = {
+		tsserver_path,
+		"--stdio",
+		"--tsserver-path",
+		tyescript_path
+	}
+})
+-- Scala nvim-metals config
+local metals_config = require('metals').bare_config()
+metals_config.init_options.statusBarProvider = "on"
+metals_config.capabilities = capabilities
+metals_config.on_attach = on_attach
+metals_config.settings = {
+	metalsBinaryPath = metals_binary_path,
+	showImplicitArguments = true,
+	excludedPackages = {
+		"akka.actor.typed.javadsl",
+		"com.github.swagger.akka.javadsl"
+	}
+}
+metals_config.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+	vim.lsp.diagnostic.on_publish_diagnostics, {
+	virtual_text = {
+		prefix = '',
+	}
+}
+)
+-- Autocmd that will actually be in charging of starting the whole thing
+local nvim_metals_group = api.nvim_create_augroup("nvim-metals", { clear = true })
+api.nvim_create_autocmd("FileType", {
+	-- NOTE: You may or may not want java included here. You will need it if you
+	-- want basic Java support but it may also conflict if you are using
+	-- something like nvim-jdtls which also works on a java filetype autocmd.
+	pattern = { "scala", "sbt", "java" },
+	callback = function()
+		require("metals").initialize_or_attach(metals_config)
+	end,
+	group = nvim_metals_group,
+})
+
+require("telescope").load_extension("metals")
+
+
+-- Autocmd that will actually be in charging of starting the whole thing
+local nvim_metals_group = api.nvim_create_augroup("nvim-metals", { clear = true })
+api.nvim_create_autocmd("FileType", {
+	-- NOTE: You may or may not want java included here. You will need it if you
+	-- want basic Java support but it may also conflict if you are using
+	-- something like nvim-jdtls which also works on a java filetype autocmd.
+	pattern = { "scala", "sbt", "java" },
+	callback = function()
+		require("metals").initialize_or_attach(metals_config)
+	end,
+	group = nvim_metals_group,
+})
+
+-- metals end
+
 require("gitsigns").setup({
 	on_attach = function(bufnr)
 		local function map(mode, lhs, rhs, opts)
 			opts = vim.tbl_extend("force", { noremap = true, silent = true }, opts or {})
-			vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts)
+			api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts)
 		end
 
 		local opts = { noremap = true, silent = true }
@@ -292,7 +367,11 @@ require("noice").setup()
 require("telescope").load_extension("noice")
 
 
-require("fidget").setup()
+require("fidget").setup({
+	debug = {
+		logging = true
+	}
+})
 require('nvim-lightbulb').setup({ autocmd = { enabled = true } })
 require('eyeliner').setup {
 	highlight_on_key = true
@@ -314,3 +393,23 @@ end)
 require('goto-preview').setup {
 	default_mappings = true;
 }
+
+local function metals_status_handler(err, status, ctx)
+	local val = {}
+	-- trim and remove spinner
+	local text = status.text:gsub('[⠇⠋⠙⠸⠴⠦]', ''):gsub("^%s*(.-)%s*$", "%1")
+	if status.hide then
+		val = { kind = "end" }
+	elseif status.show then
+		val = { kind = "begin", title = text }
+	elseif status.text then
+		val = { kind = "report", message = text }
+	else
+		return
+	end
+	local msg = { token = "metals", value = val }
+	vim.lsp.handlers["$/progress"](err, msg, ctx)
+end
+
+metals_config.init_options.statusBarProvider = 'on'
+metals_config.handlers = { ['metals/status'] = metals_status_handler }

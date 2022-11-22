@@ -12,9 +12,13 @@
       url = "github:guibou/nixGL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nvim-flake = {
+      url = "github:gvolpe/neovim-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs @ { home-manager, nixpkgs, ... }:
+  outputs = inputs @ { home-manager, nixpkgs, nvim-flake, ... }:
     let
       system = "x86_64-linux";
       username = "kghost";
@@ -23,6 +27,7 @@
         config.allowUnfree = true;
         overlays = [
           (self: super: { alacritty = import ./overlays/alacritty.nix { inherit (inputs) nixGL; pkgs = super; }; })
+          (self: super: { metals = nvim-flake.packages.${system}.metals; })
           (self: super: { derivations = import ./derivations { pkgs = super; inherit (nixpkgs) lib; }; })
         ];
       };
