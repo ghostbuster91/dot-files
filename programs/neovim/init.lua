@@ -1,7 +1,8 @@
 -- globals
 local api = vim.api
 local cmd = vim.cmd
-local map = api.nvim_set_keymap
+local map = vim.keymap.set
+local lsp = vim.lsp
 local global_opt = vim.opt_global
 
 global_opt.clipboard = "unnamed"
@@ -30,33 +31,45 @@ map("c", "<C-a>", "<HOME>", { noremap = true })
 map("c", "<C-e>", "<END>", { noremap = true })
 -- }
 
-map("n", "<Leader>/", "<cmd>lua require('telescope.builtin').commands()<cr>", { noremap = true })
+local telescope_builtin = require('telescope.builtin')
+map("n", "<Leader>/", telescope_builtin.commands, { noremap = true })
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-    local function buf_set_keymap(...)
-        api.nvim_buf_set_keymap(bufnr, ...)
+    local function mapB(mode, l, r)
+        local opts = { noremap = true, silent = true, buffer = bufnr }
+        map(mode, l, r, opts)
     end
 
     -- Mappings.
-    local opts = { noremap = true, silent = true }
 
     -- See `:help vim.lsp.*` for documentation on any of the below functions
-    buf_set_keymap("n", "<Leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-    buf_set_keymap("n", "<Leader>gtD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-    buf_set_keymap("n", "<Leader>gtd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-    buf_set_keymap("n", "<Leader>f", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
-    buf_set_keymap("n", "<Leader>gds", "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>", opts)
-    buf_set_keymap(
+    mapB("n", "<leader>rn", lsp.buf.rename)
+    mapB("n", "<leader>gtD", lsp.buf.declaration)
+    mapB("n", "<leader>gtd", lsp.buf.definition)
+    mapB("n", "<leader>f", lsp.buf.format)
+    mapB("n", "<leader>gds", telescope_builtin.lsp_document_symbols)
+    mapB(
         "n",
         "<Leader>gws",
-        "<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols()<cr>",
-        opts
+        telescope_builtin.lsp_dynamic_workspace_symbols
     )
 
-    buf_set_keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-    buf_set_keymap("n", "<Leader>gr", "<cmd>lua require('telescope.builtin').lsp_references()<cr>", opts)
+    mapB("n", "K", lsp.buf.hover)
+    mapB("n", "<Leader>gr", telescope_builtin.lsp_references)
+
+    -- buffer diagnostics only
+    mapB("n", "<leader>d", function()
+        vim.diagnostic.setloclist()
+    end)
+    mapB("n", "[d", function()
+        vim.diagnostic.goto_prev({ wrap = false })
+    end)
+
+    mapB("n", "]d", function()
+        vim.diagnostic.goto_next({ wrap = false })
+    end)
 
     if client.server_capabilities.documentFormattingProvider then
         cmd([[
@@ -141,53 +154,46 @@ api.nvim_create_autocmd("FileType", {
 
 require("telescope").load_extension("metals")
 
-
--- Autocmd that will actually be in charging of starting the whole thing
-local nvim_metals_group = api.nvim_create_augroup("nvim-metals", { clear = true })
-api.nvim_create_autocmd("FileType", {
-    -- NOTE: You may or may not want java included here. You will need it if you
-    -- want basic Java support but it may also conflict if you are using
-    -- something like nvim-jdtls which also works on a java filetype autocmd.
-    pattern = { "scala", "sbt", "java" },
-    callback = function()
-        require("metals").initialize_or_attach(metals_config)
-    end,
-    group = nvim_metals_group,
-})
-
 -- metals end
 
 require("gitsigns").setup({
     on_attach = function(bufnr)
-        local function map(mode, lhs, rhs, opts)
-            opts = vim.tbl_extend("force", { noremap = true, silent = true }, opts or {})
-            api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts)
+        local gs = package.loaded.gitsigns
+
+        local function map(mode, l, r, opts)
+            opts = opts or {}
+            opts.buffer = bufnr
+            vim.keymap.set(mode, l, r, opts)
         end
 
-        local opts = { noremap = true, silent = true }
         -- Navigation
-        map("n", "]c", "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", { expr = true })
-        map("n", "[c", "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", { expr = true })
+        map('n', ']c', function()
+            if vim.wo.diff then return ']c' end
+            vim.schedule(function() gs.next_hunk() end)
+            return '<Ignore>'
+        end, { expr = true })
+
+        map('n', '[c', function()
+            if vim.wo.diff then return '[c' end
+            vim.schedule(function() gs.prev_hunk() end)
+            return '<Ignore>'
+        end, { expr = true })
 
         -- Actions
-        map("n", "<Leader>hs", ":Gitsigns stage_hunk<CR>", opts)
-        map("v", "<Leader>hs", ":Gitsigns stage_hunk<CR>", opts)
-        map("n", "<Leader>hr", ":Gitsigns reset_hunk<CR>", opts)
-        map("v", "<Leader>hr", ":Gitsigns reset_hunk<CR>", opts)
-        -- TODO why this doesnt work and freezes vim!?
-        map("n", "<leader>hS", "<cmd>Gitsigns stage_buffer<CR>")
-        map("n", "<leader>hu", "<cmd>Gitsigns undo_stage_hunk<CR>")
-        map("n", "<leader>hR", "<cmd>Gitsigns reset_buffer<CR>")
-        map("n", "<leader>hp", "<cmd>Gitsigns preview_hunk<CR>", opts)
-        map("n", "<leader>hb", '<cmd>lua require"gitsigns".blame_line{full=true}<CR>')
-        map("n", "<leader>tb", "<cmd>Gitsigns toggle_current_line_blame<CR>")
-        map("n", "<leader>hd", "<cmd>Gitsigns diffthis<CR>")
-        map("n", "<leader>hD", '<cmd>lua require"gitsigns".diffthis("~")<CR>')
-        map("n", "<leader>td", "<cmd>Gitsigns toggle_deleted<CR>")
+        map({ 'n', 'v' }, '<leader>hs', ':Gitsigns stage_hunk<CR>')
+        map({ 'n', 'v' }, '<leader>hr', ':Gitsigns reset_hunk<CR>')
+        map('n', '<leader>hS', gs.stage_buffer)
+        map('n', '<leader>hu', gs.undo_stage_hunk)
+        map('n', '<leader>hR', gs.reset_buffer)
+        map('n', '<leader>hp', gs.preview_hunk)
+        map('n', '<leader>hb', function() gs.blame_line { full = true } end)
+        map('n', '<leader>tb', gs.toggle_current_line_blame)
+        map('n', '<leader>hd', gs.diffthis)
+        map('n', '<leader>hD', function() gs.diffthis('~') end)
+        map('n', '<leader>td', gs.toggle_deleted)
 
         -- Text object
-        map("o", "ih", ":<C-U>Gitsigns select_hunk<CR>", opts)
-        map("x", "ih", ":<C-U>Gitsigns select_hunk<CR>", opts)
+        map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
     end,
 })
 
@@ -366,16 +372,18 @@ require("symbols-outline").setup()
 require("noice").setup()
 require("telescope").load_extension("noice")
 
-
 require("fidget").setup({
     debug = {
         logging = true
     }
 })
+
 require('nvim-lightbulb').setup({ autocmd = { enabled = true } })
+
 require('eyeliner').setup {
     highlight_on_key = true
 }
+
 require('neoscroll').setup()
 
 require("diffview").setup()
@@ -390,6 +398,7 @@ neogit.setup {
 vim.keymap.set("n", '<leader>n', function()
     neogit.open()
 end)
+
 require('goto-preview').setup {
     default_mappings = true;
 }
