@@ -27,7 +27,7 @@
         config.allowUnfree = true;
         overlays = [
           (self: super: { alacritty = import ./overlays/alacritty.nix { inherit (inputs) nixGL; pkgs = super; }; })
-          (self: super: { metals = nvim-flake.packages.${system}.metals; })
+          (self: super: { inherit (nvim-flake.packages.${system}) metals; })
           (self: super: { derivations = import ./derivations { pkgs = super; inherit (nixpkgs) lib; }; })
         ];
       };
