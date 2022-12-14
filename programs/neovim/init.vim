@@ -22,3 +22,8 @@ nnoremap <silent> <C-Left> :TmuxResizeLeft<CR>
 nnoremap <silent> <C-Down> :TmuxResizeDown<CR>
 nnoremap <silent> <C-Up> :TmuxResizeUp<CR>
 nnoremap <silent> <C-Right> :TmuxResizeRight<CR>
+
+set tabstop     =4
+set softtabstop =4
+set shiftwidth  =4
+set expandtab
