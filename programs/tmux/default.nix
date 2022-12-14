@@ -81,10 +81,21 @@
       bind-key -n M-Left if-shell "$is_vim" "send-keys M-Left"  "select-pane -L"
       bind-key -n M-Right if-shell "$is_vim" "send-keys M-Right"  "select-pane -R"
 
-      bind-key -n C-Up resize-pane -U
-      bind-key -n C-Down resize-pane -D
-      bind-key -n C-Left resize-pane -L
-      bind-key -n C-Right resize-pane -R
+      # Smart pane resizing with awareness of Vim splits.
+      # See: https://github.com/RyanMillerC/better-vim-tmux-resizer
+      is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
+      | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
+
+      # Edit values if you use custom resize_count variables
+      bind-key -n C-Left if-shell "$is_vim" "send-keys C-Left"  "resize-pane -L 10"
+      bind-key -n C-Down if-shell "$is_vim" "send-keys C-Down"  "resize-pane -D 5"
+      bind-key -n C-Up if-shell "$is_vim" "send-keys C-Up"  "resize-pane -U 5"
+      bind-key -n C-Right if-shell "$is_vim" "send-keys C-Right"  "resize-pane -R 10"
+     
+      bind-key -T copy-mode-vi C-Left resize-pane -L 10
+      bind-key -T copy-mode-vi C-Down resize-pane -D 5
+      bind-key -T copy-mode-vi C-Up resize-pane -U 5
+      bind-key -T copy-mode-vi C-Right resize-pane -R 10
 
       # Rename tmux windows to the current directory
       # https://stackoverflow.com/a/45010147 {

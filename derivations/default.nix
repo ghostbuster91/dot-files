@@ -7,4 +7,5 @@
   nvim-goto-preview = pkgs.callPackage ./nvim-goto-preview.nix { inherit pkgs; };
   nvim-metals = pkgs.callPackage ./nvim-metals.nix { inherit pkgs; };
   nvim-fidget = pkgs.callPackage ./nvim-fidget.nix { inherit pkgs; };
+  nvim-tmux-resize = pkgs.callPackage ./nvim-tmux-resize.nix { inherit pkgs; };
 }

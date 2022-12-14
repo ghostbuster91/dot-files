@@ -124,6 +124,7 @@ in
       pkgs.derivations.nvim-goto-preview
       nvim-dap
       pkgs.derivations.nvim-metals
+      pkgs.derivations.nvim-tmux-resize
     ];
   };
 }
