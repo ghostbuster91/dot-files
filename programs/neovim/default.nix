@@ -34,10 +34,10 @@ in
     ];
     plugins = with pkgs.vimPlugins; [
       rec {
-        plugin = onedark-vim;
+        plugin = kanagawa-nvim;
         config = ''
           packadd! ${plugin.pname}
-          colorscheme onedark
+          colorscheme kanagawa
         '';
       }
       {
@@ -95,6 +95,8 @@ in
             tree-sitter-nix
             tree-sitter-typescript
             tree-sitter-c
+            tree-sitter-java
+            tree-sitter-scala
           ]
       ))
       nvim-treesitter-textobjects

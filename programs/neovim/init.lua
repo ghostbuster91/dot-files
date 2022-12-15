@@ -47,20 +47,20 @@ local on_attach = function(client, bufnr)
 
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     mapB("n", "<leader>rn", lsp.buf.rename, "lsp rename")
-    mapB("n", "<leader>gtD", lsp.buf.declaration, "lsp goto declaration")
-    mapB("n", "<leader>gtd", lsp.buf.definition, "lsp goto definition")
-    mapB("n", "<leader>gti", lsp.buf.implementation, "lsp goto implementation")
+    mapB("n", "<leader>gD", lsp.buf.declaration, "lsp goto declaration")
+    mapB("n", "<leader>gd", telescope_builtin.lsp_definitions, "lsp goto definition")
+    mapB("n", "<leader>gi", telescope_builtin.lsp_implementations, "lsp goto implementation")
     mapB("n", "<leader>f", lsp.buf.format, "lsp format")
-    mapB("n", "<leader>gds", telescope_builtin.lsp_document_symbols, "lsp document symbols")
+    mapB("n", "<leader>gs", telescope_builtin.lsp_document_symbols, "lsp document symbols")
     mapB(
         "n",
         "<Leader>gws",
         telescope_builtin.lsp_dynamic_workspace_symbols,
         "lsp workspace symbols"
     )
-    mapB("n", "<leader>ca", vim.lsp.buf.code_action, "lsp code action")
+    mapB("n", "<leader>ca", lsp.buf.code_action, "lsp code action")
 
-    mapB("n", "K", lsp.buf.hover, "lsp hover")
+    mapB({ "n", "v" }, "K", lsp.buf.hover, "lsp hover")
     mapB("n", "<Leader>gr", telescope_builtin.lsp_references, "lsp references")
     mapB("n", "<leader>sh", lsp.buf.signature_help, "lsp signature")
 
@@ -117,6 +117,7 @@ require("lspconfig")["tsserver"].setup({
 })
 -- Scala nvim-metals config
 local metals_config = require('metals').bare_config()
+
 metals_config.init_options.statusBarProvider = "on"
 metals_config.capabilities = capabilities
 metals_config.on_attach = on_attach
