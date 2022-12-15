@@ -460,6 +460,22 @@
         "type": "github"
       }
     },
+    "nixpkgs_3": {
+      "locked": {
+        "lastModified": 1671131270,
+        "narHash": "sha256-QCN2Wfa5i1iZThSSGtBdBcKWDfCMOvBHIKtorMaqGPA=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "8ba90bbc63e58c8c436f16500c526e9afcb6b00a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "null-ls": {
       "flake": false,
       "locked": {
@@ -595,9 +611,7 @@
         "lualine": "lualine",
         "mind-nvim": "mind-nvim",
         "nightfox": "nightfox",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
+        "nixpkgs": "nixpkgs_3",
         "null-ls": "null-ls",
         "nvim-autopairs": "nvim-autopairs",
         "nvim-bufferline-lua": "nvim-bufferline-lua",
@@ -630,17 +644,14 @@
         "which-key": "which-key"
       },
       "locked": {
-        "lastModified": 1667999470,
+        "lastModified": 0,
         "narHash": "sha256-7YJ5AP4FctnNYqfw5Ib0LFlhw48Jqsj22e2IEFcRLLs=",
-        "owner": "gvolpe",
-        "repo": "neovim-flake",
-        "rev": "a3a17d1d7dead4c2a8aae4df1146cc21f999bd15",
-        "type": "github"
+        "path": "/nix/store/sqsba8a10k90cdqp4rwznr2jxmlk0h1m-source",
+        "type": "path"
       },
       "original": {
-        "owner": "gvolpe",
-        "repo": "neovim-flake",
-        "type": "github"
+        "id": "nvim-flake",
+        "type": "indirect"
       }
     },
     "nvim-lightbulb": {

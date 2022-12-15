@@ -12,10 +12,6 @@
       url = "github:guibou/nixGL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nvim-flake = {
-      url = "github:gvolpe/neovim-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = inputs @ { home-manager, nixpkgs, nvim-flake, ... }:
