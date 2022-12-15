@@ -20,29 +20,37 @@
       };
       colors = {
         primary = {
-          foreground = "#d3d7cf";
-          background = "#2e3436";
+          foreground = "#dcd7ba";
+          background = "#1f1f28";
         };
         normal = {
-          black = "#2e3436";
-          red = "#cc0000";
-          green = "#4e9a06";
-          yellow = "#c4a000";
-          blue = "#3465a4";
-          magenta = "#75507b";
-          cyan = "#06989a";
-          white = "#d3d7cf";
+          black = "#090618";
+          red = "#c34043";
+          green = "#76946a";
+          yellow = "#c0a36e";
+          blue = "#7e9cd8";
+          magenta = "#957fb8";
+          cyan = "#6a9589";
+          white = "#c8c093";
         };
         bright = {
-          black = "#555753";
-          red = "#ef2929";
-          green = "#8ae234";
-          yellow = "#fce94f";
-          blue = "#729fcf";
-          magenta = "#ad7fa8";
-          cyan = "#34e2e2";
-          white = "#eeeeec";
+          black = "#727169";
+          red = "#e82424";
+          green = "#98bb6c";
+          yellow = "#e6c384";
+          blue = "#7fb4ca";
+          magenta = "#938aa9";
+          cyan = "#7aa89f";
+          white = "#dcd7ba";
         };
+        selection = {
+          background = "#2d4f67";
+          foreground = "#c8c093";
+        };
+        indexed_colors = [
+          { index = 16; color = "#ffa066"; }
+          { index = 17; color = "#ff5d62"; }
+        ];
       };
       key_bindings = [{
         key = "Return";

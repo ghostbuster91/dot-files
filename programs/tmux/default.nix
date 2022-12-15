@@ -106,13 +106,9 @@
       bind -n S-Enter send-keys Escape "[13;2u"
       bind -n C-Enter send-keys Escape "[13;5u"
 
-      #set inactive/active window styles
-      set -g window-style 'fg=colour247,bg=colour236'
-      set -g window-active-style 'fg=colour250,bg=black'
-
       # set the pane border colors 
       set -g pane-border-style 'fg=colour235,bg=colour238' 
-      set -g pane-active-border-style 'fg=colour51,bg=colour236'
+      set -g pane-active-border-style 'fg=colour39,bg=colour236'
     '';
   };
 }
