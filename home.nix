@@ -156,5 +156,9 @@
     temperature.day = 5000;
   };
 
+  services.unclutter = {
+    enable = true;
+  };
+
   systemd.user.startServices = "sd-switch";
 }
