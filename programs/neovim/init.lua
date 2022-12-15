@@ -18,6 +18,7 @@ nullLs.setup({
         nullLs.builtins.diagnostics.eslint,
         nullLs.builtins.code_actions.eslint,
         nullLs.builtins.formatting.prettier,
+        nullLs.builtins.code_actions.gitsigns
     },
 })
 
@@ -32,44 +33,39 @@ map("c", "<C-e>", "<END>", { noremap = true })
 -- }
 
 local telescope_builtin = require('telescope.builtin')
-map("n", "<Leader>/", telescope_builtin.commands, { noremap = true })
+map("n", "<Leader>/", telescope_builtin.commands, { noremap = true, desc = "show commands" })
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-    local function mapB(mode, l, r)
-        local opts = { noremap = true, silent = true, buffer = bufnr }
+    local function mapB(mode, l, r, desc)
+        local opts = { noremap = true, silent = true, buffer = bufnr, desc = desc }
         map(mode, l, r, opts)
     end
 
     -- Mappings.
 
     -- See `:help vim.lsp.*` for documentation on any of the below functions
-    mapB("n", "<leader>rn", lsp.buf.rename)
-    mapB("n", "<leader>gtD", lsp.buf.declaration)
-    mapB("n", "<leader>gtd", lsp.buf.definition)
-    mapB("n", "<leader>f", lsp.buf.format)
-    mapB("n", "<leader>gds", telescope_builtin.lsp_document_symbols)
+    mapB("n", "<leader>rn", lsp.buf.rename, "lsp rename")
+    mapB("n", "<leader>gtD", lsp.buf.declaration, "lsp goto declaration")
+    mapB("n", "<leader>gtd", lsp.buf.definition, "lsp goto definition")
+    mapB("n", "<leader>gti", lsp.buf.implementation, "lsp goto implementation")
+    mapB("n", "<leader>f", lsp.buf.format, "lsp format")
+    mapB("n", "<leader>gds", telescope_builtin.lsp_document_symbols, "lsp document symbols")
     mapB(
         "n",
         "<Leader>gws",
-        telescope_builtin.lsp_dynamic_workspace_symbols
+        telescope_builtin.lsp_dynamic_workspace_symbols,
+        "lsp workspace symbols"
     )
+    mapB("n", "<leader>ca", vim.lsp.buf.code_action, "lsp code action")
 
-    mapB("n", "K", lsp.buf.hover)
-    mapB("n", "<Leader>gr", telescope_builtin.lsp_references)
+    mapB("n", "K", lsp.buf.hover, "lsp hover")
+    mapB("n", "<Leader>gr", telescope_builtin.lsp_references, "lsp references")
+    mapB("n", "<leader>sh", lsp.buf.signature_help, "lsp signature")
 
-    -- buffer diagnostics only
-    mapB("n", "<leader>d", function()
-        vim.diagnostic.setloclist()
-    end)
-    mapB("n", "[d", function()
-        vim.diagnostic.goto_prev({ wrap = false })
-    end)
-
-    mapB("n", "]d", function()
-        vim.diagnostic.goto_next({ wrap = false })
-    end)
+    mapB("n", "[d", function() vim.diagnostic.goto_prev({ wrap = false }) end, "previous diagnostic")
+    mapB("n", "]d", function() vim.diagnostic.goto_next({ wrap = false }) end, "next diagnostic")
 
     if client.server_capabilities.documentFormattingProvider then
         cmd([[
@@ -100,7 +96,7 @@ end
 
 -- metals
 
-local capabilities_no_format = vim.lsp.protocol.make_client_capabilities()
+local capabilities_no_format = lsp.protocol.make_client_capabilities()
 capabilities_no_format.textDocument.formatting = false
 capabilities_no_format.textDocument.rangeFormatting = false
 capabilities_no_format.textDocument.range_formatting = false
@@ -132,8 +128,8 @@ metals_config.settings = {
         "com.github.swagger.akka.javadsl"
     }
 }
-metals_config.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics, {
+metals_config.handlers["textDocument/publishDiagnostics"] = lsp.with(
+    lsp.diagnostic.on_publish_diagnostics, {
     virtual_text = {
         prefix = '',
     }
@@ -182,15 +178,15 @@ require("gitsigns").setup({
         -- Actions
         map({ 'n', 'v' }, '<leader>hs', ':Gitsigns stage_hunk<CR>')
         map({ 'n', 'v' }, '<leader>hr', ':Gitsigns reset_hunk<CR>')
-        map('n', '<leader>hS', gs.stage_buffer)
-        map('n', '<leader>hu', gs.undo_stage_hunk)
-        map('n', '<leader>hR', gs.reset_buffer)
-        map('n', '<leader>hp', gs.preview_hunk)
-        map('n', '<leader>hb', function() gs.blame_line { full = true } end)
-        map('n', '<leader>tb', gs.toggle_current_line_blame)
-        map('n', '<leader>hd', gs.diffthis)
-        map('n', '<leader>hD', function() gs.diffthis('~') end)
-        map('n', '<leader>td', gs.toggle_deleted)
+        map('n', '<leader>hS', gs.stage_buffer, { desc = "git:stage buffer" })
+        map('n', '<leader>hu', gs.undo_stage_hunk, { desc = "git:undo stage hunk" })
+        map('n', '<leader>hR', gs.reset_buffer, { desc = "git:reset buffer" })
+        map('n', '<leader>hp', gs.preview_hunk, { desc = "git:preview hunk" })
+        map('n', '<leader>hb', function() gs.blame_line { full = true } end, { desc = "git:toggle blame" })
+        map('n', '<leader>tb', gs.toggle_current_line_blame, { desc = "git:current line blame" })
+        map('n', '<leader>hd', gs.diffthis, { desc = "git:show diff" })
+        map('n', '<leader>hD', function() gs.diffthis('~') end, { desc = "git:show diff~" })
+        map('n', '<leader>td', gs.toggle_deleted, { desc = "git:toggle deleted" })
 
         -- Text object
         map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
@@ -357,15 +353,15 @@ cmp.setup({
 
 require("neoclip").setup()
 require("telescope").load_extension("neoclip")
-vim.keymap.set("n", '<leader>"', require("telescope").extensions.neoclip.star)
+map("n", '<leader>"', require("telescope").extensions.neoclip.star, { desc = "clipboard" })
 
 require("indent_blankline").setup()
 
 local nvim_tree = require("nvim-tree")
 nvim_tree.setup()
-vim.keymap.set("n", '<leader>tt', function()
+map("n", '<leader>tt', function()
     nvim_tree.toggle(true, true)
-end)
+end, { desc = "nvim_tree toggle" })
 
 require("symbols-outline").setup()
 
@@ -395,9 +391,9 @@ neogit.setup {
         diffview = true
     }
 }
-vim.keymap.set("n", '<leader>n', function()
+map("n", '<leader>n', function()
     neogit.open()
-end)
+end, { desc = "neogit" })
 
 require('goto-preview').setup {
     default_mappings = true;
@@ -417,7 +413,7 @@ local function metals_status_handler(err, status, ctx)
         return
     end
     local msg = { token = "metals", value = val }
-    vim.lsp.handlers["$/progress"](err, msg, ctx)
+    lsp.handlers["$/progress"](err, msg, ctx)
 end
 
 metals_config.init_options.statusBarProvider = 'on'
