@@ -14,7 +14,7 @@ cnoremap <expr> <Left>  pumvisible() ? "\<Up>"    : "\<Left>"
 cnoremap <expr> <Right> pumvisible() ? "\<Down>"  : "\<Right>"
 
 "This unsets the "last search pattern" register by hitting return
-nnoremap <ESC> :noh<ESC>
+nnoremap <silent> <ESC> :noh<ESC>
 
 let g:tmux_resizer_no_mappings = 1
 
