@@ -18,7 +18,6 @@ nullLs.setup({
         nullLs.builtins.diagnostics.eslint,
         nullLs.builtins.code_actions.eslint,
         nullLs.builtins.formatting.prettier,
-        nullLs.builtins.code_actions.gitsigns
     },
 })
 
