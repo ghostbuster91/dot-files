@@ -73,11 +73,15 @@ in
       gitsigns-nvim
       plenary-nvim
 
-      # lsp stuff
+      # completions
       nvim-cmp
       cmp-nvim-lsp
       cmp-buffer
       cmp-path
+      cmp-tmux
+      cmp_luasnip
+
+      # lsp stuff
       nvim-lspconfig
       null-ls-nvim
 
@@ -100,14 +104,18 @@ in
           ]
       ))
       nvim-treesitter-textobjects
+
       nvim-web-devicons
       lualine-nvim
       nvim-gps
       comment-nvim
+
+      # snippets
       luasnip
       lspkind-nvim
+      friendly-snippets
+
       pkgs.derivations.nvim-neoclip
-      cmp-tmux
       indent-blankline-nvim
       nvim-tree-lua
       vim-tmux-clipboard

@@ -60,7 +60,7 @@ local on_attach = function(client, bufnr)
     )
     mapB("n", "<leader>ca", lsp.buf.code_action, "lsp code action")
 
-    mapB({ "n", "v" }, "K", lsp.buf.hover, "lsp hover")
+    mapB("n", "K", lsp.buf.hover, "lsp hover")
     mapB("n", "<Leader>gr", telescope_builtin.lsp_references, "lsp references")
     mapB("n", "<leader>sh", lsp.buf.signature_help, "lsp signature")
 
@@ -116,11 +116,21 @@ require("lspconfig")["tsserver"].setup({
     }
 })
 -- Scala nvim-metals config
-local metals_config = require('metals').bare_config()
-
+local metals = require("metals")
+local metals_config = metals.bare_config()
 metals_config.init_options.statusBarProvider = "on"
 metals_config.capabilities = capabilities
-metals_config.on_attach = on_attach
+metals_config.on_attach = function(client, bufnr)
+    on_attach(client, bufnr)
+    map("v", "K", metals.type_of_range)
+    map("n", "<leader>cc", function()
+        require("telescope").extensions.coursier.complete()
+    end, { desc = "coursier complete" })
+    map("n", "<leader>mc", function()
+        require("telescope").extensions.metals.commands()
+    end, { desc = "metals commands" })
+end
+
 metals_config.settings = {
     metalsBinaryPath = metals_binary_path,
     showImplicitArguments = true,
@@ -144,7 +154,7 @@ api.nvim_create_autocmd("FileType", {
     -- something like nvim-jdtls which also works on a java filetype autocmd.
     pattern = { "scala", "sbt", "java" },
     callback = function()
-        require("metals").initialize_or_attach(metals_config)
+        metals.initialize_or_attach(metals_config)
     end,
     group = nvim_metals_group,
 })
@@ -294,6 +304,7 @@ require("Comment").setup()
 
 -- luasnip setup
 local luasnip = require("luasnip")
+require("luasnip.loaders.from_vscode").lazy_load()
 -- nvim-cmp setup
 local lspkind = require("lspkind")
 local cmp = require("cmp")
@@ -305,7 +316,7 @@ cmp.setup({
     },
     formatting = {
         format = lspkind.cmp_format({
-            mode = "symbol", -- show only symbol annotations
+            mode = "symbol_text",
             maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
         }),
     },
@@ -358,8 +369,14 @@ map("n", '<leader>"', require("telescope").extensions.neoclip.star, { desc = "cl
 
 require("indent_blankline").setup()
 
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 local nvim_tree = require("nvim-tree")
-nvim_tree.setup()
+nvim_tree.setup({
+    view = {
+        adaptive_size = true,
+    },
+})
 map("n", '<leader>tt', function()
     nvim_tree.toggle(true, true)
 end, { desc = "nvim_tree toggle" })
