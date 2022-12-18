@@ -482,3 +482,8 @@ map("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>",
 map("n", "gR", "<cmd>TroubleToggle lsp_references<cr>",
     { silent = true, noremap = true }
 )
+
+require("lsp_lines").setup()
+vim.diagnostic.config({
+    virtual_text = false,
+})
