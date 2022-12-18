@@ -101,8 +101,10 @@ in
             tree-sitter-c
             tree-sitter-java
             tree-sitter-scala
+            tree-sitter-query # for the tree-sitter itself
           ]
       ))
+      playground
       nvim-treesitter-textobjects
 
       nvim-web-devicons
