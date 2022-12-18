@@ -403,7 +403,9 @@ end, { desc = "nvim_tree toggle" })
 
 require("symbols-outline").setup()
 
-require("noice").setup()
+require("noice").setup({
+    lsp = { progress = { enabled = false } }
+})
 require("telescope").load_extension("noice")
 
 require("fidget").setup({
