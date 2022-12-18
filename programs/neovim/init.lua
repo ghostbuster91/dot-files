@@ -21,6 +21,27 @@ nullLs.setup({
     },
 })
 
+local actions = require("telescope.actions")
+local telescope = require("telescope")
+telescope.setup({
+    defaults = {
+        mappings = {
+            i = {
+                ["<esc>"] = actions.close,
+            },
+        },
+    },
+    extensions = {
+        ["ui-select"] = {
+            require("telescope.themes").get_dropdown {
+                -- even more opts
+            }
+        }
+    }
+})
+
+telescope.load_extension("fzf")
+telescope.load_extension("ui-select")
 
 -- Saving files as root with w!! {
 map("c", "w!!", "%!sudo tee > /dev/null %", { noremap = true })
@@ -114,6 +135,7 @@ require("lspconfig")["tsserver"].setup({
         tyescript_path
     }
 })
+
 -- Scala nvim-metals config
 local metals = require("metals")
 local metals_config = metals.bare_config()
@@ -123,10 +145,10 @@ metals_config.on_attach = function(client, bufnr)
     on_attach(client, bufnr)
     map("v", "K", metals.type_of_range)
     map("n", "<leader>cc", function()
-        require("telescope").extensions.coursier.complete()
+        telescope.extensions.coursier.complete()
     end, { desc = "coursier complete" })
     map("n", "<leader>mc", function()
-        require("telescope").extensions.metals.commands()
+        telescope.extensions.metals.commands()
     end, { desc = "metals commands" })
 end
 
@@ -158,7 +180,7 @@ api.nvim_create_autocmd("FileType", {
     group = nvim_metals_group,
 })
 
-require("telescope").load_extension("metals")
+telescope.load_extension("metals")
 
 -- metals end
 
@@ -264,28 +286,6 @@ require("nvim-treesitter.configs").setup({
         lint_events = { "BufWrite", "CursorHold" },
     },
 })
-
-local actions = require("telescope.actions")
-
-require("telescope").setup({
-    defaults = {
-        mappings = {
-            i = {
-                ["<esc>"] = actions.close,
-            },
-        },
-    },
-    extensions = {
-        ["ui-select"] = {
-            require("telescope.themes").get_dropdown {
-                -- even more opts
-            }
-        }
-    }
-})
-
-require("telescope").load_extension("fzf")
-require("telescope").load_extension("ui-select")
 
 local gps = require("nvim-gps")
 gps.setup()

@@ -125,7 +125,6 @@ in
       telescope-ui-select-nvim
       pkgs.derivations.nvim-noice
       nui-nvim
-      nvim-notify
       pkgs.derivations.nvim-fidget
       nvim-lightbulb
       pkgs.derivations.nvim-eyeliner
