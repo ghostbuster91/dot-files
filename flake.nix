@@ -14,22 +14,21 @@
     };
   };
 
-  outputs = inputs @ { home-manager, nixpkgs, ... }:
+  outputs = inputs @ { home-manager, nixpkgs, nixGL, ... }:
     let
       system = "x86_64-linux";
       username = "kghost";
-      lib = import ./lib { inherit pkgs inputs; };
 
-      pluginOverlay = lib.buildPluginOverlay;
-      metalsOverlay = lib.metalsOverlay;
+      overlays = import ./overlays {
+        inherit nixGL;
+      };
 
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
         overlays = [
-          (self: super: { alacritty = import ./overlays/alacritty.nix { inherit (inputs) nixGL; pkgs = super; }; })
           (self: super: { derivations = import ./derivations { pkgs = super; inherit (nixpkgs) lib; }; })
-          metalsOverlay
+          overlays
         ];
       };
     in
