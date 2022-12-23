@@ -14,17 +14,22 @@
     };
   };
 
-  outputs = inputs @ { home-manager, nixpkgs, nvim-flake, ... }:
+  outputs = inputs @ { home-manager, nixpkgs, ... }:
     let
       system = "x86_64-linux";
       username = "kghost";
+      lib = import ./lib { inherit pkgs inputs; };
+
+      pluginOverlay = lib.buildPluginOverlay;
+      metalsOverlay = lib.metalsOverlay;
+
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
         overlays = [
           (self: super: { alacritty = import ./overlays/alacritty.nix { inherit (inputs) nixGL; pkgs = super; }; })
-          (self: super: { inherit (nvim-flake.packages.${system}) metals; })
           (self: super: { derivations = import ./derivations { pkgs = super; inherit (nixpkgs) lib; }; })
+          metalsOverlay
         ];
       };
     in
