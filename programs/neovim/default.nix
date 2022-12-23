@@ -93,6 +93,8 @@ in
             tree-sitter-vim
             tree-sitter-html
             tree-sitter-yaml
+            tree-sitter-json
+            tree-sitter-markdown
             tree-sitter-comment
             tree-sitter-bash
             tree-sitter-javascript
@@ -102,6 +104,12 @@ in
             tree-sitter-java
             tree-sitter-scala
             tree-sitter-query # for the tree-sitter itself
+            tree-sitter-python
+            tree-sitter-go
+            tree-sitter-hocon
+            tree-sitter-sql
+            tree-sitter-graphql
+            tree-sitter-dockerfile
           ]
       ))
       playground

@@ -184,6 +184,12 @@ telescope.load_extension("metals")
 
 -- metals end
 
+local hocon_group = api.nvim_create_augroup("hocon", { clear = true })
+api.nvim_create_autocmd(
+    { 'BufNewFile', 'BufRead' },
+    { group = hocon_group, pattern = '*/resources/*.conf', command = 'set ft=hocon' }
+)
+
 require("gitsigns").setup({
     on_attach = function(bufnr)
         local gs = package.loaded.gitsigns
