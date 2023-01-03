@@ -1,11 +1,11 @@
 { pkgs }:
-pkgs.vimUtils.buildVimPluginFrom2Nix {
+pkgs.vimUtils.buildVimPluginFrom2Nix rec {
   pname = "fidget.nvim";
-  version = "7b62ccfc236e51e78e5b2fc7d3068eacd65e4590";
+  version = "44585a0c0085765195e6961c15529ba6c5a2a13b";
   src = pkgs.fetchFromGitHub {
     owner = "j-hui";
     repo = "fidget.nvim";
-    rev = "2cf9997d3bde2323a1a0934826ec553423005a26";
-    sha256 = "sha256-p41t+Xd64aWSzay3JCwHhlADGQ+3pFUiBDOSykalyRM=";
+    rev = version;
+    sha256 = "sha256-FC0vjzpFhXmE/dtQ8XNjLarndf9v3JbokBxnK3yVVYQ";
   };
 }
