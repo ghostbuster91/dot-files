@@ -158,6 +158,7 @@
 
   services.unclutter = {
     enable = true;
+    extraOptions = [ "ignore-scrolling" ];
   };
 
   systemd.user.startServices = "sd-switch";
