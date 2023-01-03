@@ -125,7 +125,7 @@ in
       lspkind-nvim
       friendly-snippets
 
-      pkgs.derivations.nvim-neoclip
+      nvim-neoclip-lua
       indent-blankline-nvim
       nvim-tree-lua
       vim-tmux-clipboard
@@ -133,14 +133,14 @@ in
       telescope-ui-select-nvim
       pkgs.derivations.nvim-noice
       nui-nvim
-      pkgs.derivations.nvim-fidget
+      fidget-nvim
       nvim-lightbulb
       pkgs.derivations.nvim-eyeliner
       neoscroll-nvim
-      pkgs.derivations.nvim-neogit
+      neogit
       undotree
       diffview-nvim
-      pkgs.derivations.nvim-goto-preview
+      goto-preview
       nvim-dap
       pkgs.derivations.nvim-metals
       pkgs.derivations.nvim-tmux-resize

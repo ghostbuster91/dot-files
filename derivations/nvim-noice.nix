@@ -1,12 +1,11 @@
 { pkgs }:
-pkgs.vimUtils.buildVimPluginFrom2Nix {
+pkgs.vimUtils.buildVimPluginFrom2Nix rec {
   pname = "noice.nvim";
-  version = "7b62ccfc236e51e78e5b2fc7d3068eacd65e4590";
+  version = "256ec7318e227d4a0879f3776bfbe3955f5d2eef";
   src = pkgs.fetchFromGitHub {
     owner = "folke";
     repo = "noice.nvim";
-    rev = "7b62ccfc236e51e78e5b2fc7d3068eacd65e4590";
-    sha256 = "sha256-YLvsu1A0pjIXA7Fq/MVwot5eykZbrdaKh85szVAEXpQ="
-    ;
+    rev = version;
+    sha256 = "sha256-WahLRz8GTHRnV2CRVRWFopzXZuK9P2CFzhcUDPgmEbs=";
   };
 }
