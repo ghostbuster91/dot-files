@@ -4,22 +4,13 @@ local cmd = vim.cmd
 local map = vim.keymap.set
 local lsp = vim.lsp
 local global_opt = vim.opt_global
+local diag = vim.diagnostic
 
 global_opt.clipboard = "unnamed"
 global_opt.timeoutlen = 200
 
 -- lsp
 local lspconfig = require("lspconfig")
-local nullLs = require("null-ls")
-
-nullLs.setup({
-    sources = {
-        nullLs.builtins.formatting.shfmt,
-        nullLs.builtins.diagnostics.eslint,
-        nullLs.builtins.code_actions.eslint,
-        nullLs.builtins.formatting.prettier,
-    },
-})
 
 local actions = require("telescope.actions")
 local telescope = require("telescope")
@@ -84,8 +75,12 @@ local on_attach = function(client, bufnr)
     mapB("n", "<Leader>gr", telescope_builtin.lsp_references, "lsp references")
     mapB("n", "<leader>sh", lsp.buf.signature_help, "lsp signature")
 
-    mapB("n", "[d", function() vim.diagnostic.goto_prev({ wrap = false }) end, "previous diagnostic")
-    mapB("n", "]d", function() vim.diagnostic.goto_next({ wrap = false }) end, "next diagnostic")
+    mapB("n", "[d", function()
+        diag.goto_prev({ wrap = false, severity = { min = diag.severity.WARN } })
+    end, "previous diagnostic")
+    mapB("n", "]d", function()
+        diag.goto_next({ wrap = false, severity = { min = diag.severity.WARN } })
+    end, "next diagnostic")
 
     if client.server_capabilities.documentFormattingProvider then
         cmd([[
@@ -96,6 +91,52 @@ local on_attach = function(client, bufnr)
             ]])
     end
 end
+
+local null_ls = require("null-ls")
+local spell_check_enabled = false
+null_ls.setup({
+    sources = {
+        null_ls.builtins.formatting.shfmt,
+        null_ls.builtins.formatting.prettier,
+        null_ls.builtins.diagnostics.eslint,
+        null_ls.builtins.code_actions.eslint,
+        null_ls.builtins.diagnostics.cspell.with({
+            -- Force the severity to be HINT
+            diagnostics_postprocess = function(diagnostic)
+                diagnostic.severity = diag.severity.HINT
+            end,
+        }),
+        null_ls.builtins.code_actions.cspell,
+        null_ls.builtins.code_actions.statix,
+        null_ls.builtins.diagnostics.statix,
+    },
+    on_attach = function(client, bufnr)
+        local function mapB(mode, l, r, desc)
+            local opts = { noremap = true, silent = true, buffer = bufnr, desc = desc }
+            map(mode, l, r, opts)
+        end
+
+        on_attach(client, bufnr)
+        mapB("n", "[s", function()
+            diag.goto_prev({ wrap = false, severity = diag.severity.HINT })
+        end, "previous misspelled word")
+        mapB("n", "]s", function()
+            diag.goto_next({ wrap = false, severity = diag.severity.HINT })
+        end, "next misspelled word")
+    end,
+})
+if not spell_check_enabled then
+    null_ls.disable({ name = "cspell" })
+end
+map("n", "<leader>ss", function()
+    if spell_check_enabled then
+        null_ls.disable({ name = "cspell" })
+        spell_check_enabled = false
+    else
+        null_ls.enable({ name = "cspell" })
+        spell_check_enabled = true
+    end
+end, { desc = "toggle spell check", noremap = true })
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches

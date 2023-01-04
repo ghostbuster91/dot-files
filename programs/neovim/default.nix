@@ -31,6 +31,7 @@ in
       pkgs.shfmt
       pkgs.nodePackages.eslint
       pkgs.nodePackages.prettier
+      pkgs.nodePackages.cspell
     ];
     plugins = with pkgs.vimPlugins; [
       rec {
