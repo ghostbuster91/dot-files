@@ -31,7 +31,7 @@ in
       pkgs.shfmt
       pkgs.nodePackages.eslint
       pkgs.nodePackages.prettier
-      pkgs.nodePackages.cspell
+      pkgs.ltex-ls
     ];
     plugins = with pkgs.vimPlugins; [
       rec {
@@ -147,6 +147,7 @@ in
       pkgs.derivations.nvim-tmux-resize
       trouble-nvim
       lsp_lines-nvim
+      pkgs.derivations.ltex-extra-nvim
     ];
   };
 }

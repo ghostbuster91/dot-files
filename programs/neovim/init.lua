@@ -93,50 +93,17 @@ local on_attach = function(client, bufnr)
 end
 
 local null_ls = require("null-ls")
-local spell_check_enabled = false
 null_ls.setup({
     sources = {
         null_ls.builtins.formatting.shfmt,
         null_ls.builtins.formatting.prettier,
         null_ls.builtins.diagnostics.eslint,
         null_ls.builtins.code_actions.eslint,
-        null_ls.builtins.diagnostics.cspell.with({
-            -- Force the severity to be HINT
-            diagnostics_postprocess = function(diagnostic)
-                diagnostic.severity = diag.severity.HINT
-            end,
-        }),
-        null_ls.builtins.code_actions.cspell,
         null_ls.builtins.code_actions.statix,
         null_ls.builtins.diagnostics.statix,
     },
-    on_attach = function(client, bufnr)
-        local function mapB(mode, l, r, desc)
-            local opts = { noremap = true, silent = true, buffer = bufnr, desc = desc }
-            map(mode, l, r, opts)
-        end
-
-        on_attach(client, bufnr)
-        mapB("n", "[s", function()
-            diag.goto_prev({ wrap = false, severity = diag.severity.HINT })
-        end, "previous misspelled word")
-        mapB("n", "]s", function()
-            diag.goto_next({ wrap = false, severity = diag.severity.HINT })
-        end, "next misspelled word")
-    end,
+    on_attach = on_attach,
 })
-if not spell_check_enabled then
-    null_ls.disable({ name = "cspell" })
-end
-map("n", "<leader>ss", function()
-    if spell_check_enabled then
-        null_ls.disable({ name = "cspell" })
-        spell_check_enabled = false
-    else
-        null_ls.enable({ name = "cspell" })
-        spell_check_enabled = true
-    end
-end, { desc = "toggle spell check", noremap = true })
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
@@ -154,6 +121,36 @@ for _, lsp in ipairs(servers) do
         -- }
     })
 end
+
+-- ltex
+lspconfig.ltex.setup {
+    capabilities = capabilities,
+    on_attach = function(client, bufnr)
+        local function mapB(mode, l, r, desc)
+            local opts = { noremap = true, silent = true, buffer = bufnr, desc = desc }
+            map(mode, l, r, opts)
+        end
+
+        on_attach(client, bufnr)
+        mapB("n", "[s", function()
+            diag.goto_prev({ wrap = false, severity = diag.severity.INFO })
+        end, "previous info diagnostic")
+        mapB("n", "]s", function()
+            diag.goto_next({ wrap = false, severity = diag.severity.INFO })
+        end, "next info diagnostic")
+        require("ltex_extra").setup {
+            load_langs = { "pl-PL", "en-US" }, -- table <string> : languages for witch dictionaries will be loaded
+            init_check = true,
+            path = "./.dict", -- string : path to store dictionaries. Relative path uses current working directory
+            log_level = "none",
+        }
+    end,
+    settings = { -- this empty setting has to be here, see https://github.com/barreiroleo/ltex_extra.nvim/issues/22
+        ltex = {
+            -- your settings.
+        }
+    }
+}
 
 -- metals
 
