@@ -455,9 +455,15 @@ require("noice").setup({
         -- event is always "notify" and kind can be any log level as a string
         -- The default routes will forward notifications to nvim-notify
         -- Benefit of using Noice for this is the routing and consistent history view
-        enabled = false,
-        view = "notify",
+        enabled = true,
+        view = "mini",
     },
+    messages = {
+        enabled = true, -- enables the Noice messages UI
+        view = "mini", -- default view for messages
+        view_error = "mini", -- view for errors
+        view_warn = "mini", -- view for warnings
+    }
 })
 require("telescope").load_extension("noice")
 

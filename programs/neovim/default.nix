@@ -132,7 +132,7 @@ in
       vim-tmux-clipboard
       symbols-outline-nvim
       telescope-ui-select-nvim
-      pkgs.derivations.nvim-noice
+      noice-nvim
       nui-nvim
       fidget-nvim
       nvim-lightbulb
