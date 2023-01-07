@@ -543,6 +543,18 @@ map("n", "gR", "<cmd>TroubleToggle lsp_references<cr>",
 )
 
 require("lsp_lines").setup()
-vim.diagnostic.config({
+diag.config({
     virtual_text = false,
 })
+
+local leap = require("leap")
+leap.add_default_mappings()
+-- The below settings make Leap's highlighting a bit closer to what you've been
+-- used to in Lightspeed.
+api.nvim_set_hl(0, 'LeapBackdrop', { link = 'Comment' })
+api.nvim_set_hl(0, 'LeapMatch', {
+    fg = 'white', -- for light themes, set to 'black' or similar
+    bold = true,
+    nocombine = true,
+})
+leap.opts.highlight_unlabeled_phase_one_targets = true

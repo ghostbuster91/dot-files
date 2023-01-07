@@ -62,7 +62,6 @@ in
           nnoremap <silent> <A-Right> :TmuxNavigateRight<cr>
         '';
       }
-      lightspeed-nvim
       which-key-nvim
       nvim-autopairs
       {
@@ -148,6 +147,8 @@ in
       trouble-nvim
       lsp_lines-nvim
       pkgs.derivations.ltex-extra-nvim
+      vim-repeat # needed for leap
+      pkgs.derivations.nvim-leap
     ];
   };
 }
