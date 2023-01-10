@@ -31,7 +31,7 @@ in
       pkgs.shfmt
       pkgs.nodePackages.eslint
       pkgs.nodePackages.prettier
-      pkgs.ltex-ls
+      pkgs.nodePackages.cspell
     ];
     plugins = with pkgs.vimPlugins; [
       rec {
@@ -146,7 +146,6 @@ in
       pkgs.derivations.nvim-tmux-resize
       trouble-nvim
       lsp_lines-nvim
-      pkgs.derivations.ltex-extra-nvim
       vim-repeat # needed for leap
       pkgs.derivations.nvim-leap
     ];

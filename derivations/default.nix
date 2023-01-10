@@ -3,6 +3,5 @@
   nvim-eyeliner = pkgs.callPackage ./nvim-eyeliner.nix { inherit pkgs; };
   nvim-metals = pkgs.callPackage ./nvim-metals.nix { inherit pkgs; };
   nvim-tmux-resize = pkgs.callPackage ./nvim-tmux-resize.nix { inherit pkgs; };
-  ltex-extra-nvim = pkgs.callPackage ./ltex-extra-nvim.nix { inherit pkgs; };
   nvim-leap = pkgs.callPackage ./nvim-leap.nix { inherit pkgs; };
 }
