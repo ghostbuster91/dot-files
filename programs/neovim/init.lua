@@ -277,7 +277,7 @@ require("which-key").setup()
 require("nvim-autopairs").setup()
 
 require("nvim-treesitter.configs").setup({
-    ensure_installed = {}, -- Revert to full list once https://github.com/NixOS/nixpkgs/issues/189838 will be resolved
+    ensure_installed = {},
     highlight = {
         enable = true, -- false will disable the whole extension                 -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
         -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
@@ -328,7 +328,7 @@ require("nvim-treesitter.configs").setup({
         },
     },
     query_linter = {
-        enable = true,
+        enable = false, -- disabled until https://github.com/nvim-treesitter/playground/pull/111 is resolved
         use_virtual_text = true,
         lint_events = { "BufWrite", "CursorHold" },
     },
