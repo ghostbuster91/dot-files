@@ -1,5 +1,4 @@
-{ pkgs, ts-build }:
-
+{ pkgs }:
 pkgs.fetchFromGitHub {
   owner = "tree-sitter";
   repo = "tree-sitter-scala";

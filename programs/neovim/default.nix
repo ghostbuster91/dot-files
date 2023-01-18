@@ -118,7 +118,7 @@ in
           ]
       ))
       playground
-      nvim-treesitter-textobjects
+      pkgs.nvim-treesitter-textobjects
 
       nvim-web-devicons
       lualine-nvim
@@ -140,7 +140,8 @@ in
       nui-nvim
       fidget-nvim
       nvim-lightbulb
-      pkgs.derivations.nvim-eyeliner
+      # pkgs.derivations.nvim-eyeliner
+      pkgs.derivations.nvim-next
       neoscroll-nvim
       neogit
       undotree

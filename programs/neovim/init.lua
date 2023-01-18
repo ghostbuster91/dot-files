@@ -9,6 +9,7 @@ local diag = vim.diagnostic
 global_opt.clipboard = "unnamed"
 global_opt.timeoutlen = 200
 
+local next_integrations = require("nvim-next.integrations")
 -- lsp
 local lspconfig = require("lspconfig")
 
@@ -75,12 +76,9 @@ local on_attach = function(client, bufnr)
     mapB("n", "<Leader>gr", telescope_builtin.lsp_references, "lsp references")
     mapB("n", "<leader>sh", lsp.buf.signature_help, "lsp signature")
 
-    mapB("n", "[d", function()
-        diag.goto_prev({ wrap = false, severity = { min = diag.severity.WARN } })
-    end, "previous diagnostic")
-    mapB("n", "]d", function()
-        diag.goto_next({ wrap = false, severity = { min = diag.severity.WARN } })
-    end, "next diagnostic")
+    local nndiag = next_integrations.diagnostic()
+    mapB("n", "[d", nndiag.goto_prev({ wrap = false, severity = { min = diag.severity.WARN } }), "previous diagnostic")
+    mapB("n", "]d", nndiag.goto_next({ wrap = false, severity = { min = diag.severity.WARN } }), "next diagnostic")
 
     if client.server_capabilities.documentFormattingProvider then
         cmd([[
@@ -116,13 +114,10 @@ null_ls.setup({
             map(mode, l, r, opts)
         end
 
+        local nndiag = next_integrations.diagnostic()
         on_attach(client, bufnr)
-        mapB("n", "[s", function()
-            diag.goto_prev({ wrap = false, severity = diag.severity.HINT })
-        end, "previous misspelled word")
-        mapB("n", "]s", function()
-            diag.goto_next({ wrap = false, severity = diag.severity.HINT })
-        end, "next misspelled word")
+        mapB("n", "[s", nndiag.goto_prev({ wrap = false, severity = diag.severity.HINT }), "previous misspelled word")
+        mapB("n", "]s", nndiag.goto_next({ wrap = false, severity = diag.severity.HINT }), "next misspelled word")
     end,
 })
 if not spell_check_enabled then
@@ -241,18 +236,10 @@ require("gitsigns").setup({
             vim.keymap.set(mode, l, r, opts)
         end
 
+        local nngs = next_integrations.gitsigns(gs)
         -- Navigation
-        map('n', ']c', function()
-            if vim.wo.diff then return ']c' end
-            vim.schedule(function() gs.next_hunk() end)
-            return '<Ignore>'
-        end, { expr = true })
-
-        map('n', '[c', function()
-            if vim.wo.diff then return '[c' end
-            vim.schedule(function() gs.prev_hunk() end)
-            return '<Ignore>'
-        end, { expr = true })
+        map('n', ']c', nngs.next_hunk, { expr = true, desc = "next change" })
+        map('n', '[c', nngs.prev_hunk, { expr = true, desc = "previous change" })
 
         -- Actions
         map({ 'n', 'v' }, '<leader>hs', ':Gitsigns stage_hunk<CR>')
@@ -276,6 +263,7 @@ require("which-key").setup()
 
 require("nvim-autopairs").setup()
 
+next_integrations.treesitter_textobjects()
 require("nvim-treesitter.configs").setup({
     ensure_installed = {},
     highlight = {
@@ -332,6 +320,27 @@ require("nvim-treesitter.configs").setup({
         use_virtual_text = true,
         lint_events = { "BufWrite", "CursorHold" },
     },
+    nvim_next = {
+        enable = true,
+        move = {
+            goto_next_start = {
+                ["]m"] = "@function.outer",
+                ["]]"] = { query = "@class.outer", desc = "Next class start" },
+            },
+            goto_next_end = {
+                ["]M"] = "@function.outer",
+                ["]["] = "@class.outer",
+            },
+            goto_previous_start = {
+                ["[m"] = "@function.outer",
+                ["[["] = "@class.outer",
+            },
+            goto_previous_end = {
+                ["[M"] = "@function.outer",
+                ["[]"] = "@class.outer",
+            },
+        }
+    }
 })
 
 local gps = require("nvim-gps")
@@ -478,9 +487,9 @@ require("fidget").setup({
 
 require('nvim-lightbulb').setup({ autocmd = { enabled = true } })
 
-require('eyeliner').setup {
-    highlight_on_key = true
-}
+-- require('eyeliner').setup {
+--     highlight_on_key = true
+-- }
 
 require('neoscroll').setup()
 
@@ -561,3 +570,14 @@ api.nvim_set_hl(0, 'LeapMatch', {
     nocombine = true,
 })
 leap.opts.highlight_unlabeled_phase_one_targets = true
+--
+local nvim_next_builtins = require("nvim-next.builtins")
+require("nvim-next").setup({
+    default_mappings = {
+        repeat_style = "directional",
+    },
+    items = {
+        nvim_next_builtins.f,
+        nvim_next_builtins.t
+    }
+})
