@@ -84,6 +84,7 @@
     nix-tree
     nixfmt
     nix-prefetch
+    nurl
 
     # Media
     youtube-dl
