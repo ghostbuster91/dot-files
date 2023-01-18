@@ -140,7 +140,6 @@ in
       nui-nvim
       fidget-nvim
       nvim-lightbulb
-      # pkgs.derivations.nvim-eyeliner
       pkgs.derivations.nvim-next
       neoscroll-nvim
       neogit

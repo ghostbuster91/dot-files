@@ -487,10 +487,6 @@ require("fidget").setup({
 
 require('nvim-lightbulb').setup({ autocmd = { enabled = true } })
 
--- require('eyeliner').setup {
---     highlight_on_key = true
--- }
-
 require('neoscroll').setup()
 
 require("diffview").setup()
