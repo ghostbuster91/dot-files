@@ -47,6 +47,9 @@ map("c", "<C-e>", "<END>", { noremap = true })
 local telescope_builtin = require('telescope.builtin')
 map("n", "<Leader>/", telescope_builtin.commands, { noremap = true, desc = "show commands" })
 
+-- global variable to control if lsp should format file on save
+Auto_format = true
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -81,12 +84,17 @@ local on_attach = function(client, bufnr)
     mapB("n", "]d", nndiag.goto_next({ wrap = false, severity = { min = diag.severity.WARN } }), "next diagnostic")
 
     if client.server_capabilities.documentFormattingProvider then
-        cmd([[
-            augroup LspFormatting
-                autocmd! * <buffer>
-                autocmd BufWritePre <buffer> lua vim.lsp.buf.format()
-            augroup END
-            ]])
+        local augroup = api.nvim_create_augroup('LspFormatting', { clear = true })
+        api.nvim_create_autocmd('BufWritePre', {
+            group = augroup,
+            buffer = bufnr,
+            desc = 'format with lsp on save',
+            callback = function()
+                if Auto_format then
+                    lsp.buf.format()
+                end
+            end
+        })
     end
 end
 
