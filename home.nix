@@ -100,6 +100,7 @@
     gh
     tig
     statix # nix linter
+    nix-output-monitor
   ];
 
   programs = {

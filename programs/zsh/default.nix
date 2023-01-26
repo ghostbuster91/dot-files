@@ -124,6 +124,7 @@
     history = { extended = true; };
     shellAliases = {
       lsd = "${pkgs.exa}/bin/exa --long --header --git --all";
+      switch = "${pkgs.home-manager}/bin/home-manager switch --flake path:/home/kghost/workspace/dot-files |& ${pkgs.nix-output-monitor}/bin/nom";
     };
   };
 }
