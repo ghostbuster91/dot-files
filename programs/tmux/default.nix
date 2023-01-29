@@ -109,6 +109,8 @@
       # set the pane border colors 
       set -g pane-border-style 'fg=colour235,bg=colour238' 
       set -g pane-active-border-style 'fg=colour39,bg=colour236'
+
+      bind a next-layout
     '';
   };
 }
