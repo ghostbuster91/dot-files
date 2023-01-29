@@ -295,6 +295,7 @@ require("nvim-treesitter.configs").setup({
         },
     },
     textobjects = {
+        enable = true,
         swap = {
             enable = true,
             swap_next = {
@@ -324,29 +325,31 @@ require("nvim-treesitter.configs").setup({
         },
     },
     query_linter = {
-        enable = false, -- disabled until https://github.com/nvim-treesitter/playground/pull/111 is resolved
+        enable = true,
         use_virtual_text = true,
         lint_events = { "BufWrite", "CursorHold" },
     },
     nvim_next = {
         enable = true,
-        move = {
-            goto_next_start = {
-                ["]m"] = "@function.outer",
-                ["]]"] = { query = "@class.outer", desc = "Next class start" },
-            },
-            goto_next_end = {
-                ["]M"] = "@function.outer",
-                ["]["] = "@class.outer",
-            },
-            goto_previous_start = {
-                ["[m"] = "@function.outer",
-                ["[["] = "@class.outer",
-            },
-            goto_previous_end = {
-                ["[M"] = "@function.outer",
-                ["[]"] = "@class.outer",
-            },
+        textobjects = {
+            move = {
+                goto_next_start = {
+                    ["]m"] = "@function.outer",
+                    ["]]"] = { query = "@class.outer", desc = "Next class start" },
+                },
+                goto_next_end = {
+                    ["]M"] = "@function.outer",
+                    ["]["] = "@class.outer",
+                },
+                goto_previous_start = {
+                    ["[m"] = "@function.outer",
+                    ["[["] = "@class.outer",
+                },
+                goto_previous_end = {
+                    ["[M"] = "@function.outer",
+                    ["[]"] = "@class.outer",
+                },
+            }
         }
     }
 })
@@ -497,7 +500,15 @@ require('nvim-lightbulb').setup({ autocmd = { enabled = true } })
 
 require('neoscroll').setup()
 
-require("diffview").setup()
+local diffview_actions = next_integrations.diffview(require("diffview.actions"))
+require("diffview").setup({
+    file_history_panel = {
+        keymaps = {
+            { "n", "[x", diffview_actions.prev_conflict, { desc = "In the merge-tool: jump to the previous conflict" } },
+            { "n", "]x", diffview_actions.next_conflict, { desc = "In the merge-tool: jump to the next conflict" } },
+        }
+    }
+})
 
 local neogit = require('neogit')
 neogit.setup {
