@@ -44,6 +44,8 @@ map("c", "<C-a>", "<HOME>", { noremap = true })
 map("c", "<C-e>", "<END>", { noremap = true })
 -- }
 
+map("n", "<F11>", ":update<CR>", { noremap = true, silent = true })
+
 local telescope_builtin = require('telescope.builtin')
 map("n", "<Leader>/", telescope_builtin.commands, { noremap = true, desc = "show commands" })
 
