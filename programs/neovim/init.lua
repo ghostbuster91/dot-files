@@ -271,7 +271,9 @@ require("gitsigns").setup({
 
 require("which-key").setup()
 
-require("nvim-autopairs").setup()
+require("nvim-autopairs").setup({
+    enable_check_bracket_line = false -- doesn't work well when writing schema
+})
 
 next_integrations.treesitter_textobjects()
 require("nvim-treesitter.configs").setup({
