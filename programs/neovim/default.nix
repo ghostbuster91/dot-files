@@ -115,6 +115,7 @@ in
             tree-sitter-sql
             tree-sitter-graphql
             tree-sitter-dockerfile
+            tree-sitter-scheme
           ]
       ))
       playground
