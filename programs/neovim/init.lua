@@ -19,12 +19,12 @@ telescope.setup({
     defaults = {
         mappings = {
             i = {
-                ["<esc>"] = actions.close,
+                    ["<esc>"] = actions.close,
             },
         },
     },
     extensions = {
-        ["ui-select"] = {
+            ["ui-select"] = {
             require("telescope.themes").get_dropdown {
                 -- even more opts
             }
@@ -147,7 +147,7 @@ end, { desc = "toggle spell check", noremap = true })
 -- map buffer local keybindings when the language server attaches
 -- local capabilities = vim.lsp.protocol.make_client_capabilities()
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
-local servers = { "bashls", "vimls", "rnix", "yamlls", "sumneko_lua" }
+local servers = { "bashls", "vimls", "rnix", "yamlls", "lua_ls" }
 for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup({
         on_attach = on_attach,
@@ -208,10 +208,10 @@ metals_config.settings = {
 }
 metals_config.handlers["textDocument/publishDiagnostics"] = lsp.with(
     lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = {
-        prefix = '',
+        virtual_text = {
+            prefix = '',
+        }
     }
-}
 )
 -- Autocmd that will actually be in charging of starting the whole thing
 local nvim_metals_group = api.nvim_create_augroup("nvim-metals", { clear = true })
@@ -303,17 +303,17 @@ require("nvim-treesitter.configs").setup({
         swap = {
             enable = true,
             swap_next = {
-                ["<leader>a"] = "@parameter.inner",
+                    ["<leader>a"] = "@parameter.inner",
             },
             swap_previous = {
-                ["<leader>A"] = "@parameter.inner",
+                    ["<leader>A"] = "@parameter.inner",
             },
         },
     },
     playground = {
         enable = true,
         disable = {},
-        updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+        updatetime = 25,         -- Debounced time for highlighting nodes in the playground from source code
         persist_queries = false, -- Whether the query persists across vim sessions
         keybindings = {
             toggle_query_editor = 'o',
@@ -338,20 +338,20 @@ require("nvim-treesitter.configs").setup({
         textobjects = {
             move = {
                 goto_next_start = {
-                    ["]m"] = "@function.outer",
-                    ["]]"] = { query = "@class.outer", desc = "Next class start" },
+                        ["]m"] = "@function.outer",
+                        ["]]"] = { query = "@class.outer", desc = "Next class start" },
                 },
                 goto_next_end = {
-                    ["]M"] = "@function.outer",
-                    ["]["] = "@class.outer",
+                        ["]M"] = "@function.outer",
+                        ["]["] = "@class.outer",
                 },
                 goto_previous_start = {
-                    ["[m"] = "@function.outer",
-                    ["[["] = "@class.outer",
+                        ["[m"] = "@function.outer",
+                        ["[["] = "@class.outer",
                 },
                 goto_previous_end = {
-                    ["[M"] = "@function.outer",
-                    ["[]"] = "@class.outer",
+                        ["[M"] = "@function.outer",
+                        ["[]"] = "@class.outer",
                 },
             }
         }
@@ -412,21 +412,21 @@ cmp.setup({
         }),
     },
     mapping = {
-        ["<C-p>"] = cmp.mapping.select_prev_item(),
-        ["<C-n>"] = cmp.mapping.select_next_item(),
-        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-        ["<C-f>"] = cmp.mapping.scroll_docs(4),
-        ["<C-Space>"] = cmp.mapping.complete(),
-        ["<C-e>"] = cmp.mapping.close(),
-        ["<S-CR>"] = cmp.mapping.confirm({
+            ["<C-p>"] = cmp.mapping.select_prev_item(),
+            ["<C-n>"] = cmp.mapping.select_next_item(),
+            ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+            ["<C-f>"] = cmp.mapping.scroll_docs(4),
+            ["<C-Space>"] = cmp.mapping.complete(),
+            ["<C-e>"] = cmp.mapping.close(),
+            ["<S-CR>"] = cmp.mapping.confirm({
             behavior = cmp.ConfirmBehavior.Replace,
             select = true,
         }),
-        ["<CR>"] = cmp.mapping.confirm({
+            ["<CR>"] = cmp.mapping.confirm({
             behavior = cmp.ConfirmBehavior.Insert,
             select = true,
         }),
-        ["<Tab>"] = function(fallback)
+            ["<Tab>"] = function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
             elseif luasnip.expand_or_jumpable() then
@@ -435,7 +435,7 @@ cmp.setup({
                 fallback()
             end
         end,
-        ["<S-Tab>"] = function(fallback)
+            ["<S-Tab>"] = function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
             elseif luasnip.jumpable(-1) then
@@ -447,8 +447,8 @@ cmp.setup({
     },
     sources = {
         { name = "nvim_lsp", priority = 10 },
-        { name = "buffer", priority = 9 },
-        { name = 'tmux', priority = 8 },
+        { name = "buffer",   priority = 9 },
+        { name = 'tmux',     priority = 8 },
         { name = "luasnip" },
         { name = "path" },
     },
@@ -486,10 +486,10 @@ require("noice").setup({
         view = "mini",
     },
     messages = {
-        enabled = true, -- enables the Noice messages UI
-        view = "mini", -- default view for messages
+        enabled = true,      -- enables the Noice messages UI
+        view = "mini",       -- default view for messages
         view_error = "mini", -- view for errors
-        view_warn = "mini", -- view for warnings
+        view_warn = "mini",  -- view for warnings
     }
 })
 require("telescope").load_extension("noice")
@@ -526,7 +526,7 @@ map("n", '<leader>n', function()
 end, { desc = "neogit" })
 
 require('goto-preview').setup {
-    default_mappings = true;
+    default_mappings = true,
 }
 
 local function metals_status_handler(err, status, ctx)
