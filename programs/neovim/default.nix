@@ -32,6 +32,8 @@ in
       pkgs.nodePackages.eslint
       pkgs.nodePackages.prettier
       pkgs.nodePackages.cspell
+      pkgs.rust-analyzer
+      pkgs.rustfmt
     ];
     plugins = with pkgs.vimPlugins; [
       rec {
@@ -116,6 +118,7 @@ in
             tree-sitter-graphql
             tree-sitter-dockerfile
             tree-sitter-scheme
+            tree-sitter-rust
           ]
       ))
       playground

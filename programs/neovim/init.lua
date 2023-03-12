@@ -147,7 +147,7 @@ end, { desc = "toggle spell check", noremap = true })
 -- map buffer local keybindings when the language server attaches
 -- local capabilities = vim.lsp.protocol.make_client_capabilities()
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
-local servers = { "bashls", "vimls", "rnix", "yamlls", "lua_ls" }
+local servers = { "bashls", "vimls", "rnix", "yamlls", "lua_ls", "rust_analyzer" }
 for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup({
         on_attach = on_attach,
