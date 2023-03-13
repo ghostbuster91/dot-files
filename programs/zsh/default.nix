@@ -1,4 +1,5 @@
 { pkgs, config, lib, ... }: {
+  programs.starship = import ./starship.nix { inherit pkgs; inherit config; inherit lib; };
   programs.zsh = {
     enable = true;
     enableAutosuggestions = true;
@@ -6,16 +7,6 @@
     enableVteIntegration = true;
     defaultKeymap = "emacs";
     plugins = [
-      {
-        name = "powerlevel10k";
-        src = pkgs.zsh-powerlevel10k;
-        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-      }
-      {
-        name = "powerlevel10k-config";
-        src = lib.cleanSource ./p10k-config;
-        file = "p10k.zsh";
-      }
       {
         name = "fzf-tab";
         src = "${pkgs.zsh-fzf-tab}/share/fzf-tab";
