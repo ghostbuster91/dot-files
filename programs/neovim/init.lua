@@ -52,9 +52,13 @@ map("n", "<Leader>/", telescope_builtin.commands, { noremap = true, desc = "show
 -- global variable to control if lsp should format file on save
 Auto_format = true
 
+local navic = require("nvim-navic")
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
+    if client.server_capabilities.documentSymbolProvider then
+        navic.attach(client, bufnr)
+    end
     local function mapB(mode, l, r, desc)
         local opts = { noremap = true, silent = true, buffer = bufnr, desc = desc }
         map(mode, l, r, opts)
@@ -358,9 +362,6 @@ require("nvim-treesitter.configs").setup({
     }
 })
 
-local gps = require("nvim-gps")
-gps.setup()
-
 require("lualine").setup({
     options = {
         icons_enabled = true,
@@ -374,7 +375,9 @@ require("lualine").setup({
     sections = {
         lualine_a = { "mode" },
         lualine_b = { "branch", "diff", "diagnostics" },
-        lualine_c = { "filename", { gps.get_location, cond = gps.is_available } },
+        lualine_c = {
+            { navic.get_location, cond = navic.is_available },
+        },
         lualine_x = { "encoding", "fileformat", "filetype" },
         lualine_y = { "progress" },
         lualine_z = { "location" },

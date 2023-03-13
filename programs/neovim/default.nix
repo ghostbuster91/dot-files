@@ -126,7 +126,7 @@ in
 
       nvim-web-devicons
       lualine-nvim
-      nvim-gps
+      nvim-navic
       comment-nvim
 
       # snippets
