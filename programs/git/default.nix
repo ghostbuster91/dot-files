@@ -11,7 +11,7 @@
         pager = "diff-so-fancy | less -FXRi";
       };
       color = { ui = true; };
-      push = { default = "simple"; };
+      push = { default = "simple"; autoSetupRemote = true; };
       pull = { ff = "only"; };
       init = { defaultBranch = "main"; };
       alias = { gone = "!bash ~/bin/git-gone.sh"; };
