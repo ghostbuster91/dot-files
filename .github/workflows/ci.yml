@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ nix ]
+    branches: [ ** ]
   pull_request:
-    branches: [ nix ]
+    branches: [ ** ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
