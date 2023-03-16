@@ -79,7 +79,7 @@ local on_attach = function(client, bufnr)
         telescope_builtin.lsp_dynamic_workspace_symbols,
         "lsp workspace symbols"
     )
-    mapB("n", "<leader>ca", lsp.buf.code_action, "lsp code action")
+    mapB({ "v", "n" }, "<leader>ca", require("actions-preview").code_actions)
 
     mapB("n", "K", lsp.buf.hover, "lsp hover")
     mapB("n", "<Leader>gr", telescope_builtin.lsp_references, "lsp references")

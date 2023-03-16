@@ -167,6 +167,7 @@ in
         '';
       }
       nvim-treesitter-context
+      pkgs.nvim-actions-preview
     ];
   };
 }

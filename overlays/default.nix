@@ -7,5 +7,6 @@ self: super:
     import ./treesitter-scala.nix { pkgs = super; };
   nvim-treesitter-textobjects =
     import ./nvim-treesitter-textobjects.nix { pkgs = super; };
+  nvim-actions-preview =
+    import ./nvim-actions-preview.nix { pkgs = super; };
 }
-
