@@ -1,4 +1,4 @@
-{ nixGL, ts-build }:
+{ nixGL }:
 self: super:
 {
   alacritty = import ./alacritty.nix { inherit nixGL; pkgs = super; };

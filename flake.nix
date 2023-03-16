@@ -12,16 +12,15 @@
       url = "github:guibou/nixGL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    ts-build.url = "github:pta2002/build-ts-grammar.nix";
   };
 
-  outputs = inputs @ { home-manager, nixpkgs, nixGL, ts-build, ... }:
+  outputs = inputs @ { home-manager, nixpkgs, nixGL, ... }:
     let
       system = "x86_64-linux";
       username = "kghost";
 
       overlays = import ./overlays {
-        inherit nixGL ts-build;
+        inherit nixGL;
       };
 
       pkgs = import nixpkgs {
