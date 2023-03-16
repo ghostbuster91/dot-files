@@ -166,6 +166,7 @@ in
           let g:gh_open_command = 'fn() { echo "$@" | xsel -b; }; fn '
         '';
       }
+      nvim-treesitter-context
     ];
   };
 }

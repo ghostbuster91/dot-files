@@ -603,3 +603,4 @@ require("nvim-next").setup({
         nvim_next_builtins.t
     }
 })
+require 'treesitter-context'.setup()
