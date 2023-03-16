@@ -12,9 +12,10 @@
       url = "github:guibou/nixGL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
-  outputs = inputs @ { home-manager, nixpkgs, nixGL, ... }:
+  outputs = inputs @ { home-manager, nixpkgs, nixGL, neovim-nightly-overlay, ... }:
     let
       system = "x86_64-linux";
       username = "kghost";
@@ -29,6 +30,7 @@
         overlays = [
           (self: super: { derivations = import ./derivations { pkgs = super; inherit (nixpkgs) lib; }; })
           overlays
+          neovim-nightly-overlay.overlay
         ];
       };
     in
