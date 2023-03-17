@@ -7,4 +7,6 @@
   nvim-syntax-surfer = pkgs.callPackage ./nvim-syntax-surfer.nix { inherit pkgs; };
   nvim-actions-preview = pkgs.callPackage ./nvim-actions-preview.nix { inherit pkgs; };
   nvim-portal = pkgs.callPackage ./nvim-portal.nix { inherit pkgs; };
+  nvim-ssr = pkgs.callPackage ./nvim-ssr.nix { inherit pkgs; };
+
 }

@@ -229,7 +229,15 @@ in
             vim.keymap.set("n", "<leader>o", "<cmd>Portal jumplist backward<cr>")
             vim.keymap.set("n", "<leader>i", "<cmd>Portal jumplist forward<cr>")
           EOF
-      '';
+        '';
+      }
+      {
+        plugin = pkgs.derivations.nvim-ssr;
+        config = ''
+          lua << EOF
+            vim.keymap.set({ "n", "x" }, "<leader>rs", function() require("ssr").open() end)
+          EOF
+        '';
       }
     ];
   };
