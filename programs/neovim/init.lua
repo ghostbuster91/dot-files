@@ -505,8 +505,6 @@ require("fidget").setup({
 
 require('nvim-lightbulb').setup({ autocmd = { enabled = true } })
 
-require('neoscroll').setup()
-
 local diffview_actions = next_integrations.diffview(require("diffview.actions"))
 require("diffview").setup({
     file_history_panel = {
