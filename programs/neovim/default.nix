@@ -127,7 +127,7 @@ in
           ]
       ))
       playground
-      pkgs.nvim-treesitter-textobjects
+      nvim-treesitter-textobjects
 
       nvim-web-devicons
       lualine-nvim
