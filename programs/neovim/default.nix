@@ -143,7 +143,6 @@ in
       indent-blankline-nvim
       nvim-tree-lua
       vim-tmux-clipboard
-      symbols-outline-nvim
       telescope-ui-select-nvim
       noice-nvim
       nui-nvim

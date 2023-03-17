@@ -569,8 +569,6 @@ map("n", '<leader>tt', function()
     nvim_tree.toggle(true, true)
 end, { desc = "nvim_tree toggle" })
 
-require("symbols-outline").setup()
-
 require("noice").setup({
     lsp = { progress = { enabled = false } },
     notify = {
