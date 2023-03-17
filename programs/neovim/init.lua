@@ -604,3 +604,15 @@ require("nvim-next").setup({
     }
 })
 require 'treesitter-context'.setup()
+
+-- Syntax Tree Surfer
+require("syntax-tree-surfer").setup()
+-- Swap The Master Node relative to the cursor with it's siblings, Dot Repeatable
+map("n", "<C-e>", function()
+    vim.opt.opfunc = "v:lua.STSSwapUpNormal_Dot"
+    return "g@l"
+end, { silent = true, expr = true, desc = "Swap TS node with one above" })
+map("n", "<C-n>", function()
+    vim.opt.opfunc = "v:lua.STSSwapDownNormal_Dot"
+    return "g@l"
+end, { silent = true, expr = true, desc = "Swap TS node with one below" })
