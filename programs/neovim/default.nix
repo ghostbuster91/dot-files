@@ -246,6 +246,15 @@ in
           EOF
         '';
       }
+      {
+        plugin = nvim-dap-virtual-text;
+        config = ''
+          lua <<EOF
+            require("nvim-dap-virtual-text").setup()
+          EOF
+        '';
+      }
+
     ];
   };
 }
