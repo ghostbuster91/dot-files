@@ -185,7 +185,7 @@ in
         '';
       }
       nvim-treesitter-context
-      pkgs.nvim-actions-preview
+      pkgs.derivations.nvim-actions-preview
       {
         plugin = pkgs.derivations.nvim-syntax-surfer;
         config = ''

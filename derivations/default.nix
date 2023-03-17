@@ -5,4 +5,5 @@
   nvim-leap = pkgs.callPackage ./nvim-leap.nix { inherit pkgs; };
   nvim-next = pkgs.callPackage ./nvim-next.nix { inherit pkgs; };
   nvim-syntax-surfer = pkgs.callPackage ./nvim-syntax-surfer.nix { inherit pkgs; };
+  nvim-actions-preview = pkgs.callPackage ./nvim-actions-preview.nix { inherit pkgs; };
 }
