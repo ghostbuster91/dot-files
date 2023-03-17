@@ -193,11 +193,11 @@ in
           vim.keymap.set("n", "<C-e>", function()
               vim.opt.opfunc = "v:lua.STSSwapUpNormal_Dot"
               return "g@l"
-          end, { silent = true, expr = true, desc = "Swap TS node with one above" })
+          end, { silent = true, expr = true, desc = "Swap TS node with one above", noremap = true })
           vim.keymap.set("n", "<C-n>", function()
               vim.opt.opfunc = "v:lua.STSSwapDownNormal_Dot"
               return "g@l"
-          end, { silent = true, expr = true, desc = "Swap TS node with one below" })
+          end, { silent = true, expr = true, desc = "Swap TS node with one below", noremap = true })
 
           -- Visual Selection from Normal Mode
           vim.keymap.set("n", "vx", '<cmd>STSSelectMasterNode<cr>', opts)
