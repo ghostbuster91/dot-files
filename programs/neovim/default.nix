@@ -49,9 +49,14 @@ in
           "It has to be set in the first plugin's config as plugins get sourced before any other configuration and the leader customization doesn't work otherwise
           let mapleader = "${leaderKey}" 
           nnoremap <Leader>tf <cmd>Telescope find_files<cr>
-          nnoremap <Leader>tg <cmd>Telescope live_grep<cr>
           nnoremap <Leader>th <cmd>Telescope buffers<cr>
           nnoremap <Leader>gh <cmd>lua require('telescope.builtin').git_commits()<cr>
+
+          lua << EOF
+              vim.keymap.set("n", "<leader>tg", function()
+                require("telescope.builtin").live_grep({ layout_strategy = "vertical" })
+              end)
+          EOF
         '';
       }
       telescope-fzf-native-nvim

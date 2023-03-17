@@ -48,6 +48,14 @@ map("n", "<F11>", ":update<CR>", { noremap = true, silent = true })
 
 local telescope_builtin = require('telescope.builtin')
 map("n", "<Leader>/", telescope_builtin.commands, { noremap = true, desc = "show commands" })
+map(
+    "n",
+    "<Leader>gwd",
+    function()
+        telescope_builtin.diagnostics({ layout_strategy = "vertical" })
+    end,
+    { desc = "diagnostics" }
+)
 
 -- global variable to control if lsp should format file on save
 Auto_format = true
@@ -68,21 +76,33 @@ local on_attach = function(client, bufnr)
 
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     mapB("n", "<leader>rn", lsp.buf.rename, "lsp rename")
-    mapB("n", "<leader>gD", lsp.buf.declaration, "lsp goto declaration")
-    mapB("n", "<leader>gd", telescope_builtin.lsp_definitions, "lsp goto definition")
-    mapB("n", "<leader>gi", telescope_builtin.lsp_implementations, "lsp goto implementation")
+    mapB("n", "<leader>gD", function()
+        lsp.buf.declaration({ layout_strategy = "vertical" })
+    end, "lsp goto declaration")
+    mapB("n", "<leader>gd", function()
+        telescope_builtin.lsp_definitions({ layout_strategy = "vertical" })
+    end, "lsp goto definition")
+    mapB("n", "<leader>gi", function()
+        telescope_builtin.lsp_implementations({ layout_strategy = "vertical" })
+    end, "lsp goto implementation")
     mapB("n", "<leader>f", lsp.buf.format, "lsp format")
-    mapB("n", "<leader>gs", telescope_builtin.lsp_document_symbols, "lsp document symbols")
-    mapB(
+    mapB("n", "<leader>gs", function()
+        telescope_builtin.lsp_document_symbols({ layout_strategy = "vertical" })
+    end, "lsp document symbols")
+    map(
         "n",
         "<Leader>gws",
-        telescope_builtin.lsp_dynamic_workspace_symbols,
-        "lsp workspace symbols"
+        function()
+            telescope_builtin.lsp_dynamic_workspace_symbols({ layout_strategy = "vertical" })
+        end,
+        { desc = "lsp workspace symbols" }
     )
     mapB({ "v", "n" }, "<leader>ca", require("actions-preview").code_actions)
 
     mapB("n", "K", lsp.buf.hover, "lsp hover")
-    mapB("n", "<Leader>gr", telescope_builtin.lsp_references, "lsp references")
+    mapB("n", "<Leader>gr", function()
+        telescope_builtin.lsp_references({ layout_strategy = "vertical" })
+    end, "lsp references")
     mapB("n", "<leader>sh", lsp.buf.signature_help, "lsp signature")
 
     local nndiag = next_integrations.diagnostic()
@@ -194,12 +214,10 @@ metals_config.capabilities = capabilities
 metals_config.on_attach = function(client, bufnr)
     on_attach(client, bufnr)
     map("v", "K", metals.type_of_range)
-    map("n", "<leader>cc", function()
-        telescope.extensions.coursier.complete()
-    end, { desc = "coursier complete" })
-    map("n", "<leader>mc", function()
-        telescope.extensions.metals.commands()
-    end, { desc = "metals commands" })
+
+    -- TODO: investigate why it doesnt work
+    -- map("n", "<leader>cc", telescope.extensions.coursier.complete, { desc = "coursier complete" })
+    map("n", "<leader>mc", telescope.extensions.metals.commands, { desc = "metals commands" })
 end
 
 metals_config.settings = {
@@ -602,4 +620,3 @@ require("nvim-next").setup({
     }
 })
 require 'treesitter-context'.setup()
-
