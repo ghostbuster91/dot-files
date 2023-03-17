@@ -27,3 +27,11 @@ set tabstop     =4
 set softtabstop =4
 set shiftwidth  =4
 set expandtab
+
+"Persist undotree history in /tmp
+let s:undodir = "/tmp/.undodir_" . $USER
+if !isdirectory(s:undodir)
+    call mkdir(s:undodir, "", 0700)
+endif
+let &undodir=s:undodir
+set undofile
