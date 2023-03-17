@@ -53,6 +53,9 @@ in
           nnoremap <Leader>gh <cmd>lua require('telescope.builtin').git_commits()<cr>
 
           lua << EOF
+              vim.keymap.set("n", "<leader>hc", function()
+                require("telescope.builtin").git_bcommits()
+              end)
               vim.keymap.set("n", "<leader>tg", function()
                 require("telescope.builtin").live_grep({ layout_strategy = "vertical" })
               end)
