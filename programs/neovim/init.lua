@@ -667,6 +667,7 @@ map("n", "gR", "<cmd>TroubleToggle lsp_references<cr>",
 )
 
 require("lsp_lines").setup()
+map("", "<Leader>j", require("lsp_lines").toggle, { desc = "Toggle lsp_lines" })
 diag.config({
     virtual_text = false,
 })
