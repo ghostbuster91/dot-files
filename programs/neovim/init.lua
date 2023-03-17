@@ -63,6 +63,7 @@ Auto_format = true
 local navic = require("nvim-navic")
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
+local lsp_group = api.nvim_create_augroup("lsp", { clear = true })
 local on_attach = function(client, bufnr)
     if client.server_capabilities.documentSymbolProvider then
         navic.attach(client, bufnr)
@@ -98,6 +99,7 @@ local on_attach = function(client, bufnr)
         { desc = "lsp workspace symbols" }
     )
     mapB({ "v", "n" }, "<leader>ca", require("actions-preview").code_actions)
+    mapB("n", "<leader>cl", lsp.codelens.run)
 
     mapB("n", "K", lsp.buf.hover, "lsp hover")
     mapB("n", "<Leader>gr", function()
@@ -209,15 +211,89 @@ require("lspconfig")["tsserver"].setup({
 -- Scala nvim-metals config
 local metals = require("metals")
 local metals_config = metals.bare_config()
+metals_config.tvp = {
+    icons = {
+        enabled = true,
+    },
+}
 metals_config.init_options.statusBarProvider = "on"
 metals_config.capabilities = capabilities
+
+local dap = require("dap")
+
+dap.configurations.scala = {
+    {
+        type = "scala",
+        request = "launch",
+        name = "RunOrTest",
+        metals = {
+            runType = "runOrTestFile",
+            --args = { "firstArg", "secondArg", "thirdArg" }, -- here just as an example
+        },
+    },
+    {
+        type = "scala",
+        request = "launch",
+        name = "Test Target",
+        metals = {
+            runType = "testTarget",
+        },
+    },
+}
+
 metals_config.on_attach = function(client, bufnr)
+    local function mapB(mode, l, r, desc)
+        local opts = { noremap = true, silent = true, buffer = bufnr, desc = desc }
+        map(mode, l, r, opts)
+    end
     on_attach(client, bufnr)
-    map("v", "K", metals.type_of_range)
+    metals.setup_dap()
+    mapB("v", "K", metals.type_of_range, "metals: type of range")
 
     -- TODO: investigate why it doesnt work
     -- map("n", "<leader>cc", telescope.extensions.coursier.complete, { desc = "coursier complete" })
     map("n", "<leader>mc", telescope.extensions.metals.commands, { desc = "metals commands" })
+
+    mapB("n", "<leader>dc", function()
+        require("dap").continue()
+    end, "dap: continue")
+
+    mapB("n", "<leader>dr", function()
+        require("dap").repl.toggle()
+    end, "dap: repl toggle")
+
+    mapB("n", "<leader>dK", function()
+        require("dap.ui.widgets").hover()
+    end, "dap: ui widget")
+
+    mapB("n", "<leader>dt", function()
+        require("dap").toggle_breakpoint()
+    end, "dap: toggle breakpoint")
+
+    mapB("n", "<leader>dso", function()
+        require("dap").step_over()
+    end, "dap: step over")
+
+    mapB("n", "<leader>dsi", function()
+        require("dap").step_into()
+    end, "dap: step into")
+
+    mapB("n", "<leader>dl", function()
+        require("dap").run_last()
+    end, "dap: run last")
+
+    dap.listeners.after["event_terminated"]["nvim-metals"] = function(_, _)
+        --vim.notify("Tests have finished!")
+        dap.repl.open()
+    end
+
+    api.nvim_create_autocmd("FileType", {
+        pattern = { "dap-repl" },
+        callback = function()
+            require("dap.ext.autocompl").attach()
+        end,
+        group = lsp_group,
+    })
 end
 
 metals_config.settings = {
