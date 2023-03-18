@@ -52,6 +52,21 @@ map("n", "<leader>se", function()
     diag.setqflist({ severity = "E" })
 end, { desc = "Diagnostics[E] into qflist" })
 
+local toggle_qf = function()
+    local qf_exists = false
+    for _, win in pairs(vim.fn.getwininfo()) do
+        if win["quickfix"] == 1 then
+            qf_exists = true
+        end
+    end
+    if qf_exists == true then
+        vim.cmd "cclose"
+        return
+    end
+    vim.cmd "copen"
+end
+map("n", "<leader>to", toggle_qf, { desc = "qflist toggle" })
+
 local telescope_builtin = require('telescope.builtin')
 map("n", "<Leader>/", telescope_builtin.commands, { noremap = true, desc = "show commands" })
 map(
@@ -674,9 +689,7 @@ map("n", "gR", "<cmd>TroubleToggle lsp_references<cr>",
 
 require("lsp_lines").setup()
 map("", "<Leader>j", require("lsp_lines").toggle, { desc = "Toggle lsp_lines" })
-diag.config({
-    virtual_text = false,
-})
+diag.config({ virtual_lines = { only_current_line = true }, virtual_text = false })
 
 local leap = require("leap")
 leap.add_default_mappings()
