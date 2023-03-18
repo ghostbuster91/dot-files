@@ -29,3 +29,4 @@ endif
 let &undodir=s:undodir
 set undofile
 
+set diffopt+=linematch:60
