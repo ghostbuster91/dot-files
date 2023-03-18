@@ -55,10 +55,10 @@ in
           lua << EOF
               vim.keymap.set("n", "<leader>hc", function()
                 require("telescope.builtin").git_bcommits()
-              end)
+              end, { desc = "Buffer commites"})
               vim.keymap.set("n", "<leader>tg", function()
                 require("telescope.builtin").live_grep({ layout_strategy = "vertical" })
-              end)
+              end, { desc = "Live grep"})
           EOF
         '';
       }
