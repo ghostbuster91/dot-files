@@ -28,3 +28,7 @@ if !isdirectory(s:undodir)
 endif
 let &undodir=s:undodir
 set undofile
+
+nnoremap<leader>to :copen<cr>
+nnoremap<leader>tc :cclose<cr>
+

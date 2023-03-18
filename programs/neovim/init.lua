@@ -18,8 +18,8 @@ local telescope = require("telescope")
 telescope.setup({
     defaults = {
         mappings = {
-            i = {
-                    ["<esc>"] = actions.close,
+            n = {
+                    ["f"] = actions.send_to_qflist,
             },
         },
     },
@@ -45,6 +45,12 @@ map("c", "<C-e>", "<END>", { noremap = true })
 -- }
 
 map("n", "<F11>", ":wall<CR>", { noremap = true, silent = true })
+map("n", "<leader>su", function()
+    diag.setqflist()
+end, { desc = "Diagnostics into qflist" })
+map("n", "<leader>se", function()
+    diag.setqflist({ severity = "E" })
+end, { desc = "Diagnostics[E] into qflist" })
 
 local telescope_builtin = require('telescope.builtin')
 map("n", "<Leader>/", telescope_builtin.commands, { noremap = true, desc = "show commands" })
@@ -694,4 +700,20 @@ require("nvim-next").setup({
         nvim_next_builtins.t
     }
 })
+local next_move = require("nvim-next.move")
+local prev_qf_item, next_qf_item = next_move.make_repeatable_pair(function(_)
+    local status, err = pcall(vim.cmd, "cprevious")
+    if not status then
+        vim.notify("No more items", vim.log.levels.INFO)
+    end
+end, function(_)
+    local status, err = pcall(vim.cmd, "cnext")
+    if not status then
+        vim.notify("No more items", vim.log.levels.INFO)
+    end
+end)
+
+map("n", "]q", next_qf_item, { desc = "nvim-next: next qfix" })
+map("n", "[q", prev_qf_item, { desc = "nvim-next: prev qfix" })
+
 require 'treesitter-context'.setup()
