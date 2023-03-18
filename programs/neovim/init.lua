@@ -323,7 +323,8 @@ metals_config.settings = {
     excludedPackages = {
         "akka.actor.typed.javadsl",
         "com.github.swagger.akka.javadsl"
-    }
+    },
+    enableSemanticHighlighting = true
 }
 metals_config.handlers["textDocument/publishDiagnostics"] = lsp.with(
     lsp.diagnostic.on_publish_diagnostics, {
