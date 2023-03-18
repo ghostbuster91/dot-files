@@ -279,6 +279,15 @@ in
         '';
       }
       nvim-bqf
+      {
+        plugin = telescope-undo-nvim;
+        config = ''
+          lua <<EOF
+            require("telescope").load_extension("undo")
+            vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
+          EOF
+        '';
+      }
     ];
   };
 }
