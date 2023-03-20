@@ -16,6 +16,13 @@ cnoremap <expr> <Right> pumvisible() ? "\<Down>"  : "\<Right>"
 "This unsets the "last search pattern" register by hitting return
 nnoremap <silent> <ESC> :noh<ESC>
 
+let g:tmux_resizer_no_mappings = 1
+
+nnoremap <silent> <C-Left> :TmuxResizeLeft<CR>
+nnoremap <silent> <C-Down> :TmuxResizeDown<CR>
+nnoremap <silent> <C-Up> :TmuxResizeUp<CR>
+nnoremap <silent> <C-Right> :TmuxResizeRight<CR>
+
 set tabstop     =4
 set softtabstop =4
 set shiftwidth  =4
