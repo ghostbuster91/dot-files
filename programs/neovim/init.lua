@@ -86,6 +86,7 @@ map(
 Auto_format = true
 
 local navic = require("nvim-navic")
+require("lsp-inlayhints").setup()
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local lsp_group = api.nvim_create_augroup("lsp", { clear = true })
@@ -93,6 +94,7 @@ local on_attach = function(client, bufnr)
     if client.server_capabilities.documentSymbolProvider then
         navic.attach(client, bufnr)
     end
+    require("lsp-inlayhints").on_attach(client, bufnr)
     local function mapB(mode, l, r, desc)
         local opts = { noremap = true, silent = true, buffer = bufnr, desc = desc }
         map(mode, l, r, opts)
@@ -125,6 +127,7 @@ local on_attach = function(client, bufnr)
     )
     mapB({ "v", "n" }, "<leader>ca", require("actions-preview").code_actions)
     mapB("n", "<leader>cl", lsp.codelens.run)
+    mapB("n", "<leader>ch", require('lsp-inlayhints').toggle, "lsp: toggle inlayhints")
 
     mapB("n", "K", lsp.buf.hover, "lsp hover")
     mapB("n", "<Leader>gr", function()

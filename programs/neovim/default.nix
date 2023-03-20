@@ -320,6 +320,7 @@ in
           EOF
         '';
       }
+      pkgs.derivations.nvim-inlayhints
     ];
   };
 }
