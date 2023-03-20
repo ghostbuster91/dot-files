@@ -232,7 +232,7 @@ require("lspconfig")["tsserver"].setup({
         tsserver_path,
         "--stdio",
         "--tsserver-path",
-        tyescript_path
+        typescript_path
     }
 })
 
