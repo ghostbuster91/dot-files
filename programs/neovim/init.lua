@@ -274,6 +274,16 @@ metals_config.on_attach = function(client, bufnr)
     on_attach(client, bufnr)
     metals.setup_dap()
     mapB("v", "K", metals.type_of_range, "metals: type of range")
+    mapB("n", "<leader>mt", require("metals.tvp").toggle_tree_view, "metals: toggle tree view")
+
+    mapB("n", "<leader>mr", require("metals.tvp").reveal_in_tree, "metals: reveal in tree")
+
+    mapB("n", "<leader>msi", function()
+        require("metals").toggle_setting("showImplicitArguments")
+    end, "metals: show implicit args")
+    mapB("n", "<leader>mss", function()
+        require("metals").toggle_setting("enableSemanticHighlighting")
+    end, "metals: toggle enableSemanticHighlighting")
 
     -- TODO: investigate why it doesnt work
     -- map("n", "<leader>cc", telescope.extensions.coursier.complete, { desc = "coursier complete" })
