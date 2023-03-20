@@ -163,6 +163,22 @@ in
       diffview-nvim
       goto-preview
       nvim-dap
+      {
+        plugin = nvim-dap-ui;
+        config = ''
+          lua << EOF
+            require("dapui").setup()
+            local dap, dapui = require("dap"), require("dapui")
+            dap.listeners.before.event_terminated["dapui_config"] = function()
+              dapui.close()
+            end
+            dap.listeners.before.event_exited["dapui_config"] = function()
+              dapui.close()
+            end
+          EOF
+        '';
+      }
+      telescope-dap-nvim
       pkgs.derivations.nvim-metals
       # pkgs.derivations.nvim-tmux-resize
       trouble-nvim

@@ -37,6 +37,7 @@ telescope.setup({
 
 telescope.load_extension("fzf")
 telescope.load_extension("ui-select")
+telescope.load_extension('dap')
 
 -- Saving files as root with w!! {
 map("c", "w!!", "%!sudo tee > /dev/null %", { noremap = true })
@@ -294,7 +295,11 @@ metals_config.on_attach = function(client, bufnr)
         require("dap").toggle_breakpoint()
     end, "dap: toggle breakpoint")
 
-    mapB("n", "<leader>dso", function()
+    mapB("n", "<leader>dT", function()
+        require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
+    end, "dap: toggle breakpoint condition")
+
+    mapB("n", "<leader>dsv", function()
         require("dap").step_over()
     end, "dap: step over")
 
@@ -302,9 +307,21 @@ metals_config.on_attach = function(client, bufnr)
         require("dap").step_into()
     end, "dap: step into")
 
+    mapB("n", "<leader>dso", function()
+        require("dap").step_out()
+    end, "dap: step out")
+
     mapB("n", "<leader>dl", function()
         require("dap").run_last()
     end, "dap: run last")
+
+    mapB("n", "<leader>du", function()
+        require("dapui").toggle()
+    end, "dap: ui toggle")
+
+    mapB("n", "<leader>db", function()
+        telescope.extensions.dap.list_breakpoints()
+    end, "dap: list breakpoints")
 
     dap.listeners.after["event_terminated"]["nvim-metals"] = function(_, _)
         --vim.notify("Tests have finished!")
