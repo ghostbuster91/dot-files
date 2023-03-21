@@ -801,4 +801,3 @@ end)
 map("n", "]q", next_qf_item, { desc = "nvim-next: next qfix" })
 map("n", "[q", prev_qf_item, { desc = "nvim-next: prev qfix" })
 
-require 'treesitter-context'.setup()

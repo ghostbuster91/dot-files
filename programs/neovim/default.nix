@@ -203,7 +203,6 @@ in
           let g:gh_open_command = 'fn() { echo "$@" | xsel -b; }; fn '
         '';
       }
-      nvim-treesitter-context
       pkgs.derivations.nvim-actions-preview
       {
         plugin = pkgs.derivations.nvim-syntax-surfer;
