@@ -262,30 +262,6 @@ in
           EOF
         '';
       }
-      {
-        plugin = ChatGPT-nvim;
-        config = ''
-          lua <<EOF
-            require("chatgpt").setup({
-                keymaps = {
-                    close = { "<C-c>" },
-                    submit = "<S-Enter>",
-                    yank_last = "<C-y>",
-                    yank_last_code = "<leader>y",
-                    scroll_up = "<C-u>",
-                    scroll_down = "<C-d>",
-                    toggle_settings = "<C-o>",
-                    new_session = "<leader>co",
-                    cycle_windows = "<Tab>",
-                    -- in the Sessions pane
-                    select_session = "<Space>",
-                    rename_session = "r",
-                    delete_session = "d",
-                  }
-            })
-          EOF
-        '';
-      }
       nvim-bqf
       {
         plugin = telescope-undo-nvim;
