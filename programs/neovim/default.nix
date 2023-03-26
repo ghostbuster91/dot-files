@@ -205,39 +205,6 @@ in
       }
       pkgs.derivations.nvim-actions-preview
       {
-        plugin = pkgs.derivations.nvim-syntax-surfer;
-        config = ''
-          lua << EOF
-          -- Syntax Tree Surfer
-          require("syntax-tree-surfer").setup()
-          local opts = {noremap = true, silent = true}
-          -- Swap The Master Node relative to the cursor with it's siblings, Dot Repeatable
-          vim.keymap.set("n", "<C-e>", function()
-              vim.opt.opfunc = "v:lua.STSSwapUpNormal_Dot"
-              return "g@l"
-          end, { silent = true, expr = true, desc = "Swap TS node with one above", noremap = true })
-          vim.keymap.set("n", "<C-n>", function()
-              vim.opt.opfunc = "v:lua.STSSwapDownNormal_Dot"
-              return "g@l"
-          end, { silent = true, expr = true, desc = "Swap TS node with one below", noremap = true })
-
-          -- Visual Selection from Normal Mode
-          vim.keymap.set("n", "vx", '<cmd>STSSelectMasterNode<cr>', opts)
-          vim.keymap.set("n", "vn", '<cmd>STSSelectCurrentNode<cr>', opts)
-
-          -- Select Nodes in Visual Mode
-          vim.keymap.set("x", "<S-Right>", '<cmd>STSSelectNextSiblingNode<cr>', opts)
-          vim.keymap.set("x", "<S-Left>", '<cmd>STSSelectPrevSiblingNode<cr>', opts)
-          vim.keymap.set("x", "<S-Up>", '<cmd>STSSelectParentNode<cr>', opts)
-          vim.keymap.set("x", "<S-Down>", '<cmd>STSSelectChildNode<cr>', opts)
-
-          -- Swapping Nodes in Visual Mode
-          vim.keymap.set("x", "<S-A-Down>", '<cmd>STSSwapNextVisual<cr>', opts)
-          vim.keymap.set("x", "<S-A-Up>", '<cmd>STSSwapPrevVisual<cr>', opts)
-          EOF
-        '';
-      }
-      {
         plugin = pkgs.derivations.nvim-portal;
         config = ''
           lua << EOF
