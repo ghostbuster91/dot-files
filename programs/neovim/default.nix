@@ -214,14 +214,6 @@ in
         '';
       }
       {
-        plugin = pkgs.derivations.nvim-ssr;
-        config = ''
-          lua << EOF
-            vim.keymap.set({ "n", "x" }, "<leader>sr", function() require("ssr").open() end)
-          EOF
-        '';
-      }
-      {
         plugin = nvim-dap-virtual-text;
         config = ''
           lua <<EOF
