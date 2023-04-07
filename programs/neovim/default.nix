@@ -14,13 +14,13 @@ in
     extraConfig = ''
       	let mapleader = "${leaderKey}"
     '' +
-    "${builtins.readFile ./init2.vim}" +
+    "${builtins.readFile ./init.vim}" +
     ''
       lua << EOF
         local tsserver_path = "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server"
         local typescript_path = "${pkgs.nodePackages.typescript}/lib/node_modules/typescript/lib"
         local metals_binary_path = "${pkgs.metals}/bin/metals"
-        ${builtins.readFile ./init2.lua}
+        ${builtins.readFile ./init.lua}
       EOF
     '';
     extraPackages = [
