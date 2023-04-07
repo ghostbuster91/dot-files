@@ -112,12 +112,7 @@ in
             tree-sitter-typescript
             tree-sitter-c
             tree-sitter-java
-            (tree-sitter-scala.overrideAttrs
-              (old: {
-                version = "master";
-                src = pkgs.tree-sitter-scala-master;
-              })
-            )
+            pkgs.tree-sitter-scala-master
             tree-sitter-query # for the tree-sitter itself
             tree-sitter-python
             tree-sitter-go
