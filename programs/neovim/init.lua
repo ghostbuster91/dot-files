@@ -19,12 +19,12 @@ telescope.setup({
     defaults = {
         mappings = {
             n = {
-                    ["f"] = actions.send_to_qflist,
+                ["f"] = actions.send_to_qflist,
             },
         },
     },
     extensions = {
-            ["ui-select"] = {
+        ["ui-select"] = {
             require("telescope.themes").get_dropdown {
                 -- even more opts
             },
@@ -357,7 +357,7 @@ metals_config.settings = {
         "akka.actor.typed.javadsl",
         "com.github.swagger.akka.javadsl"
     },
-    enableSemanticHighlighting = true
+    enableSemanticHighlighting = false
 }
 metals_config.handlers["textDocument/publishDiagnostics"] = lsp.with(
     lsp.diagnostic.on_publish_diagnostics, {
@@ -456,10 +456,10 @@ require("nvim-treesitter.configs").setup({
         swap = {
             enable = true,
             swap_next = {
-                    ["<leader>a"] = "@parameter.inner",
+                ["<leader>a"] = "@parameter.inner",
             },
             swap_previous = {
-                    ["<leader>A"] = "@parameter.inner",
+                ["<leader>A"] = "@parameter.inner",
             },
         },
         select = {
@@ -468,14 +468,14 @@ require("nvim-treesitter.configs").setup({
             lookahead = true,
             keymaps = {
                 -- You can use the capture groups defined in textobjects.scm
-                    ["af"] = "@function.outer",
-                    ["if"] = "@function.inner",
-                    ["ac"] = "@class.outer",
+                ["af"] = "@function.outer",
+                ["if"] = "@function.inner",
+                ["ac"] = "@class.outer",
                 -- You can optionally set descriptions to the mappings (used in the desc parameter of
                 -- nvim_buf_set_keymap) which plugins like which-key display
-                    ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+                ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
                 -- You can also use captures from other query groups like `locals.scm`
-                    ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
+                ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
             },
             -- You can choose the select mode (default is charwise 'v')
             --
@@ -485,9 +485,9 @@ require("nvim-treesitter.configs").setup({
             -- and should return the mode ('v', 'V', or '<c-v>') or a table
             -- mapping query_strings to modes.
             selection_modes = {
-                    ['@parameter.outer'] = 'v', -- charwise
-                    ['@function.outer'] = 'V',  -- linewise
-                    ['@class.outer'] = '<c-v>', -- blockwise
+                ['@parameter.outer'] = 'v', -- charwise
+                ['@function.outer'] = 'V',  -- linewise
+                ['@class.outer'] = '<c-v>', -- blockwise
             },
             -- If you set this to `true` (default is `false`) then any textobject is
             -- extended to include preceding or succeeding whitespace. Succeeding
@@ -529,20 +529,20 @@ require("nvim-treesitter.configs").setup({
         textobjects = {
             move = {
                 goto_next_start = {
-                        ["]m"] = "@function.outer",
-                        ["]]"] = { query = "@class.outer", desc = "Next class start" },
+                    ["]m"] = "@function.outer",
+                    ["]]"] = { query = "@class.outer", desc = "Next class start" },
                 },
                 goto_next_end = {
-                        ["]M"] = "@function.outer",
-                        ["]["] = "@class.outer",
+                    ["]M"] = "@function.outer",
+                    ["]["] = "@class.outer",
                 },
                 goto_previous_start = {
-                        ["[m"] = "@function.outer",
-                        ["[["] = "@class.outer",
+                    ["[m"] = "@function.outer",
+                    ["[["] = "@class.outer",
                 },
                 goto_previous_end = {
-                        ["[M"] = "@function.outer",
-                        ["[]"] = "@class.outer",
+                    ["[M"] = "@function.outer",
+                    ["[]"] = "@class.outer",
                 },
             }
         }
@@ -602,21 +602,21 @@ cmp.setup({
         }),
     },
     mapping = {
-            ["<C-p>"] = cmp.mapping.select_prev_item(),
-            ["<C-n>"] = cmp.mapping.select_next_item(),
-            ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-            ["<C-f>"] = cmp.mapping.scroll_docs(4),
-            ["<C-Space>"] = cmp.mapping.complete(),
-            ["<C-e>"] = cmp.mapping.close(),
-            ["<S-CR>"] = cmp.mapping.confirm({
+        ["<C-p>"] = cmp.mapping.select_prev_item(),
+        ["<C-n>"] = cmp.mapping.select_next_item(),
+        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-f>"] = cmp.mapping.scroll_docs(4),
+        ["<C-Space>"] = cmp.mapping.complete(),
+        ["<C-e>"] = cmp.mapping.close(),
+        ["<S-CR>"] = cmp.mapping.confirm({
             behavior = cmp.ConfirmBehavior.Replace,
             select = true,
         }),
-            ["<CR>"] = cmp.mapping.confirm({
+        ["<CR>"] = cmp.mapping.confirm({
             behavior = cmp.ConfirmBehavior.Insert,
             select = true,
         }),
-            ["<Tab>"] = function(fallback)
+        ["<Tab>"] = function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
             elseif luasnip.expand_or_jumpable() then
@@ -625,7 +625,7 @@ cmp.setup({
                 fallback()
             end
         end,
-            ["<S-Tab>"] = function(fallback)
+        ["<S-Tab>"] = function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
             elseif luasnip.jumpable(-1) then
@@ -652,14 +652,16 @@ require("indent_blankline").setup()
 
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
-local nvim_tree = require("nvim-tree")
-nvim_tree.setup({
+require("nvim-tree").setup({
     view = {
         adaptive_size = true,
     },
 })
-map("n", '<leader>tt', function()
-    nvim_tree.toggle(true, true)
+map("n", '<leader>et', function()
+    require("nvim-tree.api").tree.toggle(true, true)
+end, { desc = "nvim_tree toggle" })
+map("n", '<leader>ef', function()
+    require("nvim-tree.api").tree.find_file(false, true)
 end, { desc = "nvim_tree toggle" })
 
 require("noice").setup({
@@ -690,15 +692,15 @@ require("fidget").setup({
 
 require('nvim-lightbulb').setup({ autocmd = { enabled = true } })
 
-local diffview_actions = next_integrations.diffview(require("diffview.actions"))
-require("diffview").setup({
-    file_history_panel = {
-        keymaps = {
-            { "n", "[x", diffview_actions.prev_conflict, { desc = "In the merge-tool: jump to the previous conflict" } },
-            { "n", "]x", diffview_actions.next_conflict, { desc = "In the merge-tool: jump to the next conflict" } },
-        }
-    }
-})
+-- local diffview_actions = next_integrations.diffview(require("diffview.actions"))
+-- require("diffview").setup({
+--     file_history_panel = {
+--         keymaps = {
+--             { "n", "[x", diffview_actions.prev_conflict, { desc = "In the merge-tool: jump to the previous conflict" } },
+--             { "n", "]x", diffview_actions.next_conflict, { desc = "In the merge-tool: jump to the next conflict" } },
+--         }
+--     }
+-- })
 
 local neogit = require('neogit')
 neogit.setup {
