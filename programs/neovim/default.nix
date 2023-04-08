@@ -192,15 +192,7 @@ in
       trouble-nvim
       vim-repeat # needed for leap
       pkgs.derivations.nvim-leap
-      {
-        plugin = vim-gh-line;
-        config = ''
-          let g:gh_line_map_default = 0
-          let g:gh_line_blame_map_default = 0
-          let g:gh_line_map = '<leader>gc'
-          let g:gh_open_command = 'fn() { echo "$@" | xsel -b; }; fn '
-        '';
-      }
+      gitlinker-nvim
       pkgs.derivations.nvim-actions-preview
       {
         plugin = pkgs.derivations.nvim-portal;
