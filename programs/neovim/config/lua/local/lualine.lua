@@ -14,7 +14,14 @@ local setup = function(navic)
             lualine_b = { "branch", "diff", "diagnostics" },
             lualine_c = {
                 'filename',
-                { navic.get_location, cond = navic.is_available },
+                {
+                    function()
+                        return navic.get_location()
+                    end,
+                    cond = function()
+                        return navic.is_available()
+                    end
+                },
             },
             lualine_x = { "encoding", "fileformat", "filetype" },
             lualine_y = { "progress" },
