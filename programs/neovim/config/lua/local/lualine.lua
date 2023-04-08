@@ -13,6 +13,7 @@ local setup = function(navic)
             lualine_a = { "mode" },
             lualine_b = { "branch", "diff", "diagnostics" },
             lualine_c = {
+                'filename',
                 { navic.get_location, cond = navic.is_available },
             },
             lualine_x = { "encoding", "fileformat", "filetype" },
@@ -22,7 +23,7 @@ local setup = function(navic)
         inactive_sections = {
             lualine_a = {},
             lualine_b = {},
-            lualine_c = { "filename" },
+            lualine_c = {},
             lualine_x = { "location" },
             lualine_y = {},
             lualine_z = {},
