@@ -57,7 +57,7 @@ api.nvim_create_autocmd(
 require("which-key").setup()
 
 require("nvim-autopairs").setup({
-    enable_check_bracket_line = false -- doesn't work well when writing schema
+    check_ts = true,
 })
 
 
