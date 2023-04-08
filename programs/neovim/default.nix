@@ -67,15 +67,6 @@ in
         '';
       }
       telescope-fzf-native-nvim
-      {
-        plugin = vim-tmux-navigator;
-        config = ''
-          nnoremap <silent> <A-Left> :TmuxNavigateLeft<cr>
-          nnoremap <silent> <A-Down> :TmuxNavigateDown<cr>
-          nnoremap <silent> <A-Up> :TmuxNavigateUp<cr>
-          nnoremap <silent> <A-Right> :TmuxNavigateRight<cr>
-        '';
-      }
       which-key-nvim
       nvim-autopairs
       {
@@ -174,7 +165,6 @@ in
       }
       telescope-dap-nvim
       p_nvim-metals
-      p_nvim-tmux-resize
       trouble-nvim
       vim-repeat # needed for leap
       p_nvim-leap
@@ -231,6 +221,7 @@ in
         '';
       }
       p_nvim-lsp-inlayhints
+      p_nvim-smart-splits-nvim
     ];
   };
 }

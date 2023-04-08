@@ -41,8 +41,8 @@
         url = "github:cbochs/portal.nvim";
         flake = false;
       };
-      p_nvim-tmux-resize = {
-        url = "github:RyanMillerC/better-vim-tmux-resizer";
+      p_nvim-smart-splits-nvim = {
+        url = "github:ghostbuster91/smart-splits.nvim";
         flake = false;
       };
     };

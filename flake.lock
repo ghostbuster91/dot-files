@@ -329,19 +329,19 @@
         "type": "github"
       }
     },
-    "p_nvim-tmux-resize": {
+    "p_nvim-smart-splits-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1621209374,
-        "narHash": "sha256-1uHcQQUnViktDBZt+aytlBF1ZG+/Ifv5VVoKSyM9ML0=",
-        "owner": "RyanMillerC",
-        "repo": "better-vim-tmux-resizer",
-        "rev": "a791fe5b4433ac43a4dad921e94b7b5f88751048",
+        "lastModified": 1680973308,
+        "narHash": "sha256-/ld8d3zXc0GzxS9PmCb8IIvgg6kS/EQC9l9T2/BsfPo=",
+        "owner": "ghostbuster91",
+        "repo": "smart-splits.nvim",
+        "rev": "8f21a6f684731e43c1b8dfad5c32acb4f3bf11c2",
         "type": "github"
       },
       "original": {
-        "owner": "RyanMillerC",
-        "repo": "better-vim-tmux-resizer",
+        "owner": "ghostbuster91",
+        "repo": "smart-splits.nvim",
         "type": "github"
       }
     },
@@ -358,7 +358,7 @@
         "p_nvim-metals": "p_nvim-metals",
         "p_nvim-next": "p_nvim-next",
         "p_nvim-portal": "p_nvim-portal",
-        "p_nvim-tmux-resize": "p_nvim-tmux-resize"
+        "p_nvim-smart-splits-nvim": "p_nvim-smart-splits-nvim"
       }
     },
     "utils": {
