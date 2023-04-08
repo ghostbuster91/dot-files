@@ -3,13 +3,13 @@ local map = vim.keymap.set
 local lsp = vim.lsp
 local diag = vim.diagnostic
 
+-- global variable to control if lsp should format file on save
+Auto_format = true
+
 local setup = function(telescope, telescope_builtin, navic, next_integrations, tsserver_path, typescript_path,
                        metals_binary_path)
     -- lsp
     local lspconfig = require("lspconfig")
-
-    -- global variable to control if lsp should format file on save
-    Auto_format = true
 
     require("lsp-inlayhints").setup()
     -- Use an on_attach function to only map the following keys
