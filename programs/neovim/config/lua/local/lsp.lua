@@ -3,8 +3,8 @@ local map = vim.keymap.set
 local lsp = vim.lsp
 local diag = vim.diagnostic
 
-local setup = function(telescope, navic, next_integrations, tsserver_path, typescript_path, metals_binary_path)
-    local telescope_builtin = telescope.builtin
+local setup = function(telescope, telescope_builtin, navic, next_integrations, tsserver_path, typescript_path,
+                       metals_binary_path)
     -- lsp
     local lspconfig = require("lspconfig")
 

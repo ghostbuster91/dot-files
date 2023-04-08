@@ -37,7 +37,10 @@ local setup = function()
 
     telescope.load_extension("fzf")
     telescope.load_extension("ui-select")
-    return telescope
+    return {
+        core = telescope,
+        builtin = telescope_builtin
+    }
 end
 
 return { setup = setup }
