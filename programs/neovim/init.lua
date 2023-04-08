@@ -121,7 +121,7 @@ require('goto-preview').setup {
 
 local virtual_text = false
 diag.config({ virtual_text = virtual_text })
-map("n", "<leader>dt", function()
+map("n", "<leader>jt", function()
     virtual_text = not virtual_text
     diag.config({ virtual_text = virtual_text })
 end, { desc = "toggle virtual text" })
