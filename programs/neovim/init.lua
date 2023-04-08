@@ -167,6 +167,7 @@ end)
 map("n", "]q", next_qf_item, { desc = "nvim-next: next qfix" })
 map("n", "[q", prev_qf_item, { desc = "nvim-next: prev qfix" })
 
+require("gitlinker").setup()
 
 require("local/trouble").setup()
 local telescope = require("local/telescope").setup()
@@ -177,4 +178,4 @@ require("local/gitsigns").setup(next_integrations)
 require("local/cmp").setup()
 require("local/lualine").setup(navic)
 require("local/treesitter").setup(next_integrations)
-require("gitlinker").setup()
+require("local/neoscroll").setup()
