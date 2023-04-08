@@ -190,7 +190,6 @@ in
       pkgs.derivations.nvim-metals
       pkgs.derivations.nvim-tmux-resize
       trouble-nvim
-      lsp_lines-nvim
       vim-repeat # needed for leap
       pkgs.derivations.nvim-leap
       {

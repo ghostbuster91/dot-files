@@ -119,10 +119,15 @@ require('goto-preview').setup {
 
 
 
-
-require("lsp_lines").setup()
-map("", "<Leader>j", require("lsp_lines").toggle, { desc = "Toggle lsp_lines" })
-diag.config({ virtual_lines = { only_current_line = true }, virtual_text = false })
+local virtual_text = false
+diag.config({ virtual_text = virtual_text })
+map("n", "<leader>dt", function()
+    virtual_text = not virtual_text
+    diag.config({ virtual_text = virtual_text })
+end, { desc = "toggle virtual text" })
+map("n", "k", function()
+    diag.open_float()
+end, { desc = "show diagnostic under the cursor" })
 
 local leap = require("leap")
 leap.add_default_mappings()
@@ -167,7 +172,7 @@ require("local/trouble").setup()
 local telescope = require("local/telescope").setup()
 require("local/noice").setup(telescope.core)
 require("local/lsp").setup(telescope.core, telescope.builtin, navic, next_integrations, tsserver_path, typescript_path,
-metals_binary_path)
+    metals_binary_path)
 require("local/gitsigns").setup(next_integrations)
 require("local/cmp").setup()
 require("local/lualine").setup(navic)
