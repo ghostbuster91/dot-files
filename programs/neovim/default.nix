@@ -150,7 +150,7 @@ in
       nui-nvim
       fidget-nvim
       nvim-lightbulb
-      pkgs.derivations.nvim-next
+      p_nvim-next
       neoscroll-nvim
       neogit
       undotree
@@ -173,15 +173,15 @@ in
         '';
       }
       telescope-dap-nvim
-      pkgs.derivations.nvim-metals
-      pkgs.derivations.nvim-tmux-resize
+      p_nvim-metals
+      p_nvim-tmux-resize
       trouble-nvim
       vim-repeat # needed for leap
-      pkgs.derivations.nvim-leap
+      p_nvim-leap
       gitlinker-nvim
-      pkgs.derivations.nvim-actions-preview
+      p_nvim-actions-preview
       {
-        plugin = pkgs.derivations.nvim-portal;
+        plugin = p_nvim-portal;
         config = ''
           lua << EOF
             vim.keymap.set("n", "<leader>o", "<cmd>Portal jumplist backward<cr>")
@@ -230,7 +230,7 @@ in
           EOF
         '';
       }
-      pkgs.derivations.nvim-inlayhints
+      p_nvim-lsp-inlayhints
     ];
   };
 }
