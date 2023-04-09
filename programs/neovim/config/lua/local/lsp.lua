@@ -8,7 +8,17 @@ Auto_format = true
 
 local setup = function(telescope, telescope_builtin, navic, next_integrations, tsserver_path, typescript_path,
                        metals_binary_path)
-    -- lsp
+    -- setup neodev in a way that it loads all plugins when editing dot-files
+    local username = vim.fn.expand('$USER')
+    local dotfiles_dir = "/home/" .. username .. "/workspace/dot-files"
+    require("neodev").setup({
+        override = function(root_dir, library)
+            if root_dir:find(dotfiles_dir, 1, true) then
+                library.enabled = true
+                library.plugins = true
+            end
+        end,
+    })
     local lspconfig = require("lspconfig")
 
     require("lsp-inlayhints").setup()
@@ -127,7 +137,7 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, t
     -- map buffer local keybindings when the language server attaches
     -- local capabilities = vim.lsp.protocol.make_client_capabilities()
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
-    local servers = { "bashls", "vimls", "rnix", "yamlls", "lua_ls", "rust_analyzer" }
+    local servers = { "bashls", "vimls", "rnix", "yamlls", "rust_analyzer" }
     for _, lsp in ipairs(servers) do
         lspconfig[lsp].setup({
             on_attach = on_attach,
@@ -159,6 +169,20 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, t
             "--stdio",
             "--tsserver-path",
             typescript_path
+        }
+    })
+    local library = vim.api.nvim_get_runtime_file('*.lua', true)
+    require("lspconfig").lua_ls.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+        settings = {
+            Lua = {
+                workspace = {
+                    -- Make the server aware of Neovim runtime files
+                    checkThirdParty = false,
+                    library = library
+                },
+            }
         }
     })
 

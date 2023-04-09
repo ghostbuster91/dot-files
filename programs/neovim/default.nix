@@ -222,6 +222,7 @@ in
       }
       p_nvim-lsp-inlayhints
       p_nvim-smart-splits-nvim
+      neodev-nvim
     ];
   };
 }
