@@ -17,5 +17,6 @@ jobs:
       - uses: cachix/install-nix-action@v19
         with:
           nix_path: nixpkgs=channel:nixos-unstable
+      - run: nix flake check
       - run: nix-env -i statix -f '<nixpkgs>'
       - run: statix check .
