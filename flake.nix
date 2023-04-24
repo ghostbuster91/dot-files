@@ -62,8 +62,9 @@
           overlays
         ];
       };
+      inherit (inputs.nixpkgs.lib) mapAttrs;
     in
-    {
+    rec {
       homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = {
@@ -81,5 +82,10 @@
           }
         ];
       };
+      checks.${system} =
+        let
+          hm = mapAttrs (_: c: c.activationPackage) homeConfigurations;
+        in
+        hm;
     };
 }
