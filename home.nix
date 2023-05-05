@@ -74,8 +74,6 @@
     ripgrep # better grep
 
     tree # display tree structure of directory
-    _1password # 1password cli
-    _1password-gui
     jq # pretty-print json
     hexyl # pretty-print hex
 
@@ -127,6 +125,13 @@
     nix-index = {
       enable = true;
       enableZshIntegration = true;
+    };
+    ssh = {
+      enable = true;
+      extraConfig = ''
+Host *
+	IdentityAgent ~/.1password/agent.sock
+      '';
     };
   };
 

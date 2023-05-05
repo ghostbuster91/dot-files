@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, username, ... }:
 
 {
   imports =
@@ -32,6 +32,8 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
   # Set your time zone.
   time.timeZone = "Europe/Warsaw";
 
@@ -111,7 +113,18 @@
   # accidentally delete configuration.nix.
   # system.copySystemConfiguration = true;
   environment.shells = with pkgs; [ zsh ];
+  programs = {
 
+    # Enable the 1Password CLI, this also enables a SGUID wrapper so the CLI can authorize against the GUI app
+    _1password = {
+      enable = true;
+    };
+    # Enable the 1Passsword GUI with myself as an authorized user for polkit
+    _1password-gui = {
+      enable = true;
+      polkitPolicyOwners = [ username ];
+    };
+  };
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It’s perfectly fine and recommended to leave

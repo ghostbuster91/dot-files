@@ -102,6 +102,7 @@
           }
           disko.nixosModules.disko
         ];
+        specialArgs = { inherit username;};
       };
 
 
