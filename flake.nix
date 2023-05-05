@@ -73,6 +73,7 @@
         inherit pkgs;
         extraSpecialArgs = {
           inherit inputs;
+          inherit username;
         };
 
         modules = [
