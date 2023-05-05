@@ -1,6 +1,10 @@
-{ pkgs, config, inputs, lib, ... }: {
+{ pkgs, config, inputs, lib, username, ... }: {
 
-
+  home = {
+    inherit username;
+    homeDirectory = "/home/${username}";
+    stateVersion = "22.05";
+  };
   targets.genericLinux.enable = true;
   fonts.fontconfig.enable = true;
   # Home Manager needs a bit of information about you and the
@@ -21,33 +25,33 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  home.file.".config/nix/registry.json".text = builtins.toJSON {
-    flakes =
-      lib.mapAttrsToList
-        (n: v: {
-          exact = true;
-          from = {
-            id = n;
-            type = "indirect";
-          };
-          to = {
-            path = v.outPath;
-            type = "path";
-          };
-        })
-        inputs;
-    version = 2;
-  };
-
-  nix.package = inputs.nix.packages.${pkgs.system}.nix;
-  nix.settings.nix-path = [
-    "nixpkgs=${inputs.nixpkgs}"
-    "home-manager=${inputs.home-manager}"
-  ];
+  # home.file.".config/nix/registry.json".text = builtins.toJSON {
+  #   flakes =
+  #     lib.mapAttrsToList
+  #       (n: v: {
+  #         exact = true;
+  #         from = {
+  #           id = n;
+  #           type = "indirect";
+  #         };
+  #         to = {
+  #           path = v.outPath;
+  #           type = "path";
+  #         };
+  #       })
+  #       inputs;
+  #   version = 2;
+  # };
+  #
+  # nix.package = inputs.nix.packages.${pkgs.system}.nix;
+  # nix.settings.nix-path = [
+  #   "nixpkgs=${inputs.nixpkgs}"
+  #   "home-manager=${inputs.home-manager}"
+  # ];
 
   home.sessionVariables = {
     EDITOR = "nvim";
-    DOCKER_HOST = "unix://$XDG_RUNTIME_DIR/docker.sock";
+    # DOCKER_HOST = "unix://$XDG_RUNTIME_DIR/docker.sock";
   };
 
   imports = [
@@ -125,43 +129,43 @@
     };
   };
 
-  dconf = {
-    enable = true;
-    settings = {
-      "org.gnome.desktop.input-sources" = {
-        show-all-sources = "false";
-        xkb-options = "['numpad:shift3', 'numpad:microsoft']";
-        per-window = "false";
-        current = "uint32 0";
-        mru-sources = "@a(ss) []";
-        sources = "[('xkb', 'pl')]";
-      };
-      "org/gnome/settings-daemon/plugins/media-keys" = {
-        custom-keybindings = [
-          "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
-        ];
-      };
-      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" =
-        {
-          binding = "<Primary><Alt>f";
-          command = "alacritty";
-          name = "open-terminal";
-        };
-    };
-  };
-
-  services.redshift = {
-    enable = true;
-    latitude = "52.2370";
-    longitude = "21.0175";
-    temperature.night = 3000;
-    temperature.day = 5000;
-  };
-
-  services.unclutter = {
-    enable = true;
-    extraOptions = [ "ignore-scrolling" ];
-  };
-
-  systemd.user.startServices = "sd-switch";
+  #dconf = {
+  #  enable = true;
+  #  settings = {
+  #    "org.gnome.desktop.input-sources" = {
+  #      show-all-sources = "false";
+  #      xkb-options = "['numpad:shift3', 'numpad:microsoft']";
+  #      per-window = "false";
+  #      current = "uint32 0";
+  #      mru-sources = "@a(ss) []";
+  #      sources = "[('xkb', 'pl')]";
+  #    };
+  #    "org/gnome/settings-daemon/plugins/media-keys" = {
+  #      custom-keybindings = [
+  #        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+  #      ];
+  #    };
+  #    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" =
+  #      {
+  #        binding = "<Primary><Alt>f";
+  #        command = "alacritty";
+  #        name = "open-terminal";
+  #      };
+  #  };
+  #};
+  #
+  #services.redshift = {
+  #  enable = true;
+  #  latitude = "52.2370";
+  #  longitude = "21.0175";
+  #  temperature.night = 3000;
+  #  temperature.day = 5000;
+  #};
+  #
+  #services.unclutter = {
+  #  enable = true;
+  #  extraOptions = [ "ignore-scrolling" ];
+  #};
+  #
+  #systemd.user.startServices = "sd-switch";
 }

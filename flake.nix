@@ -4,6 +4,11 @@
   inputs =
     {
       nix.url = "github:nixos/nix/2.11-maintenance";
+      nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-22.11";
+      disko = {
+        url = "github:nix-community/disko";
+        inputs.nixpkgs.follows = "nixpkgs-stable";
+      };
       nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
       home-manager = {
         url = "github:nix-community/home-manager";
@@ -13,7 +18,6 @@
         url = "github:guibou/nixGL";
         inputs.nixpkgs.follows = "nixpkgs";
       };
-
       # Neovim plugins
       p_nvim-actions-preview = {
         url = "github:aznhe21/actions-preview.nvim";
@@ -45,7 +49,7 @@
       };
     };
 
-  outputs = inputs @ { home-manager, nixpkgs, nixGL, ... }:
+  outputs = inputs @ { home-manager, nixpkgs, nixGL, nixpkgs-stable, disko, ... }:
     let
       system = "x86_64-linux";
       username = "kghost";
@@ -82,6 +86,26 @@
           }
         ];
       };
+
+      nixosConfigurations.kubuntu = nixpkgs-stable.lib.nixosSystem {
+        inherit system;
+        modules = [
+          ./machines/kubuntu/configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useUserPackages = true;
+              useGlobalPkgs = true;
+              users.${username} = ./home.nix;
+              extraSpecialArgs = { inherit username; inherit pkgs; };
+            };
+          }
+          disko.nixosModules.disko
+        ];
+      };
+
+
+
       checks.${system} =
         let
           hm = mapAttrs (_: c: c.activationPackage) homeConfigurations;
