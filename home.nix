@@ -75,6 +75,7 @@
 
     tree # display tree structure of directory
     _1password # 1password cli
+    _1password-gui
     jq # pretty-print json
     hexyl # pretty-print hex
 
