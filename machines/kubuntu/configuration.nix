@@ -3,15 +3,6 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, username, lib, ... }:
-let
-  nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
-    export __NV_PRIME_RENDER_OFFLOAD=1
-    export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA_GO
-    export __GLX_VENDOR_LIBRARY_NAME=nvidia
-    export __VK_LAYER_NV_optimus=NVIDIA_only
-    exec "$@"
-  '';
-in
 {
   imports =
     [
@@ -69,21 +60,14 @@ in
   };
   hardware.opengl.enable = true;
   hardware.nvidia.modesetting.enable = true;
-  # boot.kernelParams = [ "module_blacklist=i915" ];
   hardware.nvidia.prime = {
-    # offload.enable = true;
+    #TODO switch to offload once https://github.com/NixOS/nixpkgs/pull/165188 gets into stable
+    #more info: https://discourse.nixos.org/t/using-internal-external-monitor-with-nvidia-offload/22504
     sync.allowExternalGpu = true;
     sync.enable = true;
     intelBusId = "PCI:0:2:0";
     nvidiaBusId = "PCI:1:0:0";
 
-  };
-  specialisation = {
-    external-display.configuration = {
-      system.nixos.tags = [ "external-display" ];
-      hardware.nvidia.prime.offload.enable = lib.mkForce false;
-      hardware.nvidia.powerManagement.enable = lib.mkForce false;
-    };
   };
 
   # Configure keymap in X11
@@ -113,7 +97,6 @@ in
     vim
     git
     firefox
-    nvidia-offload
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
