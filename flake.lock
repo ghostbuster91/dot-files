@@ -35,6 +35,22 @@
         "type": "github"
       }
     },
+    "hardware": {
+      "locked": {
+        "lastModified": 1683381148,
+        "narHash": "sha256-aHbP6LXea9DaIqJAeH2TKJSGB2xufMuLDzrlmIl2d/0=",
+        "owner": "ghostbuster91",
+        "repo": "nixos-hardware",
+        "rev": "cb0f09e249bbd0f6689622a3fc39ae1feaa983e3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ghostbuster91",
+        "ref": "master",
+        "repo": "nixos-hardware",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -292,6 +308,7 @@
     "root": {
       "inputs": {
         "disko": "disko",
+        "hardware": "hardware",
         "home-manager": "home-manager",
         "nix": "nix",
         "nixGL": "nixGL",

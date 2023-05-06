@@ -9,6 +9,7 @@
         url = "github:nix-community/disko";
         inputs.nixpkgs.follows = "nixpkgs-stable";
       };
+      hardware.url = "github:ghostbuster91/nixos-hardware/master";
       nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
       home-manager = {
         url = "github:nix-community/home-manager";
@@ -49,7 +50,7 @@
       };
     };
 
-  outputs = inputs @ { home-manager, nixpkgs, nixGL, nixpkgs-stable, disko, ... }:
+  outputs = inputs @ { home-manager, nixpkgs, nixGL, nixpkgs-stable, disko, hardware, ... }:
     let
       system = "x86_64-linux";
       username = "kghost";
@@ -106,6 +107,7 @@
             };
           }
           disko.nixosModules.disko
+          hardware.nixosModules.focus-m2-gen1
         ];
         specialArgs = { inherit username; };
       };

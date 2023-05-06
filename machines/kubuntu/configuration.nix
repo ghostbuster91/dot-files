@@ -59,15 +59,16 @@
     videoDrivers = [ "nvidia" ];
   };
   hardware.opengl.enable = true;
-  hardware.nvidia.modesetting.enable = true;
-  hardware.nvidia.prime = {
-    #TODO switch to offload once https://github.com/NixOS/nixpkgs/pull/165188 gets into stable
-    #more info: https://discourse.nixos.org/t/using-internal-external-monitor-with-nvidia-offload/22504
-    sync.allowExternalGpu = true;
-    sync.enable = true;
-    intelBusId = "PCI:0:2:0";
-    nvidiaBusId = "PCI:1:0:0";
 
+  hardware.nvidia = {
+    powerManagement = {
+      enable = true;
+    };
+    prime = {
+      offload.enable = false;
+      sync.enable = true;
+      sync.allowExternalGpu = true;
+    };
   };
 
   # Configure keymap in X11
@@ -97,6 +98,10 @@
     vim
     git
     firefox
+    lm_sensors
+    wirelesstools
+    pciutils
+    usbutils
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -151,12 +156,12 @@
             "HDMI-0" = external.config // {
               enable = true;
               primary = true;
-              position = "0x0";
+              position = "1920x0";
             };
             "eDP-1-1" = builtin.config // {
               enable = true;
               primary = false;
-              position = "2560x0";
+              position = "0x0";
             };
           };
           fingerprint = {
