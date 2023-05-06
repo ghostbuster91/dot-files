@@ -2,8 +2,16 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, username, ... }:
-
+{ config, pkgs, username, lib, ... }:
+let
+  nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
+    export __NV_PRIME_RENDER_OFFLOAD=1
+    export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA_GO
+    export __GLX_VENDOR_LIBRARY_NAME=nvidia
+    export __VK_LAYER_NV_optimus=NVIDIA_only
+    exec "$@"
+  '';
+in
 {
   imports =
     [
@@ -57,9 +65,26 @@
     desktopManager = {
       xfce.enable = true;
     };
+    videoDrivers = [ "nvidia" ];
   };
+  hardware.opengl.enable = true;
+  hardware.nvidia.modesetting.enable = true;
+  # boot.kernelParams = [ "module_blacklist=i915" ];
+  hardware.nvidia.prime = {
+    # offload.enable = true;
+    sync.allowExternalGpu = true;
+    sync.enable = true;
+    intelBusId = "PCI:0:2:0";
+    nvidiaBusId = "PCI:1:0:0";
 
-
+  };
+  specialisation = {
+    external-display.configuration = {
+      system.nixos.tags = [ "external-display" ];
+      hardware.nvidia.prime.offload.enable = lib.mkForce false;
+      hardware.nvidia.powerManagement.enable = lib.mkForce false;
+    };
+  };
 
   # Configure keymap in X11
   # services.xserver.layout = "us";
@@ -78,7 +103,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.kghost = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "audio" "networkmanager" ]; # Enable ‘sudo’ for the user.
     shell = pkgs.zsh;
   };
 
@@ -88,6 +113,7 @@
     vim
     git
     firefox
+    nvidia-offload
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -102,6 +128,79 @@
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
+
+  services.autorandr =
+    let
+      builtin = {
+        config = {
+          crtc = 4;
+          mode = "1920x1080";
+          rate = "60.02";
+        };
+        fingerprint = "00ffffffffffff0038704b0000000000011d0104a5221378039d45a3564d9e270e4e5100000001010101010101010101010101010101008280a070381f403020350058c21000001a008280a0703832463020350058c21000001a000000fd00283c43430e010a202020202020000000fe004c4d3135364c462d314630320a005f";
+      };
+      external = {
+        config = {
+          crtc = 1;
+          mode = "2560x1440";
+          rate = "143.91";
+        };
+        fingerprint = "00ffffffffffff0010acdb414c4e4344131f0103803c2278ea8cb5af4f43ab260e5054a54b00d100d1c0b300a94081808100714fe1c0565e00a0a0a029503020350055502100001a000000ff004753374b5438330a2020202020000000fc0044454c4c205332373231444746000000fd0030901ee63c000a20202020202001d602034bf1525a3f101f2005140413121103020106071516230907078301000067030c002000383c67d85dc4017880016d1a0000020b3090e60f62256230e305c000e200d5e606050162623e40e7006aa0a067500820980455502100001a6fc200a0a0a055503020350055502100001a00000000000000000000000000000000d6";
+      };
+    in
+    {
+      enable = true;
+      profiles = {
+        standalone = {
+          config = {
+            "eDP-1-1" = builtin.config // {
+              enable = true;
+              primary = true;
+              position = "0x0";
+            };
+          };
+          fingerprint = {
+            "eDP-1-1" = builtin.fingerprint;
+          };
+        };
+        home = {
+          config = {
+            "HDMI-0" = external.config // {
+              enable = true;
+              primary = true;
+              position = "0x0";
+            };
+            "eDP-1-1" = builtin.config // {
+              enable = true;
+              primary = false;
+              position = "2560x0";
+            };
+          };
+          fingerprint = {
+            "HDMI-0" = external.fingerprint;
+            "eDP-1-1" = builtin.fingerprint;
+          };
+        };
+        home-external = {
+          config = {
+            "HDMI-0" = external.config // {
+              enable = true;
+              primary = true;
+              position = "0x0";
+            };
+            "eDP-1-1" = builtin.config // {
+              enable = false;
+              primary = false;
+              position = "2560x0";
+            };
+          };
+          fingerprint = {
+            "HDMI-0" = external.fingerprint;
+            "eDP-1-1" = builtin.fingerprint;
+          };
+        };
+      };
+    };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
