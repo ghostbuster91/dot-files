@@ -1,4 +1,4 @@
-{ pkgs, pkgs-stable, ... }: {
+{ pkgs, ... }: {
 
   programs.git = {
     enable = true;
@@ -20,7 +20,7 @@
         signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFFeU4GXH+Ae00DipGGJN7uSqPJxWFmgRo9B+xjV3mK4";
       };
       gpg.format = "ssh";
-      gpg.ssh = { program = "${pkgs-stable._1password-gui}/share/1password/op-ssh-sign"; allowedSignersFile = "~/.ssh/allowed_signers"; };
+      gpg.ssh = { allowedSignersFile = "~/.ssh/allowed_signers"; };
       commit.gpgsign = true;
       # [gpg]
       #   format = ssh
