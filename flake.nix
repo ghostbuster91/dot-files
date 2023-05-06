@@ -110,7 +110,7 @@
           hardware.nixosModules.focus-m2-gen1
           # flake registry
           {
-            nix.registry = builtins.mapAttrs (_: flake: { inherit flake; }) inputs;
+            nix.registry.nixpkgs.flake = inputs.nixpkgs;
           }
         ];
         specialArgs = { inherit username; };
