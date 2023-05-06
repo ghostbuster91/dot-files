@@ -66,6 +66,10 @@
           overlays
         ];
       };
+      pkgs-stable = import nixpkgs-stable {
+        inherit system;
+        config.allowUnfree = true;
+      };
       inherit (inputs.nixpkgs.lib) mapAttrs;
     in
     rec {
@@ -98,12 +102,12 @@
               useUserPackages = true;
               useGlobalPkgs = true;
               users.${username} = ./home.nix;
-              extraSpecialArgs = { inherit username; inherit pkgs; };
+              extraSpecialArgs = { inherit username; inherit pkgs; inherit pkgs-stable; };
             };
           }
           disko.nixosModules.disko
         ];
-        specialArgs = { inherit username;};
+        specialArgs = { inherit username; };
       };
 
 

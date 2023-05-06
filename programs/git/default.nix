@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, pkgs-stable, ... }: {
 
   programs.git = {
     enable = true;
@@ -16,6 +16,21 @@
       init = { defaultBranch = "main"; };
       alias = { gone = "!bash ~/bin/git-gone.sh"; };
       submodule = { recurse = true; };
+      user = {
+        signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFFeU4GXH+Ae00DipGGJN7uSqPJxWFmgRo9B+xjV3mK4";
+      };
+      gpg.format = "ssh";
+      gpg.ssh = { program = "${pkgs-stable._1password-gui}/share/1password/op-ssh-sign"; allowedSignersFile = "~/.ssh/allowed_signers"; };
+      commit.gpgsign = true;
+      # [gpg]
+      #   format = ssh
+      #
+      # [gpg "ssh"]
+      #   program = "/opt/1Password/op-ssh-sign"
+      #
+      # [commit]
+      #   gpgsign = true
+
     };
     includes = [
       {
@@ -33,4 +48,6 @@
       }
     ];
   };
+
+  home.file."./.ssh/allowed_signers".text = "ghostbuster91@users.noreply.github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFFeU4GXH+Ae00DipGGJN7uSqPJxWFmgRo9B+xjV3mK4";
 }
