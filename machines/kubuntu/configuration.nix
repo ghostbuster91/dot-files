@@ -26,7 +26,7 @@
   boot.loader.systemd-boot.enable = true;
 
   networking.hostId = "d1084363";
-  networking.hostName = "kubuntu"; # Define your hostname.
+  networking.hostName = "focus"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
@@ -54,25 +54,39 @@
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
-    exportConfiguration = true;
-    desktopManager = {
-      xfce.enable = true;
-    };
     videoDrivers = [ "nvidia" ];
   };
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
+  services.xserver.displayManager.gdm.wayland = true;
+  services.xserver.displayManager.defaultSession = "gnome";
+
+  environment.gnome.excludePackages = (with pkgs; [
+    gnome-photos
+    gnome-tour
+  ]) ++ (with pkgs.gnome; [
+    cheese # webcam tool
+    gnome-music
+    gedit # text editor
+    epiphany # web browser
+    geary # email reader
+    evince # document viewer
+    gnome-characters
+    totem # video player
+    tali # poker game
+    iagno # go game
+    hitori # sudoku game
+    atomix # puzzle game
+  ]);
+
   hardware.opengl.enable = true;
 
   hardware.nvidia = {
     powerManagement = {
       enable = true;
     };
-    prime = {
-      offload.enable = false;
-      sync.enable = true;
-      sync.allowExternalGpu = true;
-    };
+    nvidiaPersistenced = true;
   };
-
   # Configure keymap in X11
   # services.xserver.layout = "us";
   # services.xserver.xkbOptions = "eurosign:e,caps:escape";
@@ -119,89 +133,12 @@
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
-  services.autorandr =
-    let
-      builtin = {
-        config = {
-          crtc = 4;
-          mode = "1920x1080";
-          rate = "60.02";
-        };
-        fingerprint = "00ffffffffffff0038704b0000000000011d0104a5221378039d45a3564d9e270e4e5100000001010101010101010101010101010101008280a070381f403020350058c21000001a008280a0703832463020350058c21000001a000000fd00283c43430e010a202020202020000000fe004c4d3135364c462d314630320a005f";
-      };
-      external = {
-        config = {
-          crtc = 1;
-          mode = "2560x1440";
-          rate = "143.91";
-        };
-        fingerprint = "00ffffffffffff0010acdb414c4e4344131f0103803c2278ea8cb5af4f43ab260e5054a54b00d100d1c0b300a94081808100714fe1c0565e00a0a0a029503020350055502100001a000000ff004753374b5438330a2020202020000000fc0044454c4c205332373231444746000000fd0030901ee63c000a20202020202001d602034bf1525a3f101f2005140413121103020106071516230907078301000067030c002000383c67d85dc4017880016d1a0000020b3090e60f62256230e305c000e200d5e606050162623e40e7006aa0a067500820980455502100001a6fc200a0a0a055503020350055502100001a00000000000000000000000000000000d6";
-      };
-    in
-    {
-      enable = true;
-      profiles = {
-        standalone = {
-          config = {
-            "eDP-1-1" = builtin.config // {
-              enable = true;
-              primary = true;
-              position = "0x0";
-            };
-          };
-          fingerprint = {
-            "eDP-1-1" = builtin.fingerprint;
-          };
-        };
-        home = {
-          config = {
-            "HDMI-0" = external.config // {
-              enable = true;
-              primary = true;
-              position = "1920x0";
-            };
-            "eDP-1-1" = builtin.config // {
-              enable = true;
-              primary = false;
-              position = "0x0";
-            };
-          };
-          fingerprint = {
-            "HDMI-0" = external.fingerprint;
-            "eDP-1-1" = builtin.fingerprint;
-          };
-        };
-        home-external = {
-          config = {
-            "HDMI-0" = external.config // {
-              enable = true;
-              primary = true;
-              position = "0x0";
-            };
-            "eDP-1-1" = builtin.config // {
-              enable = false;
-              primary = false;
-              position = "2560x0";
-            };
-          };
-          fingerprint = {
-            "HDMI-0" = external.fingerprint;
-            "eDP-1-1" = builtin.fingerprint;
-          };
-        };
-      };
-    };
-
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
-  # system.copySystemConfiguration = true;
   environment.shells = with pkgs; [ zsh ];
   programs = {
 

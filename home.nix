@@ -42,7 +42,7 @@
   #       inputs;
   #   version = 2;
   # };
-  #
+
   # nix.package = inputs.nix.packages.${pkgs.system}.nix;
   # nix.settings.nix-path = [
   #   "nixpkgs=${inputs.nixpkgs}"

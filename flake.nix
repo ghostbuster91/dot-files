@@ -93,7 +93,7 @@
         ];
       };
 
-      nixosConfigurations.kubuntu = nixpkgs-stable.lib.nixosSystem {
+      nixosConfigurations.focus = nixpkgs-stable.lib.nixosSystem {
         inherit system;
         modules = [
           ./machines/kubuntu/configuration.nix
@@ -108,6 +108,10 @@
           }
           disko.nixosModules.disko
           hardware.nixosModules.focus-m2-gen1
+          # flake registry
+          {
+            nix.registry = builtins.mapAttrs (_: flake: { inherit flake; }) inputs;
+          }
         ];
         specialArgs = { inherit username; };
       };
