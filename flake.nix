@@ -96,7 +96,7 @@
       nixosConfigurations.focus = nixpkgs-stable.lib.nixosSystem {
         inherit system;
         modules = [
-          ./machines/kubuntu/configuration.nix
+          ./machines/focus/configuration.nix
           home-manager.nixosModules.home-manager
           {
             home-manager = {
