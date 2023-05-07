@@ -114,6 +114,7 @@
     powerManagement = {
       enable = true;
     };
+    nvidiaPersistenced = true;
   };
   # Configure keymap in X11
   # services.xserver.layout = "us";
