@@ -131,6 +131,16 @@
       enable = true;
     };
   };
+  xdg.configFile."mimeapps.list".force = true;
+  xdg.mimeApps = {
+    enable = true;
+    associations.added = {
+      "text/plain" = [ "sublime2.desktop" ];
+    };
+    defaultApplications = {
+      "text/plain" = [ "sublime2.desktop" ];
+    };
+  };
 
   #dconf = {
   #  enable = true;
