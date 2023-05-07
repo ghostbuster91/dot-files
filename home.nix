@@ -104,6 +104,7 @@
     tig
     statix # nix linter
     nix-output-monitor
+    slack
   ];
 
   programs = {
