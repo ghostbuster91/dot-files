@@ -152,6 +152,7 @@
     wirelesstools
     pciutils
     usbutils
+    glxinfo
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
