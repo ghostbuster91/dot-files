@@ -88,6 +88,7 @@
     nixfmt
     nix-prefetch
     nurl
+    nvd
 
     # Media
     youtube-dl
