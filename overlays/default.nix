@@ -5,6 +5,7 @@ let
 in
 {
   #alacritty = import ./alacritty.nix { inherit (inputs) nixGL; pkgs = super; };
+  google-chrome = import ./chrome.nix { pkgs = super; };
   metals = import ./metalsOverlay.nix { pkgs = super; };
   tree-sitter-scala-master =
     import ./treesitter-scala.nix { pkgs = super; };
@@ -12,3 +13,5 @@ in
     import ./nvim-treesitter-textobjects.nix { pkgs = super; };
   vimPlugins = super.vimPlugins // nvimPlugins;
 } 
+
+

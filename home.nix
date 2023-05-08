@@ -134,6 +134,9 @@
     ssh = {
       enable = true;
     };
+    google-chrome = {
+      enable = true;
+    };
   };
   xdg.configFile."mimeapps.list".force = true;
   xdg.mimeApps = {
@@ -194,3 +197,5 @@
   #
   #systemd.user.startServices = "sd-switch";
 }
+
+
