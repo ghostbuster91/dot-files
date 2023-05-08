@@ -39,7 +39,7 @@
           user = {
             name = "Kasper Kondzielski";
             email = "kasper.kondzielski@iohk.io";
-            signingKey = "5A22DAA4D02BA94A";
+            signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFFeU4GXH+Ae00DipGGJN7uSqPJxWFmgRo9B+xjV3mK4";
           };
           commit = {
             gpgSign = true;
