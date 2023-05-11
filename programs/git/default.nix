@@ -22,32 +22,10 @@
       gpg.format = "ssh";
       gpg.ssh = { allowedSignersFile = "~/.ssh/allowed_signers"; };
       commit.gpgsign = true;
-      # [gpg]
-      #   format = ssh
-      #
-      # [gpg "ssh"]
-      #   program = "/opt/1Password/op-ssh-sign"
-      #
-      # [commit]
-      #   gpgsign = true
-
     };
-    includes = [
-      {
-        condition = "gitdir:~/dev/";
-        contents = {
-          user = {
-            name = "Kasper Kondzielski";
-            email = "kasper.kondzielski@iohk.io";
-            signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFFeU4GXH+Ae00DipGGJN7uSqPJxWFmgRo9B+xjV3mK4";
-          };
-          commit = {
-            gpgSign = true;
-          };
-        };
-      }
-    ];
   };
 
-  home.file."./.ssh/allowed_signers".text = "ghostbuster91@users.noreply.github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFFeU4GXH+Ae00DipGGJN7uSqPJxWFmgRo9B+xjV3mK4";
+  home.file."./.ssh/allowed_signers".text = ''
+    ghostbuster91@users.noreply.github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFFeU4GXH+Ae00DipGGJN7uSqPJxWFmgRo9B+xjV3mK4
+  '';
 }
