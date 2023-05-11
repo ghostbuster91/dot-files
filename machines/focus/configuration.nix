@@ -3,6 +3,13 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, username, lib, ... }:
+let 
+ customFonts = pkgs.nerdfonts.override {
+    fonts = [
+      "JetBrainsMono"
+    ];
+  };
+in
 {
   imports =
     [
@@ -131,6 +138,10 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
+  fonts.fonts = with pkgs; [
+    customFonts
+    font-awesome
+  ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.kghost = {
