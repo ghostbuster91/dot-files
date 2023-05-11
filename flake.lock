@@ -193,6 +193,22 @@
         "type": "github"
       }
     },
+    "openconnect-sso": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1680271746,
+        "narHash": "sha256-qerm3HzTP0xnfOim0eEmUZa/MMll6VuS0IEKfiUysgU=",
+        "owner": "vlaci",
+        "repo": "openconnect-sso",
+        "rev": "c3f67e2b037e71c193b3c7b1f90ec9a5a440856f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vlaci",
+        "repo": "openconnect-sso",
+        "type": "github"
+      }
+    },
     "p_nvim-actions-preview": {
       "flake": false,
       "locked": {
@@ -314,6 +330,7 @@
         "nixGL": "nixGL",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-stable": "nixpkgs-stable",
+        "openconnect-sso": "openconnect-sso",
         "p_nvim-actions-preview": "p_nvim-actions-preview",
         "p_nvim-leap": "p_nvim-leap",
         "p_nvim-lsp-inlayhints": "p_nvim-lsp-inlayhints",

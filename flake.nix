@@ -48,6 +48,12 @@
         url = "github:ghostbuster91/smart-splits.nvim";
         flake = false;
       };
+
+      # misc 
+      openconnect-sso = {
+        url = "github:vlaci/openconnect-sso";
+        flake = false;
+      };
     };
 
   outputs = inputs @ { home-manager, nixpkgs, nixGL, nixpkgs-stable, disko, hardware, ... }:
@@ -55,6 +61,7 @@
       system = "x86_64-linux";
       username = "kghost";
 
+      openconnectOverlay = import "${inputs.openconnect-sso}/overlay.nix";
       overlays = import ./overlays {
         inherit inputs;
       };
@@ -65,6 +72,7 @@
         overlays = [
           (self: super: { derivations = import ./derivations { pkgs = super; inherit (nixpkgs) lib; }; })
           overlays
+          openconnectOverlay
         ];
       };
       pkgs-stable = import nixpkgs-stable {

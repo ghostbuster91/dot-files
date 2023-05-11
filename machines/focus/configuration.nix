@@ -3,8 +3,8 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, username, lib, ... }:
-let 
- customFonts = pkgs.nerdfonts.override {
+let
+  customFonts = pkgs.nerdfonts.override {
     fonts = [
       "JetBrainsMono"
     ];
@@ -33,11 +33,17 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 20;
 
-  networking.hostId = "d1084363";
-  networking.hostName = "focus"; # Define your hostname.
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
+  networking = {
+    hostId = "d1084363";
+    hostName = "focus";
+    networkmanager = {
+      enable = true;
+      plugins = with pkgs; [
+        networkmanager-openvpn
+        networkmanager-openconnect
+      ];
+    };
+  };
 
   hardware.bluetooth.enable = true;
 
