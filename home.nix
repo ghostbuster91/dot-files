@@ -106,6 +106,7 @@
     statix # nix linter
     nix-output-monitor
     slack
+    zoom-us
 
     gnomeExtensions.tray-icons-reloaded
     gnome.gnome-tweaks
