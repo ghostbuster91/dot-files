@@ -107,5 +107,10 @@
       lsd = "${pkgs.exa}/bin/exa --long --header --git --all";
       sw = "${pkgs.home-manager}/bin/home-manager switch --flake path:/home/kghost/workspace/dot-files |& ${pkgs.nix-output-monitor}/bin/nom";
     };
+    initExtra = ''
+      if test -f "~/.secrets.sh"; then
+        source ~/.secrets.sh
+      fi
+    '';
   };
 }
