@@ -20,6 +20,7 @@ in
         local tsserver_path = "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server"
         local typescript_path = "${pkgs.nodePackages.typescript}/lib/node_modules/typescript/lib"
         local metals_binary_path = "${pkgs.metals}/bin/metals"
+        local coursier_path = "${pkgs.coursier}/bin/cs"
         ${builtins.readFile ./init.lua}
       EOF
     '';
@@ -117,6 +118,7 @@ in
             tree-sitter-dockerfile
             tree-sitter-scheme
             tree-sitter-rust
+            tree-sitter-smithy
           ]
       ))
       playground
