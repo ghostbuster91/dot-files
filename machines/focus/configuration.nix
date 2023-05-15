@@ -209,6 +209,13 @@ in
     };
   };
 
+  virtualisation.docker.enable = true;
+  users.extraGroups.docker.members = [ username ];
+  # virtualisation.docker.rootless = {
+  #   enable = true;
+  #   setSocketVariable = true;
+  # };
+
   # power management features
   services.power-profiles-daemon.enable = false;
   services.tlp.enable = true;
