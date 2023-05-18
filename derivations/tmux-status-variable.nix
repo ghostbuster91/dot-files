@@ -1,16 +1,16 @@
 { pkgs }:
 let
   pname = "tmux-status-variables";
-  version = "b7d97faa8a5b4db8248cc3d398e623860ba650fe";
+  version = "6f75b024e01c46e35df5ce331e3b2a0f5aeb1b63";
 in
 pkgs.tmuxPlugins.mkTmuxPlugin {
   pluginName = pname;
   inherit version;
   rtpFilePath = "tmux-status-variables.tmux";
   src = pkgs.fetchFromGitHub {
-    owner = "odedlaz";
+    owner = "ghostbuster91";
     repo = pname;
     rev = version;
-    sha256 = "sha256-UotV2vai4WP2s9rhhZ2DQrlwaM2+O58KDTidEeK3tL0=";
+    sha256 = "sha256-JnDyIOC61uw1nc1Nlt5EmsS6iulKHcPtLkfqzmbFEok=";
   };
 }

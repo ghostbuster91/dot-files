@@ -15,7 +15,7 @@
       }
       pkgs.tmuxPlugins.better-mouse-mode
       {
-        plugin = pkgs.tmuxPlugins.onedark-theme;
+        plugin = pkgs.tmux-onedark-theme;
         extraConfig = ''
           set -g @onedark_widgets "#{prefix_highlight} #{free_mem}"
         '';

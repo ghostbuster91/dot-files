@@ -10,6 +10,7 @@ in
   nvim-treesitter-textobjects =
     import ./nvim-treesitter-textobjects.nix { pkgs = super; };
   vimPlugins = super.vimPlugins // nvimPlugins;
+  tmux-onedark-theme = import ./tmux-onedark-theme.nix { pkgs = super; };
 } 
 
 
