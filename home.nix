@@ -111,6 +111,7 @@
 
     gnomeExtensions.tray-icons-reloaded
     gnome.gnome-tweaks
+    jetbrains.idea-community
   ];
 
   programs = {
