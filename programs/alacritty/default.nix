@@ -1,7 +1,8 @@
-{ pkgs, ... }: {
+{ pkgs, pkgs-unstable, ... }: {
 
   programs.alacritty = {
     enable = true;
+    package = pkgs-unstable.alacritty;
     settings = {
       env = {
         ZSH_TMUX_AUTOSTART = "true";

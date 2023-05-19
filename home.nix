@@ -1,4 +1,4 @@
-{ pkgs, config, inputs, lib, username, pkgs-stable, ... }: {
+{ pkgs, config, inputs, lib, username, pkgs-unstable, ... }: {
 
   home = {
     inherit username;
@@ -63,7 +63,7 @@
     ./programs/git
   ];
 
-  home.packages = with pkgs; [
+  home.packages = with pkgs-unstable; [
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     diff-so-fancy # pretty diffs
     git-gone # get rid of orphan local branches
@@ -82,7 +82,7 @@
 
     # nix stuff
     nix-du
-    nix-index
+    # nix-index
     nixpkgs-review
     nix-tree
     nixfmt

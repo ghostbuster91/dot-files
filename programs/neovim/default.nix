@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, config, pkgs-unstable, ... }:
 let
   leaderKey = "\\<Space>";
 in
@@ -9,6 +9,7 @@ in
   };
   programs.neovim = {
     enable = true;
+    package = pkgs-unstable.neovim-unwrapped;
     viAlias = true;
     vimAlias = true;
     extraConfig = ''
@@ -17,30 +18,30 @@ in
     "${builtins.readFile ./init.vim}" +
     ''
       lua << EOF
-        local tsserver_path = "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server"
-        local typescript_path = "${pkgs.nodePackages.typescript}/lib/node_modules/typescript/lib"
-        local metals_binary_path = "${pkgs.metals}/bin/metals"
-        local coursier_path = "${pkgs.coursier}/bin/cs"
+        local tsserver_path = "${pkgs-unstable.nodePackages.typescript-language-server}/bin/typescript-language-server"
+        local typescript_path = "${pkgs-unstable.nodePackages.typescript}/lib/node_modules/typescript/lib"
+        local metals_binary_path = "${pkgs-unstable.metals}/bin/metals"
+        local coursier_path = "${pkgs-unstable.coursier}/bin/cs"
         ${builtins.readFile ./init.lua}
       EOF
     '';
-    extraPackages = [
-      pkgs.nodePackages.typescript
-      pkgs.nodePackages.typescript-language-server
-      pkgs.nodePackages.bash-language-server
-      pkgs.nodePackages.vim-language-server
-      pkgs.nodePackages.yaml-language-server
-      pkgs.rnix-lsp
-      pkgs.sumneko-lua-language-server
-      pkgs.stylua
-      pkgs.shfmt
-      pkgs.nodePackages.eslint
-      pkgs.nodePackages.prettier
-      pkgs.nodePackages.cspell
-      pkgs.rust-analyzer
-      pkgs.rustfmt
+    extraPackages = with pkgs-unstable; [
+      nodePackages.typescript
+      nodePackages.typescript-language-server
+      nodePackages.bash-language-server
+      nodePackages.vim-language-server
+      nodePackages.yaml-language-server
+      rnix-lsp
+      sumneko-lua-language-server
+      stylua
+      shfmt
+      nodePackages.eslint
+      nodePackages.prettier
+      nodePackages.cspell
+      rust-analyzer
+      rustfmt
     ];
-    plugins = with pkgs.vimPlugins; [
+    plugins = with pkgs-unstable.vimPlugins; [
       rec {
         plugin = kanagawa-nvim;
         config = ''

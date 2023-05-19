@@ -1,8 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, pkgs-unstable, ... }:
 {
   imports = [ ./bloop.nix ];
 
-  home.packages = with pkgs; [
+  home.packages = with pkgs-unstable; [
     jdk11
     scala
     ammonite
@@ -13,7 +13,7 @@
   ];
 
   home.sessionVariables = {
-    JAVA_HOME = "${pkgs.jdk}";
+    JAVA_HOME = "${pkgs-unstable.jdk}";
     JVM_DEBUG =
       "-J-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005";
   };

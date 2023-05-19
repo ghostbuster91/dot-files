@@ -1,6 +1,7 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, pkgs-unstable, ... }: {
   programs.tmux = {
     enable = true;
+    package = pkgs-unstable.tmux;
     terminal = "tmux-256color";
     baseIndex = 1;
     escapeTime = 0;
@@ -8,34 +9,34 @@
     sensibleOnTop = true;
     plugins = [
       {
-        plugin = pkgs.tmuxPlugins.yank;
+        plugin = pkgs-unstable.tmuxPlugins.yank;
         extraConfig = ''
           set -g @yank_action 'copy-pipe'
         '';
       }
-      pkgs.tmuxPlugins.better-mouse-mode
+      pkgs-unstable.tmuxPlugins.better-mouse-mode
       {
-        plugin = pkgs.tmux-onedark-theme;
+        plugin = pkgs-unstable.tmux-onedark-theme;
         extraConfig = ''
           set -g @onedark_widgets "#{prefix_highlight} #{free_mem}"
         '';
       }
-      pkgs.derivations.tmux-status-variable
+      pkgs-unstable.derivations.tmux-status-variable
       {
-        plugin = pkgs.tmuxPlugins.prefix-highlight;
+        plugin = pkgs-unstable.tmuxPlugins.prefix-highlight;
         extraConfig = ''
           set -g @prefix_highlight_show_copy_mode 'on'
         '';
       }
       {
-        plugin = pkgs.tmuxPlugins.tmux-thumbs;
+        plugin = pkgs-unstable.tmuxPlugins.tmux-thumbs;
         extraConfig = ''
           set -g @thumbs-command 'echo -n {} | xsel -b'
           set -g @thumbs-regexp-1 'sha256-\S{43}=' # Match nix sha256
           set -g @thumbs-regexp-2 'addr_\w{58}' # Match cardano bech32 address
         '';
       }
-      pkgs.tmuxPlugins.jump
+      pkgs-unstable.tmuxPlugins.jump
     ];
     extraConfig = ''
       set -g mouse on

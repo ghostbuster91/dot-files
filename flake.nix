@@ -4,15 +4,15 @@
   inputs =
     {
       nix.url = "github:nixos/nix/2.11-maintenance";
-      nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-22.11";
+      nixpkgs.url = "github:nixos/nixpkgs/nixos-22.11";
+      nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
       disko = {
         url = "github:nix-community/disko";
-        inputs.nixpkgs.follows = "nixpkgs-stable";
+        inputs.nixpkgs.follows = "nixpkgs";
       };
       hardware.url = "github:ghostbuster91/nixos-hardware/master";
-      nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
       home-manager = {
-        url = "github:nix-community/home-manager";
+        url = "github:nix-community/home-manager/release-22.11";
         inputs.nixpkgs.follows = "nixpkgs";
       };
       nixGL = {
@@ -56,7 +56,7 @@
       };
     };
 
-  outputs = inputs @ { home-manager, nixpkgs, nixGL, nixpkgs-stable, disko, hardware, ... }:
+  outputs = inputs @ { home-manager, nixpkgs-unstable, nixGL, nixpkgs, disko, hardware, ... }:
     let
       system = "x86_64-linux";
       username = "kghost";
@@ -66,16 +66,16 @@
         inherit inputs;
       };
 
-      pkgs = import nixpkgs {
+      pkgs-unstable = import nixpkgs-unstable {
         inherit system;
         config.allowUnfree = true;
         overlays = [
-          (self: super: { derivations = import ./derivations { pkgs = super; inherit (nixpkgs) lib; }; })
+          (self: super: { derivations = import ./derivations { pkgs = super; inherit (pkgs) lib; }; })
           overlays
           openconnectOverlay
         ];
       };
-      pkgs-stable = import nixpkgs-stable {
+      pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
       };
@@ -87,6 +87,7 @@
         extraSpecialArgs = {
           inherit inputs;
           inherit username;
+          inherit pkgs-unstable;
         };
 
         modules = [
@@ -101,7 +102,7 @@
         ];
       };
 
-      nixosConfigurations.focus = nixpkgs-stable.lib.nixosSystem {
+      nixosConfigurations.focus = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
           ./machines/focus/configuration.nix
@@ -111,7 +112,7 @@
               useUserPackages = true;
               useGlobalPkgs = true;
               users.${username} = ./home.nix;
-              extraSpecialArgs = { inherit username; inherit pkgs; inherit pkgs-stable; };
+              extraSpecialArgs = { inherit username; inherit pkgs-unstable; };
             };
           }
           disko.nixosModules.disko
@@ -123,8 +124,6 @@
         ];
         specialArgs = { inherit username; };
       };
-
-
 
       checks.${system} =
         let
