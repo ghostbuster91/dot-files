@@ -131,5 +131,7 @@
           hm = mapAttrs (_: c: c.activationPackage) homeConfigurations;
         in
         os // hm;
+
+      formatter.${system} = pkgs-unstable.nixpkgs-fmt;
     };
 }
