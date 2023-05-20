@@ -127,8 +127,9 @@
 
       checks.${system} =
         let
+          os = mapAttrs (_: c: c.config.system.build.toplevel) nixosConfigurations;
           hm = mapAttrs (_: c: c.activationPackage) homeConfigurations;
         in
-        hm;
+        os // hm;
     };
 }
