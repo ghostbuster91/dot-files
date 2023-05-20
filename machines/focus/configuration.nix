@@ -18,6 +18,7 @@ in
       (import ./disko-config.nix {
         disks = [ "/dev/nvme0n1" "/dev/nvme1n1" ]; # replace this with your disk name i.e. /dev/nvme0n1
       })
+      ./cache.nix
     ];
 
   # Use the GRUB 2 boot loader.
@@ -239,4 +240,6 @@ in
     fi
   '';
 }
+
+
 
