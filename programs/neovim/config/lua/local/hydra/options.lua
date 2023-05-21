@@ -1,6 +1,3 @@
-local diag = vim.diagnostic
-
-
 local setup = function(hydra, lsp)
     local M = {}
     M.virtual_text = function()

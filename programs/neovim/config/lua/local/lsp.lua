@@ -5,7 +5,9 @@ local diag = vim.diagnostic
 
 local setup = function(telescope, telescope_builtin, navic, next_integrations, tsserver_path, typescript_path,
                        metals_binary_path, coursier_path)
-    local M = {}
+    local M = {
+        on_attach_dap_subscribers = {}
+    }
     M.virtual_text = {
         enabled = false,
         enable = function()
@@ -255,7 +257,6 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, t
             name = "RunOrTest",
             metals = {
                 runType = "runOrTestFile",
-                --args = { "firstArg", "secondArg", "thirdArg" }, -- here just as an example
             },
         },
         {
@@ -291,52 +292,34 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, t
         -- map("n", "<leader>cc", telescope.extensions.coursier.complete, { desc = "coursier complete" })
         map("n", "<leader>mc", telescope.extensions.metals.commands, { desc = "metals commands" })
 
-        mapB("n", "<leader>dc", function()
-            require("dap").continue()
-        end, "dap: continue")
-
-        mapB("n", "<leader>dr", function()
-            require("dap").repl.toggle()
-        end, "dap: repl toggle")
-
-        mapB("n", "<leader>dK", function()
-            require("dap.ui.widgets").hover()
-        end, "dap: ui widget")
-
-        mapB("n", "<leader>dt", function()
-            require("dap").toggle_breakpoint()
-        end, "dap: toggle breakpoint")
-
-        mapB("n", "<leader>dT", function()
-            require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
-        end, "dap: toggle breakpoint condition")
-
-        mapB("n", "<leader>dsv", function()
-            require("dap").step_over()
-        end, "dap: step over")
-
-        mapB("n", "<leader>dsi", function()
-            require("dap").step_into()
-        end, "dap: step into")
-
-        mapB("n", "<leader>dso", function()
-            require("dap").step_out()
-        end, "dap: step out")
-
-        mapB("n", "<leader>dl", function()
-            require("dap").run_last()
-        end, "dap: run last")
-
-        mapB("n", "<leader>du", function()
-            require("dapui").toggle()
-        end, "dap: ui toggle")
-
-        mapB("n", "<leader>db", function()
-            telescope.extensions.dap.list_breakpoints()
-        end, "dap: list breakpoints")
+        local dap_interface = {
+            continue = dap.continue,
+            toggle_repl = dap.repl.toggle,
+            hover = require("dap.ui.widgets").hover,
+            step_out = dap.step_out,
+            step_into = dap.step_into,
+            step_over = dap.step_over,
+            run_last = dap.run_last,
+            run_to_cursor = dap.run_to_cursor,
+            run_and_attach = function()
+                --TODO fixe me; use somehow https://github.com/scalameta/nvim-metals/blob/32a37ce2f2cdafd0f1c5a44bcf748dae6867c982/lua/metals/setup.lua#L109-L168
+                dap.run({ type = 'scala', request = 'attach', host = '127.0.0.1', port = 5678 })
+            end,
+            toggle_ui = require("dapui").toggle,
+            toggle_breakpoint = dap.toggle_breakpoint,
+            set_breakpoint = function()
+                dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
+            end,
+            terminate = function()
+                dap.disconnect({ terminateDebuggee = false })
+            end,
+        }
+        for _, subscriber in ipairs(M.on_attach_dap_subscribers) do
+            subscriber.on_attach(client, bufnr, dap_interface)
+        end
 
         dap.listeners.after["event_terminated"]["nvim-metals"] = function(_, _)
-            --vim.notify("Tests have finished!")
+            vim.notify("Tests have finished!", vim.log.levels.INFO, { title = "Metals" })
             dap.repl.open()
         end
 
