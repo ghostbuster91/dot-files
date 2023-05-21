@@ -3,11 +3,49 @@ local map = vim.keymap.set
 local lsp = vim.lsp
 local diag = vim.diagnostic
 
--- global variable to control if lsp should format file on save
-Auto_format = true
-
 local setup = function(telescope, telescope_builtin, navic, next_integrations, tsserver_path, typescript_path,
                        metals_binary_path, coursier_path)
+    local M = {}
+    M.virtual_text = {
+        enabled = false,
+        enable = function()
+            M.virtual_text.enabled = true
+            diag.config({ virtual_text = true })
+            vim.notify("virtual text enabled", vim.log.levels.INFO, { title = "LSP" })
+        end,
+        disable = function()
+            M.virtual_text.enabled = false
+            diag.config({ virtual_text = false })
+            vim.notify("virtual text disabled", vim.log.levels.INFO, { title = "LSP" })
+        end,
+        toggle = function()
+            if M.virtual_text.enabled then
+                M.virtual_text.disable()
+            else
+                M.virtual_text.enable()
+            end
+        end,
+    }
+    diag.config({ virtual_text = M.virtual_text.enabled })
+
+    M.auto_format = {
+        enabled = true,
+        enable = function()
+            M.auto_format.enabled = true
+            vim.notify("auto format enabled", vim.log.levels.INFO, { title = "LSP" })
+        end,
+        disable = function()
+            M.auto_format.enabled = false
+            vim.notify("auto format disabled", vim.log.levels.INFO, { title = "LSP" })
+        end,
+        toggle = function()
+            if M.auto_format.enabled then
+                M.auto_format.disable()
+            else
+                M.auto_format.enable()
+            end
+        end
+    }
     -- setup neodev in a way that it loads all plugins when editing dot-files
     local username = vim.fn.expand('$USER')
     local dotfiles_dir = "/home/" .. username .. "/workspace/dot-files"
@@ -82,7 +120,7 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, t
                 buffer = bufnr,
                 desc = 'format with lsp on save',
                 callback = function()
-                    if Auto_format then
+                    if M.auto_format.enabled then
                         lsp.buf.format()
                     end
                 end
@@ -91,7 +129,6 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, t
     end
 
     local null_ls = require("null-ls")
-    local spell_check_enabled = false
     null_ls.setup({
         sources = {
             null_ls.builtins.formatting.shfmt,
@@ -120,18 +157,30 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, t
             mapB("n", "]s", nndiag.goto_next({ wrap = false, severity = diag.severity.HINT }), "next misspelled word")
         end,
     })
-    if not spell_check_enabled then
+
+    M.spell_check = {
+        enabled = false,
+        toggle = function()
+            if M.spell_check.enabled then
+                M.spell_check.disable()
+            else
+                M.spell_check.enable()
+            end
+        end,
+        enable = function()
+            null_ls.enable({ name = "cspell" })
+            M.spell_check.enabled = true
+            vim.notify("Spell check enabled", vim.log.levels.INFO, { title = "null_ls" })
+        end,
+        disable = function()
+            null_ls.disable({ name = "cspell" })
+            M.spell_check.enabled = false
+            vim.notify("Spell check disabled", vim.log.levels.INFO, { title = "null_ls" })
+        end
+    }
+    if not M.spell_check.enabled then
         null_ls.disable({ name = "cspell" })
     end
-    map("n", "<leader>ss", function()
-        if spell_check_enabled then
-            null_ls.disable({ name = "cspell" })
-            spell_check_enabled = false
-        else
-            null_ls.enable({ name = "cspell" })
-            spell_check_enabled = true
-        end
-    end, { desc = "toggle spell check", noremap = true })
 
     -- Use a loop to conveniently call 'setup' on multiple servers and
     -- map buffer local keybindings when the language server attaches
@@ -364,6 +413,8 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, t
             '--', '0' },
         root_dir = lspconfig.util.root_pattern("smithy-build.json")
     }
+
+    return M
 end
 
 return { setup = setup }

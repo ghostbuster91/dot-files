@@ -1,9 +1,7 @@
 -- This file will be inlined into home-manager initial configuration
 -- globals
 local api = vim.api
-local cmd = vim.cmd
 local map = vim.keymap.set
-local lsp = vim.lsp
 local global_opt = vim.opt_global
 local diag = vim.diagnostic
 
@@ -118,13 +116,6 @@ require('goto-preview').setup {
 }
 
 
-
-local virtual_text = false
-diag.config({ virtual_text = virtual_text })
-map("n", "<leader>jt", function()
-    virtual_text = not virtual_text
-    diag.config({ virtual_text = virtual_text })
-end, { desc = "toggle virtual text" })
 map("n", "k", function()
     diag.open_float()
 end, { desc = "show diagnostic under the cursor" })
@@ -172,7 +163,8 @@ require("gitlinker").setup()
 require("local/trouble").setup()
 local telescope = require("local/telescope").setup()
 require("local/noice").setup(telescope.core)
-require("local/lsp").setup(telescope.core, telescope.builtin, navic, next_integrations, tsserver_path, typescript_path,
+local lsp = require("local/lsp").setup(telescope.core, telescope.builtin, navic, next_integrations, tsserver_path,
+    typescript_path,
     metals_binary_path, coursier_path)
 require("local/gitsigns").setup(next_integrations)
 require("local/cmp").setup()
@@ -181,3 +173,4 @@ require("local/treesitter").setup(next_integrations)
 require("local/neoscroll").setup()
 require("local/smart-split").setup()
 require("local/dial").setup()
+require("local/hydra").setup(lsp)
