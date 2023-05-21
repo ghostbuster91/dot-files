@@ -109,7 +109,7 @@ in
             tree-sitter-typescript
             tree-sitter-c
             tree-sitter-java
-            tree-sitter-scala
+            pkgs.tree-sitter-scala-master
             tree-sitter-query # for the tree-sitter itself
             tree-sitter-python
             tree-sitter-go
