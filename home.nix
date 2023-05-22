@@ -115,6 +115,7 @@
     kooha # screen recorder
     clapper # video player
     asciinema # terminal recorder
+    powertop
   ];
 
   programs = {
