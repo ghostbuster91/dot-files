@@ -33,6 +33,9 @@ in
   # boot.loader.grub.device = "nodev"; # or "nodev" for efi only
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 20;
+  boot.kernelParams = [
+    "acpi_mask_gpe=0x6F"
+  ];
 
   networking = {
     hostId = "d1084363";
