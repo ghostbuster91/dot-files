@@ -34,7 +34,7 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 20;
   boot.kernelParams = [
-    "acpi_mask_gpe=0x6F"
+    "tpm_tis.interrupts=0"
   ];
 
   networking = {
