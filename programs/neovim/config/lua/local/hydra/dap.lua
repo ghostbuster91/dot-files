@@ -3,7 +3,7 @@ local map = vim.keymap.set
 local setup = function(hydra, lsp)
     local hint = [[
  _n_: step over   _s_: Continue/Start   _t_: Breakpoint     _K_: Eval
- _i_: step into   _x_: Quit             _b_: Breakpoint     ^ ^
+ _i_: step into   _x_: Quit             _b_: Breakpoint     _r_: toggle repl
  _o_: step out    _X_: Stop             _l_: run last
  _c_: to cursor   _u_: toggle UI
  ^
@@ -41,6 +41,7 @@ local setup = function(hydra, lsp)
                     { 'b', dap.set_breakpoint,    { silent = true } },
                     { 'l', dap.run_last,          { silent = true } },
                     { 'K', dap.hover,             { silent = true } },
+                    { 'r', dap.hover,             { silent = true } },
                     { 'q', nil, {
                         exit = true,
                         nowait = true
@@ -55,7 +56,7 @@ local setup = function(hydra, lsp)
             end
 
             map({ 'n' }, "<leader>da", function()
-                dap.run_and_attach()
+                dap.continue()
                 hydra.spawn('dap-hydra')
             end, { buffer = bufnr, desc = "Attach debugger" })
         end
