@@ -278,11 +278,11 @@
     "p_nvim-next": {
       "flake": false,
       "locked": {
-        "lastModified": 1683458655,
-        "narHash": "sha256-M4AGOkVw5lU3WAUxnOMQVAquENqtgdIYrqxgKWGwQNk=",
+        "lastModified": 1684822885,
+        "narHash": "sha256-2NwRSLz0yGaMalY0FWkPMqxYHbY5Bu3rhewZ5IBfz6o=",
         "owner": "ghostbuster91",
         "repo": "nvim-next",
-        "rev": "ca196c487d3425050afb03e7cb54eb10ba0670b0",
+        "rev": "2f74bf8e0c62b1414107fe5f9f4ad10bbf409819",
         "type": "github"
       },
       "original": {
