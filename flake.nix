@@ -19,6 +19,10 @@
         url = "github:guibou/nixGL";
         inputs.nixpkgs.follows = "nixpkgs";
       };
+      nix-metals = {
+        url = "github:ghostbuster91/nix-metals/stable";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
       # Neovim plugins
       p_nvim-actions-preview = {
         url = "github:aznhe21/actions-preview.nvim";
@@ -64,6 +68,7 @@
       openconnectOverlay = import "${inputs.openconnect-sso}/overlay.nix";
       overlays = import ./overlays {
         inherit inputs;
+        inherit system;
       };
 
       pkgs-unstable = import nixpkgs-unstable {
