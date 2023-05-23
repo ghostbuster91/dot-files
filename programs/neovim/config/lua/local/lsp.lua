@@ -110,11 +110,6 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, t
         end, "lsp references")
         mapB("n", "<leader>sh", lsp.buf.signature_help, "lsp signature")
 
-        local nndiag = next_integrations.diagnostic()
-        mapB("n", "[d", nndiag.goto_prev({ wrap = false, severity = { min = diag.severity.WARN } }),
-            "previous diagnostic")
-        mapB("n", "]d", nndiag.goto_next({ wrap = false, severity = { min = diag.severity.WARN } }), "next diagnostic")
-
         if client.server_capabilities.documentFormattingProvider then
             local augroup = api.nvim_create_augroup('LspFormatting', { clear = true })
             api.nvim_create_autocmd('BufWritePre', {

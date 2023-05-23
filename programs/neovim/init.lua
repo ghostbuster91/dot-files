@@ -146,17 +146,22 @@ local next_move = require("nvim-next.move")
 local prev_qf_item, next_qf_item = next_move.make_repeatable_pair(function(_)
     local status, err = pcall(vim.cmd, "cprevious")
     if not status then
-        vim.notify("No more items", vim.log.levels.INFO)
+        vim.notify("No more items", vim.log.levels.INFO, { title = "Quickfix" })
     end
 end, function(_)
     local status, err = pcall(vim.cmd, "cnext")
     if not status then
-        vim.notify("No more items", vim.log.levels.INFO)
+        vim.notify("No more items", vim.log.levels.INFO, { title = "Quickfix" })
     end
 end)
 
 map("n", "]q", next_qf_item, { desc = "nvim-next: next qfix" })
 map("n", "[q", prev_qf_item, { desc = "nvim-next: prev qfix" })
+
+local nndiag = next_integrations.diagnostic()
+map("n", "[d", nndiag.goto_prev({ wrap = false, severity = { min = diag.severity.WARN } }),
+    { desc = "previous diagnostic" })
+map("n", "]d", nndiag.goto_next({ wrap = false, severity = { min = diag.severity.WARN } }), { desc = "next diagnostic" })
 
 require("gitlinker").setup()
 
