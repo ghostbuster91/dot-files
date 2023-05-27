@@ -73,11 +73,11 @@
     },
     "hardware": {
       "locked": {
-        "lastModified": 1683474550,
-        "narHash": "sha256-wo/5pIGkvHPxnvNI9Qovie7ETuDk8FIe9x1VITlIF5A=",
+        "lastModified": 1683963203,
+        "narHash": "sha256-WzaLX+BKUfTV2OUCZ6kIVoefnUn7lkxwqHeurDZuPaw=",
         "owner": "ghostbuster91",
         "repo": "nixos-hardware",
-        "rev": "dbe2d8e66f3e00a342c1e445e2c26d31bb9b9c9c",
+        "rev": "e39036d599ad51d6a3f77f7e96bfa630f4991410",
         "type": "github"
       },
       "original": {
