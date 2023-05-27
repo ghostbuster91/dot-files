@@ -21,7 +21,7 @@ in
         local tsserver_path = "${pkgs-unstable.nodePackages.typescript-language-server}/bin/typescript-language-server"
         local typescript_path = "${pkgs-unstable.nodePackages.typescript}/lib/node_modules/typescript/lib"
         local metals_binary_path = "${pkgs-unstable.metals}/bin/metals"
-        local coursier_path = "${pkgs-unstable.coursier}/bin/cs"
+        local smithy_ls_path = "${pkgs-unstable.disney-smithy-ls}/bin/smithy_ls"
         ${builtins.readFile ./init.lua}
       EOF
     '';

@@ -4,7 +4,7 @@ local lsp = vim.lsp
 local diag = vim.diagnostic
 
 local setup = function(telescope, telescope_builtin, navic, next_integrations, tsserver_path, typescript_path,
-                       metals_binary_path, coursier_path)
+                       metals_binary_path, smithy_ls_path)
     local M = {
         on_attach_dap_subscribers = {}
     }
@@ -380,16 +380,14 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, t
     metals_config.handlers = { ['metals/status'] = metals_status_handler }
 
     -- metals end
-    vim.cmd([[au BufRead,BufNewFile *.smithy setfiletype smithy]])
 
     lspconfig.smithy_ls.setup {
         capabilities = capabilities,
         on_attach = function(client, bufnr)
             on_attach(client, bufnr)
         end,
-        cmd = { coursier_path, 'launch', 'com.disneystreaming.smithy:smithy-language-server:0.0.20',
-            '--', '0' },
-        root_dir = lspconfig.util.root_pattern("smithy-build.json")
+        cmd = { smithy_ls_path, '0' },
+        root_dir = lspconfig.util.root_pattern("smithy-build.json", ".git")
     }
 
     return M

@@ -23,6 +23,10 @@
         url = "github:ghostbuster91/nix-metals/stable";
         inputs.nixpkgs.follows = "nixpkgs";
       };
+      nix-smithy-ls = {
+        url = "github:ghostbuster91/nix-smithy-ls";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
       # Neovim plugins
       p_nvim-actions-preview = {
         url = "github:aznhe21/actions-preview.nvim";

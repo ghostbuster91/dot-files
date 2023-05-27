@@ -10,6 +10,7 @@ global_opt.timeoutlen = 200
 
 local next_integrations = require("nvim-next.integrations")
 
+vim.cmd([[au BufRead,BufNewFile *.smithy setfiletype smithy]])
 -- Saving files as root with w!! {
 map("c", "w!!", "%!sudo tee > /dev/null %", { noremap = true })
 -- }
@@ -170,7 +171,7 @@ local telescope = require("local/telescope").setup()
 require("local/noice").setup(telescope.core)
 local lsp = require("local/lsp").setup(telescope.core, telescope.builtin, navic, next_integrations, tsserver_path,
     typescript_path,
-    metals_binary_path, coursier_path)
+    metals_binary_path, smithy_ls_path)
 require("local/gitsigns").setup(next_integrations)
 require("local/cmp").setup()
 require("local/lualine").setup(navic)

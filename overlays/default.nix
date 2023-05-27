@@ -6,6 +6,7 @@ in
 {
   #alacritty = import ./alacritty.nix { inherit (inputs) nixGL; pkgs = super; };
   inherit (inputs.nix-metals.packages.${system}) metals;
+  inherit (inputs.nix-smithy-ls.packages.${system}) disney-smithy-ls;
   google-chrome = import ./chrome.nix { pkgs = super; };
   tree-sitter-scala-master =
     import ./treesitter-scala.nix { pkgs = super; };
