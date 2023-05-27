@@ -116,6 +116,7 @@
     clapper # video player
     asciinema # terminal recorder
     powertop
+    signal-desktop
   ];
 
   programs = {
