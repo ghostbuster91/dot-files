@@ -137,7 +137,7 @@ in
 
       nvim-neoclip-lua
       indent-blankline-nvim
-      nvim-tree-lua
+      neo-tree-nvim
       vim-tmux-clipboard
       telescope-ui-select-nvim
       noice-nvim

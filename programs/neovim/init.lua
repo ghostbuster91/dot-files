@@ -68,19 +68,19 @@ map("n", '<leader>"', require("telescope").extensions.neoclip.star, { desc = "cl
 
 require("indent_blankline").setup()
 
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-require("nvim-tree").setup({
-    view = {
-        adaptive_size = true,
-    },
-})
-map("n", '<leader>et', function()
-    require("nvim-tree.api").tree.toggle(true, true)
-end, { desc = "nvim_tree toggle" })
-map("n", '<leader>ef', function()
-    require("nvim-tree.api").tree.find_file(false, true)
-end, { desc = "nvim_tree toggle" })
+-- vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrwPlugin = 1
+-- require("nvim-tree").setup({
+--     view = {
+--         adaptive_size = true,
+--     },
+-- })
+-- map("n", '<leader>et', function()
+--     require("nvim-tree.api").tree.toggle(true, true)
+-- end, { desc = "nvim_tree toggle" })
+-- map("n", '<leader>ef', function()
+--     require("nvim-tree.api").tree.find_file(false, true)
+-- end, { desc = "nvim_tree toggle" })
 
 
 require("fidget").setup({
@@ -113,7 +113,7 @@ map("n", '<leader>n', function()
 end, { desc = "neogit" })
 
 require('goto-preview').setup {
-    default_mappings = true,
+    default_mappings = false,
 }
 
 
@@ -180,3 +180,4 @@ require("local/neoscroll").setup()
 require("local/smart-split").setup()
 require("local/dial").setup()
 require("local/hydra").setup(lsp)
+require("local/neotree").setup()
