@@ -5,6 +5,7 @@ local setup = function()
     -- nvim-cmp setup
     local lspkind = require("lspkind")
     local cmp = require("cmp")
+    local compare = require('cmp.config.compare')
     cmp.setup({
         snippet = {
             expand = function(args)
@@ -57,6 +58,24 @@ local setup = function()
             { name = 'tmux',     priority = 8 },
             { name = "luasnip" },
             { name = "path" },
+        },
+        preselect = cmp.PreselectMode.None, -- disable preselection
+        sorting = {
+            priority_weight = 2,
+            comparators = {
+                compare.offset,    -- we still want offset to be higher to order after 3rd letter
+                compare.score,     -- same as above
+                compare.sort_text, -- add higher precedence for sort_text, it must be above `kind`
+                compare.recently_used,
+                compare.kind,
+                compare.length,
+                compare.order,
+            },
+        },
+        -- if you want to add preselection you have to set completeopt to new values
+        completion = {
+            -- completeopt = 'menu,menuone,noselect', <---- this is default value,
+            completeopt = 'menu,menuone', -- remove noselect
         },
     })
     return cmp
