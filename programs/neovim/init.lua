@@ -113,7 +113,7 @@ map("n", '<leader>n', function()
 end, { desc = "neogit" })
 
 require('goto-preview').setup {
-    default_mappings = false,
+    default_mappings = true,
 }
 
 
