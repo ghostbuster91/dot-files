@@ -79,7 +79,6 @@
         inherit system;
         config.allowUnfree = true;
         overlays = [
-          (self: super: { derivations = import ./derivations { pkgs = super; inherit (pkgs) lib; }; })
           overlays
           openconnectOverlay
         ];

@@ -17,11 +17,7 @@
       pkgs-unstable.tmuxPlugins.better-mouse-mode
       {
         plugin = pkgs-unstable.tmux-onedark-theme;
-        extraConfig = ''
-          set -g @onedark_widgets "#{prefix_highlight} #{free_mem}"
-        '';
       }
-      pkgs-unstable.derivations.tmux-status-variable
       {
         plugin = pkgs-unstable.tmuxPlugins.prefix-highlight;
         extraConfig = ''
@@ -112,6 +108,11 @@
       set -g pane-active-border-style 'fg=colour39,bg=colour236'
 
       bind a next-layout
+      onedark_black="#282c34"
+      onedark_green="#98c379"
+      onedark_visual_grey="#3e4452"
+      onedark_white="#aab2bf"
+      set -g status-right "#[fg=$onedark_white,bg=$onedark_black] #(${pkgs-unstable.tmux-mem-cpu-load}/bin/tmux-mem-cpu-load -g 5 --interval 2) #[fg=$onedark_green,bg=$onedark_black]"
     '';
   };
 }
