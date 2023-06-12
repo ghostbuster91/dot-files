@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, username, lib, ... }:
+{ config, pkgs, username, pkgs-unstable, lib, ... }:
 let
   customFonts = pkgs.nerdfonts.override {
     fonts = [
@@ -157,7 +157,7 @@ in
   users.users.kghost = {
     isNormalUser = true;
     extraGroups = [ "wheel" "audio" "networkmanager" ]; # Enable ‘sudo’ for the user.
-    shell = pkgs.zsh;
+    shell = pkgs-unstable.zsh;
   };
 
   # List packages installed in system profile. To search, run:
@@ -173,6 +173,7 @@ in
     glxinfo
     libva-utils
   ];
+  programs.zsh.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

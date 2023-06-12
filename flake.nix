@@ -4,7 +4,7 @@
   inputs =
     {
       nix.url = "github:nixos/nix/2.11-maintenance";
-      nixpkgs.url = "github:nixos/nixpkgs/nixos-22.11";
+      nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
       nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
       disko = {
         url = "github:nix-community/disko";
@@ -12,7 +12,7 @@
       };
       hardware.url = "github:nixos/nixos-hardware/master";
       home-manager = {
-        url = "github:nix-community/home-manager/release-22.11";
+        url = "github:nix-community/home-manager/release-23.05";
         inputs.nixpkgs.follows = "nixpkgs";
       };
       nixGL = {
@@ -131,7 +131,7 @@
             nix.registry.nixpkgs.flake = inputs.nixpkgs;
           }
         ];
-        specialArgs = { inherit username; };
+        specialArgs = { inherit username; inherit pkgs-unstable; };
       };
 
       checks.${system} =

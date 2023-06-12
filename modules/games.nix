@@ -13,11 +13,16 @@
     steamtinkerlaunch
     proton-caller
     protontricks
-    # protonup-qt
+    protonup-qt
     steam-run
     gamescope
     gamemode
     lutris
+
+    mangohud
+    protonup
+    vulkan-tools
+    winetricks
   ];
 
 }
