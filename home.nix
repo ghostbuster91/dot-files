@@ -65,8 +65,6 @@
 
   home.packages = with pkgs-unstable; [
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
-    diff-so-fancy # pretty diffs
-    git-gone # get rid of orphan local branches
     bat # better cat
     tokei # better cloc
     xsv # csv manipulation
