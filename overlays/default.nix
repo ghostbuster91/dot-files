@@ -4,7 +4,6 @@ let
   nvimPlugins = import ./nvimPlugins.nix { pkgs = super; inherit inputs; };
 in
 {
-  #alacritty = import ./alacritty.nix { inherit (inputs) nixGL; pkgs = super; };
   inherit (inputs.nix-metals.packages.${system}) metals;
   inherit (inputs.nix-smithy-ls.packages.${system}) disney-smithy-ls;
   google-chrome = import ./chrome.nix { pkgs = super; };
@@ -13,7 +12,6 @@ in
   nvim-treesitter-textobjects =
     import ./nvim-treesitter-textobjects.nix { pkgs = super; };
   vimPlugins = super.vimPlugins // nvimPlugins;
-  tmux-onedark-theme = import ./tmux-onedark-theme.nix { pkgs = super; };
 } 
 
 

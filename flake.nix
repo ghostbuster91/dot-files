@@ -15,10 +15,6 @@
         url = "github:nix-community/home-manager/release-23.05";
         inputs.nixpkgs.follows = "nixpkgs";
       };
-      nixGL = {
-        url = "github:guibou/nixGL";
-        inputs.nixpkgs.follows = "nixpkgs";
-      };
       nix-metals = {
         url = "github:ghostbuster91/nix-metals/stable";
         inputs.nixpkgs.follows = "nixpkgs";
@@ -64,7 +60,7 @@
       };
     };
 
-  outputs = inputs @ { home-manager, nixpkgs-unstable, nixGL, nixpkgs, disko, hardware, ... }:
+  outputs = inputs @ { home-manager, nixpkgs-unstable, nixpkgs, disko, hardware, ... }:
     let
       system = "x86_64-linux";
       username = "kghost";
@@ -90,26 +86,6 @@
       inherit (inputs.nixpkgs.lib) mapAttrs;
     in
     rec {
-      homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        extraSpecialArgs = {
-          inherit inputs;
-          inherit username;
-          inherit pkgs-unstable;
-        };
-
-        modules = [
-          ./home.nix
-          {
-            home = {
-              inherit username;
-              homeDirectory = "/home/${username}";
-              stateVersion = "22.05";
-            };
-          }
-        ];
-      };
-
       nixosConfigurations.focus = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
@@ -137,9 +113,8 @@
       checks.${system} =
         let
           os = mapAttrs (_: c: c.config.system.build.toplevel) nixosConfigurations;
-          hm = mapAttrs (_: c: c.activationPackage) homeConfigurations;
         in
-        os // hm;
+        os;
 
       formatter.${system} = pkgs-unstable.nixpkgs-fmt;
     };

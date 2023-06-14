@@ -1,4 +1,8 @@
-{ pkgs, config, pkgs-unstable, ... }: {
+{ pkgs, config, pkgs-unstable, ... }:
+let
+  onedark-theme = import ./tmux-onedark-theme.nix { inherit pkgs; };
+in
+{
   programs.tmux = {
     enable = true;
     package = pkgs-unstable.tmux;
@@ -15,9 +19,7 @@
         '';
       }
       pkgs-unstable.tmuxPlugins.better-mouse-mode
-      {
-        plugin = pkgs-unstable.tmux-onedark-theme;
-      }
+      onedark-theme
       {
         plugin = pkgs-unstable.tmuxPlugins.prefix-highlight;
         extraConfig = ''
