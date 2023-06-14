@@ -49,34 +49,11 @@ in
           colorscheme kanagawa
         '';
       }
-      {
-        plugin = telescope-nvim;
-        config = ''
-          "It has to be set in the first plugin's config as plugins get sourced before any other configuration and the leader customization doesn't work otherwise
-          let mapleader = "${leaderKey}" 
-          nnoremap <Leader>tf <cmd>Telescope find_files<cr>
-          nnoremap <Leader>th <cmd>Telescope buffers<cr>
-          nnoremap <Leader>gh <cmd>lua require('telescope.builtin').git_commits()<cr>
-
-          lua << EOF
-              vim.keymap.set("n", "<leader>hc", function()
-                require("telescope.builtin").git_bcommits()
-              end, { desc = "Buffer commites"})
-              vim.keymap.set("n", "<leader>tg", function()
-                require("telescope.builtin").live_grep({ layout_strategy = "vertical" })
-              end, { desc = "Live grep"})
-          EOF
-        '';
-      }
+      telescope-nvim
       telescope-fzf-native-nvim
       which-key-nvim
       nvim-autopairs
-      {
-        plugin = vim-sandwich;
-        #config = ''
-        #  runtime macros/sandwich/keymap/surround.vim
-        #'';
-      }
+      vim-sandwich
       gitsigns-nvim
       plenary-nvim
 
@@ -191,15 +168,7 @@ in
         '';
       }
       nvim-bqf
-      {
-        plugin = telescope-undo-nvim;
-        config = ''
-          lua <<EOF
-            require("telescope").load_extension("undo")
-            vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
-          EOF
-        '';
-      }
+      telescope-undo-nvim
       dial-nvim
       p_nvim-lsp-inlayhints
       p_nvim-smart-splits-nvim
