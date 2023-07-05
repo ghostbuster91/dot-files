@@ -49,7 +49,7 @@
         flake = false;
       };
       p_nvim-smart-splits-nvim = {
-        url = "github:ghostbuster91/smart-splits.nvim";
+        url = "github:mrjones2014/smart-splits.nvim";
         flake = false;
       };
 

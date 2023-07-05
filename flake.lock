@@ -352,15 +352,15 @@
     "p_nvim-smart-splits-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1680973308,
-        "narHash": "sha256-/ld8d3zXc0GzxS9PmCb8IIvgg6kS/EQC9l9T2/BsfPo=",
-        "owner": "ghostbuster91",
+        "lastModified": 1687779152,
+        "narHash": "sha256-mLLh8rcq5D6dA9Iwn3ULiHRG/jI4Sjct4J498C+QPO8=",
+        "owner": "mrjones2014",
         "repo": "smart-splits.nvim",
-        "rev": "8f21a6f684731e43c1b8dfad5c32acb4f3bf11c2",
+        "rev": "7aad6019dee974a01333523a5b8e122b7e7da454",
         "type": "github"
       },
       "original": {
-        "owner": "ghostbuster91",
+        "owner": "mrjones2014",
         "repo": "smart-splits.nvim",
         "type": "github"
       }
