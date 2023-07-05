@@ -1,4 +1,27 @@
-{ pkgs, config, lib, pkgs-unstable, ... }: {
+{ pkgs, config, lib, pkgs-unstable, ... }:
+let
+  omz = "${pkgs-unstable.oh-my-zsh}/share/oh-my-zsh/";
+  z-rupa = pkgs.fetchFromGitHub {
+    owner = "ghostbuster91";
+    repo = "z";
+    rev = "b82ac78a2d4457d2ca09973332638f123f065fd1";
+    hash = "sha256-4jMHh1GVRdFNjUjiPH94vewbfLcah7Agu153zjVNE14=";
+  };
+  z-fz = pkgs.fetchFromGitHub {
+    owner = "ghostbuster91";
+    repo = "fz.sh";
+    rev = "7b4e215f5887b24e1ef725ffdb89f3479e913875";
+    hash = "sha256-H+E4Eh7ms8NRQ+JHkj3ynne/pg7MWXOTYVp5baI58aM=";
+  };
+  zsh-autopair = pkgs.fetchFromGitHub {
+    owner = "hlissner";
+    repo = "zsh-autopair";
+    rev = "396c38a7468458ba29011f2ad4112e4fd35f78e6";
+    hash = "sha256-PXHxPxFeoYXYMOC29YQKDdMnqTO0toyA7eJTSCV6PGE=";
+  };
+
+in
+{
   programs.starship = import ./starship.nix { inherit lib; };
   programs.zsh = {
     enable = true;
@@ -21,60 +44,64 @@
         src = pkgs-unstable.zsh-nix-shell;
         file = "share/zsh-nix-shell/nix-shell.plugin.zsh";
       }
+      {
+        name = "fzf-tab";
+        src = "${pkgs.zsh-fzf-tab}/share/fzf-tab";
+      }
+      {
+        name = "zsh-you-should-use";
+        src = pkgs.zsh-you-should-use;
+        file = "share/zsh/plugins/you-should-use/you-should-use.plugin.zsh";
+      }
+      {
+        name = "zsh-nix-shell";
+        src = pkgs.zsh-nix-shell;
+        file = "share/zsh-nix-shell/nix-shell.plugin.zsh";
+      }
+      {
+        name = "omz-common-aliases";
+        src = omz;
+        file = "plugins/common-aliases/common-aliases.plugin.zsh";
+      }
+      {
+        name = "omz-git";
+        src = omz;
+        file = "plugins/git/git.plugin.zsh";
+      }
+      {
+        name = "omz-extract";
+        src = omz;
+        file = "plugins/extract/extract.plugin.zsh";
+      }
+      {
+        name = "zsh-forgit";
+        src = pkgs.zsh-forgit;
+        file = "share/zsh/zsh-forgit/forgit.plugin.zsh";
+      }
+      {
+        name = "omz-tmux";
+        src = omz;
+        file = "plugins/tmux/tmux.plugin.zsh";
+      }
+      {
+        name = "z-rupa";
+        src = z-rupa;
+        file = "z.sh";
+      }
+      {
+        name = "z-fz";
+        src = z-fz;
+        file = "fz.plugin.zsh";
+      }
+      {
+        name = "zsh-autopair";
+        src = zsh-autopair;
+        file = "zsh-autopair.plugin.zsh";
+      }
     ];
-    zplug = {
-      enable = true;
-      plugins = [
-        {
-          name = "plugins/common-aliases";
-          tags =
-            [ "from:oh-my-zsh" "at:904f8685f75ff5dd3f544f8c6f2cabb8e5952e9a" ];
-        }
-        {
-          name = "plugins/git";
-          tags =
-            [ "from:oh-my-zsh" "at:904f8685f75ff5dd3f544f8c6f2cabb8e5952e9a" ];
-        }
-        {
-          name = "plugins/extract";
-          tags =
-            [ "from:oh-my-zsh" "at:904f8685f75ff5dd3f544f8c6f2cabb8e5952e9a" ];
-        }
-        {
-          name = "plugins/docker";
-          tags =
-            [ "from:oh-my-zsh" "at:904f8685f75ff5dd3f544f8c6f2cabb8e5952e9a" ];
-        }
-        {
-          name = "plugins/docker-compose";
-          tags =
-            [ "from:oh-my-zsh" "at:904f8685f75ff5dd3f544f8c6f2cabb8e5952e9a" ];
-        }
-        {
-          name = "rupa/z";
-          tags = [ "use:z.sh" "at:v1.11" ];
-        }
-        {
-          name = "changyuheng/fz";
-          tags = [ "defer:1" "at:2a4c1bc73664bb938bfcc7c99f473d0065f9dbfd" ];
-        }
-        {
-          name = "hlissner/zsh-autopair";
-          tags = [ "at:9d003fc02dbaa6db06e6b12e8c271398478e0b5d" "defer:2" ];
-        }
-        {
-          name = "wfxr/forgit";
-          tags = [ "at:7b26cd46ac768af51b8dd4b84b6567c4e1c19642" "defer:1" ];
-        }
-        {
-          name = "plugins/tmux";
-          tags =
-            [ "from:oh-my-zsh" "at:904f8685f75ff5dd3f544f8c6f2cabb8e5952e9a" ];
-        }
-      ];
-    };
     initExtraFirst = ''
-      	ZSH_TMUX_CONFIG=${config.xdg.configHome}/tmux/tmux.conf
+      zmodload zsh/zprof
+      ZSH_TMUX_CONFIG=${config.xdg.configHome}/tmux/tmux.conf
     '';
     initExtraBeforeCompInit = ''
       # fix delete key
