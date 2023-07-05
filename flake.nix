@@ -105,6 +105,7 @@
           # flake registry
           {
             nix.registry.nixpkgs.flake = inputs.nixpkgs;
+            nix.nixPath = [ "nixpkgs=flake:nixpkgs" ];
           }
         ];
         specialArgs = { inherit username; inherit pkgs-unstable; };

@@ -103,6 +103,8 @@ in
   services.xserver.desktopManager.gnome.enable = true;
   services.xserver.displayManager.gdm.wayland = true;
   services.xserver.displayManager.defaultSession = "gnome";
+
+  users.groups.plugdev = { }; # needed for qmk-udev-rules
   services.udev.packages = with pkgs; [
     gnome.gnome-settings-daemon
     qmk-udev-rules
@@ -156,7 +158,7 @@ in
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.kghost = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "audio" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "audio" "networkmanager" "plugdev" ]; # Enable ‘sudo’ for the user.
     shell = pkgs-unstable.zsh;
   };
 
@@ -254,6 +256,4 @@ in
     fi
   '';
 }
-
-
 
