@@ -11,9 +11,6 @@ global_opt.timeoutlen = 200
 local next_integrations = require("nvim-next.integrations")
 
 vim.cmd([[au BufRead,BufNewFile *.smithy setfiletype smithy]])
--- Saving files as root with w!! {
-map("c", "w!!", "%!sudo tee > /dev/null %", { noremap = true })
--- }
 
 -- <CTRL> + a and <CTRL> + e move to the beginning and the end of the line
 map("c", "<C-a>", "<HOME>", { noremap = true })
