@@ -28,10 +28,6 @@
         url = "github:aznhe21/actions-preview.nvim";
         flake = false;
       };
-      p_nvim-lsp-inlayhints = {
-        url = "github:lvimuser/lsp-inlayhints.nvim";
-        flake = false;
-      };
       p_nvim-leap = {
         url = "github:ggandor/leap.nvim";
         flake = false;

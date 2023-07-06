@@ -23,34 +23,30 @@ local setup = function()
         }
     })
 
-    local telescope_builtin = require('telescope.builtin')
-    map("n", "<Leader>/", telescope_builtin.commands, { noremap = true, desc = "show commands" })
+    local builtin = require('telescope.builtin')
+    map("n", "<Leader>/", builtin.commands, { noremap = true, desc = "show commands" })
     map(
         "n",
         "<Leader>gwd",
         function()
-            telescope_builtin.diagnostics({ layout_strategy = "vertical" })
+            builtin.diagnostics({ layout_strategy = "vertical" })
         end,
         { desc = "diagnostics" }
     )
 
     map("n", "<leader>hc", function()
-        require("telescope.builtin").git_bcommits()
+        builtin.git_bcommits()
     end, { desc = "Buffer commites" })
     map("n", "<leader>tg", function()
-        require("telescope.builtin").live_grep({ layout_strategy = "vertical" })
+        builtin.live_grep({ layout_strategy = "vertical" })
     end, { desc = "Live grep" })
-
-    map("n", "<leader>gh", function()
-        require("telescope.builtin").git_commits()
-    end, { desc = "Commites" })
-    map("n", "<leader>tf", function()
-        require("telescope.builtin").find_files()
-    end, { desc = "Files" })
-    map("n", "<leader>th", function()
-        require("telescope.builtin").buffers()
-    end, { desc = "Buffers" })
-
+    map("n", "<leader>gh", builtin.git_commits, { desc = "Commites" })
+    map("n", "<leader>ts", builtin.git_status, { desc = "Git status" })
+    map("n", "<leader>tt", builtin.git_files, { desc = "Git files" })
+    map("n", "<leader>tf", builtin.find_files, { desc = "Files" })
+    map("n", "<leader>th", builtin.buffers, { desc = "Buffers" })
+    map('n', '<leader>hh', builtin.help_tags, { desc = "Help tags" })
+    map('n', '<leader>tr', builtin.resume, { desc = "Telescope resume" })
 
     telescope.load_extension("fzf")
     telescope.load_extension("ui-select")
@@ -58,7 +54,7 @@ local setup = function()
     map("n", "<leader>u", "<cmd>Telescope undo<cr>")
     return {
         core = telescope,
-        builtin = telescope_builtin
+        builtin = builtin
     }
 end
 

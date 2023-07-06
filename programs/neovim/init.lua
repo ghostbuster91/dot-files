@@ -108,7 +108,7 @@ neogit.setup {
         diffview = true
     }
 }
-map("n", '<leader>n', function()
+map("n", '<leader>nn', function()
     neogit.open()
 end, { desc = "neogit" })
 

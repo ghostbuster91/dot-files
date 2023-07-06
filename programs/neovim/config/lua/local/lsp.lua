@@ -61,7 +61,6 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, t
     })
     local lspconfig = require("lspconfig")
 
-    require("lsp-inlayhints").setup()
     -- Use an on_attach function to only map the following keys
     -- after the language server attaches to the current buffer
     local lsp_group = api.nvim_create_augroup("lsp", { clear = true })
@@ -69,7 +68,6 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, t
         if client.server_capabilities.documentSymbolProvider then
             navic.attach(client, bufnr)
         end
-        require("lsp-inlayhints").on_attach(client, bufnr)
         local function mapB(mode, l, r, desc)
             local opts = { noremap = true, silent = true, buffer = bufnr, desc = desc }
             map(mode, l, r, opts)
@@ -82,31 +80,30 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, t
         mapB("n", "<leader>gD", function()
             lsp.buf.declaration({ layout_strategy = "vertical" })
         end, "lsp goto declaration")
-        mapB("n", "<leader>gd", function()
-            telescope_builtin.lsp_definitions({ layout_strategy = "vertical" })
+        mapB("n", "<leader>nd", function()
+            telescope_builtin.lsp_definitions({ layout_strategy = "vertical", fname_width = 60 })
         end, "lsp goto definition")
-        mapB("n", "<leader>gi", function()
-            telescope_builtin.lsp_implementations({ layout_strategy = "vertical" })
+        mapB("n", "<leader>ni", function()
+            telescope_builtin.lsp_implementations({ layout_strategy = "vertical", fname_width = 60 })
         end, "lsp goto implementation")
         mapB("n", "<leader>f", lsp.buf.format, "lsp format")
-        mapB("n", "<leader>gs", function()
-            telescope_builtin.lsp_document_symbols({ layout_strategy = "vertical" })
+        mapB("n", "<leader>nt", function()
+            telescope_builtin.lsp_document_symbols({ layout_strategy = "vertical", fname_width = 60 })
         end, "lsp document symbols")
         map(
             "n",
-            "<Leader>gws",
+            "<Leader>ns",
             function()
-                telescope_builtin.lsp_dynamic_workspace_symbols({ layout_strategy = "vertical" })
+                telescope_builtin.lsp_dynamic_workspace_symbols({ layout_strategy = "vertical", fname_width = 60 })
             end,
             { desc = "lsp workspace symbols" }
         )
         mapB({ "v", "n" }, "<leader>ca", require("actions-preview").code_actions)
         mapB("n", "<leader>cl", lsp.codelens.run)
-        mapB("n", "<leader>ch", require('lsp-inlayhints').toggle, "lsp: toggle inlayhints")
 
         mapB("n", "K", lsp.buf.hover, "lsp hover")
-        mapB("n", "<Leader>gr", function()
-            telescope_builtin.lsp_references({ layout_strategy = "vertical" })
+        mapB("n", "<Leader>nr", function()
+            telescope_builtin.lsp_references({ layout_strategy = "vertical", fname_width = 60 })
         end, "lsp references")
         mapB("n", "<leader>sh", lsp.buf.signature_help, "lsp signature")
 

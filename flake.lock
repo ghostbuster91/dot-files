@@ -285,22 +285,6 @@
         "type": "github"
       }
     },
-    "p_nvim-lsp-inlayhints": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1674309348,
-        "narHash": "sha256-jjr9Tl2Ucg+zGJEnPMzExJBpsZt8nJ5qerbJpzTXoDs=",
-        "owner": "lvimuser",
-        "repo": "lsp-inlayhints.nvim",
-        "rev": "84ca3abe8aaecbb5b30ad89e4701d4a9c821b72c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "lvimuser",
-        "repo": "lsp-inlayhints.nvim",
-        "type": "github"
-      }
-    },
     "p_nvim-metals": {
       "flake": false,
       "locked": {
@@ -410,7 +394,6 @@
         "openconnect-sso": "openconnect-sso",
         "p_nvim-actions-preview": "p_nvim-actions-preview",
         "p_nvim-leap": "p_nvim-leap",
-        "p_nvim-lsp-inlayhints": "p_nvim-lsp-inlayhints",
         "p_nvim-metals": "p_nvim-metals",
         "p_nvim-neogit": "p_nvim-neogit",
         "p_nvim-next": "p_nvim-next",
