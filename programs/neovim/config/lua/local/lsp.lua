@@ -75,26 +75,27 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, t
 
         -- Mappings.
 
+        local vertical_layout = { layout_strategy = "vertical", fname_width = 80 }
         -- See `:help vim.lsp.*` for documentation on any of the below functions
         mapB("n", "<leader>rn", lsp.buf.rename, "lsp rename")
         mapB("n", "<leader>gD", function()
-            lsp.buf.declaration({ layout_strategy = "vertical" })
+            lsp.buf.declaration(vertical_layout)
         end, "lsp goto declaration")
         mapB("n", "<leader>nd", function()
-            telescope_builtin.lsp_definitions({ layout_strategy = "vertical", fname_width = 60 })
+            telescope_builtin.lsp_definitions(vertical_layout)
         end, "lsp goto definition")
         mapB("n", "<leader>ni", function()
-            telescope_builtin.lsp_implementations({ layout_strategy = "vertical", fname_width = 60 })
+            telescope_builtin.lsp_implementations(vertical_layout)
         end, "lsp goto implementation")
         mapB("n", "<leader>f", lsp.buf.format, "lsp format")
         mapB("n", "<leader>nt", function()
-            telescope_builtin.lsp_document_symbols({ layout_strategy = "vertical", fname_width = 60 })
+            telescope_builtin.lsp_document_symbols(vertical_layout)
         end, "lsp document symbols")
         map(
             "n",
             "<Leader>ns",
             function()
-                telescope_builtin.lsp_dynamic_workspace_symbols({ layout_strategy = "vertical", fname_width = 60 })
+                telescope_builtin.lsp_dynamic_workspace_symbols(vertical_layout)
             end,
             { desc = "lsp workspace symbols" }
         )
@@ -103,7 +104,7 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, t
 
         mapB("n", "K", lsp.buf.hover, "lsp hover")
         mapB("n", "<Leader>nr", function()
-            telescope_builtin.lsp_references({ layout_strategy = "vertical", fname_width = 60 })
+            telescope_builtin.lsp_references(vertical_layout)
         end, "lsp references")
         mapB("n", "<leader>sh", lsp.buf.signature_help, "lsp signature")
 
