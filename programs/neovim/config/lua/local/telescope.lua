@@ -11,6 +11,15 @@ local setup = function()
                 },
             },
         },
+        pickers = {
+            buffers = {
+                mappings = {
+                    i = {
+                        ["<c-d>"] = actions.delete_buffer + actions.move_to_top,
+                    }
+                }
+            }
+        },
         extensions = {
             ["ui-select"] = {
                 require("telescope.themes").get_dropdown {
