@@ -123,7 +123,7 @@ in
       nvim-lightbulb
       p_nvim-next
       neoscroll-nvim
-      neogit
+      p_nvim-neogit
       undotree
       # diffview-nvim
       goto-preview

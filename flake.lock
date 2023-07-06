@@ -317,6 +317,22 @@
         "type": "github"
       }
     },
+    "p_nvim-neogit": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1688574545,
+        "narHash": "sha256-1DEzVPHL+l8y2PHWcAg/bPBA+E/5riMa6pon3vvyQag=",
+        "owner": "NeogitOrg",
+        "repo": "neogit",
+        "rev": "72824006f2dcf775cc498cc4a046ddd2c99d20a3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NeogitOrg",
+        "repo": "neogit",
+        "type": "github"
+      }
+    },
     "p_nvim-next": {
       "flake": false,
       "locked": {
@@ -380,6 +396,7 @@
         "p_nvim-leap": "p_nvim-leap",
         "p_nvim-lsp-inlayhints": "p_nvim-lsp-inlayhints",
         "p_nvim-metals": "p_nvim-metals",
+        "p_nvim-neogit": "p_nvim-neogit",
         "p_nvim-next": "p_nvim-next",
         "p_nvim-portal": "p_nvim-portal",
         "p_nvim-smart-splits-nvim": "p_nvim-smart-splits-nvim"

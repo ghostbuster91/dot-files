@@ -52,6 +52,11 @@
         url = "github:mrjones2014/smart-splits.nvim";
         flake = false;
       };
+      p_nvim-neogit =
+        {
+          url = "github:NeogitOrg/neogit";
+          flake = false;
+        };
 
       # misc 
       openconnect-sso = {
