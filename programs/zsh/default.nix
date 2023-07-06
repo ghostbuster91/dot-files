@@ -74,6 +74,16 @@ in
         file = "plugins/extract/extract.plugin.zsh";
       }
       {
+        name = "omz-docker";
+        src = omz;
+        file = "plugins/docker/docker.plugin.zsh";
+      }
+      {
+        name = "omz-docker-compose";
+        src = omz;
+        file = "plugins/docker-compose/docker-compose.plugin.zsh";
+      }
+      {
         name = "zsh-forgit";
         src = pkgs.zsh-forgit;
         file = "share/zsh/zsh-forgit/forgit.plugin.zsh";
