@@ -57,6 +57,10 @@
           url = "github:NeogitOrg/neogit";
           flake = false;
         };
+      p_treesitter-scala = {
+        url = "github:tree-sitter/tree-sitter-scala";
+        flake = false;
+      };
 
       # misc 
       openconnect-sso = {

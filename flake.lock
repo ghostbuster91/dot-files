@@ -381,6 +381,22 @@
         "type": "github"
       }
     },
+    "p_treesitter-scala": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1688139280,
+        "narHash": "sha256-nCmQjLqunccXVgmNUMbMbm6SYuwCRtf1v2CFXrgKXqo=",
+        "owner": "tree-sitter",
+        "repo": "tree-sitter-scala",
+        "rev": "8062487fb3b7f3ce1bb7ce1fd1c84bed60c75203",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tree-sitter",
+        "repo": "tree-sitter-scala",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "disko": "disko",
@@ -399,7 +415,8 @@
         "p_nvim-neogit": "p_nvim-neogit",
         "p_nvim-next": "p_nvim-next",
         "p_nvim-portal": "p_nvim-portal",
-        "p_nvim-smart-splits-nvim": "p_nvim-smart-splits-nvim"
+        "p_nvim-smart-splits-nvim": "p_nvim-smart-splits-nvim",
+        "p_treesitter-scala": "p_treesitter-scala"
       }
     },
     "systems": {

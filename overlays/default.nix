@@ -8,7 +8,7 @@ in
   inherit (inputs.nix-smithy-ls.packages.${system}) disney-smithy-ls;
   google-chrome = import ./chrome.nix { pkgs = super; };
   tree-sitter-scala-master =
-    import ./treesitter-scala.nix { pkgs = super; };
+    import ./treesitter-scala.nix { pkgs = super; src = inputs.p_treesitter-scala; };
   nvim-treesitter-textobjects =
     import ./nvim-treesitter-textobjects.nix { pkgs = super; };
   vimPlugins = super.vimPlugins // nvimPlugins;
