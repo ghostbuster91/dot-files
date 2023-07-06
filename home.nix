@@ -85,8 +85,10 @@
     nix-tree
     nixfmt
     nix-prefetch
-    nurl
-    nvd
+    nurl # better prefetch
+    nvd # compare nix derivations
+    statix # nix linter
+    nix-output-monitor
 
     # Media
     youtube-dl
@@ -97,12 +99,11 @@
     neofetch
 
     xsel # for tmux-yank
+    unzip # also for vim
 
     sublime
     gh
     tig
-    statix # nix linter
-    nix-output-monitor
     slack
     zoom-us
     openconnect-sso
