@@ -61,7 +61,7 @@ require("Comment").setup()
 
 require("neoclip").setup()
 require("telescope").load_extension("neoclip")
-map("n", '<leader>"', require("telescope").extensions.neoclip.star, { desc = "clipboard" })
+map("n", "<leader>'", require("telescope").extensions.neoclip.star, { desc = "clipboard" })
 
 require("indent_blankline").setup()
 
