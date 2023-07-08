@@ -160,11 +160,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1685102590,
-        "narHash": "sha256-wI83UMaqp5KJZUz+pW9nmcCGLNdAfAN42axc+g+ybNg=",
+        "lastModified": 1685607599,
+        "narHash": "sha256-RliInBZD9z1bIlTDwE/XYC93dvPKQk5Vkw29t4eSAQU=",
         "owner": "ghostbuster91",
         "repo": "nix-smithy-ls",
-        "rev": "1b4d03dde19c9dc219129195eddf0c6b78b0a2f3",
+        "rev": "b581b3c2f4b18eac08fb5686e1229deb1cd9c7f7",
         "type": "github"
       },
       "original": {
