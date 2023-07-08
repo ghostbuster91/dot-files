@@ -385,7 +385,7 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, t
             on_attach(client, bufnr)
         end,
         cmd = { smithy_ls_path, '0' },
-        root_dir = lspconfig.util.root_pattern("smithy-build.json", ".git")
+        root_dir = lspconfig.util.root_pattern("smithy-build.json")
     }
 
     return M
