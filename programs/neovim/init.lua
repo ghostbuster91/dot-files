@@ -101,9 +101,6 @@ require('nvim-lightbulb').setup({ autocmd = { enabled = true } })
 local neogit = require('neogit')
 neogit.setup {
     disable_commit_confirmation = true,
-    integrations = {
-        diffview = true
-    }
 }
 map("n", '<leader>ne', function()
     neogit.open()
