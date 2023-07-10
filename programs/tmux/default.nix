@@ -59,17 +59,16 @@ in
       bind g choose-window "join-pane -b -s '%%'"
 
       # Switch windows alt+number
-      bind-key -n M-1 if-shell 'tmux select-window -t 1' ''' 'new-window -t 1'
-      bind-key -n M-2 if-shell 'tmux select-window -t 2' ''' 'new-window -t 2'
-      bind-key -n M-3 if-shell 'tmux select-window -t 3' ''' 'new-window -t 3'
-      bind-key -n M-4 if-shell 'tmux select-window -t 4' ''' 'new-window -t 4'
-      bind-key -n M-5 if-shell 'tmux select-window -t 5' ''' 'new-window -t 5'
-      bind-key -n M-6 if-shell 'tmux select-window -t 6' ''' 'new-window -t 6'
-      bind-key -n M-7 if-shell 'tmux select-window -t 7' ''' 'new-window -t 7'
-      bind-key -n M-8 if-shell 'tmux select-window -t 8' ''' 'new-window -t 8'
-      bind-key -n M-9 if-shell 'tmux select-window -t 9' ''' 'new-window -t 9'
-      bind-key -n M-0 if-shell 'tmux select-window -t 10' ''' 'new-window -t 10'
-
+      bind-key -n M-1 if-shell 'tmux select-window -t :1' ''' 'new-window -t :1'
+      bind-key -n M-2 if-shell 'tmux select-window -t :2' ''' 'new-window -t :2'
+      bind-key -n M-3 if-shell 'tmux select-window -t :3' ''' 'new-window -t :3'
+      bind-key -n M-4 if-shell 'tmux select-window -t :4' ''' 'new-window -t :4'
+      bind-key -n M-5 if-shell 'tmux select-window -t :5' ''' 'new-window -t :5'
+      bind-key -n M-6 if-shell 'tmux select-window -t :6' ''' 'new-window -t :6'
+      bind-key -n M-7 if-shell 'tmux select-window -t :7' ''' 'new-window -t :7'
+      bind-key -n M-8 if-shell 'tmux select-window -t :8' ''' 'new-window -t :8'
+      bind-key -n M-9 if-shell 'tmux select-window -t :9' ''' 'new-window -t :9'
+      bind-key -n M-0 if-shell 'tmux select-window -t :10' ''' 'new-window -t :10'
 
       # Smart pane switching with awareness of Vim splits.
       # See: https://github.com/christoomey/vim-tmux-navigator
