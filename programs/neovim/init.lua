@@ -58,6 +58,8 @@ require("nvim-autopairs").setup({
 
 
 require("Comment").setup()
+local ft = require('Comment.ft')
+ft.smithy = '//%s'
 
 require("neoclip").setup()
 require("telescope").load_extension("neoclip")
