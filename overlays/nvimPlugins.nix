@@ -5,6 +5,8 @@ let
     version = pluginInput.rev;
     src = pluginInput;
   };
-  nvimPluginInputs = pkgs.lib.attrsets.mapAttrs (k: v: v // { name = k; }) (pkgs.lib.attrsets.filterAttrs (k: v: builtins.substring 0 6 k == "p_nvim") inputs);
+  prefix = "p_nvim";
+  prefixLength = builtins.stringLength prefix;
+  nvimPluginInputs = pkgs.lib.attrsets.mapAttrs (k: v: v // { name = k; }) (pkgs.lib.attrsets.filterAttrs (k: v: builtins.substring 0 prefixLength k == prefix) inputs);
 in
 pkgs.lib.attrsets.mapAttrs (k: v: (nvimPluginBuilder v)) nvimPluginInputs

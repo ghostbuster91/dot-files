@@ -48,13 +48,16 @@
         url = "github:mrjones2014/smart-splits.nvim";
         flake = false;
       };
-      p_nvim-neogit =
-        {
-          url = "github:NeogitOrg/neogit";
-          flake = false;
-        };
+      p_nvim-neogit = {
+        url = "github:NeogitOrg/neogit";
+        flake = false;
+      };
       p_treesitter-scala = {
         url = "github:tree-sitter/tree-sitter-scala";
+        flake = false;
+      };
+      p_treesitte-device-tree = {
+        url = "github:joelspadin/tree-sitter-devicetree";
         flake = false;
       };
 

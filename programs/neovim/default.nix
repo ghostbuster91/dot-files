@@ -87,7 +87,7 @@ in
             tree-sitter-typescript
             tree-sitter-c
             tree-sitter-java
-            pkgs-unstable.tree-sitter-scala-master
+            pkgs-unstable.p_treesitter-scala
             tree-sitter-query # for the tree-sitter itself
             tree-sitter-python
             tree-sitter-go

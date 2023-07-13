@@ -365,6 +365,22 @@
         "type": "github"
       }
     },
+    "p_treesitte-device-tree": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1682286310,
+        "narHash": "sha256-iDiG6pNfALxy7nKyjuHfI9HW5/KElW/6zYguPaiMrzY=",
+        "owner": "joelspadin",
+        "repo": "tree-sitter-devicetree",
+        "rev": "d2cc332aeb814ea40e1e34ed6b9446324b32612a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "joelspadin",
+        "repo": "tree-sitter-devicetree",
+        "type": "github"
+      }
+    },
     "p_treesitter-scala": {
       "flake": false,
       "locked": {
@@ -399,6 +415,7 @@
         "p_nvim-next": "p_nvim-next",
         "p_nvim-portal": "p_nvim-portal",
         "p_nvim-smart-splits-nvim": "p_nvim-smart-splits-nvim",
+        "p_treesitte-device-tree": "p_treesitte-device-tree",
         "p_treesitter-scala": "p_treesitter-scala"
       }
     },
