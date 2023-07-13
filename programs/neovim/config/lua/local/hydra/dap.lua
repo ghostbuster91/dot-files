@@ -56,7 +56,7 @@ local setup = function(hydra, lsp)
             end
 
             map({ 'n' }, "<leader>da", function()
-                dap.continue()
+                dap.attach()
                 hydra.spawn('dap-hydra')
             end, { buffer = bufnr, desc = "Attach debugger" })
         end

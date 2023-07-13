@@ -294,9 +294,10 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, t
             step_over = dap.step_over,
             run_last = dap.run_last,
             run_to_cursor = dap.run_to_cursor,
-            run_and_attach = function()
+            attach = function()
                 --TODO fixe me; use somehow https://github.com/scalameta/nvim-metals/blob/32a37ce2f2cdafd0f1c5a44bcf748dae6867c982/lua/metals/setup.lua#L109-L168
-                dap.run({ type = 'scala', request = 'attach', host = '127.0.0.1', port = 5678 })
+                --todo should ask for buildTarget and port?
+                dap.run({ type = 'scala', request = 'attach', host = '127.0.0.1', port = 5005, buildTarget="root" })
             end,
             toggle_ui = require("dapui").toggle,
             toggle_breakpoint = dap.toggle_breakpoint,
