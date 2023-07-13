@@ -112,7 +112,10 @@
           hardware.nixosModules.focus-m2-gen1
           # flake registry
           {
-            nix.registry.nixpkgs.flake = inputs.nixpkgs;
+            nix.registry = {
+              nixpkgs.flake = inputs.nixpkgs;
+              nixpkgs-unstable.flake = inputs.nixpkgs-unstable;
+            };
             nix.nixPath = [ "nixpkgs=flake:nixpkgs" ];
           }
         ];
