@@ -12,6 +12,7 @@ in
     package = pkgs-unstable.neovim-unwrapped;
     viAlias = true;
     vimAlias = true;
+    defaultEditor = true;
     extraConfig = ''
       	let mapleader = "${leaderKey}"
     '' +
