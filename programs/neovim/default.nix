@@ -19,10 +19,14 @@ in
     "${builtins.readFile ./init.vim}" +
     ''
       lua << EOF
-        local tsserver_path = "${pkgs-unstable.nodePackages.typescript-language-server}/bin/typescript-language-server"
-        local typescript_path = "${pkgs-unstable.nodePackages.typescript}/lib/node_modules/typescript/lib"
-        local metals_binary_path = "${pkgs-unstable.metals}/bin/metals"
-        local smithy_ls_path = "${pkgs-unstable.disney-smithy-ls}/bin/smithy_ls"
+        local binaries = {
+          tsserver_path = "${pkgs-unstable.nodePackages.typescript-language-server}/bin/typescript-language-server",
+          typescript_path = "${pkgs-unstable.nodePackages.typescript}/lib/node_modules/typescript/lib",
+          metals_binary_path = "${pkgs-unstable.metals}/bin/metals",
+          smithy_ls_path = "${pkgs-unstable.disney-smithy-ls}/bin/smithy_ls",
+          lua_language_server = "${pkgs-unstable.sumneko-lua-language-server}/bin/lua-language-server",
+        }
+        
         ${builtins.readFile ./init.lua}
       EOF
     '';

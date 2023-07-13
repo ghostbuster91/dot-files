@@ -3,8 +3,7 @@ local map = vim.keymap.set
 local lsp = vim.lsp
 local diag = vim.diagnostic
 
-local setup = function(telescope, telescope_builtin, navic, next_integrations, tsserver_path, typescript_path,
-                       metals_binary_path, smithy_ls_path)
+local setup = function(telescope, telescope_builtin, navic, next_integrations, binaries)
     local M = {
         on_attach_dap_subscribers = {}
     }
@@ -209,16 +208,17 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, t
         end,
         capabilities = capabilities_no_format,
         cmd = {
-            tsserver_path,
+            binaries.tsserver_path,
             "--stdio",
             "--tsserver-path",
-            typescript_path
+            binaries.typescript_path
         }
     })
     local library = vim.api.nvim_get_runtime_file('*.lua', true)
     require("lspconfig").lua_ls.setup({
         on_attach = on_attach,
         capabilities = capabilities,
+        cmd = { binaries.lua_language_server },
         settings = {
             Lua = {
                 workspace = {
@@ -297,7 +297,7 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, t
             attach = function()
                 --TODO fixe me; use somehow https://github.com/scalameta/nvim-metals/blob/32a37ce2f2cdafd0f1c5a44bcf748dae6867c982/lua/metals/setup.lua#L109-L168
                 --todo should ask for buildTarget and port?
-                dap.run({ type = 'scala', request = 'attach', host = '127.0.0.1', port = 5005, buildTarget="root" })
+                dap.run({ type = 'scala', request = 'attach', host = '127.0.0.1', port = 5005, buildTarget = "root" })
             end,
             toggle_ui = require("dapui").toggle,
             toggle_breakpoint = dap.toggle_breakpoint,
@@ -327,7 +327,7 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, t
     end
 
     metals_config.settings = {
-        metalsBinaryPath = metals_binary_path,
+        metalsBinaryPath = binaries.metals_binary_path,
         showImplicitArguments = true,
         excludedPackages = {
             "akka.actor.typed.javadsl",
@@ -385,7 +385,7 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, t
         on_attach = function(client, bufnr)
             on_attach(client, bufnr)
         end,
-        cmd = { smithy_ls_path, '0' },
+        cmd = { binaries.smithy_ls_path, '0' },
         root_dir = lspconfig.util.root_pattern("smithy-build.json")
     }
 

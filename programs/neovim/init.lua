@@ -163,9 +163,8 @@ require("gitlinker").setup()
 require("local/trouble").setup()
 local telescope = require("local/telescope").setup()
 require("local/noice").setup(telescope.core)
-local lsp = require("local/lsp").setup(telescope.core, telescope.builtin, navic, next_integrations, tsserver_path,
-    typescript_path,
-    metals_binary_path, smithy_ls_path)
+---@diagnostic disable-next-line: undefined-global
+local lsp = require("local/lsp").setup(telescope.core, telescope.builtin, navic, next_integrations, binaries)
 require("local/gitsigns").setup(next_integrations)
 require("local/cmp").setup()
 require("local/lualine").setup(navic)
