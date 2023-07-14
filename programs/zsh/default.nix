@@ -9,7 +9,7 @@ let
   };
   z-fz = pkgs.fetchFromGitHub {
     owner = "ghostbuster91";
-    repo = "fz.sh";
+    repo = "fz";
     rev = "7b4e215f5887b24e1ef725ffdb89f3479e913875";
     hash = "sha256-H+E4Eh7ms8NRQ+JHkj3ynne/pg7MWXOTYVp5baI58aM=";
   };
