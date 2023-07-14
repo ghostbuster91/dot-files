@@ -92,6 +92,7 @@ in
             tree-sitter-c
             tree-sitter-java
             pkgs-unstable.p_treesitter-scala
+            pkgs-unstable.p_treesitter-devicetree
             tree-sitter-query # for the tree-sitter itself
             tree-sitter-python
             tree-sitter-go

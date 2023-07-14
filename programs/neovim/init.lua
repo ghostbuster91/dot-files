@@ -49,13 +49,9 @@ api.nvim_create_autocmd(
     { group = hocon_group, pattern = '*/resources/*.conf', command = 'set ft=hocon' }
 )
 
-
-require("which-key").setup()
-
 require("nvim-autopairs").setup({
     check_ts = true,
 })
-
 
 require("Comment").setup()
 local ft = require('Comment.ft')
@@ -176,3 +172,4 @@ require("local/smart-split").setup()
 require("local/dial").setup()
 require("local/hydra").setup(lsp)
 require("local/neotree").setup()
+require("which-key").setup()

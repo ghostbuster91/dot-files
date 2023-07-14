@@ -320,11 +320,11 @@
     "p_nvim-next": {
       "flake": false,
       "locked": {
-        "lastModified": 1684822885,
-        "narHash": "sha256-2NwRSLz0yGaMalY0FWkPMqxYHbY5Bu3rhewZ5IBfz6o=",
+        "lastModified": 1689344845,
+        "narHash": "sha256-c1ZBThvPj3ep+dyg2vy4Zu7g6po8Q1N/WKGlcDDXIks=",
         "owner": "ghostbuster91",
         "repo": "nvim-next",
-        "rev": "2f74bf8e0c62b1414107fe5f9f4ad10bbf409819",
+        "rev": "49eaf4e1731258285791669fdedcee351c59ebdc",
         "type": "github"
       },
       "original": {
@@ -365,7 +365,7 @@
         "type": "github"
       }
     },
-    "p_treesitte-device-tree": {
+    "p_treesitter-devicetree": {
       "flake": false,
       "locked": {
         "lastModified": 1682286310,
@@ -415,7 +415,7 @@
         "p_nvim-next": "p_nvim-next",
         "p_nvim-portal": "p_nvim-portal",
         "p_nvim-smart-splits-nvim": "p_nvim-smart-splits-nvim",
-        "p_treesitte-device-tree": "p_treesitte-device-tree",
+        "p_treesitter-devicetree": "p_treesitter-devicetree",
         "p_treesitter-scala": "p_treesitter-scala"
       }
     },

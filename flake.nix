@@ -56,7 +56,7 @@
         url = "github:tree-sitter/tree-sitter-scala";
         flake = false;
       };
-      p_treesitte-device-tree = {
+      p_treesitter-devicetree = {
         url = "github:joelspadin/tree-sitter-devicetree";
         flake = false;
       };
