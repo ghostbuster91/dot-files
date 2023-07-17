@@ -23,6 +23,11 @@
       gpg.ssh = { allowedSignersFile = "~/.ssh/allowed_signers"; };
       commit.gpgsign = true;
     };
+    ignores = [
+      ".bloop"
+      ".metals"
+      "metals.sbt"
+    ];
   };
 
   home.file."./.ssh/allowed_signers".text = ''
