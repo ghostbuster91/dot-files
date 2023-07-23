@@ -2,6 +2,23 @@ local setup = function()
     -- luasnip setup
     local luasnip = require("luasnip")
     require("luasnip.loaders.from_vscode").lazy_load()
+    local types = require("luasnip.util.types")
+    luasnip.config.setup({
+        ext_opts = {
+            [types.choiceNode] = {
+                active = {
+                    virt_text = { { "●", "CmpItemKindValue" } }
+                }
+            },
+            [types.insertNode] = {
+                active = {
+                    virt_text = { { "󰔶", "CmpItemKindUnit" } }
+                }
+            }
+        },
+        region_check_events = { 'InsertEnter' },
+    })
+
     -- nvim-cmp setup
     local lspkind = require("lspkind")
     local cmp = require("cmp")
