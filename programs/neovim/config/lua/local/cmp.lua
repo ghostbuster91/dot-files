@@ -72,9 +72,9 @@ local setup = function()
         sources = {
             { name = "nvim_lsp", priority = 10 },
             { name = "buffer",   priority = 9 },
-            { name = 'tmux',     priority = 8 },
-            { name = "luasnip" },
-            { name = "path" },
+            { name = "luasnip",  priority = 8 },
+            { name = 'tmux',     priority = 7 },
+            { name = "path",     priority = 5 },
         },
         preselect = cmp.PreselectMode.None, -- disable preselection
         sorting = {
