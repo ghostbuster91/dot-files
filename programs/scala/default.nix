@@ -10,6 +10,7 @@
     coursier
     scala-cli
     sbt
+    maven3
   ];
 
   home.sessionVariables = {
