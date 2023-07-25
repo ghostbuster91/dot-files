@@ -15,6 +15,10 @@
         url = "github:nix-community/home-manager/release-23.05";
         inputs.nixpkgs.follows = "nixpkgs";
       };
+      sops-nix = {
+        url = "github:Mic92/sops-nix";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
       nix-metals = {
         url = "github:ghostbuster91/nix-metals/stable";
         inputs.nixpkgs.follows = "nixpkgs";
@@ -68,7 +72,7 @@
       };
     };
 
-  outputs = inputs @ { home-manager, nixpkgs-unstable, nixpkgs, disko, hardware, ... }:
+  outputs = inputs @ { home-manager, nixpkgs-unstable, nixpkgs, disko, hardware, sops-nix, ... }:
     let
       system = "x86_64-linux";
       username = "kghost";
@@ -118,6 +122,7 @@
             };
             nix.nixPath = [ "nixpkgs=flake:nixpkgs" ];
           }
+          sops-nix.nixosModules.sops
         ];
         specialArgs = { inherit username; inherit pkgs-unstable; };
       };
