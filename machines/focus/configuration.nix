@@ -65,6 +65,7 @@ in
     settings = {
       # Automate `nix store --optimise`
       auto-optimise-store = true;
+      netrc-file = "/home/${username}/.netrc";
 
       # Required by Cachix to be used as non-root user
       trusted-users = [ "root" username ];
