@@ -56,6 +56,10 @@
         url = "github:NeogitOrg/neogit";
         flake = false;
       };
+      p_nvim-neotree = {
+        url = "github:nvim-neo-tree/neo-tree.nvim/v3.x";
+        flake = false;
+      };
       p_treesitter-scala = {
         url = "github:tree-sitter/tree-sitter-scala";
         flake = false;

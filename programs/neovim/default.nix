@@ -120,7 +120,7 @@ in
 
       nvim-neoclip-lua
       indent-blankline-nvim
-      neo-tree-nvim
+      p_nvim-neotree
       vim-tmux-clipboard
       telescope-ui-select-nvim
       noice-nvim

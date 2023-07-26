@@ -333,6 +333,23 @@
         "type": "github"
       }
     },
+    "p_nvim-neotree": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1689375767,
+        "narHash": "sha256-DfR0pFtQdkRmJexUVVCQ4xYHnlkOVbnhq+X43OORd9w=",
+        "owner": "nvim-neo-tree",
+        "repo": "neo-tree.nvim",
+        "rev": "981a43adcca25e7ccc3c589902d49f25e4d48ebc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-neo-tree",
+        "ref": "v3.x",
+        "repo": "neo-tree.nvim",
+        "type": "github"
+      }
+    },
     "p_nvim-next": {
       "flake": false,
       "locked": {
@@ -428,6 +445,7 @@
         "p_nvim-leap": "p_nvim-leap",
         "p_nvim-metals": "p_nvim-metals",
         "p_nvim-neogit": "p_nvim-neogit",
+        "p_nvim-neotree": "p_nvim-neotree",
         "p_nvim-next": "p_nvim-next",
         "p_nvim-portal": "p_nvim-portal",
         "p_nvim-smart-splits-nvim": "p_nvim-smart-splits-nvim",
