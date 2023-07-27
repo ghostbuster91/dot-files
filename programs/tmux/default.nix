@@ -71,18 +71,6 @@ in
       bind-key -n M-9 if-shell 'tmux select-window -t :9' ''' 'new-window -t :9'
       bind-key -n M-0 if-shell 'tmux select-window -t :10' ''' 'new-window -t :10'
 
-      # Switch sessions ctrl+number (off by one because there is no session-base-index)
-      bind-key -n C-1 if-shell 'tmux has-session -t 0'  'switch-client -t 0'  'new-session -s 0'
-      bind-key -n C-2 if-shell 'tmux has-session -t 1'  'switch-client -t 1'  'new-session -s 1'
-      bind-key -n C-3 if-shell 'tmux has-session -t 2'  'switch-client -t 2'  'new-session -s 2'
-      bind-key -n C-4 if-shell 'tmux has-session -t 3'  'switch-client -t 3'  'new-session -s 3'
-      bind-key -n C-5 if-shell 'tmux has-session -t 4'  'switch-client -t 4'  'new-session -s 4'
-      bind-key -n C-6 if-shell 'tmux has-session -t 5'  'switch-client -t 5'  'new-session -s 5'
-      bind-key -n C-7 if-shell 'tmux has-session -t 6'  'switch-client -t 6'  'new-session -s 6'
-      bind-key -n C-8 if-shell 'tmux has-session -t 7'  'switch-client -t 7'  'new-session -s 7'
-      bind-key -n C-9 if-shell 'tmux has-session -t 8'  'switch-client -t 8'  'new-session -s 8'
-      bind-key -n C-0 if-shell 'tmux has-session -t 9'  'switch-client -t 9'  'new-session -s 9'
-
       # Smart pane switching with awareness of Vim splits.
       # See: https://github.com/christoomey/vim-tmux-navigator
       is_vim="ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
