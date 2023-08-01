@@ -73,6 +73,7 @@ local setup = function()
                     ["zO"] = expand_all_filesystem,
                 },
             },
+            use_libuv_file_watcher = true,
         },
         default_component_configs = {
             icon = {
