@@ -110,6 +110,8 @@ in
       set -g pane-active-border-style 'fg=colour39,bg=colour236'
 
       bind a next-layout
+      bind n new-session
+      bind t switch-client -l
       onedark_black="#282c34"
       onedark_green="#98c379"
       onedark_visual_grey="#3e4452"
