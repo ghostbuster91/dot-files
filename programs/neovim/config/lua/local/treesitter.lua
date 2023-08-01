@@ -1,3 +1,5 @@
+local api = vim.api
+
 local setup = function(next_integrations)
     next_integrations.treesitter_textobjects()
     require("nvim-treesitter.configs").setup({
@@ -8,7 +10,9 @@ local setup = function(next_integrations)
             -- Using this option may slow down your editor, and you may see some duplicate highlights.
             -- Instead of true it can also be a list of languages
             additional_vim_regex_highlighting = false,
-            disable = {}, -- treesitter interferes with VimTex
+            disable = function(_, bufnr) -- Disable in large buffers
+                return api.nvim_buf_line_count(bufnr) > 50000
+            end,
         },
         indent = {
             enable = true,
