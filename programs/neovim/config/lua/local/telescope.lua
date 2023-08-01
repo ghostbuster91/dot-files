@@ -3,8 +3,24 @@ local map = vim.keymap.set
 local setup = function()
     local actions = require("telescope.actions")
     local telescope = require("telescope")
+    local previewers = require("telescope.previewers")
+
+    local small_files_preview_maker = function(filepath, bufnr, opts)
+        opts = opts or {}
+
+        filepath = vim.fn.expand(filepath)
+        vim.loop.fs_stat(filepath, function(_, stat)
+            if not stat then return end
+            if stat.size > 100000 then
+                return
+            else
+                previewers.buffer_previewer_maker(filepath, bufnr, opts)
+            end
+        end)
+    end
     telescope.setup({
         defaults = {
+            buffer_previewer_maker = small_files_preview_maker,
             mappings = {
                 n = {
                     ["f"] = actions.send_to_qflist,
