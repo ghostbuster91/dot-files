@@ -73,7 +73,7 @@ local setup = function()
             { name = "nvim_lsp", priority = 10 },
             { name = "buffer",   priority = 9 },
             { name = "luasnip",  priority = 8 },
-            { name = 'tmux',     priority = 7 },
+            { name = 'tmux',     priority = 7 }, --TODO consider removing
             { name = "path",     priority = 5 },
         },
         preselect = cmp.PreselectMode.None, -- disable preselection
