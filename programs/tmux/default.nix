@@ -111,6 +111,7 @@ in
 
       bind a next-layout
       bind n new-session
+      unbind t
       bind t switch-client -l
       onedark_black="#282c34"
       onedark_green="#98c379"
