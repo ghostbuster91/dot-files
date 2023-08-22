@@ -80,8 +80,6 @@
 
     # nix stuff
     nix-du
-    # nix-index
-    nixpkgs-review
     nix-tree
     nixfmt
     nix-prefetch
