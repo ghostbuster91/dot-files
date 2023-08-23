@@ -20,7 +20,7 @@
         inputs.nixpkgs.follows = "nixpkgs";
       };
       nix-metals = {
-        url = "github:ghostbuster91/nix-metals/stable";
+        url = "github:ghostbuster91/nix-metals/nightly";
         inputs.nixpkgs.follows = "nixpkgs";
       };
       nix-smithy-ls = {
