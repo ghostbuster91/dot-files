@@ -91,6 +91,7 @@ in
             tree-sitter-typescript
             tree-sitter-c
             tree-sitter-java
+            tree-sitter-kotlin
             pkgs-unstable.p_treesitter-scala
             pkgs-unstable.p_treesitter-devicetree
             tree-sitter-query # for the tree-sitter itself
