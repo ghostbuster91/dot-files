@@ -109,7 +109,7 @@
     gnomeExtensions.tray-icons-reloaded
     gnome.gnome-tweaks
     jetbrains.idea-community
-    kooha # screen recorder
+    pkgs.kooha # screen recorder
     clapper # video player
     asciinema # terminal recorder
     powertop
