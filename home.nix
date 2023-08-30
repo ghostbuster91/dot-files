@@ -114,6 +114,7 @@
     asciinema # terminal recorder
     powertop
     signal-desktop
+    vscode-fhs
   ];
 
   programs = {
