@@ -104,6 +104,7 @@
     tig
     slack
     zoom-us
+    openconnect-sso
 
     gnomeExtensions.tray-icons-reloaded
     gnome.gnome-tweaks

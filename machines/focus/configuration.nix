@@ -34,6 +34,8 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 20;
 
+
+
   networking = {
     hostId = "d1084363";
     hostName = "focus";
@@ -77,6 +79,7 @@ in
       keep-derivations = true;
     };
   };
+
 
   # Set your time zone.
   time.timeZone = "Europe/Warsaw";
