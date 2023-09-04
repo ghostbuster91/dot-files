@@ -45,20 +45,6 @@ in
         file = "share/zsh-nix-shell/nix-shell.plugin.zsh";
       }
       {
-        name = "fzf-tab";
-        src = "${pkgs.zsh-fzf-tab}/share/fzf-tab";
-      }
-      {
-        name = "zsh-you-should-use";
-        src = pkgs.zsh-you-should-use;
-        file = "share/zsh/plugins/you-should-use/you-should-use.plugin.zsh";
-      }
-      {
-        name = "zsh-nix-shell";
-        src = pkgs.zsh-nix-shell;
-        file = "share/zsh-nix-shell/nix-shell.plugin.zsh";
-      }
-      {
         name = "omz-common-aliases";
         src = omz;
         file = "plugins/common-aliases/common-aliases.plugin.zsh";
@@ -85,7 +71,7 @@ in
       }
       {
         name = "zsh-forgit";
-        src = pkgs.zsh-forgit;
+        src = pkgs-unstable.zsh-forgit;
         file = "share/zsh/zsh-forgit/forgit.plugin.zsh";
       }
       {
