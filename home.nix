@@ -5,7 +5,6 @@
     homeDirectory = "/home/${username}";
     stateVersion = "22.05";
   };
-  targets.genericLinux.enable = true;
   fonts.fontconfig.enable = true;
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -50,7 +49,6 @@
   # ];
 
   home.sessionVariables = {
-    EDITOR = "nvim";
     # DOCKER_HOST = "unix://$XDG_RUNTIME_DIR/docker.sock";
   };
 

@@ -125,6 +125,9 @@ in
       FZF_CTRL_T_OPTS = "--ansi --preview '${pkgs-unstable.bat}/bin/bat --style=numbers --color=always --line-range :500 {}'";
       FZF_CTRL_T_COMMAND = "${pkgs-unstable.fd}/bin/fd -I --type file";
     };
+    sessionVariables = {
+      EDITOR = "nvim";
+    };
     history = { extended = true; };
     shellAliases = {
       lsd = "${pkgs-unstable.exa}/bin/exa --long --header --git --all";
