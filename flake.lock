@@ -272,11 +272,11 @@
     "p_nvim-actions-preview": {
       "flake": false,
       "locked": {
-        "lastModified": 1691856680,
-        "narHash": "sha256-p8qEk4R88pcNiUn40ZZ+2euLQ8UFwQr/3QW7BUMY1KQ=",
+        "lastModified": 1692778077,
+        "narHash": "sha256-5HzyrYWGTdorG4JXMv0iQNj9EM702+8g7E18Oct1JiY=",
         "owner": "aznhe21",
         "repo": "actions-preview.nvim",
-        "rev": "7b4925d51dd89a97723be076013b550899e499fa",
+        "rev": "5650c76abfb84d6498330dd045657ba630ecdbba",
         "type": "github"
       },
       "original": {
@@ -320,11 +320,11 @@
     "p_nvim-neogit": {
       "flake": false,
       "locked": {
-        "lastModified": 1692551457,
-        "narHash": "sha256-Q6BojuCTCXE9QHJ/PE/iKqA4Q5YnwPVNaAtP5v9igzU=",
+        "lastModified": 1693858908,
+        "narHash": "sha256-JphsJProBdSSVk6VTuklghEjd4lOnS0VRV+61cbmOzU=",
         "owner": "NeogitOrg",
         "repo": "neogit",
-        "rev": "a5fb1b47975c43c1400e338f57badd94a6e09450",
+        "rev": "69482aa8404bf8b4775110393c8248e784fccbf1",
         "type": "github"
       },
       "original": {
@@ -336,11 +336,11 @@
     "p_nvim-neotree": {
       "flake": false,
       "locked": {
-        "lastModified": 1692534991,
-        "narHash": "sha256-rJHoWYZrw8UxcNw/2LYmtpG+qucyDrfkp7lrofszd8Q=",
+        "lastModified": 1693067247,
+        "narHash": "sha256-gP/C1AJX2UXPZ0x8r/vMsnOjIVe7Hk977yrVb1DIrtI=",
         "owner": "nvim-neo-tree",
         "repo": "neo-tree.nvim",
-        "rev": "e62babc62c7f8de579ad69d0a5d2613bff864126",
+        "rev": "9b5b4c874b13e372500f07c37187ba06c0c1ac0a",
         "type": "github"
       },
       "original": {
@@ -401,11 +401,11 @@
     "p_treesitter-devicetree": {
       "flake": false,
       "locked": {
-        "lastModified": 1682286310,
-        "narHash": "sha256-iDiG6pNfALxy7nKyjuHfI9HW5/KElW/6zYguPaiMrzY=",
+        "lastModified": 1693778550,
+        "narHash": "sha256-r23ycLCR79Ow4eI8rK03B3M1loU8/7K8dDrqBIPSAS0=",
         "owner": "joelspadin",
         "repo": "tree-sitter-devicetree",
-        "rev": "d2cc332aeb814ea40e1e34ed6b9446324b32612a",
+        "rev": "cc26cbf2121a27eaa72a05a795ce38aba4e0f86e",
         "type": "github"
       },
       "original": {
@@ -417,11 +417,11 @@
     "p_treesitter-scala": {
       "flake": false,
       "locked": {
-        "lastModified": 1692515751,
-        "narHash": "sha256-fzruLddcKTqC47CKCZhznDoyGIA1fPdqxqmzgmd9RkM=",
+        "lastModified": 1693548849,
+        "narHash": "sha256-bi0Lqo/Zs2Uaz1efuKAARpEDg5Hm59oUe7eSXgL1Wow=",
         "owner": "tree-sitter",
         "repo": "tree-sitter-scala",
-        "rev": "d50b6ca5cc3d925e3d1f497199cb8d8383ddae8a",
+        "rev": "70afdd5632d57dd63a960972ab25945e353a52f6",
         "type": "github"
       },
       "original": {
