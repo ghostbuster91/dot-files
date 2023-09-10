@@ -67,7 +67,6 @@ in
       cmp-nvim-lsp
       cmp-buffer
       cmp-path
-      cmp-tmux
       cmp_luasnip
 
       # lsp stuff
