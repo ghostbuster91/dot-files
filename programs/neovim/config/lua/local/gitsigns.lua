@@ -12,13 +12,13 @@ local setup = function(next_integrations)
             local nngs = next_integrations.gitsigns(gs)
 
             -- Navigation
-            map('n', ']c', function()
+            map({ 'n', 'v' }, ']c', function()
                 if vim.wo.diff then return ']c' end
                 vim.schedule(function() nngs.next_hunk({ wrap = false }) end)
                 return '<Ignore>'
             end, { expr = true })
 
-            map('n', '[c', function()
+            map({ 'n', 'v' }, '[c', function()
                 if vim.wo.diff then return '[c' end
                 vim.schedule(function() nngs.prev_hunk({ wrap = false }) end)
                 return '<Ignore>'
