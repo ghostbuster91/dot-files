@@ -46,6 +46,8 @@ local setup = function(next_integrations)
                     ["af"] = "@function.outer",
                     ["if"] = "@function.inner",
                     ["ac"] = "@class.outer",
+                    ["ap"] = "@parameter.outer",
+                    ["ip"] = "@parameter.inner",
                     -- You can optionally set descriptions to the mappings (used in the desc parameter of
                     -- nvim_buf_set_keymap) which plugins like which-key display
                     ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
@@ -73,7 +75,7 @@ local setup = function(next_integrations)
                 -- * query_string: eg '@function.inner'
                 -- * selection_mode: eg 'v'
                 -- and should return true of false
-                include_surrounding_whitespace = true,
+                include_surrounding_whitespace = false,
             },
         },
         playground = {
