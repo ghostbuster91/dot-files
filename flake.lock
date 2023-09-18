@@ -223,11 +223,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1692447944,
-        "narHash": "sha256-fkJGNjEmTPvqBs215EQU4r9ivecV5Qge5cF/QDLVn3U=",
+        "lastModified": 1694767346,
+        "narHash": "sha256-5uH27SiVFUwsTsqC5rs3kS7pBoNhtoy9QfTP9BmknGk=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "d680ded26da5cf104dd2735a51e88d2d8f487b4d",
+        "rev": "ace5093e36ab1e95cb9463863491bee90d5a4183",
         "type": "github"
       },
       "original": {
@@ -250,22 +250,6 @@
         "owner": "nixos",
         "ref": "nixos-23.05",
         "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "openconnect-sso": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1689349020,
-        "narHash": "sha256-2UVtOb0gD6wqEY/BeLZ2BCrR/qyb6M0mgf8CRNxflPA=",
-        "owner": "vlaci",
-        "repo": "openconnect-sso",
-        "rev": "51e1eb727a93cf8b063157b7e9453dd21d3ba85f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "vlaci",
-        "repo": "openconnect-sso",
         "type": "github"
       }
     },
@@ -353,11 +337,11 @@
     "p_nvim-next": {
       "flake": false,
       "locked": {
-        "lastModified": 1689344845,
-        "narHash": "sha256-c1ZBThvPj3ep+dyg2vy4Zu7g6po8Q1N/WKGlcDDXIks=",
+        "lastModified": 1695069269,
+        "narHash": "sha256-RZRp7GfXuxMygYIvcZcQoYQ8Lb3HWN3aeGKzAibyHuM=",
         "owner": "ghostbuster91",
         "repo": "nvim-next",
-        "rev": "49eaf4e1731258285791669fdedcee351c59ebdc",
+        "rev": "bedeb874c55f88dfc7bd531cdb3d27e4438e4415",
         "type": "github"
       },
       "original": {
@@ -456,7 +440,6 @@
         "nix-smithy-ls": "nix-smithy-ls",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable",
-        "openconnect-sso": "openconnect-sso",
         "p_nvim-actions-preview": "p_nvim-actions-preview",
         "p_nvim-leap": "p_nvim-leap",
         "p_nvim-metals": "p_nvim-metals",

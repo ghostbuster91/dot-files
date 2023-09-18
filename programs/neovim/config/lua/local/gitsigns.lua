@@ -10,9 +10,19 @@ local setup = function(next_integrations)
             end
 
             local nngs = next_integrations.gitsigns(gs)
+
             -- Navigation
-            map('n', ']c', nngs.next_hunk, { expr = true, desc = "next change" })
-            map('n', '[c', nngs.prev_hunk, { expr = true, desc = "previous change" })
+            map('n', ']c', function()
+                if vim.wo.diff then return ']c' end
+                vim.schedule(function() nngs.next_hunk({ wrap = false }) end)
+                return '<Ignore>'
+            end, { expr = true })
+
+            map('n', '[c', function()
+                if vim.wo.diff then return '[c' end
+                vim.schedule(function() nngs.prev_hunk({ wrap = false }) end)
+                return '<Ignore>'
+            end, { expr = true })
 
             -- Actions
             map({ 'n', 'v' }, '<leader>hs', ':Gitsigns stage_hunk<CR>')

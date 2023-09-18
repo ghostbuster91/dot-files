@@ -130,7 +130,7 @@ in
     };
     history = { extended = true; };
     shellAliases = {
-      lsd = "${pkgs-unstable.exa}/bin/exa --long --header --git --all";
+      lsd = "${pkgs-unstable.eza}/bin/exa --long --header --git --all";
     };
     initExtra = ''
       if test -f "$HOME/.secrets.sh"; then

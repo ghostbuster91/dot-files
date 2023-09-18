@@ -72,12 +72,6 @@
         url = "github:joelspadin/tree-sitter-devicetree";
         flake = false;
       };
-
-      # misc 
-      openconnect-sso = {
-        url = "github:vlaci/openconnect-sso";
-        flake = false;
-      };
     };
 
   outputs = inputs @ { home-manager, nixpkgs-unstable, nixpkgs, disko, hardware, sops-nix, ... }:
@@ -85,7 +79,6 @@
       system = "x86_64-linux";
       username = "kghost";
 
-      openconnectOverlay = import "${inputs.openconnect-sso}/overlay.nix";
       overlays = import ./overlays {
         inherit inputs;
         inherit system;
@@ -96,7 +89,6 @@
         config.allowUnfree = true;
         overlays = [
           overlays
-          openconnectOverlay
         ];
       };
       pkgs = import nixpkgs {
