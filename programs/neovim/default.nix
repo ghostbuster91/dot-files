@@ -179,6 +179,7 @@ in
       p_nvim-smart-splits-nvim
       neodev-nvim
       hydra-nvim
+      p_nvim-telescope-livegrep-args
     ];
   };
 }

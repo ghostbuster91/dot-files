@@ -60,6 +60,10 @@
         url = "github:nvim-neo-tree/neo-tree.nvim/v3.x";
         flake = false;
       };
+      p_nvim-telescope-livegrep-args = {
+        url = "github:nvim-telescope/telescope-live-grep-args.nvim";
+        flake = false;
+      };
       p_treesitter-scala = {
         url = "github:tree-sitter/tree-sitter-scala";
         flake = false;
