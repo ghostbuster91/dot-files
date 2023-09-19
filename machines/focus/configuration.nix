@@ -182,6 +182,7 @@ in
     usbutils
     glxinfo
     libva-utils
+    globalprotect-openconnect
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -248,6 +249,10 @@ in
     CPU_SCALING_GOVERNOR_ON_AC = "performance";
     CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
     CPU_HWP_ON_AC = "performance";
+  };
+
+  services.globalprotect = {
+    enable = true;
   };
 
   # This value determines the NixOS release from which the default
