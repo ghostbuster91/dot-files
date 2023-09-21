@@ -69,6 +69,9 @@
     fd # faster find
     ripgrep # better grep
 
+    dnsutils # dig etc
+    traceroute
+
     tree # display tree structure of directory
     jq # pretty-print json
     hexyl # pretty-print hex
@@ -102,9 +105,9 @@
     tig
     slack
     zoom-us
-    # openconnect-sso
 
     gnomeExtensions.tray-icons-reloaded
+    # gnomeExtensions.appindicator # TODO test if both are needed
     gnome.gnome-tweaks
     jetbrains.idea-community
     pkgs.kooha # screen recorder
