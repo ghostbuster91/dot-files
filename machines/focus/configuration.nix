@@ -217,6 +217,7 @@ in
       polkitPolicyOwners = [ username ];
     };
     zsh.enable = true;
+    wireshark.enable = true;
   };
 
   virtualisation = {
