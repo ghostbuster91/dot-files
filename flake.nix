@@ -64,6 +64,10 @@
         url = "github:nvim-telescope/telescope-live-grep-args.nvim";
         flake = false;
       };
+      p_nvim-substitute = {
+        url = "github:gbprod/substitute.nvim";
+        flake = false;
+      };
       p_treesitter-scala = {
         url = "github:tree-sitter/tree-sitter-scala";
         flake = false;

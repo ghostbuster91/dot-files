@@ -382,6 +382,22 @@
         "type": "github"
       }
     },
+    "p_nvim-substitute": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1689863405,
+        "narHash": "sha256-3rAYqqk5HUFqRMb2GNW326mHiVSOc+pIJ/FN5N58nAU=",
+        "owner": "gbprod",
+        "repo": "substitute.nvim",
+        "rev": "89dbe55cccee36bcb5e2be8c2d92ff8716601734",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gbprod",
+        "repo": "substitute.nvim",
+        "type": "github"
+      }
+    },
     "p_nvim-telescope-livegrep-args": {
       "flake": false,
       "locked": {
@@ -448,6 +464,7 @@
         "p_nvim-next": "p_nvim-next",
         "p_nvim-portal": "p_nvim-portal",
         "p_nvim-smart-splits-nvim": "p_nvim-smart-splits-nvim",
+        "p_nvim-substitute": "p_nvim-substitute",
         "p_nvim-telescope-livegrep-args": "p_nvim-telescope-livegrep-args",
         "p_treesitter-devicetree": "p_treesitter-devicetree",
         "p_treesitter-scala": "p_treesitter-scala",
