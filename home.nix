@@ -65,12 +65,16 @@
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     bat # better cat
     tokei # better cloc
-    xsv # csv manipulation
     fd # faster find
     ripgrep # better grep
+    procs # better ps
+    pstree # tree like ps
+    exiftool # extract metadata info
 
     dnsutils # dig etc
     traceroute
+    nload
+    speedtest-cli
 
     tree # display tree structure of directory
     jq # pretty-print json
@@ -78,6 +82,7 @@
 
     # Files
     dua # disk usage analyzer
+    duf #FIXME currently it is hidden be some alias 
 
     # nix stuff
     nix-du
@@ -88,10 +93,6 @@
     nvd # compare nix derivations
     statix # nix linter
     nix-output-monitor
-
-    # Media
-    youtube-dl
-    imagemagick
 
     # Overview
     htop
