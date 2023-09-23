@@ -76,6 +76,10 @@
         url = "github:joelspadin/tree-sitter-devicetree";
         flake = false;
       };
+      p_treesitter-hocon = {
+        url = "github:antosha417/tree-sitter-hocon";
+        flake = false;
+      };
     };
 
   outputs = inputs @ { home-manager, nixpkgs-unstable, nixpkgs, disko, hardware, sops-nix, ... }:

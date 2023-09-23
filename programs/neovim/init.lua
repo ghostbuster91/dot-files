@@ -158,6 +158,12 @@ map("n", "]d", nndiag.goto_next({ wrap = false, severity = { min = diag.severity
 
 require("gitlinker").setup()
 
+local hocon_group = vim.api.nvim_create_augroup("hocon", { clear = true })
+vim.api.nvim_create_autocmd(
+    { 'BufNewFile', 'BufRead' },
+    { group = hocon_group, pattern = '*.conf', command = 'set ft=hocon' }
+)
+
 require("local/trouble").setup()
 local telescope = require("local/telescope").setup()
 require("local/noice").setup(telescope.core)

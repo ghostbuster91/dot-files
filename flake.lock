@@ -430,6 +430,22 @@
         "type": "github"
       }
     },
+    "p_treesitter-hocon": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1667813940,
+        "narHash": "sha256-9Zo3YYoo9mJ4Buyj7ofSrlZURrwstBo0vgzeTq1jMGw=",
+        "owner": "antosha417",
+        "repo": "tree-sitter-hocon",
+        "rev": "c390f10519ae69fdb03b3e5764f5592fb6924bcc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "antosha417",
+        "repo": "tree-sitter-hocon",
+        "type": "github"
+      }
+    },
     "p_treesitter-scala": {
       "flake": false,
       "locked": {
@@ -467,6 +483,7 @@
         "p_nvim-substitute": "p_nvim-substitute",
         "p_nvim-telescope-livegrep-args": "p_nvim-telescope-livegrep-args",
         "p_treesitter-devicetree": "p_treesitter-devicetree",
+        "p_treesitter-hocon": "p_treesitter-hocon",
         "p_treesitter-scala": "p_treesitter-scala",
         "sops-nix": "sops-nix"
       }

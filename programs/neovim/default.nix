@@ -93,6 +93,7 @@ in
             tree-sitter-kotlin
             pkgs-unstable.p_treesitter-scala
             pkgs-unstable.p_treesitter-devicetree
+            pkgs-unstable.p_treesitter-hocon
             tree-sitter-query # for the tree-sitter itself
             tree-sitter-python
             tree-sitter-go
