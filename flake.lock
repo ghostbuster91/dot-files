@@ -285,6 +285,22 @@
         "type": "github"
       }
     },
+    "p_nvim-local-highlight": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1695113533,
+        "narHash": "sha256-TgRS5g8plT+AYJsQVPsYEoOd09ba0vY3BGaPqztRT1Q=",
+        "owner": "tzachar",
+        "repo": "local-highlight.nvim",
+        "rev": "b5c45c0383f814b7b1498dd53fdd840750d50243",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tzachar",
+        "repo": "local-highlight.nvim",
+        "type": "github"
+      }
+    },
     "p_nvim-metals": {
       "flake": false,
       "locked": {
@@ -474,6 +490,7 @@
         "nixpkgs-unstable": "nixpkgs-unstable",
         "p_nvim-actions-preview": "p_nvim-actions-preview",
         "p_nvim-leap": "p_nvim-leap",
+        "p_nvim-local-highlight": "p_nvim-local-highlight",
         "p_nvim-metals": "p_nvim-metals",
         "p_nvim-neogit": "p_nvim-neogit",
         "p_nvim-neotree": "p_nvim-neotree",
