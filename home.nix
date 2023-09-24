@@ -82,7 +82,8 @@
 
     # Files
     dua # disk usage analyzer
-    duf #FIXME currently it is hidden be some alias 
+    duf #FIXME currently it is hidden by some alias 
+    nsxiv # image viewer
 
     # nix stuff
     nix-du
