@@ -7,6 +7,9 @@ local setup = function(next_integrations)
     vim.api.nvim_set_hl(0, 'TSDefinition', { bg = '#2A2A37' })
     vim.api.nvim_set_hl(0, 'TSDefinitionUsage', { bg = '#2A2A37' })
 
+    -- remove once https://github.com/nvim-treesitter/nvim-treesitter/pull/5443 is merged
+    vim.treesitter.language.register("scala", "sbt")
+
     require("nvim-treesitter.configs").setup({
         ensure_installed = {},
         highlight = {
