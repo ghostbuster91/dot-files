@@ -80,11 +80,23 @@ local setup = function(hydra, lsp)
             end, { desc = 'virtualedit' } },
             { 'i', function()
                 if vim.o.list == true then
+                    vim.opt.listchars = {
+                        space = ' ',
+                        tab = nil,
+                        eol = ' '
+                    }
                     vim.o.list = false
+                    vim.notify("white characters invisible", vim.log.levels.INFO, { title = "indent-line" })
                 else
                     vim.o.list = true
+                    vim.opt.listchars = {
+                        space = '⋅',
+                        tab = '»»',
+                        eol = '↴'
+                    }
+                    vim.notify("white characters visible", vim.log.levels.INFO, { title = "indent-line" })
                 end
-            end, { desc = 'show invisible' } },
+            end, { exit = true, desc = 'show invisible' } },
             { 's', function()
                 lsp.spell_check.toggle()
             end, { exit = true, desc = 'null_ls spell check' } },
