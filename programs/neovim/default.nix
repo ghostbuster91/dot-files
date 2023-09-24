@@ -174,7 +174,6 @@ in
           EOF
         '';
       }
-      nvim-bqf
       telescope-undo-nvim
       dial-nvim
       p_nvim-smart-splits-nvim
