@@ -182,7 +182,3 @@ require("local/neotree").setup()
 require("which-key").setup()
 require("local/substitute").setup()
 
-vim.api.nvim_set_hl(0, 'MyHighlightGroup4', { bg = '#2A2A37' })
-require('local-highlight').setup({
-    hlgroup = 'MyHighlightGroup4',
-})

@@ -68,10 +68,6 @@
         url = "github:gbprod/substitute.nvim";
         flake = false;
       };
-      p_nvim-local-highlight = {
-        url = "github:tzachar/local-highlight.nvim";
-        flake = false;
-      };
       p_treesitter-scala = {
         url = "github:tree-sitter/tree-sitter-scala";
         flake = false;

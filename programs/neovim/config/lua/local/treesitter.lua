@@ -2,6 +2,11 @@ local api = vim.api
 
 local setup = function(next_integrations)
     next_integrations.treesitter_textobjects()
+
+    -- highlights for treesitter-refactor
+    vim.api.nvim_set_hl(0, 'TSDefinition', { bg = '#2A2A37' })
+    vim.api.nvim_set_hl(0, 'TSDefinitionUsage', { bg = '#2A2A37' })
+
     require("nvim-treesitter.configs").setup({
         ensure_installed = {},
         highlight = {
@@ -123,7 +128,27 @@ local setup = function(next_integrations)
                     },
                 }
             }
-        }
+        },
+        refactor = {
+            enable = true,
+            highlight_definitions = {
+                enable = true,
+                -- Set to false if you have an `updatetime` of ~100.
+                clear_on_cursor_move = true,
+            },
+            highlight_current_scope = { enable = false },
+            navigation = {
+                enable = true,
+                -- Assign keymaps to false to disable them, e.g. `goto_definition = false`.
+                keymaps = {
+                    goto_definition = false,
+                    list_definitions = false,
+                    list_definitions_toc = false,
+                    goto_next_usage = ")",
+                    goto_previous_usage = "(",
+                },
+            },
+        },
     })
 end
 

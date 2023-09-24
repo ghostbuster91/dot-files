@@ -108,6 +108,7 @@ in
       ))
       playground
       nvim-treesitter-textobjects
+      nvim-treesitter-refactor
 
       nvim-web-devicons
       lualine-nvim
@@ -181,7 +182,6 @@ in
       hydra-nvim
       p_nvim-telescope-livegrep-args
       p_nvim-substitute
-      p_nvim-local-highlight
     ];
   };
 }
