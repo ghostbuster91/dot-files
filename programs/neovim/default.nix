@@ -94,6 +94,7 @@ in
             pkgs-unstable.p_treesitter-scala
             pkgs-unstable.p_treesitter-devicetree
             pkgs-unstable.p_treesitter-hocon
+            pkgs-unstable.p_treesitter-xml
             tree-sitter-query # for the tree-sitter itself
             tree-sitter-python
             tree-sitter-go

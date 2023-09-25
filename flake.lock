@@ -462,6 +462,22 @@
         "type": "github"
       }
     },
+    "p_treesitter-xml": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1691653663,
+        "narHash": "sha256-3ryZXRgsBaNKBBHUhJ8ANHYunOUMzthMI7gw+6lnooQ=",
+        "owner": "ObserverOfTime",
+        "repo": "tree-sitter-xml",
+        "rev": "9deacbfb79cb3527a0396255beb17e1bba3f2052",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ObserverOfTime",
+        "repo": "tree-sitter-xml",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "disko": "disko",
@@ -485,6 +501,7 @@
         "p_treesitter-devicetree": "p_treesitter-devicetree",
         "p_treesitter-hocon": "p_treesitter-hocon",
         "p_treesitter-scala": "p_treesitter-scala",
+        "p_treesitter-xml": "p_treesitter-xml",
         "sops-nix": "sops-nix"
       }
     },

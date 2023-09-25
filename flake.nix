@@ -80,6 +80,10 @@
         url = "github:antosha417/tree-sitter-hocon";
         flake = false;
       };
+      p_treesitter-xml = {
+        url = "github:ObserverOfTime/tree-sitter-xml";
+        flake = false;
+      };
     };
 
   outputs = inputs @ { home-manager, nixpkgs-unstable, nixpkgs, disko, hardware, sops-nix, ... }:
