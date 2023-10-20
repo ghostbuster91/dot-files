@@ -75,6 +75,7 @@ in
       keep-outputs = true;
       keep-derivations = true;
     };
+
   };
 
 
@@ -183,6 +184,7 @@ in
     glxinfo
     libva-utils
     globalprotect-openconnect
+    sops
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
