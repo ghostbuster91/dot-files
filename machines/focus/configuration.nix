@@ -110,6 +110,8 @@ in
     qmk-udev-rules
   ];
 
+  hardware.flipperzero.enable = true;
+
   environment.gnome.excludePackages = (with pkgs; [
     gnome-photos
     gnome-tour
