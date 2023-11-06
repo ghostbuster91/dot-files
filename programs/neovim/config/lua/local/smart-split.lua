@@ -1,6 +1,6 @@
 local setup = function()
     require('smart-splits').setup({
-        wrap_at_edge = false,
+        at_edge = "wrap",
         multiplexer_integration = "tmux",
     })
     vim.keymap.set('n', '<C-Left>', require('smart-splits').resize_left)
