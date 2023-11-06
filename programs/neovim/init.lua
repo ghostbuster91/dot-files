@@ -61,26 +61,14 @@ require("neoclip").setup()
 require("telescope").load_extension("neoclip")
 map("n", "<leader>'", require("telescope").extensions.neoclip.star, { desc = "clipboard" })
 
-require("indent_blankline").setup()
-
--- vim.g.loaded_netrw = 1
--- vim.g.loaded_netrwPlugin = 1
--- require("nvim-tree").setup({
---     view = {
---         adaptive_size = true,
---     },
--- })
--- map("n", '<leader>et', function()
---     require("nvim-tree.api").tree.toggle(true, true)
--- end, { desc = "nvim_tree toggle" })
--- map("n", '<leader>ef', function()
---     require("nvim-tree.api").tree.find_file(false, true)
--- end, { desc = "nvim_tree toggle" })
-
+require("ibl").setup({
+    indent = { char = "▏" },
+    scope = { enabled = false }
+})
 
 require("fidget").setup({
     debug = {
-        logging = true
+        logging = false
     }
 })
 
@@ -181,4 +169,3 @@ require("local/hydra").setup(lsp)
 require("local/neotree").setup()
 require("which-key").setup()
 require("local/substitute").setup()
-
