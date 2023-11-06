@@ -32,7 +32,7 @@ in
     plugins = [
       {
         name = "fzf-tab";
-        src = "${pkgs-unstable.zsh-fzf-tab}/share/fzf-tab";
+        src = "${pkgs.zsh-fzf-tab}/share/fzf-tab";
       }
       {
         name = "zsh-you-should-use";
