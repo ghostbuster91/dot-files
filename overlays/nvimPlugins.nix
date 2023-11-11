@@ -1,6 +1,6 @@
 { pkgs, inputs }:
 let
-  nvimPluginBuilder = pluginInput: pkgs.vimUtils.buildVimPluginFrom2Nix rec {
+  nvimPluginBuilder = pluginInput: pkgs.vimUtils.buildVimPlugin rec {
     pname = pluginInput.name;
     version = pluginInput.rev;
     src = pluginInput;
