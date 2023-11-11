@@ -15,6 +15,7 @@
       format = "[$time]($style)";
     };
     right_format = lib.concatStrings [ "$time" ];
+    aws.disabled = true;
     java.disabled = true;
     kotlin.disabled = true;
     c.disabled = true;
