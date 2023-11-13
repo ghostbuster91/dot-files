@@ -114,7 +114,7 @@
         inherit system;
         modules = [
           ./machines/focus/configuration.nix
-          ./modules/games.nix
+          ./modules
           home-manager.nixosModules.home-manager
           {
             home-manager = {

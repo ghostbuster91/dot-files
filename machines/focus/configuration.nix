@@ -82,54 +82,12 @@ in
   # Set your time zone.
   time.timeZone = "Europe/Warsaw";
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  #   useXkbConfig = true; # use xkbOptions in tty.
-  # };
-
-  # Enable the X11 windowing system.
-  services.xserver = {
-    enable = true;
-    videoDrivers = [ "nvidia" ];
-  };
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-  services.xserver.displayManager.gdm.wayland = true;
-  services.xserver.displayManager.defaultSession = "gnome";
-
   users.groups.plugdev = { }; # needed for qmk-udev-rules
   services.udev.packages = with pkgs; [
-    gnome.gnome-settings-daemon
     qmk-udev-rules
   ];
 
   hardware.flipperzero.enable = true;
-
-  environment.gnome.excludePackages = (with pkgs; [
-    gnome-photos
-    gnome-tour
-  ]) ++ (with pkgs.gnome; [
-    cheese # webcam tool
-    gnome-music
-    gedit # text editor
-    epiphany # web browser
-    geary # email reader
-    evince # document viewer
-    gnome-characters
-    totem # video player
-    tali # poker game
-    iagno # go game
-    hitori # sudoku game
-    atomix # puzzle game
-  ]);
-
   hardware.opengl.enable = true;
 
   hardware.nvidia = {
@@ -148,14 +106,7 @@ in
       allowExternalGpu = false;
     };
   };
-  # Configure keymap in X11
-  services.xserver.layout = "pl";
-  # services.xserver.xkbOptions = "eurosign:e,caps:escape";
 
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
-  # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
@@ -189,26 +140,8 @@ in
     sops
   ];
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
   environment.shells = with pkgs; [ zsh ];
+
   programs = {
 
     # Enable the 1Password CLI, this also enables a SGUID wrapper so the CLI can authorize against the GUI app
@@ -241,6 +174,7 @@ in
       enableExtensionPack = false;
     };
   };
+
   users.extraGroups.docker.members = [ username ];
   # virtualisation.docker.rootless = {
   #   enable = true;
