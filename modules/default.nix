@@ -1,6 +1,6 @@
 {
   imports = [
-    ./gnome
+    ./gnome-wayland
     ./games
   ];
 }
