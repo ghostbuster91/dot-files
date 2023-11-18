@@ -32,6 +32,13 @@
     atomix # puzzle game
   ]);
 
+  hardware.pulseaudio.enable = false;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
 
   # Configure keymap in X11
   services.xserver.layout = "pl";
