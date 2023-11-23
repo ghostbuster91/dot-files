@@ -3,9 +3,9 @@ let
   leaderKey = "\\<Space>";
 in
 {
-  home.file."./.config/nvim/" = {
-    source = ./config;
+  xdg.configFile."nvim/lua" = {
     recursive = true;
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/workspace/dot-files/programs/neovim/config/lua";
   };
   programs.neovim = {
     enable = true;
