@@ -183,6 +183,7 @@ in
       hydra-nvim
       p_nvim-telescope-livegrep-args
       p_nvim-substitute
+      p_nvim-baleia
     ];
   };
 }

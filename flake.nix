@@ -68,6 +68,10 @@
         url = "github:gbprod/substitute.nvim";
         flake = false;
       };
+      p_nvim-baleia = {
+        url = "github:m00qek/baleia.nvim";
+        flake = false;
+      };
       p_treesitter-scala = {
         url = "github:tree-sitter/tree-sitter-scala";
         flake = false;
