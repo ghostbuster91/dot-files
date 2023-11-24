@@ -331,6 +331,7 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, b
     metals_config.settings = {
         metalsBinaryPath = binaries.metals_binary_path,
         showImplicitArguments = true,
+        superMethodLensesEnabled = false,
         excludedPackages = {
             "akka.actor.typed.javadsl",
             "com.github.swagger.akka.javadsl"
