@@ -392,6 +392,15 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, b
         root_dir = lspconfig.util.root_pattern("smithy-build.json")
     }
 
+
+    local misc_group = api.nvim_create_augroup("misc", { clear = true })
+    api.nvim_create_autocmd('FileType', {
+        pattern = { "log" },
+        callback = function()
+            require('baleia').setup({}).once(0)
+        end,
+        group = misc_group
+    })
     return M
 end
 
