@@ -88,7 +88,9 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, b
         end, "lsp goto implementation")
         mapB("n", "<leader>f", lsp.buf.format, "lsp format")
         mapB("n", "<leader>nt", function()
-            telescope_builtin.lsp_document_symbols(vertical_layout)
+            telescope_builtin.lsp_document_symbols(vim.tbl_extend("force",
+                { symbols = { "class", "method", "function" } },
+                vertical_layout))
         end, "lsp document symbols")
         map(
             "n",

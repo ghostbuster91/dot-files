@@ -5,8 +5,12 @@ in
 {
   xdg.configFile."nvim/lua" = {
     recursive = true;
-    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/workspace/dot-files/programs/neovim/config/lua";
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/workspace/dot-files/programs/neovim/lua";
   };
+  # home.file."./.config/nvim/lua/" = {
+  #   source = ./lua;
+  #   recursive = true;
+  # };
   programs.neovim = {
     enable = true;
     package = pkgs-unstable.neovim-unwrapped;
@@ -159,15 +163,7 @@ in
       p_nvim-leap
       gitlinker-nvim
       p_nvim-actions-preview
-      {
-        plugin = p_nvim-portal;
-        config = ''
-          lua << EOF
-            vim.keymap.set("n", "<leader>o", "<cmd>Portal jumplist backward<cr>")
-            vim.keymap.set("n", "<leader>i", "<cmd>Portal jumplist forward<cr>")
-          EOF
-        '';
-      }
+      p_nvim-portal
       {
         plugin = nvim-dap-virtual-text;
         config = ''
