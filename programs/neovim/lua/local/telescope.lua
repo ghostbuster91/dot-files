@@ -1,10 +1,11 @@
 local map = vim.keymap.set
 
-local setup = function()
+local setup = function(diffview)
     local actions = require("telescope.actions")
     local telescope = require("telescope")
     local previewers = require("telescope.previewers")
     local live_grep_args_shortcuts = require("telescope-live-grep-args.shortcuts")
+    local action_state = require("telescope.actions.state")
 
     local small_files_preview_maker = function(filepath, bufnr, opts)
         opts = opts or {}
@@ -35,6 +36,17 @@ local setup = function()
                         ["<c-d>"] = actions.delete_buffer + actions.move_to_top,
                     }
                 }
+            },
+            git_bcommits = {
+                mappings = {
+                    i = {
+                        ["<CR>"] = function(prompt_bufnr)
+                            local entry = action_state.get_selected_entry()
+                            actions.close(prompt_bufnr)
+                            diffview.open(entry.value .. "~1..." .. entry.value)
+                        end
+                    }
+                }
             }
         },
         extensions = {
@@ -60,7 +72,7 @@ local setup = function()
         { desc = "diagnostics" }
     )
 
-    map("n", "<leader>hc", function()
+    map("n", "<leader>ec", function()
         builtin.git_bcommits()
     end, { desc = "Buffer commites" })
     map("n", "<leader>ti", function()

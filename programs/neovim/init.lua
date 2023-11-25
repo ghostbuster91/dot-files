@@ -75,28 +75,9 @@ require("fidget").setup({
 
 require('nvim-lightbulb').setup({ autocmd = { enabled = true } })
 
--- local diffview_actions = next_integrations.diffview(require("diffview.actions"))
--- require("diffview").setup({
---     file_history_panel = {
---         keymaps = {
---             { "n", "[x", diffview_actions.prev_conflict, { desc = "In the merge-tool: jump to the previous conflict" } },
---             { "n", "]x", diffview_actions.next_conflict, { desc = "In the merge-tool: jump to the next conflict" } },
---         }
---     }
--- })
-
-local neogit = require('neogit')
-neogit.setup {
-    disable_commit_confirmation = true,
-}
-map("n", '<leader>ne', function()
-    neogit.open()
-end, { desc = "neogit" })
-
 require('goto-preview').setup {
     default_mappings = true,
 }
-
 
 map("n", "k", function()
     diag.open_float()
@@ -137,7 +118,6 @@ end, function(_)
     end
 end)
 
-map("n", "]q", next_qf_item, { desc = "nvim-next: next qfix" })
 map("n", "[q", prev_qf_item, { desc = "nvim-next: prev qfix" })
 
 local nndiag = next_integrations.diagnostic()
@@ -154,7 +134,8 @@ vim.api.nvim_create_autocmd(
 )
 
 require("local/trouble").setup()
-local telescope = require("local/telescope").setup()
+local diffview = require("local/diffview").setup(next_integrations)
+local telescope = require("local/telescope").setup(diffview)
 require("local/noice").setup(telescope.core)
 ---@diagnostic disable-next-line: undefined-global
 local lsp = require("local/lsp").setup(telescope.core, telescope.builtin, navic, next_integrations, binaries)
@@ -171,3 +152,4 @@ require("local/neotree").setup()
 require("which-key").setup()
 require("local/substitute").setup()
 require("local/portal").setup()
+require("local/neogit").setup()

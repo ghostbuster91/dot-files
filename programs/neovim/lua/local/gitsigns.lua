@@ -12,30 +12,28 @@ local setup = function(next_integrations)
             local nngs = next_integrations.gitsigns(gs)
 
             -- Navigation
-            map({ 'n', 'v' }, ']c', function()
+            map({ 'n', 'v', 'o' }, ']c', function()
                 if vim.wo.diff then return ']c' end
                 vim.schedule(function() nngs.next_hunk({ wrap = false }) end)
                 return '<Ignore>'
             end, { expr = true })
 
-            map({ 'n', 'v' }, '[c', function()
+            map({ 'n', 'v', 'o' }, '[c', function()
                 if vim.wo.diff then return '[c' end
                 vim.schedule(function() nngs.prev_hunk({ wrap = false }) end)
                 return '<Ignore>'
             end, { expr = true })
 
             -- Actions
-            map({ 'n', 'v' }, '<leader>hs', ':Gitsigns stage_hunk<CR>')
-            map({ 'n', 'v' }, '<leader>hr', ':Gitsigns reset_hunk<CR>')
-            map('n', '<leader>hS', gs.stage_buffer, { desc = "git:stage buffer" })
-            map('n', '<leader>hu', gs.undo_stage_hunk, { desc = "git:undo stage hunk" })
-            map('n', '<leader>hR', gs.reset_buffer, { desc = "git:reset buffer" })
-            map('n', '<leader>hp', gs.preview_hunk, { desc = "git:preview hunk" })
-            map('n', '<leader>hb', function() gs.blame_line { full = true } end, { desc = "git:blame current line" })
-            map('n', '<leader>tb', gs.toggle_current_line_blame, { desc = "git:current line blame" })
-            map('n', '<leader>hd', gs.diffthis, { desc = "git:show diff" })
-            map('n', '<leader>hD', function() gs.diffthis('~') end, { desc = "git:show diff~" })
-            map('n', '<leader>td', gs.toggle_deleted, { desc = "git:toggle deleted" })
+            map({ 'n', 'v' }, '<leader>es', ':Gitsigns stage_hunk<CR>')
+            map({ 'n', 'v' }, '<leader>er', ':Gitsigns reset_hunk<CR>')
+            map('n', '<leader>eS', gs.stage_buffer, { desc = "git:stage buffer" })
+            map('n', '<leader>eu', gs.undo_stage_hunk, { desc = "git:undo stage hunk" })
+            map('n', '<leader>eR', gs.reset_buffer, { desc = "git:reset buffer" })
+            map('n', '<leader>ep', gs.preview_hunk, { desc = "git:preview hunk" })
+            map('n', '<leader>eb', function() gs.blame_line { full = true } end, { desc = "git:blame current line" })
+            -- map('n', '<leader>hd', gs.diffthis, { desc = "git:show diff" })
+            -- map('n', '<leader>hD', function() gs.diffthis('~') end, { desc = "git:show diff~" })
 
             -- Text object
             map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
