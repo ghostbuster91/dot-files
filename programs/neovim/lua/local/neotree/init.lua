@@ -47,6 +47,7 @@ local setup = function()
     end
 
     require("neo-tree").setup({
+        sources = { "filesystem", "git_status", "buffers", "document_symbols" },
         git_status_async = true,
         enable_diagnostics = false,
         close_if_last_window = true,
