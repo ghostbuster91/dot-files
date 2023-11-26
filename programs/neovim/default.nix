@@ -1,4 +1,4 @@
-{ pkgs, config, pkgs-unstable, ... }:
+{ pkgs, config, pkgs-unstable, lib, ... }:
 let
   leaderKey = "\\<Space>";
 in
@@ -29,6 +29,9 @@ in
           metals_binary_path = "${pkgs-unstable.metals}/bin/metals",
           smithy_ls_path = "${pkgs-unstable.disney-smithy-ls}/bin/smithy_ls",
           lua_language_server = "${pkgs-unstable.sumneko-lua-language-server}/bin/lua-language-server",
+          go = "${lib.getExe pkgs.go}",
+          python = "${lib.getExe pkgs.python3}",
+          scalaCLI = "${lib.getExe pkgs-unstable.scala-cli}",
         }
         
         ${builtins.readFile ./init.lua}
@@ -180,6 +183,8 @@ in
       p_nvim-telescope-livegrep-args
       p_nvim-substitute
       p_nvim-baleia
+      p_nvim-scratch
+      sniprun
     ];
   };
 }

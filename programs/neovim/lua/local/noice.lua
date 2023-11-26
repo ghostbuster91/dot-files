@@ -1,5 +1,6 @@
 local setup = function(telescope)
-    local noice = require("noice").setup({
+    local noice = require("noice")
+    noice.setup({
         lsp = { progress = { enabled = false } },
         notify = {
             -- Noice can be used as `vim.notify` so you can route any notification like other messages
@@ -15,9 +16,25 @@ local setup = function(telescope)
             view = "mini",       -- default view for messages
             view_error = "mini", -- view for errors
             view_warn = "mini",  -- view for warnings
+        },
+        presets = {
+            long_message_to_split = true,
+        },
+        routes = {
+            {
+                view = "vsplit",
+                filter = {
+                    kind = "sniprun"
+                },
+            },
         }
     })
     telescope.load_extension("noice")
+
+    vim.keymap.set("c", "<S-Enter>", function()
+        noice.redirect(vim.fn.getcmdline())
+    end, { desc = "Redirect Cmdline" })
+
     return noice
 end
 

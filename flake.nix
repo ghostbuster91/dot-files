@@ -72,6 +72,10 @@
         url = "github:m00qek/baleia.nvim";
         flake = false;
       };
+      p_nvim-scratch = {
+        url = "github:ghostbuster91/scratch.nvim";
+        flake = false;
+      };
       p_treesitter-scala = {
         url = "github:tree-sitter/tree-sitter-scala";
         flake = false;

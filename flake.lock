@@ -382,6 +382,22 @@
         "type": "github"
       }
     },
+    "p_nvim-scratch": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1701035601,
+        "narHash": "sha256-K4jvcPaUHlYNtXPhjWHZajAEtWPDVLKoGJxS6gGE0do=",
+        "owner": "ghostbuster91",
+        "repo": "scratch.nvim",
+        "rev": "0ad662cefc676c387832b0e2a3994318fb5f7fa6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ghostbuster91",
+        "repo": "scratch.nvim",
+        "type": "github"
+      }
+    },
     "p_nvim-smart-splits-nvim": {
       "flake": false,
       "locked": {
@@ -512,6 +528,7 @@
         "p_nvim-neotree": "p_nvim-neotree",
         "p_nvim-next": "p_nvim-next",
         "p_nvim-portal": "p_nvim-portal",
+        "p_nvim-scratch": "p_nvim-scratch",
         "p_nvim-smart-splits-nvim": "p_nvim-smart-splits-nvim",
         "p_nvim-substitute": "p_nvim-substitute",
         "p_nvim-telescope-livegrep-args": "p_nvim-telescope-livegrep-args",
