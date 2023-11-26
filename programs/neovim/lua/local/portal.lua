@@ -19,7 +19,7 @@ local setup = function()
         ---An ordered list of keys for labelling portals.
         ---Labels will be applied in order, or to match slotted results.
         ---@type string[]
-        labels = { "n", "t", "e", "s", "i", "r" },
+        labels = { "n", "e", "i", "o", "t", "s", "r", "a" },
 
         ---Select the first portal when there is only one result.
         select_first = false,
@@ -133,7 +133,7 @@ local setup = function()
     end
 
     vim.keymap.set('n', '<BS>n', function()
-        portal.tunnel(query({ max_results = 8 }))
+        portal.tunnel(query({ max_results = 5 }))
     end)
 end
 
