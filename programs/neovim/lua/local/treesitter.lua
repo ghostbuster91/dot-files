@@ -10,6 +10,7 @@ local setup = function(next_integrations)
     -- remove once https://github.com/nvim-treesitter/nvim-treesitter/pull/5443 is merged
     vim.treesitter.language.register("scala", "sbt")
 
+    ---@diagnostic disable: missing-fields
     require("nvim-treesitter.configs").setup({
         ensure_installed = {},
         highlight = {

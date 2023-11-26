@@ -159,8 +159,8 @@ in
       telescope-dap-nvim
       p_nvim-metals
       trouble-nvim
-      vim-repeat # needed for leap
-      p_nvim-leap
+      vim-repeat
+      flash-nvim
       gitlinker-nvim
       p_nvim-actions-preview
       p_nvim-portal
