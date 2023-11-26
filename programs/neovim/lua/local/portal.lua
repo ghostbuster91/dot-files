@@ -117,7 +117,7 @@ local setup = function()
         end)
 
         iter = iter:filter(function(v)
-            return vim.api.nvim_buf_is_valid(v.buffer)
+            return vim.api.nvim_buf_is_valid(v.buffer) and v.buffer ~= vim.fn.bufnr()
         end)
 
         return {
