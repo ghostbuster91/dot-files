@@ -9,6 +9,8 @@ global_opt.clipboard = "unnamed"
 global_opt.timeoutlen = 200
 
 local next_integrations = require("nvim-next.integrations")
+-- YANK highlight
+vim.cmd([[autocmd TextYankPost * silent! lua vim.highlight.on_yank {}]])
 
 vim.cmd([[au BufRead,BufNewFile *.smithy setfiletype smithy]])
 vim.cmd([[au BufRead,BufNewFile *.log setfiletype log]])
