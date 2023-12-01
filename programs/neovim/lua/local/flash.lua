@@ -12,7 +12,16 @@ local setup = function()
         search = {
             -- search/jump in all windows
             multi_window = false,
-        }
+        },
+        modes = {
+            char = {
+                enabled = false,
+            },
+            search = {
+                enabled = false,
+            }
+        },
+
     })
 end
 
