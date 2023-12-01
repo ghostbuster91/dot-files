@@ -41,7 +41,7 @@ local setup = function(hydra, lsp)
                     { 'b', dap.set_breakpoint,    { silent = true } },
                     { 'l', dap.run_last,          { silent = true } },
                     { 'K', dap.hover,             { silent = true } },
-                    { 'r', dap.hover,             { silent = true } },
+                    { 'r', dap.toggle_repl,       { silent = true } },
                     { 'q', nil, {
                         exit = true,
                         nowait = true
