@@ -185,6 +185,7 @@ in
       p_nvim-baleia
       p_nvim-scratch
       sniprun
+      p_nvim-hover
     ];
   };
 }

@@ -76,6 +76,10 @@
         url = "github:ghostbuster91/scratch.nvim";
         flake = false;
       };
+      p_nvim-hover = {
+        url = "github:lewis6991/hover.nvim";
+        flake = false;
+      };
       p_treesitter-scala = {
         url = "github:tree-sitter/tree-sitter-scala";
         flake = false;

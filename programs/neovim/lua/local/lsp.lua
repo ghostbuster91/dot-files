@@ -103,7 +103,7 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, b
         mapB({ "v", "n" }, "<leader>ca", require("actions-preview").code_actions)
         mapB("n", "<leader>cl", lsp.codelens.run)
 
-        mapB("n", "K", lsp.buf.hover, "lsp hover")
+        -- mapB("n", "K", lsp.buf.hover, "lsp hover")
         mapB("n", "<Leader>nr", function()
             telescope_builtin.lsp_references(vertical_layout)
         end, "lsp references")

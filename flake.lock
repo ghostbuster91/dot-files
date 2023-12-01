@@ -285,6 +285,22 @@
         "type": "github"
       }
     },
+    "p_nvim-hover": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1700651509,
+        "narHash": "sha256-oEXj/45k9DWoZSuz4RgPNXZ2U3CTiEkO5Rx1Xsgnujo=",
+        "owner": "lewis6991",
+        "repo": "hover.nvim",
+        "rev": "0a0dd1baf1bb9415e3358207b6ab35747fb5f3ba",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lewis6991",
+        "repo": "hover.nvim",
+        "type": "github"
+      }
+    },
     "p_nvim-leap": {
       "flake": false,
       "locked": {
@@ -522,6 +538,7 @@
         "nixpkgs-unstable": "nixpkgs-unstable",
         "p_nvim-actions-preview": "p_nvim-actions-preview",
         "p_nvim-baleia": "p_nvim-baleia",
+        "p_nvim-hover": "p_nvim-hover",
         "p_nvim-leap": "p_nvim-leap",
         "p_nvim-metals": "p_nvim-metals",
         "p_nvim-neogit": "p_nvim-neogit",
