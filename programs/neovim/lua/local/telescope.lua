@@ -6,6 +6,7 @@ local setup = function(diffview)
     local previewers = require("telescope.previewers")
     local live_grep_args_shortcuts = require("telescope-live-grep-args.shortcuts")
     local action_state = require("telescope.actions.state")
+    local utils = require("telescope.utils")
 
     local small_files_preview_maker = function(filepath, bufnr, opts)
         opts = opts or {}
@@ -41,9 +42,47 @@ local setup = function(diffview)
                 mappings = {
                     i = {
                         ["<CR>"] = function(prompt_bufnr)
-                            local entry = action_state.get_selected_entry()
+                            local selection = action_state.get_selected_entry()
+                            if selection == nil then
+                                utils.__warn_no_selection "builtin.commands"
+                                return
+                            end
                             actions.close(prompt_bufnr)
-                            diffview.open(entry.value .. "~1..." .. entry.value)
+                            diffview.open(selection.value .. "~1..." .. selection.value)
+                        end
+                    }
+                }
+            },
+            commands = {
+                mappings = {
+                    i = {
+                        ["<CR>"] = function(prompt_bufnr)
+                            local selection = action_state.get_selected_entry()
+                            actions.close(prompt_bufnr)
+                            local val = selection.value
+                            local cmd = string.format([[:%s ]], val.name)
+
+                            vim.cmd(cmd)
+                            vim.fn.histadd("cmd", val.name)
+                        end,
+                        ["<S-CR>"] = function(prompt_bufnr) -- original behavior
+                            local selection = action_state.get_selected_entry()
+                            if selection == nil then
+                                utils.__warn_no_selection "builtin.commands"
+                                return
+                            end
+
+                            actions.close(prompt_bufnr)
+                            local val = selection.value
+                            local cmd = string.format([[:%s ]], val.name)
+
+                            if val.nargs == "0" then
+                                vim.cmd(cmd)
+                                vim.fn.histadd("cmd", val.name)
+                            else
+                                vim.cmd [[stopinsert]]
+                                vim.fn.feedkeys(cmd, "n")
+                            end
                         end
                     }
                 }
