@@ -55,7 +55,7 @@ api.nvim_create_autocmd(
 )
 
 require("nvim-autopairs").setup({
-    check_ts = false,
+    check_ts = true,
 })
 
 require("Comment").setup()
