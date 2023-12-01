@@ -40,10 +40,12 @@ local setup = function(next_integrations)
             swap = {
                 enable = true,
                 swap_next = {
-                    ["<leader>a"] = "@parameter.inner",
+                    ["<m-a>"] = "@parameter.inner",
+                    ["<m-f>"] = "@function.outer",
                 },
                 swap_previous = {
-                    ["<leader>A"] = "@parameter.inner",
+                    ["<m-A>"] = "@parameter.inner",
+                    ["<m-F>"] = "@function.outer",
                 },
             },
             select = {
