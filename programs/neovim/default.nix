@@ -187,6 +187,7 @@ in
       p_nvim-scratch
       sniprun
       p_nvim-hover
+      p_nvim-gp-nvim
     ];
   };
 }

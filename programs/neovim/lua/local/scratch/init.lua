@@ -4,7 +4,7 @@ local setup = function(binaries)
     local sniprun = require('sniprun')
     sniprun.setup({
         display = {
-            "Classic",
+            "Terminal", -- todo change it to something else as its behavior is buggy? (e.g. try insert mode)
         },
         -- cannot add more interpreters for now because they mostly assume global installations
         -- without any option to configure binaries https://github.com/michaelb/sniprun/issues/263
@@ -27,7 +27,7 @@ local setup = function(binaries)
 
     map("n", "<BS>r", function()
         sniprun.run('w')
-    end)
+    end, { desc = "sniprun: execute buffer" })
 
     require('scratch').setup({
         scratch_file_dir = vim.fn.stdpath("cache") .. "/scratch.nvim",
@@ -63,8 +63,19 @@ local setup = function(binaries)
                     "",
                 },
             },
+
         },
+        localKeys = {
+            -- TODO: setup sniprun only for snippets
+        }
     })
+    map("n", "<BS>f", function()
+        require("scratch").scratchOpen()
+    end)
+    map("n", "<BS>n", function()
+        local scratch = require("scratch.scratch_file")
+        scratch.scratch()
+    end)
 end
 
 return { setup = setup }

@@ -285,6 +285,22 @@
         "type": "github"
       }
     },
+    "p_nvim-gp-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1701362739,
+        "narHash": "sha256-NBlcufQdJnXMjwd81X+5EhQvwhP9LKI/qoGxOYx9YHk=",
+        "owner": "Robitx",
+        "repo": "gp.nvim",
+        "rev": "d1ce1df50e504e7aeeb65653b76cc9c8345e9a87",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Robitx",
+        "repo": "gp.nvim",
+        "type": "github"
+      }
+    },
     "p_nvim-hover": {
       "flake": false,
       "locked": {
@@ -538,6 +554,7 @@
         "nixpkgs-unstable": "nixpkgs-unstable",
         "p_nvim-actions-preview": "p_nvim-actions-preview",
         "p_nvim-baleia": "p_nvim-baleia",
+        "p_nvim-gp-nvim": "p_nvim-gp-nvim",
         "p_nvim-hover": "p_nvim-hover",
         "p_nvim-leap": "p_nvim-leap",
         "p_nvim-metals": "p_nvim-metals",
