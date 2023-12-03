@@ -240,7 +240,6 @@ local setupChatGpt = function()
             end,
         },
     }
-
     --
     -- vim.api.nvim_create_autocmd({ 'BufEnter' }, {
     --     pattern = vim.fn.expand('~') .. '/dev/*',
@@ -256,7 +255,7 @@ local setupChatGpt = function()
         end
     }) ]]
     require("gp").setup(config)
-    map("n", "<BS>e", "<cmd>GpChatExplain<cr>", { desc = "gp: explain" })
+    map({ "n", "v" }, "<leader>ce", "<cmd>GpExplain<cr>", { desc = "gp: explain" })
 end
 
 local setupCopilot = function(binaries)
