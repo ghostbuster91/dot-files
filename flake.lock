@@ -285,6 +285,22 @@
         "type": "github"
       }
     },
+    "p_nvim-copilot": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1701432676,
+        "narHash": "sha256-Usk303CSrbnT78+TKbKw5i9AyEVvPMDPvChpEFRnYhc=",
+        "owner": "zbirenbaum",
+        "repo": "copilot.lua",
+        "rev": "38a41d0d78f8823cc144c99784528b9a68bdd608",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zbirenbaum",
+        "repo": "copilot.lua",
+        "type": "github"
+      }
+    },
     "p_nvim-gp-nvim": {
       "flake": false,
       "locked": {
@@ -554,6 +570,7 @@
         "nixpkgs-unstable": "nixpkgs-unstable",
         "p_nvim-actions-preview": "p_nvim-actions-preview",
         "p_nvim-baleia": "p_nvim-baleia",
+        "p_nvim-copilot": "p_nvim-copilot",
         "p_nvim-gp-nvim": "p_nvim-gp-nvim",
         "p_nvim-hover": "p_nvim-hover",
         "p_nvim-leap": "p_nvim-leap",
