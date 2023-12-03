@@ -320,6 +320,7 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, b
         end
 
         mapB("n", "<leader>dl", dap_interface.run_last, "dap: Run last")
+        mapB("n", "<leader>dd", dap_interface.toggle_breakpoint, "dap: toggle breakpoint")
 
         dap.listeners.after["event_terminated"]["nvim-metals"] = function(_, _)
             vim.notify("Tests have finished!", vim.log.levels.INFO, { title = "Metals" })
