@@ -186,7 +186,7 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, b
     -- map buffer local keybindings when the language server attaches
     -- local capabilities = vim.lsp.protocol.make_client_capabilities()
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
-    local servers = { "bashls", "vimls", "rnix", "yamlls", "rust_analyzer", "gopls" }
+    local servers = { "bashls", "vimls", "yamlls", "rust_analyzer", "gopls" }
     for _, lsp in ipairs(servers) do
         lspconfig[lsp].setup({
             on_attach = on_attach,
@@ -233,6 +233,16 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, b
                     library = library
                 },
             }
+        }
+    })
+    require('lspconfig').nil_ls.setup({
+        capabilities = capabilities,
+        settings = {
+            ['nil'] = {
+                formatting = {
+                    command = { binaries.nix_fmt },
+                },
+            },
         }
     })
 

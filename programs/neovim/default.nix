@@ -33,6 +33,7 @@ in
           python = "${lib.getExe pkgs.python3}", -- required for sniprun
           scalaCLI = "${lib.getExe pkgs-unstable.scala-cli}", -- required for sniprun
           nodejs = "${lib.getExe pkgs-unstable.nodejs}", -- required for copilot
+          nix_fmt = "${lib.getExe pkgs-unstable.nixpkgs-fmt}"
         }
         
         ${builtins.readFile ./init.lua}
@@ -45,7 +46,7 @@ in
       nodePackages.bash-language-server
       nodePackages.vim-language-server
       nodePackages.yaml-language-server
-      rnix-lsp
+      nil
       sumneko-lua-language-server
       stylua
       shfmt
