@@ -25,9 +25,12 @@ local setup = function(binaries)
         },
     })
 
-    map("n", "<BS>r", function()
+    map("n", "<leader>rs", function()
         sniprun.run('w')
     end, { desc = "sniprun: execute buffer" })
+    map("v", "<leader>rs", function()
+        sniprun.run('v')
+    end, { desc = "sniprun: execute visual selection" })
 
     require('scratch').setup({
         scratch_file_dir = vim.fn.stdpath("cache") .. "/scratch.nvim",
@@ -36,7 +39,7 @@ local setup = function(binaries)
         filetype_details = {              -- or, you can have more control here
             go = {
                 requireDir = true,        -- true if each scratch file requires a new directory
-                filename = "main",        -- the filename of the scratch file in the new directory
+                filename = "main.go",     -- the filename of the scratch file in the new directory
                 content = { "package main", "", "func main() {", "  ", "}" },
                 cursor = {
                     location = { 4, 2 },
@@ -45,13 +48,12 @@ local setup = function(binaries)
             },
             ["gp.md"] = {
                 cursor = {
-                    location = { 12, 2 },
+                    location = { 8, 3 },
                     insert_mode = true,
                 },
                 content = {
                     "# topic: ?",
                     "",
-                    '- model: {"top_p":1,"temperature":0.7,"model":"gpt-3.5-turbo-16k"}',
                     "- file: placeholder",
                     "- role: You are a general AI assistant.",
                     "",
@@ -59,7 +61,7 @@ local setup = function(binaries)
                     "",
                     "---",
                     "",
-                    "🗨:",
+                    "🗨: ",
                     "",
                 },
             },
