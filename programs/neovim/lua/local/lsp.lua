@@ -76,38 +76,38 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, b
 
         local vertical_layout = { layout_strategy = "vertical", fname_width = 80 }
         -- See `:help vim.lsp.*` for documentation on any of the below functions
-        mapB("n", "<leader>rn", lsp.buf.rename, "lsp rename")
+        mapB("n", "<leader>rn", lsp.buf.rename, "[lsp] rename")
         mapB("n", "<leader>gD", function()
             lsp.buf.declaration(vertical_layout)
-        end, "lsp goto declaration")
+        end, "[lsp] goto declaration")
         mapB("n", "<leader>nd", function()
             telescope_builtin.lsp_definitions(vertical_layout)
-        end, "lsp goto definition")
+        end, "[lsp] goto definition")
         mapB("n", "<leader>ni", function()
             telescope_builtin.lsp_implementations(vertical_layout)
-        end, "lsp goto implementation")
-        mapB("n", "<leader>f", lsp.buf.format, "lsp format")
+        end, "[lsp] goto implementation")
+        mapB("n", "<leader>f", lsp.buf.format, "[lsp] format")
         mapB("n", "<leader>nt", function()
             telescope_builtin.lsp_document_symbols(vim.tbl_extend("force",
                 { symbols = { "class", "method", "function" } },
                 vertical_layout))
-        end, "lsp document symbols")
+        end, "[lsp] document symbols")
         map(
             "n",
             "<Leader>ns",
             function()
                 telescope_builtin.lsp_dynamic_workspace_symbols(vertical_layout)
             end,
-            { desc = "lsp workspace symbols" }
+            { desc = "[lsp] workspace symbols" }
         )
-        mapB({ "v", "n" }, "<leader>ca", require("actions-preview").code_actions)
-        mapB("n", "<leader>cl", lsp.codelens.run)
+        mapB({ "v", "n" }, "<leader>ca", require("actions-preview").code_actions, "[lsp] code actions")
+        mapB("n", "<leader>cl", lsp.codelens.run, "[lsp] code lenses")
 
         -- mapB("n", "K", lsp.buf.hover, "lsp hover")
         mapB("n", "<Leader>nr", function()
             telescope_builtin.lsp_references(vertical_layout)
-        end, "lsp references")
-        mapB("n", "<leader>sh", lsp.buf.signature_help, "lsp signature")
+        end, "[lsp] references")
+        mapB("n", "<leader>sh", lsp.buf.signature_help, "[lsp] signature")
 
         if client.server_capabilities.documentFormattingProvider then
             local augroup = api.nvim_create_augroup('LspFormatting', { clear = true })
@@ -121,6 +121,10 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, b
                     end
                 end
             })
+        end
+        -- Enable inlay hints if the client supports it.
+        if client.server_capabilities.inlayHintProvider then
+            vim.lsp.inlay_hint(bufnr, true)
         end
     end
 
@@ -182,7 +186,7 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, b
     -- map buffer local keybindings when the language server attaches
     -- local capabilities = vim.lsp.protocol.make_client_capabilities()
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
-    local servers = { "bashls", "vimls", "rnix", "yamlls", "rust_analyzer" }
+    local servers = { "bashls", "vimls", "rnix", "yamlls", "rust_analyzer", "gopls" }
     for _, lsp in ipairs(servers) do
         lspconfig[lsp].setup({
             on_attach = on_attach,
@@ -286,6 +290,7 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, b
         -- TODO: investigate why it doesnt work
         -- map("n", "<leader>cc", telescope.extensions.coursier.complete, { desc = "coursier complete" })
         map("n", "<leader>mc", telescope.extensions.metals.commands, { desc = "metals commands" })
+        mapB("n", "<leader>mk", metals.hover_worksheet, "metals: hover worksheet")
 
         local dap_interface = {
             continue = dap.continue,

@@ -52,6 +52,7 @@ in
       nodePackages.cspell
       rust-analyzer
       rustfmt
+      gopls
     ];
     plugins = with pkgs-unstable.vimPlugins; [
       rec {
