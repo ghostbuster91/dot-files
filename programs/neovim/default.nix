@@ -56,6 +56,7 @@ in
       rust-analyzer
       rustfmt
       gopls
+      go # for gopls
     ];
     plugins = with pkgs-unstable.vimPlugins; [
       rec {
