@@ -132,9 +132,11 @@ local setup = function()
         return generate(opts or {}, Settings)
     end
 
-    vim.keymap.set('n', '<BS>n', function()
-        portal.tunnel(query({ max_results = 5 }))
-    end)
+    -- TODO: there is a bug which prevents buffers from being displayed correctly in certain circumestances 
+    -- https://github.com/cbochs/portal.nvim/issues/43
+    -- vim.keymap.set('n', '<BS>n', function()
+    --     portal.tunnel(query({ max_results = 5 }))
+    -- end)
 end
 
 return {
