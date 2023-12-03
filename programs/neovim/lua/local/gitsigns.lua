@@ -2,6 +2,7 @@ local setup = function(next_integrations)
     require("gitsigns").setup({
         on_attach = function(bufnr)
             local gs = package.loaded.gitsigns
+            local prefix_key = '<leader>h'
 
             local function map(mode, l, r, opts)
                 opts = opts or {}
@@ -25,13 +26,13 @@ local setup = function(next_integrations)
             end, { expr = true })
 
             -- Actions
-            map({ 'n', 'v' }, '<leader>es', ':Gitsigns stage_hunk<CR>')
-            map({ 'n', 'v' }, '<leader>er', ':Gitsigns reset_hunk<CR>')
-            map('n', '<leader>eS', gs.stage_buffer, { desc = "git:stage buffer" })
-            map('n', '<leader>eu', gs.undo_stage_hunk, { desc = "git:undo stage hunk" })
-            map('n', '<leader>eR', gs.reset_buffer, { desc = "git:reset buffer" })
-            map('n', '<leader>ep', gs.preview_hunk, { desc = "git:preview hunk" })
-            map('n', '<leader>eb', function() gs.blame_line { full = true } end, { desc = "git:blame current line" })
+            map({ 'n', 'v' }, prefix_key .. 's', ':Gitsigns stage_hunk<CR>')
+            map({ 'n', 'v' }, prefix_key .. 'r', ':Gitsigns reset_hunk<CR>')
+            map('n', prefix_key .. 'S', gs.stage_buffer, { desc = "git:stage buffer" })
+            map('n', prefix_key .. 'u', gs.undo_stage_hunk, { desc = "git:undo stage hunk" })
+            map('n', prefix_key .. 'R', gs.reset_buffer, { desc = "git:reset buffer" })
+            map('n', prefix_key .. 'p', gs.preview_hunk, { desc = "git:preview hunk" })
+            map('n', prefix_key .. 'b', function() gs.blame_line { full = true } end, { desc = "git:blame current line" })
             -- map('n', '<leader>hd', gs.diffthis, { desc = "git:show diff" })
             -- map('n', '<leader>hD', function() gs.diffthis('~') end, { desc = "git:show diff~" })
 

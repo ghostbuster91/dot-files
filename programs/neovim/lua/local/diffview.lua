@@ -24,10 +24,10 @@ local setup = function(next_integrations)
             }
         }
     })
-    map("n", "<leader>ed", function()
+    map("n", "<leader>hd", function()
         diffview.open({ "--", "%" })
     end, { desc = "Open current file diff" })
-    map("n", "<leader>eD", function()
+    map("n", "<leader>hD", function()
         diffview.open({})
     end, { desc = "Open diff" })
 
