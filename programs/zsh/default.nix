@@ -26,7 +26,9 @@ in
   programs.zsh = {
     enable = true;
     enableAutosuggestions = true;
-    enableSyntaxHighlighting = true;
+    syntaxHighlighting = {
+      enable = true;
+    };
     enableVteIntegration = true;
     defaultKeymap = "emacs";
     plugins = [
@@ -118,9 +120,15 @@ in
 
       autoload -U select-word-style
       select-word-style bash
+
+      # needed for plugins from omz
+      if [[ ! -f "$ZSH_CACHE_DIR/completions" ]]; then
+        mkdir -p "$ZSH_CACHE_DIR/completions"
+      fi
     '';
 
     localVariables = {
+      ZSH_CACHE_DIR = "${config.xdg.cacheHome}/zsh";
       FZF_DEFAULT_COMMAND = "${pkgs-unstable.fd}/bin/fd --type f --hidden --exclude .git --exclude node_modules --exclude '*.class'";
       FZF_CTRL_T_OPTS = "--ansi --preview '${pkgs-unstable.bat}/bin/bat --style=numbers --color=always --line-range :500 {}'";
       FZF_CTRL_T_COMMAND = "${pkgs-unstable.fd}/bin/fd -I --type file";

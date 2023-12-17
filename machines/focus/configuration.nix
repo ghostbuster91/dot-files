@@ -111,7 +111,7 @@ in
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     customFonts
     font-awesome
   ];
