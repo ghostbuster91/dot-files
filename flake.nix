@@ -83,10 +83,6 @@
         url = "github:Robitx/gp.nvim";
         flake = false;
       };
-      p_nvim-copilot = {
-        url = "github:zbirenbaum/copilot.lua";
-        flake = false;
-      };
       p_treesitter-scala = {
         url = "github:tree-sitter/tree-sitter-scala";
         flake = false;

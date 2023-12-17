@@ -258,67 +258,9 @@ local setupChatGpt = function()
     map({ "n", "v" }, "<leader>ce", "<cmd>GpExplain<cr>", { desc = "gp: explain" })
 end
 
-local setupCopilot = function(binaries)
-    local config = {
-        panel = {
-            enabled = true,
-            auto_refresh = false,
-            keymap = {
-                jump_prev = "[[",
-                jump_next = "]]",
-                accept = "<CR>",
-                refresh = "gr",
-                open = "<M-CR>"
-            },
-            layout = {
-                position = "right", -- | top | left | right
-                ratio = 0.3
-            },
-        },
-        suggestion = {
-            enabled = true,
-            auto_trigger = false,
-            debounce = 75,
-            keymap = {
-                accept = "<M-h>",
-                accept_word = false,
-                accept_line = false,
-                next = "<M-e>",
-                prev = "<M-n>",
-                dismiss = "<C-e>",
-            },
-        },
-        filetypes = {
-            yaml = false,
-            markdown = false,
-            help = false,
-            gitcommit = false,
-            gitrebase = false,
-            hgcommit = false,
-            svn = false,
-            cvs = false,
-            ["."] = false,
-        },
-        copilot_node_command = binaries.nodejs, -- Node.js version must be > 18.x
-        server_opts_overrides = {},
-    }
-    require('copilot').setup(config)
-    -- Force disable in ~/dev
-    vim.api.nvim_create_autocmd({ 'BufEnter' }, {
-        pattern = vim.fn.expand('~') .. '/dev/*',
-        command = "Copilot disable"
-    })
-
-    -- Force enable ~/dev/*
-    vim.api.nvim_create_autocmd({ 'BufEnter' }, {
-        pattern = vim.fn.expand('~') .. '/workspace/*',
-        command = "Copilot enable"
-    })
-end
 
 local setup = function(binaries)
     setupChatGpt()
-    setupCopilot(binaries)
 end
 
 return { setup = setup }

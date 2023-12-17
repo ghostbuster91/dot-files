@@ -192,7 +192,6 @@ in
       sniprun
       p_nvim-hover
       p_nvim-gp-nvim
-      p_nvim-copilot
     ];
   };
 }
