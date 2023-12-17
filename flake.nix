@@ -3,7 +3,6 @@
 
   inputs =
     {
-      nix.url = "github:nixos/nix/2.11-maintenance";
       nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
       nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
       disko = {
