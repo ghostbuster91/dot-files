@@ -364,11 +364,11 @@
     "p_nvim-scratch": {
       "flake": false,
       "locked": {
-        "lastModified": 1701035601,
-        "narHash": "sha256-K4jvcPaUHlYNtXPhjWHZajAEtWPDVLKoGJxS6gGE0do=",
+        "lastModified": 1702815802,
+        "narHash": "sha256-YgbGR4iDZTyd5HGY1rEy5PzlhsHzJ4SnCtkNkstoa4M=",
         "owner": "ghostbuster91",
         "repo": "scratch.nvim",
-        "rev": "0ad662cefc676c387832b0e2a3994318fb5f7fa6",
+        "rev": "843a7709d91eee7fd39181eaf59e4b2bae4584e4",
         "type": "github"
       },
       "original": {
