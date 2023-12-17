@@ -29,9 +29,6 @@ in
           metals_binary_path = "${pkgs-unstable.metals}/bin/metals",
           smithy_ls_path = "${pkgs-unstable.disney-smithy-ls}/bin/smithy_ls",
           lua_language_server = "${pkgs-unstable.sumneko-lua-language-server}/bin/lua-language-server",
-          go = "${lib.getExe pkgs.go}", -- required for sniprun
-          python = "${lib.getExe pkgs.python3}", -- required for sniprun
-          scalaCLI = "${lib.getExe pkgs-unstable.scala-cli}", -- required for sniprun
           nodejs = "${lib.getExe pkgs-unstable.nodejs}", -- required for copilot
           nix_fmt = "${lib.getExe pkgs-unstable.nixpkgs-fmt}"
         }
@@ -189,7 +186,6 @@ in
       p_nvim-substitute
       p_nvim-baleia
       p_nvim-scratch
-      sniprun
       p_nvim-hover
       p_nvim-gp-nvim
     ];

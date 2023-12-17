@@ -1,37 +1,6 @@
 local map = vim.keymap.set
 
-local setup = function(binaries)
-    local sniprun = require('sniprun')
-    sniprun.setup({
-        display = {
-            "Terminal", -- todo change it to something else as its behavior is buggy? (e.g. try insert mode)
-        },
-        -- cannot add more interpreters for now because they mostly assume global installations
-        -- without any option to configure binaries https://github.com/michaelb/sniprun/issues/263
-        interpreter_options = {
-            Go_original = {
-                compiler = binaries.go
-            },
-            Python3_original = {
-                interpreter = binaries.python,
-            },
-            Generic = {
-                ScalaCLI = {                           -- any key name is ok
-                    supported_filetypes = { "scala" }, -- mandatory
-                    extension = ".sc",                 -- recommended, but not mandatory. Sniprun use this to create temporary files
-                    compiler = binaries.scalaCLI,      -- one of those MUST be non-empty
-                }
-            }
-        },
-    })
-
-    map("n", "<leader>rs", function()
-        sniprun.run('w')
-    end, { desc = "sniprun: execute buffer" })
-    map("v", "<leader>rs", function()
-        sniprun.run('v')
-    end, { desc = "sniprun: execute visual selection" })
-
+local setup = function()
     require('scratch').setup({
         scratch_file_dir = vim.fn.stdpath("cache") .. "/scratch.nvim",
         window_cmd = "edit",              -- 'vsplit' | 'split' | 'edit' | 'tabedit' | 'rightbelow vsplit'
