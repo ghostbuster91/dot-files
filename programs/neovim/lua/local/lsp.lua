@@ -379,15 +379,18 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, b
     telescope.load_extension("metals")
     telescope.load_extension('dap')
 
+    local current_state = "init"
     local function metals_status_handler(err, status, ctx)
         local val = {}
         -- trim and remove spinner
         local text = status.text:gsub('[⠇⠋⠙⠸⠴⠦]', ''):gsub("^%s*(.-)%s*$", "%1")
-        if status.hide then
+        if status.hide and current_state == "started" then
             val = { kind = "end" }
+            current_state = "init"
         elseif status.show then
             val = { kind = "begin", title = text }
-        elseif status.text then
+            current_state = "started"
+        elseif status.text and current_state == "started" then
             val = { kind = "report", message = text }
         else
             return
