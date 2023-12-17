@@ -38,6 +38,12 @@ local setup = function(navic)
             )
         end,
     })
+    local function bsp_status()
+        local bsp_var = vim.api.nvim_get_var("metals_bsp_status")
+        if bsp_var then
+            return "bsp: " .. bsp_var
+        end
+    end
     lualine.setup({
         options = {
             icons_enabled = true,
@@ -70,7 +76,7 @@ local setup = function(navic)
                     end
                 },
             },
-            lualine_x = { "encoding", "fileformat", "filetype" },
+            lualine_x = { "encoding", "fileformat", "filetype", bsp_status },
             lualine_y = { "progress" },
             lualine_z = { "location" },
         },
