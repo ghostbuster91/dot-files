@@ -71,11 +71,7 @@ require("ibl").setup({
     scope = { enabled = false }
 })
 
-require("fidget").setup({
-    debug = {
-        logging = false
-    }
-})
+require("fidget").setup()
 
 require('nvim-lightbulb').setup({ autocmd = { enabled = true } })
 
