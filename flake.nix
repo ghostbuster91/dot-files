@@ -14,8 +14,16 @@
         url = "github:nix-community/home-manager/release-23.11";
         inputs.nixpkgs.follows = "nixpkgs";
       };
-      sops-nix = {
+      flake-parts = {
+        url = "github:hercules-ci/flake-parts";
+        inputs.nixpkgs-lib.follows = "nixpkgs";
+      };
+      sops = {
         url = "github:Mic92/sops-nix";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
+      treefmt-nix = {
+        url = "github:numtide/treefmt-nix";
         inputs.nixpkgs.follows = "nixpkgs";
       };
       nix-metals = {
@@ -101,65 +109,24 @@
       };
     };
 
-  outputs = inputs @ { home-manager, nixpkgs-unstable, nixpkgs, disko, hardware, sops-nix, ... }:
-    let
-      system = "x86_64-linux";
-      username = "kghost";
-
-      overlays = import ./overlays {
-        inherit inputs;
-        inherit system;
+  outputs = inputs@{ flake-parts, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [ "x86_64-linux" ];
+      imports = [
+        ./modules
+        ./machines
+        inputs.treefmt-nix.flakeModule
+      ];
+      perSystem.treefmt = {
+        imports = [ ./treefmt.nix ];
+        config = {
+          settings.formatter.stylua = {
+            options = [
+              "--indent-type"
+              "Spaces"
+            ];
+          };
+        };
       };
-
-      pkgs-unstable = import nixpkgs-unstable {
-        inherit system;
-        config.allowUnfree = true;
-        overlays = [
-          overlays
-        ];
-      };
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-      };
-      inherit (inputs.nixpkgs.lib) mapAttrs;
-    in
-    rec {
-      nixosConfigurations.focus = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [
-          ./machines/focus/configuration.nix
-          ./modules
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useUserPackages = true;
-              useGlobalPkgs = true;
-              users.${username} = ./home.nix;
-              extraSpecialArgs = { inherit username; inherit pkgs-unstable; };
-            };
-          }
-          disko.nixosModules.disko
-          hardware.nixosModules.focus-m2-gen1
-          # flake registry
-          {
-            nix.registry = {
-              nixpkgs.flake = inputs.nixpkgs;
-              nixpkgs-unstable.flake = inputs.nixpkgs-unstable;
-            };
-            nix.nixPath = [ "nixpkgs=flake:nixpkgs" ];
-          }
-          sops-nix.nixosModules.sops
-        ];
-        specialArgs = { inherit username; inherit pkgs-unstable; };
-      };
-
-      checks.${system} =
-        let
-          os = mapAttrs (_: c: c.config.system.build.toplevel) nixosConfigurations;
-        in
-        os;
-
-      formatter.${system} = pkgs-unstable.nixpkgs-fmt;
     };
 }

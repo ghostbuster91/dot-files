@@ -1,6 +1,7 @@
-{
+_: {
   imports = [
-    ./gnome-wayland
-    ./games
+    ./nixos
+    ./hm
+    ./flake
   ];
 }
