@@ -16,6 +16,7 @@
       inputs.self.nixosModules.nix
       inputs.self.nixosModules.qmk
       inputs.self.nixosModules.virtualisation
+      inputs.self.nixosModules.nixbuild
       ./custom.nix
       inputs.home-manager.nixosModule
     ];

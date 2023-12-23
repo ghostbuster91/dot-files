@@ -1,4 +1,4 @@
-{ ... }:
+_:
 {
   flake.nixosModules = {
     gnome = ./gnome-wayland;
@@ -7,5 +7,6 @@
     qmk = ./qmk.nix;
     virtualisation = ./virtualisation.nix;
     nix = ./nix.nix;
+    nixbuild = ./nixbuild.nix;
   };
 }

@@ -133,6 +133,14 @@
     };
     ssh = {
       enable = true;
+      extraConfig = ''
+        Host deckard
+          HostName deckard.lan
+          User kghost
+        Host surfer
+          HostName surfer.lan
+          User kghost
+      '';
     };
     google-chrome = {
       enable = true;
