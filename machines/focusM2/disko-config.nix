@@ -1,84 +1,84 @@
 { disks ? [ "/dev/vdb" "/dev/vdc" ], ... }: {
   disko.devices = {
-    disk = {
-      nvme0n1 = {
-        type = "disk";
-        device = builtins.elemAt disks 0;
-        content = {
-          type = "table";
-          format = "gpt";
-          partitions = [
-            {
-              name = "ESP";
-              start = "1MiB";
-              end = "256MiB";
-              fs-type = "fat32";
-              bootable = true;
-              content = {
-                type = "filesystem";
-                format = "vfat";
-                mountpoint = "/boot";
-              };
-            }
-            {
-              name = "luks";
-              start = "256MiB";
-              end = "-64GB";
-              content = {
-                type = "luks";
-                name = "nixos";
-                extraOpenArgs = [
-                  "--allow-discards"
-                  "--perf-no_write_workqueue"
-                  "--perf-no_read_workqueue"
-                ];
+    disk =
+      let
+        commonZfsExtraOptions = [
+          "--allow-discards"
+          "--perf-no_write_workqueue"
+          "--perf-no_read_workqueue"
+        ];
+      in
+      {
+        nvme0n1 = {
+          type = "disk";
+          device = builtins.elemAt disks 0;
+          content = {
+            type = "table";
+            format = "gpt";
+            partitions = [
+              {
+                name = "ESP";
+                start = "1MiB";
+                end = "1GB";
+                fs-type = "fat32";
+                bootable = true;
                 content = {
-                  type = "zfs";
-                  pool = "rpool1";
+                  type = "filesystem";
+                  format = "vfat";
+                  mountpoint = "/boot";
                 };
-              };
-            }
-            {
-              name = "swap";
-              start = "-64G";
-              end = "100%";
-              content = {
-                type = "swap";
-                randomEncryption = true;
-              };
-            }
-          ];
+              }
+              {
+                name = "luks";
+                start = "1GB";
+                end = "-64GB";
+                content = {
+                  type = "luks";
+                  name = "nixos";
+                  extraOpenArgs = commonZfsExtraOptions;
+                  content = {
+                    type = "zfs";
+                    pool = "rpool1";
+                  };
+                };
+              }
+              {
+                name = "swap";
+                start = "-64G";
+                end = "100%";
+                content = {
+                  type = "swap";
+                  randomEncryption = true;
+                };
+              }
+            ];
+          };
+        };
+        nvme1n1 = {
+          type = "disk";
+          device = builtins.elemAt disks 1;
+          content = {
+            type = "table";
+            format = "gpt";
+            partitions = [
+              {
+                name = "luks";
+                start = "256MiB";
+                end = "100%";
+                content = {
+                  type = "luks";
+                  name = "home";
+                  extraOpenArgs = commonZfsExtraOptions;
+                  content = {
+                    type = "zfs";
+                    pool = "rpool2";
+                  };
+                };
+              }
+            ];
+          };
         };
       };
-      nvme1n1 = {
-        type = "disk";
-        device = builtins.elemAt disks 1;
-        content = {
-          type = "table";
-          format = "gpt";
-          partitions = [
-            {
-              name = "luks";
-              start = "256MiB";
-              end = "100%";
-              content = {
-                type = "luks";
-                name = "home";
-                extraOpenArgs = [
-                  "--allow-discards"
-                  "--perf-no_write_workqueue"
-                  "--perf-no_read_workqueue"
-                ];
-                content = {
-                  type = "zfs";
-                  pool = "rpool2";
-                };
-              };
-            }
-          ];
-        };
-      };
-    };
     zpool = {
       rpool1 = {
         type = "zpool";
