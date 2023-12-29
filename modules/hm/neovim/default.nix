@@ -1,4 +1,4 @@
-{ config, pkgs-unstable, lib, ... }:
+{ config, pkgs, pkgs-unstable, lib, ... }:
 let
   leaderKey = "\\<Space>";
 in
@@ -30,7 +30,8 @@ in
           smithy_ls_path = "${pkgs-unstable.disney-smithy-ls}/bin/smithy_ls",
           lua_language_server = "${pkgs-unstable.sumneko-lua-language-server}/bin/lua-language-server",
           nodejs = "${lib.getExe pkgs-unstable.nodejs}", -- required for copilot
-          nix_fmt = "${lib.getExe pkgs-unstable.nixpkgs-fmt}"
+          nix_fmt = "${lib.getExe pkgs-unstable.nixpkgs-fmt}",
+          nix = "${lib.getExe pkgs.nix}"
         }
         
         ${builtins.readFile ./init.lua}

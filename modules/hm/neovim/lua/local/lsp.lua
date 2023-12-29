@@ -242,6 +242,12 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, b
                 formatting = {
                     command = { binaries.nix_fmt },
                 },
+                nix = {
+                    binary = binaries.nix,
+                    flake = {
+                        autoArchive = true,
+                    }
+                },
             },
         },
     })
