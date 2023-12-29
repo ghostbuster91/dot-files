@@ -1,4 +1,4 @@
-{ pkgs, username, pkgs-unstable, ... }: {
+{ pkgs, username, lib, pkgs-unstable, ... }: {
 
   home = {
     inherit username;
@@ -155,6 +155,11 @@
     defaultApplications = {
       "text/plain" = [ "sublime2.desktop" ];
     };
+  };
+
+  xdg.desktopEntries.firefox = {
+    name = "firefox";
+    exec = "${lib.getExe pkgs.firefox} -P";
   };
 
   dconf = {
