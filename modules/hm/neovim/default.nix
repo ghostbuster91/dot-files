@@ -93,6 +93,7 @@ in
             tree-sitter-yaml
             tree-sitter-json
             tree-sitter-markdown
+            tree-sitter-markdown-inline
             tree-sitter-comment
             tree-sitter-bash
             tree-sitter-javascript
