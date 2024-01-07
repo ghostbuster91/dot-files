@@ -2,18 +2,18 @@
 
 ![ci-badge](https://img.shields.io/static/v1?label=Built%20with&message=Garnix&color=blue&style=flat&logo=nixos&link=https://garnix.io&labelColor=111212)
 
-Install nix:
-https://nixos.org/manual/nix/stable/installation/installing-binary.html#multi-user-installation
-
-Building for the first time:
+Installation instructions:
 
 ```sh
-nix build .#homeConfigurations.kghost.activationPackage
-result/activate
+$ nix shell nixpkgs#git --experimental-features "nix-command flakes"
 ```
 
-After that configurations can be switched using:
+```
+--arg disks '[ "/dev/nvme0n1" "/dev/nvme1n1" ]'
+```
+
+unmount all mount points
 
 ```sh
-home-manager switch --flake path:/home/kghost/workspace/dot-files
+$ zpool export -fa
 ```
