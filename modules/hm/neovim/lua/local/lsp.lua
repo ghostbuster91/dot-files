@@ -246,7 +246,7 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, b
                     binary = binaries.nix,
                     flake = {
                         autoArchive = true,
-                    }
+                    },
                 },
             },
         },
