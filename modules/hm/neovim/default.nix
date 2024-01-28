@@ -89,6 +89,7 @@ in
           with plugins; [
             tree-sitter-lua
             tree-sitter-vim
+            tree-sitter-vimdoc
             tree-sitter-html
             tree-sitter-yaml
             tree-sitter-json
