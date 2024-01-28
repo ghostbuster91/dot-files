@@ -40,6 +40,27 @@
         "type": "github"
       }
     },
+    "flake-parts_2": {
+      "inputs": {
+        "nixpkgs-lib": [
+          "nix-work",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1704982712,
+        "narHash": "sha256-2Ptt+9h8dczgle2Oo6z5ni5rt/uLMG47UFTR1ry/wgg=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "07f6395285469419cf9d078f59b5b49993198c00",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "inputs": {
         "systems": "systems"
@@ -154,6 +175,30 @@
         "owner": "ghostbuster91",
         "repo": "nix-smithy-ls",
         "type": "github"
+      }
+    },
+    "nix-work": {
+      "inputs": {
+        "flake-parts": "flake-parts_2",
+        "home-manager": [
+          "home-manager"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1706460243,
+        "narHash": "sha256-ItXLCSZKb2VNJfVZNlZ3b6E++WaWa3AG8kJ5cjpplzw=",
+        "ref": "refs/heads/main",
+        "rev": "1f7bb33060f42a643e2a7f4460091642eb27edea",
+        "revCount": 3,
+        "type": "git",
+        "url": "file:///home/kghost/dev/nix-work"
+      },
+      "original": {
+        "type": "git",
+        "url": "file:///home/kghost/dev/nix-work"
       }
     },
     "nixpkgs": {
@@ -501,6 +546,7 @@
         "home-manager": "home-manager",
         "nix-metals": "nix-metals",
         "nix-smithy-ls": "nix-smithy-ls",
+        "nix-work": "nix-work",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "p_nvim-actions-preview": "p_nvim-actions-preview",

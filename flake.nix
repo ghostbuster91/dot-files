@@ -107,6 +107,11 @@
         url = "github:ObserverOfTime/tree-sitter-xml";
         flake = false;
       };
+      nix-work = {
+        url = "/home/kghost/dev/nix-work";
+        inputs.nixpkgs.follows = "nixpkgs";
+        inputs.home-manager.follows = "home-manager";
+      };
     };
 
   outputs = inputs@{ flake-parts, ... }:

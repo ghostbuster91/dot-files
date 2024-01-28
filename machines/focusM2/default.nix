@@ -33,6 +33,7 @@
         inputs.self.homeModules.git
         inputs.self.homeModules.tmux
         inputs.self.homeModules.scala
+        inputs.nix-work.homeModules.git
       ];
     };
     extraSpecialArgs = { inherit username; inherit pkgs-unstable; };
