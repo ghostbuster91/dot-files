@@ -43,7 +43,7 @@ local setup = function()
     end
 
     require("neo-tree").setup({
-        sources = { "filesystem", "git_status", "buffers", "document_symbols" },
+        sources = { "filesystem", "git_status", "buffers" },
         git_status_async = true,
         enable_diagnostics = false,
         close_if_last_window = true,
@@ -68,6 +68,19 @@ local setup = function()
                     ["/"] = "noop",
                     ["<space>"] = "noop",
                     ["zO"] = expand_all_filesystem,
+                    -- from https://github.com/nvim-neo-tree/neo-tree.nvim/discussions/370
+                    ["y"] = function(state)
+                        local node = state.tree:get_node()
+                        local filename = node.name
+                        vim.fn.setreg('"', filename)
+                        vim.notify("Copied: " .. filename)
+                    end,
+                    ["Y"] = function(state)
+                        local node = state.tree:get_node()
+                        local filepath = node:get_id()
+                        vim.fn.setreg('"', filepath)
+                        vim.notify("Copied: " .. filepath)
+                    end,
                 },
             },
             use_libuv_file_watcher = true,
@@ -109,8 +122,8 @@ local setup = function()
                 {
                     "container",
                     content = {
-                        { "name", zindex = 10 },
-                        { "clipboard", zindex = 10 },
+                        { "name",       zindex = 10 },
+                        { "clipboard",  zindex = 10 },
                         { "git_status", zindex = 10, hide_when_expanded = true },
                         {
                             "diagnostics",
@@ -119,6 +132,10 @@ local setup = function()
                             align = "right",
                             hide_when_expanded = true,
                         },
+                        { "file_size",     zindex = 10, align = "right" },
+                        { "type",          zindex = 10, align = "right" },
+                        { "last_modified", zindex = 10, align = "right" },
+                        { "created",       zindex = 10, align = "right" },
                     },
                 },
             },
@@ -128,12 +145,16 @@ local setup = function()
                 {
                     "container",
                     content = {
-                        { "name", zindex = 10 },
-                        { "clipboard", zindex = 10 },
-                        { "bufnr", zindex = 10 },
-                        { "git_status", zindex = 10 },
-                        { "modified", zindex = 20, align = "right" },
-                        { "diagnostics", zindex = 20, align = "right" },
+                        { "name",          zindex = 10 },
+                        { "clipboard",     zindex = 10 },
+                        { "bufnr",         zindex = 10 },
+                        { "git_status",    zindex = 10 },
+                        { "modified",      zindex = 20, align = "right" },
+                        { "diagnostics",   zindex = 20, align = "right" },
+                        { "file_size",     zindex = 10, align = "right" },
+                        { "type",          zindex = 10, align = "right" },
+                        { "last_modified", zindex = 10, align = "right" },
+                        { "created",       zindex = 10, align = "right" },
                     },
                 },
             },
