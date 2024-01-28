@@ -50,9 +50,14 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, b
     -- setup neodev in a way that it loads all plugins when editing dot-files
     local username = vim.fn.expand("$USER")
     local dotfiles_dir = "/home/" .. username .. "/workspace/dot-files"
+    local other_dir = "/home/" .. username .. "/workspace/example-source"
     require("neodev").setup({
         override = function(root_dir, library)
             if root_dir:find(dotfiles_dir, 1, true) then
+                library.enabled = true
+                library.plugins = true
+            end
+            if root_dir:find(other_dir, 1, true) then
                 library.enabled = true
                 library.plugins = true
             end
