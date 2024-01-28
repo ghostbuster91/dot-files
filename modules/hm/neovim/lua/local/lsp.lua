@@ -260,11 +260,6 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, b
     -- Scala nvim-metals config
     local metals = require("metals")
     local metals_config = metals.bare_config()
-    metals_config.tvp = {
-        icons = {
-            enabled = true,
-        },
-    }
     metals_config.init_options.statusBarProvider = "on"
     metals_config.capabilities = capabilities
 
@@ -414,8 +409,12 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, b
 
     metals_config.init_options.statusBarProvider = "on"
     metals_config.handlers = { ["metals/status"] = metals_status_handler }
-
-    -- metals end
+    metals_config.handlers = {
+        ["metals/treeViewDidChange"] = function(_, result)
+            vim.notify("ext treeViewDidChange")
+            require("metals_tvp.api").tree_view_did_change(result)
+        end
+    }
 
     lspconfig.smithy_ls.setup({
         capabilities = capabilities,

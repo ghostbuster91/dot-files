@@ -43,11 +43,50 @@ local setup = function()
     end
 
     require("neo-tree").setup({
-        sources = { "filesystem", "git_status", "buffers" },
+        sources = { "filesystem", "git_status", "buffers", "metals_tvp" },
+        log_level = "info",                -- "trace", "debug", "info", "warn", "error", "fatal"
+        log_to_file = false, -- true, false, "/path/to/file.log", use :NeoTreeLogs to show the file
         git_status_async = true,
         enable_diagnostics = false,
         close_if_last_window = true,
         use_popups_for_input = false,
+        metals_tvp = {
+            follow_cursor = true,
+            renderers = {
+                root = {
+                    { "indent" },
+                    { "icon",  default = "C" },
+                    { "name",  zindex = 10 },
+                },
+                symbol = {
+                    { "indent",    with_expanders = true },
+                    { "kind_icon", default = "?" },
+                    {
+                        "container",
+                        content = {
+                            { "name",      zindex = 10 },
+                            { "kind_name", zindex = 20, align = "right" },
+                        }
+                    }
+                },
+            },
+            window = {
+                mappings = {
+                    ["<cr>"] = "toggle_node",
+                    ["<s-cr>"] = "execute_node_command",
+                    ["A"] = "noop", -- also accepts the config.show_path and config.insert_as options.
+                    ["d"] = "show_debug_info",
+                    ["D"] = "show_debug_node_info",
+                    ["x"] = "noop",
+                    ["p"] = "noop",
+                    ["c"] = "noop",
+                    ["m"] = "noop",
+                    ["a"] = "noop",
+                    ["/"] = "noop",
+                    ["f"] = "noop",
+                },
+            }
+        },
         filesystem = {
             scan_mode = "deep",
             async_directory_scan = "auto",
@@ -102,6 +141,21 @@ local setup = function()
             },
             name = {
                 use_git_status_colors = false,
+            },
+            file_size = {
+                enabled = false,
+            },
+            type = {
+                enabled = false,
+            },
+            last_modified = {
+                enabled = false,
+            },
+            created = {
+                enabled = false,
+            },
+            symlink_target = {
+                enabled = false,
             },
         },
         window = {
