@@ -20,7 +20,7 @@ local setup = function(next_integrations)
             -- Instead of true it can also be a list of languages
             additional_vim_regex_highlighting = false,
             disable = function(_, bufnr) -- Disable in large buffers
-                return api.nvim_buf_line_count(bufnr) > 50000
+                return api.nvim_buf_line_count(bufnr) > 5000 or vim.fn.col('$') > 1000
             end,
         },
         indent = {
@@ -74,7 +74,7 @@ local setup = function(next_integrations)
                 -- mapping query_strings to modes.
                 selection_modes = {
                     ["@parameter.outer"] = "v", -- charwise
-                    ["@function.outer"] = "V", -- linewise
+                    ["@function.outer"] = "V",  -- linewise
                     ["@class.outer"] = "<c-v>", -- blockwise
                 },
                 -- If you set this to `true` (default is `false`) then any textobject is
@@ -92,7 +92,7 @@ local setup = function(next_integrations)
         playground = {
             enable = true,
             disable = {},
-            updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+            updatetime = 25,         -- Debounced time for highlighting nodes in the playground from source code
             persist_queries = false, -- Whether the query persists across vim sessions
             keybindings = {
                 toggle_query_editor = "o",
