@@ -8,5 +8,6 @@ _:
     virtualisation = ./virtualisation.nix;
     nix = ./nix.nix;
     nixbuild = ./nixbuild.nix;
+    sway = ./sway;
   };
 }

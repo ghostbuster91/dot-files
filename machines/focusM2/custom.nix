@@ -1,4 +1,4 @@
-{ pkgs, username, ... }:
+{ pkgs, username, lib, ... }:
 let
   customFonts = pkgs.nerdfonts.override {
     fonts = [
@@ -35,22 +35,7 @@ in
     flipperzero.enable = true;
     opengl.enable = true;
 
-    nvidia = {
-      powerManagement = {
-        enable = true;
-        finegrained = true;
-      };
-      nvidiaPersistenced = true;
-      # Reverse sync is not compatible with the open source kernel module
-      open = false;
 
-      prime = {
-        reverseSync.enable = true;
-
-        #enable if using an external GPU
-        allowExternalGpu = false;
-      };
-    };
   };
 
   # Set your time zone.
@@ -121,4 +106,7 @@ in
     # lorri is a nix-shell replacement for project development.
     lorri.enable = true;
   };
+
+  gnome.enable = lib.mkDefault true;
+  sway.enable = lib.mkDefault false;
 }

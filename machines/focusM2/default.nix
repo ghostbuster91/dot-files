@@ -1,4 +1,4 @@
-{ inputs, username, pkgs-unstable, ... }:
+{ inputs, username, pkgs-unstable,lib, ... }:
 {
   imports =
     [
@@ -18,13 +18,16 @@
       inputs.self.nixosModules.virtualisation
       inputs.self.nixosModules.nixbuild
       ./custom.nix
+      ./specialisation.nix
       inputs.home-manager.nixosModule
+      inputs.self.nixosModules.sway
     ];
 
   home-manager = {
     useUserPackages = true;
     useGlobalPkgs = true;
     users.${username} = {
+      sway-hm.enable = lib.mkDefault false;
       imports = [
         inputs.self.homeModules.base
         inputs.self.homeModules.alacritty
@@ -34,6 +37,7 @@
         inputs.self.homeModules.tmux
         inputs.self.homeModules.scala
         inputs.nix-work.homeModules.git
+        inputs.self.homeModules.sway
       ];
     };
     extraSpecialArgs = { inherit username; inherit pkgs-unstable; };
