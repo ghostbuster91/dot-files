@@ -287,6 +287,22 @@
     },
     "nixpkgs-stable": {
       "locked": {
+        "lastModified": 1706515015,
+        "narHash": "sha256-eFfY5A7wlYy3jD/75lx6IJRueg4noE+jowl0a8lIlVo=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "f4a8d6d5324c327dcc2d863eb7f3cc06ad630df4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-23.11",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-stable_2": {
+      "locked": {
         "lastModified": 1702777222,
         "narHash": "sha256-/SYmqgxTYzqZnQEfbOCHCN4GzqB9uAIsR9IWLzo0/8I=",
         "owner": "NixOS",
@@ -633,6 +649,7 @@
         "nix-smithy-ls": "nix-smithy-ls",
         "nix-work": "nix-work",
         "nixpkgs": "nixpkgs_2",
+        "nixpkgs-stable": "nixpkgs-stable",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "p_nvim-actions-preview": "p_nvim-actions-preview",
         "p_nvim-baleia": "p_nvim-baleia",
@@ -661,7 +678,7 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "nixpkgs-stable": "nixpkgs-stable"
+        "nixpkgs-stable": "nixpkgs-stable_2"
       },
       "locked": {
         "lastModified": 1702812162,

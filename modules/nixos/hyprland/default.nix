@@ -38,6 +38,7 @@
     nvidiaPersistenced = false;
     # Reverse sync is not compatible with the open source kernel module
     open = false;
+    nvidiaSettings = true;
 
     prime = {
       reverseSync.enable = false;

@@ -162,6 +162,11 @@
     exec = "${lib.getExe pkgs.firefox} -P";
   };
 
+  xdg.desktopEntries.alacritty = {
+    name = "alacritty";
+    exec = "nvidia-offload ${lib.getExe pkgs.alacritty}";
+  };
+
   dconf = {
     enable = true;
     settings = {

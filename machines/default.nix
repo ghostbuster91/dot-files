@@ -9,6 +9,11 @@ let
     inherit (inputs.nix-metals.packages.${system}) metals;
     inherit (inputs.nix-smithy-ls.packages.${system}) disney-smithy-ls;
   };
+  pkgs-stable = import inputs.nixpkgs-stable {
+    inherit system;
+    overlays = [ self.overlays.default ];
+    config.allowUnfree = true;
+  };
   username = "kghost";
 in
 {
@@ -16,7 +21,7 @@ in
     focus =
       lib.nixosSystem {
         modules = [ ./focusM2 ];
-        specialArgs = { inherit inputs; inherit pkgs-unstable; inherit username; };
+        specialArgs = { inherit inputs; inherit pkgs-unstable; inherit username; inherit pkgs-stable; };
       };
   };
 

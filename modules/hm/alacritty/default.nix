@@ -53,16 +53,18 @@
           { index = 17; color = "#ff5d62"; }
         ];
       };
-      key_bindings = [{
-        key = "Return";
-        mods = "Shift";
-        chars = "\\x1b[13;2u";
-      }
+      keyboard.bindings = [
+        {
+          key = "Return";
+          mods = "Shift";
+          chars = "\\u001b[13;2u";
+        }
         {
           key = "Return";
           mods = "Control";
-          chars = "\\x1b[13;5u";
-        }];
+          chars = "\\u001b[13;5u";
+        }
+      ];
     };
   };
 }

@@ -1,4 +1,4 @@
-{ inputs, username, pkgs-unstable, ... }:
+{ inputs, username, pkgs-unstable, pkgs-stable, ... }:
 {
   imports =
     [
@@ -29,6 +29,7 @@
       imports = [
         inputs.self.homeModules.base
         inputs.self.homeModules.alacritty
+        inputs.self.homeModules.foot
         inputs.self.homeModules.nvim
         inputs.self.homeModules.zsh
         inputs.self.homeModules.git
@@ -37,7 +38,7 @@
         inputs.nix-work.homeModules.git
       ];
     };
-    extraSpecialArgs = { inherit username; inherit pkgs-unstable; };
+    extraSpecialArgs = { inherit username; inherit pkgs-unstable; inherit pkgs-stable; };
   };
 
   # This value determines the NixOS release from which the default

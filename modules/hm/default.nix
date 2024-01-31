@@ -8,5 +8,6 @@ _:
     tmux = ./tmux;
     alacritty = ./alacritty;
     scala = ./scala;
+    foot = ./foot;
   };
 }
