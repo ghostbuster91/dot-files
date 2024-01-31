@@ -10,7 +10,8 @@
         disks = [ "/dev/nvme0n1" "/dev/nvme1n1" ];
       })
       inputs.sops.nixosModules.default
-      inputs.self.nixosModules.gnome
+      # inputs.self.nixosModules.gnome
+      inputs.self.nixosModules.hyprland
       inputs.self.nixosModules.games
       inputs.self.nixosModules.cache
       inputs.self.nixosModules.nix

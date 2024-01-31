@@ -35,22 +35,7 @@ in
     flipperzero.enable = true;
     opengl.enable = true;
 
-    nvidia = {
-      powerManagement = {
-        enable = true;
-        finegrained = true;
-      };
-      nvidiaPersistenced = true;
-      # Reverse sync is not compatible with the open source kernel module
-      open = false;
-
-      prime = {
-        reverseSync.enable = true;
-
-        #enable if using an external GPU
-        allowExternalGpu = false;
-      };
-    };
+    
   };
 
   # Set your time zone.

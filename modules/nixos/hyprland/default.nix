@@ -1,6 +1,7 @@
 { pkgs, username, inputs, ... }:
 {
   imports = [
+    inputs.hyprland.nixosModules.default
     ./config
     ./greetd
     ./mako

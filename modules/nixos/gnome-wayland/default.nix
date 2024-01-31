@@ -33,6 +33,22 @@
   ]);
 
   hardware.pulseaudio.enable = false;
+  hardware.nvidia = {
+    powerManagement = {
+      enable = true;
+      finegrained = true;
+    };
+    nvidiaPersistenced = true;
+    # Reverse sync is not compatible with the open source kernel module
+    open = false;
+
+    prime = {
+      reverseSync.enable = true;
+
+      #enable if using an external GPU
+      allowExternalGpu = false;
+    };
+  };
   services.pipewire = {
     enable = true;
     alsa.enable = true;
