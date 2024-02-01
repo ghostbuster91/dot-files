@@ -16,7 +16,7 @@ in
     focus =
       lib.nixosSystem {
         modules = [ ./focusM2 ];
-        specialArgs = { inherit inputs; inherit pkgs-unstable; inherit username; };
+        specialArgs = { inherit inputs; inherit pkgs-unstable; inherit username; waypkgs = inputs.nixwaypkgs.packages.${system}; };
       };
   };
 

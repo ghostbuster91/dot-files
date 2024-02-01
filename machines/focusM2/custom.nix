@@ -107,6 +107,6 @@ in
     lorri.enable = true;
   };
 
-  gnome.enable = lib.mkDefault true;
-  sway.enable = lib.mkDefault false;
+  # gnome.enable = lib.mkDefault true;
+  # sway.enable = lib.mkDefault false;
 }

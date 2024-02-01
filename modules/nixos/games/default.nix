@@ -7,20 +7,20 @@
   };
 
   environment.systemPackages = with pkgs; [
-    steam-rom-manager
-    steamtinkerlaunch
-    proton-caller
-    protontricks
-    protonup-qt
-    steam-run
-    gamescope
-    gamemode
-    lutris
-
-    mangohud
-    protonup
+    # steam-rom-manager
+    # steamtinkerlaunch
+    # proton-caller
+    # protontricks
+    # protonup-qt
+    # steam-run
+    # gamescope
+    # gamemode
+    # lutris
+    #
+    # mangohud
+    # protonup
     vulkan-tools
-    winetricks
+    # winetricks
   ];
 
 }

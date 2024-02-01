@@ -3,7 +3,7 @@
 
   inputs =
     {
-      nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+      nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
       nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
       disko = {
         url = "github:nix-community/disko";
@@ -11,7 +11,7 @@
       };
       hardware.url = "github:nixos/nixos-hardware/master";
       home-manager = {
-        url = "github:nix-community/home-manager/release-23.11";
+        url = "github:nix-community/home-manager";
         inputs.nixpkgs.follows = "nixpkgs";
       };
       flake-parts = {
@@ -112,6 +112,7 @@
         inputs.nixpkgs.follows = "nixpkgs";
         inputs.home-manager.follows = "home-manager";
       };
+      nixwaypkgs.url = "github:nix-community/nixpkgs-wayland";
     };
 
   outputs = inputs@{ flake-parts, ... }:

@@ -1,4 +1,4 @@
-{ inputs, username, pkgs-unstable,lib, ... }:
+{ inputs, username, pkgs-unstable, lib, ... }:
 {
   imports =
     [
@@ -10,7 +10,7 @@
         disks = [ "/dev/nvme0n1" "/dev/nvme1n1" ];
       })
       inputs.sops.nixosModules.default
-      inputs.self.nixosModules.gnome
+      # inputs.self.nixosModules.gnome
       inputs.self.nixosModules.games
       inputs.self.nixosModules.cache
       inputs.self.nixosModules.nix
@@ -18,7 +18,7 @@
       inputs.self.nixosModules.virtualisation
       inputs.self.nixosModules.nixbuild
       ./custom.nix
-      ./specialisation.nix
+      # ./specialisation.nix
       inputs.home-manager.nixosModule
       inputs.self.nixosModules.sway
     ];
@@ -27,7 +27,7 @@
     useUserPackages = true;
     useGlobalPkgs = true;
     users.${username} = {
-      sway-hm.enable = lib.mkDefault false;
+      # sway-hm.enable = lib.mkDefault false;
       imports = [
         inputs.self.homeModules.base
         inputs.self.homeModules.alacritty
@@ -37,7 +37,7 @@
         inputs.self.homeModules.tmux
         inputs.self.homeModules.scala
         inputs.nix-work.homeModules.git
-        inputs.self.homeModules.sway
+        # inputs.self.homeModules.sway
       ];
     };
     extraSpecialArgs = { inherit username; inherit pkgs-unstable; };
