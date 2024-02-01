@@ -30,9 +30,8 @@ in
         plugin = pkgs-unstable.tmuxPlugins.tmux-thumbs;
         extraConfig = ''
           set -g @thumbs-key BSpace
-          set -g @thumbs-command 'echo -n {} | xsel -b'
+          set -g @thumbs-command 'echo -n {} | ${pkgs.wl-clipboard}/bin/wl-copy'
           set -g @thumbs-regexp-1 'sha256-\S{43}=' # Match nix sha256
-          set -g @thumbs-regexp-2 'addr_\w{58}' # Match cardano bech32 address
         '';
       }
       pkgs-unstable.tmuxPlugins.jump

@@ -9,5 +9,7 @@ _:
     nix = ./nix.nix;
     nixbuild = ./nixbuild.nix;
     hyprland = ./hyprland;
+    sound = ./sound;
+    bluetooth = ./bluetooth;
   };
 }

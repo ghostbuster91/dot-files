@@ -103,6 +103,21 @@ local setup = function()
             name = {
                 use_git_status_colors = false,
             },
+            file_size = {
+                enabled = false,
+            },
+            type = {
+                enabled = false,
+            },
+            last_modified = {
+                enabled = false,
+            },
+            created = {
+                enabled = false,
+            },
+            symlink_target = {
+                enabled = false,
+            },
         },
         window = {
             auto_expand_width = true,

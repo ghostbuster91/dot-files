@@ -1,4 +1,4 @@
-{ self, inputs, ... }:
+{ self, inputs, lib, ... }:
 {
   flake.overlays = {
     default = _final: prev:
@@ -12,6 +12,18 @@
         nvim-treesitter-textobjects =
           import ./nvim-treesitter-textobjects.nix { pkgs = prev; };
         vimPlugins = prev.vimPlugins // nvimPlugins;
+        slack = prev.slack.overrideAttrs (oldAttrs: rec {
+
+          fixupPhase = ''
+            sed -i -e 's/,"WebRTCPipeWireCapturer"/,"LebRTCPipeWireCapturer"/' $out/lib/slack/resources/app.asar
+
+            rm $out/bin/slack
+            makeWrapper $out/lib/slack/slack $out/bin/slack \
+              --prefix XDG_DATA_DIRS : $GSETTINGS_SCHEMAS_PATH \
+              --suffix PATH : ${lib.makeBinPath [ prev.xdg-utils ]} \
+              --add-flags "--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations,WebRTCPipeWireCapturer"
+          '';
+        });
       } // treesitter-grammars;
   };
 

@@ -25,6 +25,13 @@ local setup = function(diffview)
     end
     telescope.setup({
         defaults = {
+            layout_strategy = "flex",
+            layout_config = {
+                flex = {
+                    flip_columns = 15,
+                },
+                -- other layout configuration
+            },
             buffer_previewer_maker = small_files_preview_maker,
             mappings = {
                 n = {

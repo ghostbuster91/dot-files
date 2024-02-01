@@ -52,6 +52,11 @@ in
         file = "plugins/common-aliases/common-aliases.plugin.zsh";
       }
       {
+        name = "omz-ssh-agent";
+        src = omz;
+        file = "plugins/ssh-agent/ssh-agent.plugin.zsh";
+      }
+      {
         name = "omz-git";
         src = omz;
         file = "plugins/git/git.plugin.zsh";

@@ -52,7 +52,7 @@
     # DOCKER_HOST = "unix://$XDG_RUNTIME_DIR/docker.sock";
   };
 
-  home.packages = with pkgs-unstable; [
+  home.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     bat # better cat
     tokei # better cloc

@@ -20,6 +20,8 @@
       inputs.self.nixosModules.nixbuild
       ./custom.nix
       inputs.home-manager.nixosModule
+      inputs.self.nixosModules.sound
+      inputs.self.nixosModules.bluetooth
     ];
 
   home-manager = {

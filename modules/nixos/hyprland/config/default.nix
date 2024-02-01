@@ -2,6 +2,12 @@
 {
   home-manager.users.${username} = _: {
     home.file = {
+      # Add sfwbar config
+      ".config/sfwbar/" = {
+        source = ../sfwbar/config;
+        recursive = true;
+        force = true;
+      };
       ".config/hypr/hyprpaper.conf".text = ''
         '';
 
@@ -18,6 +24,7 @@
         monitor=, preferred, auto, auto
 
         exec-once = waybar & hyprpaper & mako & lxqt-policykit-agent & dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+        exec-once = sfwbar -m eDP-1 & sfwbar -m HDMI-A-1
 
         # some default env vars.
         env=BROWSER, firefox
@@ -34,30 +41,38 @@
         env=QT_AUTO_SCREEN_SCALE_FACTOR,1
         env=QT_QPA_PLATFORM,wayland
 
-
         $mainMod = SUPER
 
         # bind = $mainMod, q, exec, foot 
         bind = $mainMod, w, killactive 
         bind = $mainMod, f, fullscreen, 1
-        bind = $mainMod, d, exec, pavucontrol
-        bind = $mainMod, m, exit
+        # bind = $mainMod, d, exec, pavucontrol
+        # bind = $mainMod, m, exit
         # bind = $mainMod, e, exec, kitty -e ranger
         # bind = $mainMod, b, exec, foot -e btop
-        bind = $mainMod, v, togglefloating, 
-        bind = $mainMod, r, exec, wofi --show drun
-        bind = $mainMod, p, pseudo, # dwindle
+        bind = $mainMod, i, togglefloating, 
+        bind = $mainMod, e, exec, wofi --show drun
+        # bind = $mainMod, p, pseudo, # dwindle
         bind = $mainMod, j, togglesplit, # dwindle
         bind = $mainMod, l, exec, swaylock
+        bind = $mainMod, n, togglegroup
 
-        $wA = Alpha
-        $wB = Bravo
-        $wC = Charlie
-        $wD = Delta
-        $wE = Echo
-        $wF = Foxtrot
-        $wG = Golf
-        $wH = Hotel
+        # bind = ALT, Tab, cyclenext
+        # bind = ALT, Tab, bringactivetotop
+        # bind = ALT, Tab, changegroupactive, f
+        bind = ALT, Tab, exec, killall -SIGUSR1 .sfwbar-wrapped
+
+        $wA = 1
+        $wB = 2
+        $wC = 3
+        $wD = 4
+        $wE = 5
+        $wF = 6
+        $wG = 7
+        $wH = 8
+        $wI = 9
+        $wJ = 0
+
 
         # for all categories, see https://wiki.hyprland.org/configuring/variables/
         input {
@@ -132,10 +147,15 @@
         bind = $mainMod, up, movefocus, u
         bind = $mainMod, down, movefocus, d
 
-        bind = $mainMod shift, left, movewindow, l
-        bind = $mainMod shift, right, movewindow, r
-        bind = $mainMod shift, up, movewindow, u
-        bind = $mainMod shift, down, movewindow, d
+        # bind = $mainMod shift, left, movewindow, l
+        # bind = $mainMod shift, right, movewindow, r
+        # bind = $mainMod shift, up, movewindow, u
+        # bind = $mainMod shift, down, movewindow, d
+
+        bind = $mainMod shift, left, movewindoworgroup, l
+        bind = $mainMod shift, right, movewindoworgroup, r
+        bind = $mainMod shift, up, movewindoworgroup, u
+        bind = $mainMod shift, down, movewindoworgroup, d
 
         workspace=name:$wA,monitor:eDP-1
         workspace=name:$wB,monitor:eDP-1
