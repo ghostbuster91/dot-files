@@ -1,0 +1,128 @@
+### basics
+set $monitor1 eDP-1
+set $monitor2 HDMI-A-1
+
+output eDP-1 resolution 1920x1080 position 0,0
+output HDMI-A-1 resolution 2560x1440 position 1920,0
+
+set $term foot
+set $mod Mod4
+set $menu fuzzel
+
+bindsym $mod+Return exec $term
+
+### startup
+focus output $monitor2
+
+exec dbus-sway-environment
+exec configure-gtk
+
+# give sway a little time to startup before starting kanshi.
+exec sleep 5; systemctl --user start kanshi.service
+
+### workspaces
+
+workspace 1 output $monitor1
+workspace 2 output $monitor1
+workspace 3 output $monitor1
+workspace 4 output $monitor1
+workspace 5 output $monitor1
+
+workspace 6 output $monitor2
+workspace 7 output $monitor2
+workspace 8 output $monitor2
+workspace 9 output $monitor2
+workspace 10 output $monitor2
+
+# key bindings
+
+bindsym $mod+w kill
+
+bindsym $mod+Space exec $menu
+
+#
+# Moving around:
+#
+# Move your focus around
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move the focused window with the same, but add Shift
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+#
+# Workspaces:
+#
+# Switch to workspace
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+# Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+
+#
+# Layout stuff:
+#
+# You can "split" the current object of your focus with
+# $mod+b or $mod+v, for horizontal and vertical splits
+# respectively.
+bindsym $mod+b split h
+bindsym $mod+v split v
+
+# Switch the current container between different layout styles
+bindsym $mod+s layout stacking
+bindsym $mod+t layout tabbed
+bindsym $mod+n layout toggle split
+
+# Make the current focus fullscreen
+bindsym $mod+f fullscreen
+
+# Toggle the current focus between tiling and floating mode
+# bindsym $mod+Shift+space floating toggle
+
+# Swap focus between the tiling area and the floating area
+# bindsym $mod+space focus mode_toggle
+
+# Move focus to the parent container
+# bindsym $mod+a focus parent
+
+#
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
+bar {
+    position top
+
+    # When the status_command prints a new line to stdout, swaybar updates.
+    # The default just shows the current date and time.
+    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+
+    colors {
+        statusline #ffffff
+        background #323232
+        inactive_workspace #32323200 #32323200 #5c5c5c
+    }
+}
+
+include @sysconfdir@/sway/config.d/*

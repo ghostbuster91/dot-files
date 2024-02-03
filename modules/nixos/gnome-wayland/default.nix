@@ -17,10 +17,10 @@
   environment.gnome.excludePackages = (with pkgs; [
     gnome-photos
     gnome-tour
+    gedit # text editor
   ]) ++ (with pkgs.gnome; [
     cheese # webcam tool
     gnome-music
-    gedit # text editor
     epiphany # web browser
     geary # email reader
     evince # document viewer
@@ -38,7 +38,7 @@
       enable = true;
       finegrained = true;
     };
-    nvidiaPersistenced = true;
+    nvidiaPersistenced = false;
     # Reverse sync is not compatible with the open source kernel module
     open = false;
 
