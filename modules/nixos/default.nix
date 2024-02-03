@@ -11,5 +11,6 @@ _:
     hyprland = ./hyprland;
     sound = ./sound;
     bluetooth = ./bluetooth;
+    sway = ./sway;
   };
 }

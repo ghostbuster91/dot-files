@@ -11,7 +11,8 @@
       })
       inputs.sops.nixosModules.default
       # inputs.self.nixosModules.gnome
-      inputs.self.nixosModules.hyprland
+      # inputs.self.nixosModules.hyprland
+      inputs.self.nixosModules.sway
       inputs.self.nixosModules.games
       inputs.self.nixosModules.cache
       inputs.self.nixosModules.nix

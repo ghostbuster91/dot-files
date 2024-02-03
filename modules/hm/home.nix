@@ -109,6 +109,7 @@
     powertop
     signal-desktop
     vscode-fhs
+    killall
   ];
 
   programs = {
@@ -167,38 +168,38 @@
     exec = "nvidia-offload ${lib.getExe pkgs.alacritty}";
   };
 
-  dconf = {
-    enable = true;
-    settings = {
-      "org/gnome/shell" = {
-        disable-user-extensions = false;
-
-        # `gnome-extensions list` for a list
-        enabled-extensions = [
-          "trayIconsReloaded@selfmade.pl"
-        ];
-      };
-      "org.gnome.desktop.input-sources" = {
-        show-all-sources = "false";
-        xkb-options = "['numpad:shift3', 'numpad:microsoft']";
-        per-window = "false";
-        current = "uint32 0";
-        mru-sources = "@a(ss) []";
-        sources = "[('xkb', 'pl')]";
-      };
-      "org/gnome/settings-daemon/plugins/media-keys" = {
-        custom-keybindings = [
-          "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
-        ];
-      };
-      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" =
-        {
-          binding = "<Primary><Alt>f";
-          command = "alacritty";
-          name = "open-terminal";
-        };
-    };
-  };
+  # dconf = {
+  #   enable = true;
+  #   settings = {
+  #     "org/gnome/shell" = {
+  #       disable-user-extensions = false;
+  #
+  #       # `gnome-extensions list` for a list
+  #       enabled-extensions = [
+  #         "trayIconsReloaded@selfmade.pl"
+  #       ];
+  #     };
+  #     "org.gnome.desktop.input-sources" = {
+  #       show-all-sources = "false";
+  #       xkb-options = "['numpad:shift3', 'numpad:microsoft']";
+  #       per-window = "false";
+  #       current = "uint32 0";
+  #       mru-sources = "@a(ss) []";
+  #       sources = "[('xkb', 'pl')]";
+  #     };
+  #     "org/gnome/settings-daemon/plugins/media-keys" = {
+  #       custom-keybindings = [
+  #         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+  #       ];
+  #     };
+  #     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" =
+  #       {
+  #         binding = "<Primary><Alt>f";
+  #         command = "alacritty";
+  #         name = "open-terminal";
+  #       };
+  #   };
+  # };
   #
   #services.redshift = {
   #  enable = true;

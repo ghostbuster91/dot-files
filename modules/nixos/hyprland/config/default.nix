@@ -2,12 +2,6 @@
 {
   home-manager.users.${username} = _: {
     home.file = {
-      # Add sfwbar config
-      ".config/sfwbar/" = {
-        source = ../sfwbar/config;
-        recursive = true;
-        force = true;
-      };
       ".config/hypr/hyprpaper.conf".text = ''
         '';
 
@@ -24,8 +18,6 @@
         monitor=, preferred, auto, auto
 
         exec-once = waybar & hyprpaper & mako & lxqt-policykit-agent & dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-        exec-once = sfwbar -m eDP-1 & sfwbar -m HDMI-A-1
-
         # some default env vars.
         env=BROWSER, firefox
         env=XCURSOR_SIZE,24
@@ -59,8 +51,11 @@
 
         # bind = ALT, Tab, cyclenext
         # bind = ALT, Tab, bringactivetotop
-        # bind = ALT, Tab, changegroupactive, f
-        bind = ALT, Tab, exec, killall -SIGUSR1 .sfwbar-wrapped
+        bind = ALT, Tab, changegroupactive, f
+        bind = , Print, exec, grim -g "$(slurp -d)" - | wl-copy
+        bind = SHIFT, Print, exec, grim -g "$(slurp -d)" - | tee ~/Pictures/Screenshots/$(date +'%s_grim.png') | wl-copy
+        bind = CTRL, Print, exec, grim -g "$(slurp -o)" - | wl-copy
+        bind = CTRL SHIFT, Print, exec, grim -g "$(slurp -o)" - | tee ~/Pictures/Screenshots/$(date +'%s_grim.png') | wl-copy
 
         $wA = 1
         $wB = 2
