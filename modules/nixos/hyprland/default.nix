@@ -8,7 +8,6 @@
     ./swaylock
     ./waybar
     ./wofi
-    ./sway.nix
   ];
 
   environment.sessionVariables.WLR_NO_HARDWARE_CURSORS = "1";
@@ -26,10 +25,6 @@
     xdg-utils
     wdisplays # display manager
     sfwbar
-    killall
-    vulkan-validation-layers
-    sway
-
   ];
 
   programs.hyprland = {
