@@ -157,15 +157,15 @@
     };
   };
 
-  xdg.desktopEntries.firefox = {
-    name = "firefox";
-    exec = "${lib.getExe pkgs.firefox} -P";
-  };
-
-  xdg.desktopEntries.alacritty = {
-    name = "alacritty";
-    exec = "nvidia-offload ${lib.getExe pkgs.alacritty}";
-  };
+  # xdg.desktopEntries.firefox = {
+  #   name = "firefox";
+  #   exec = "${lib.getExe pkgs.firefox} -P";
+  # };
+  #
+  # xdg.desktopEntries.alacritty = {
+  #   name = "alacritty";
+  #   exec = "nvidia-offload ${lib.getExe pkgs.alacritty}";
+  # };
 
   dconf = {
     enable = true;

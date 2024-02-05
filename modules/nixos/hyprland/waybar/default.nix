@@ -10,11 +10,10 @@
             "height": 45,
         	"modules-left": ["custom/nix", "cpu", "memory", "disk", "wlr/taskbar"],
             "modules-center": ["hyprland/workspaces", "clock"],
-        	"modules-right": [ "bluetooth", "pulseaudio", "network", "battery", "custom/power"],
+        	"modules-right": [ "bluetooth", "pulseaudio", "network", "tray", "battery", "custom/power"],
         	"custom/nix": {
                 "format": " ",
                 "tooltip": false,
-                "on-click": "${pkgs.lib.getExe pkgs.wofi} --show drun"
             },
         	"hyprland/workspaces": {
                 "format": "{name} {icon}",

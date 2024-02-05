@@ -1,4 +1,4 @@
-{ pkgs, username, inputs, ... }:
+{ pkgs, username, inputs, lib, ... }:
 {
   imports = [
     inputs.hyprland.nixosModules.default
@@ -7,11 +7,16 @@
     ./mako
     ./swaylock
     ./waybar
-    ./wofi
   ];
 
   environment.sessionVariables.WLR_NO_HARDWARE_CURSORS = "1";
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
+  # always use nvidia offload
+  environment.sessionVariables.__VK_LAYER_NV_optimus = "NVIDIA_only";
+  environment.sessionVariables.__GLX_VENDOR_LIBRARY_NAME = "nvidia";
+  environment.sessionVariables.__NV_PRIME_RENDER_OFFLOAD = "1";
+  environment.sessionVariables.__NV_PRIME_RENDER_OFFLOAD_PROVIDER = "NVIDIA-G0";
 
   environment.systemPackages = with pkgs; [
     eww-wayland # ???
@@ -24,13 +29,16 @@
     # Required if applications are having trouble opening links
     xdg-utils
     wdisplays # display manager
-    sfwbar
+    fuzzel
   ];
 
   programs.hyprland = {
     enable = true;
     # package = inputs.hyprland.packages.${pkgs.system}.hyprland;
   };
+
+  users.users.${username}.extraGroups = [ "video" ];
+  programs.light.enable = true;
 
   hardware.nvidia = {
     powerManagement = {
@@ -43,15 +51,15 @@
     nvidiaSettings = true;
 
     prime = {
-      reverseSync.enable = false;
+      reverseSync.enable = true;
       offload = {
-        enable = false;
-        enableOffloadCmd = false;
+        enable = true;
+        enableOffloadCmd = true;
       };
-      sync.enable = true;
+      sync.enable = false;
 
       #enable if using an external GPU
-      allowExternalGpu = false;
+      allowExternalGpu = true; # ?
     };
   };
 

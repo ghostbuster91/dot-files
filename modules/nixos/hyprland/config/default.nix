@@ -2,12 +2,6 @@
 {
   home-manager.users.${username} = _: {
     home.file = {
-      # Add sfwbar config
-      ".config/sfwbar/" = {
-        source = ../sfwbar/config;
-        recursive = true;
-        force = true;
-      };
       ".config/hypr/hyprpaper.conf".text = ''
         '';
 
@@ -42,16 +36,16 @@
         env=QT_QPA_PLATFORM,wayland
 
         $mainMod = SUPER
+        $term = alacritty
 
         # bind = $mainMod, q, exec, foot 
         bind = $mainMod, w, killactive 
         bind = $mainMod, f, fullscreen, 1
         # bind = $mainMod, d, exec, pavucontrol
         # bind = $mainMod, m, exit
-        # bind = $mainMod, e, exec, kitty -e ranger
-        # bind = $mainMod, b, exec, foot -e btop
         bind = $mainMod, i, togglefloating, 
-        bind = $mainMod, e, exec, wofi --show drun
+        bind = $mainMod, Space, exec, fuzzel
+        bind = $mainMod, Return, exec, $term
         # bind = $mainMod, p, pseudo, # dwindle
         bind = $mainMod, j, togglesplit, # dwindle
         bind = $mainMod, l, exec, swaylock
@@ -59,8 +53,7 @@
 
         # bind = ALT, Tab, cyclenext
         # bind = ALT, Tab, bringactivetotop
-        # bind = ALT, Tab, changegroupactive, f
-        bind = ALT, Tab, exec, killall -SIGUSR1 .sfwbar-wrapped
+        bind = ALT, Tab, changegroupactive, f
 
         $wA = 1
         $wB = 2
@@ -197,6 +190,15 @@
         # Move/resize windows with mainMod + LMB/RMB and dragging
         bindm = $mainMod, mouse:272, movewindow
         bindm = $mainMod, mouse:273, resizewindow 
+
+        # Brightness
+        bindsym XF86MonBrightnessDown exec light -U 10
+        bindsym XF86MonBrightnessUp exec light -A 10
+
+        # Volume
+        bindsym XF86AudioRaiseVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ +1%'
+        bindsym XF86AudioLowerVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ -1%'
+        bindsym XF86AudioMute exec 'pactl set-sink-mute @DEFAULT_SINK@ toggle'
       '';
 
     };
