@@ -55,6 +55,11 @@
         # bind = ALT, Tab, bringactivetotop
         bind = ALT, Tab, changegroupactive, f
 
+        bind = , Print, exec, grim -g "$(slurp -d)" - | wl-copy
+        bind = SHIFT, Print, exec, grim -g "$(slurp -d)" - | tee ~/Pictures/Screenshots/$(date +'%s_grim.png') | wl-copy
+        bind = CTRL, Print, exec, grim -g "$(slurp -o)" - | wl-copy
+        bind = CTRL SHIFT, Print, exec, grim -g "$(slurp -o)" - | tee ~/Pictures/Screenshots/$(date +'%s_grim.png') | wl-copy
+
         $wA = 1
         $wB = 2
         $wC = 3
