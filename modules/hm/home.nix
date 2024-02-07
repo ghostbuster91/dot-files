@@ -141,9 +141,6 @@
           User kghost
       '';
     };
-    google-chrome = {
-      enable = true;
-    };
   };
   xdg.configFile."mimeapps.list".force = true;
   xdg.mimeApps = {
