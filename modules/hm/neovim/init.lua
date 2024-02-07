@@ -83,11 +83,17 @@ map("n", "k", function()
     diag.open_float()
 end, { desc = "show diagnostic under the cursor" })
 
+local nvim_next_builtins = require("nvim-next.builtins")
 require("nvim-next").setup({
     default_mappings = {
         repeat_style = "directional",
     },
+    items = {
+        nvim_next_builtins.f,
+        nvim_next_builtins.t
+    }
 })
+
 local next_move = require("nvim-next.move")
 local prev_qf_item, next_qf_item = next_move.make_repeatable_pair(function(_)
     local status, err = pcall(vim.cmd, "cprevious")
