@@ -8,7 +8,6 @@
           import ./treesitter-grammars.nix { pkgs = prev; inherit inputs; };
       in
       {
-        google-chrome = import ./chrome.nix { pkgs = prev; };
         nvim-treesitter-textobjects =
           import ./nvim-treesitter-textobjects.nix { pkgs = prev; };
         vimPlugins = prev.vimPlugins // nvimPlugins;
