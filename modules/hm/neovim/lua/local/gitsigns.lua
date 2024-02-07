@@ -47,7 +47,7 @@ local setup = function(next_integrations)
             -- map('n', '<leader>hD', function() gs.diffthis('~') end, { desc = "git:show diff~" })
 
             -- Text object
-            map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
+            map({ "o", "x" }, "h", ":<C-U>Gitsigns select_hunk<CR>")
         end,
     })
 end
