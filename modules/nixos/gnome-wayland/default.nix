@@ -16,11 +16,11 @@
 
   environment.gnome.excludePackages = (with pkgs; [
     gnome-photos
+    gedit # text editor
     gnome-tour
   ]) ++ (with pkgs.gnome; [
     cheese # webcam tool
     gnome-music
-    gedit # text editor
     epiphany # web browser
     geary # email reader
     evince # document viewer
