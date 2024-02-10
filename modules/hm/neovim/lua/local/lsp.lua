@@ -260,7 +260,7 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, b
             enabled = true,
         },
     }
-    metals_config.init_options.statusBarProvider = "on"
+    metals_config.init_options.statusBarProvider = "off"
     metals_config.capabilities = capabilities
 
     local dap = require("dap")
@@ -384,22 +384,7 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, b
     telescope.load_extension("dap")
 
     local function metals_status_handler(err, status, ctx)
-        if status.statusType == "metals" then
-            local val = {}
-            -- trim and remove spinner
-            local text = status.text:gsub("[⠇⠋⠙⠸⠴⠦]", ""):gsub("^%s*(.-)%s*$", "%1")
-            if status.hide then
-                val = { kind = "end" }
-            elseif status.show then
-                val = { kind = "begin", title = text }
-            elseif status.text then
-                val = { kind = "report", message = text }
-            else
-                return
-            end
-            local msg = { token = "metals", value = val }
-            lsp.handlers["$/progress"](err, msg, ctx)
-        elseif status.statusType == "bsp" and status.text then
+        if status.statusType == "bsp" and status.text then
             local scaped_status = status.text:gsub("^%s*(.-)%s*$", "%1")
             vim.api.nvim_set_var("metals_bsp_status", scaped_status)
         else
@@ -407,7 +392,6 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, b
         end
     end
 
-    metals_config.init_options.statusBarProvider = "on"
     metals_config.handlers = { ["metals/status"] = metals_status_handler }
 
     -- metals end
