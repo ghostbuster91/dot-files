@@ -71,6 +71,7 @@ in
     libva-utils
     globalprotect-openconnect
     sops
+    nvtop
   ];
 
   environment.shells = with pkgs; [ zsh ];
