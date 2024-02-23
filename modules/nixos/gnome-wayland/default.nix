@@ -49,13 +49,18 @@
       allowExternalGpu = false;
     };
   };
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
 
   # Configure keymap in X11
   services.xserver.layout = "pl";
+  services.gnome = {
+    gnome-keyring.enable = true;
+  };
+  security = {
+    pam = {
+      services = {
+        login.enableGnomeKeyring = true;
+      };
+    };
+  };
+  programs.ssh.startAgent = true;
 }
