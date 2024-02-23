@@ -317,13 +317,13 @@
         "type": "github"
       }
     },
-    "nixpkgs_2": {
+    "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1707546158,
-        "narHash": "sha256-nYYJTpzfPMDxI8mzhQsYjIUX+grorqjKEU9Np6Xwy/0=",
+        "lastModified": 1708475490,
+        "narHash": "sha256-g1v0TsWBQPX97ziznfJdWhgMyMGtoBFs102xSYO4syU=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "d934204a0f8d9198e1e4515dd6fec76a139c87f0",
+        "rev": "0e74ca98a74bc7270d28838369593635a5db3260",
         "type": "github"
       },
       "original": {
@@ -632,11 +632,11 @@
         "nix-metals": "nix-metals",
         "nix-smithy-ls": "nix-smithy-ls",
         "nix-work": "nix-work",
-        "nixpkgs": "nixpkgs_2",
-        "nixpkgs-stable": "nixpkgs-stable",
-        "nixpkgs-unstable": [
-          "nixpkgs"
+        "nixpkgs": [
+          "nixpkgs-unstable"
         ],
+        "nixpkgs-stable": "nixpkgs-stable",
+        "nixpkgs-unstable": "nixpkgs-unstable",
         "p_nvim-actions-preview": "p_nvim-actions-preview",
         "p_nvim-baleia": "p_nvim-baleia",
         "p_nvim-gp-nvim": "p_nvim-gp-nvim",
