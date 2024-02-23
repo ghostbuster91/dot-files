@@ -43,7 +43,7 @@ local setup = function()
     end
 
     require("neo-tree").setup({
-        sources = { "filesystem", "git_status", "buffers" },
+        sources = { "filesystem", "git_status", "buffers", "document_symbols" },
         git_status_async = true,
         enable_diagnostics = false,
         close_if_last_window = true,
@@ -67,18 +67,22 @@ local setup = function()
                     ["."] = "noop",
                     ["/"] = "noop",
                     ["<space>"] = "noop",
+                    ["c"] = "copy_to_clipboard",
+                    ["C"] = "copy",
                     ["zO"] = expand_all_filesystem,
                     -- from https://github.com/nvim-neo-tree/neo-tree.nvim/discussions/370
                     ["y"] = function(state)
                         local node = state.tree:get_node()
                         local filename = node.name
                         vim.fn.setreg('"', filename)
+                        vim.fn.setreg('*', filename)
                         vim.notify("Copied: " .. filename)
                     end,
                     ["Y"] = function(state)
                         local node = state.tree:get_node()
                         local filepath = node:get_id()
                         vim.fn.setreg('"', filepath)
+                        vim.fn.setreg('*', filepath)
                         vim.notify("Copied: " .. filepath)
                     end,
                 },
