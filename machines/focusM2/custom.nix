@@ -34,8 +34,6 @@ in
     bluetooth.enable = true;
     flipperzero.enable = true;
     opengl.enable = true;
-
-    
   };
 
   # Set your time zone.
@@ -53,7 +51,8 @@ in
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.${username} = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "audio" "networkmanager" "plugdev" ]; # Enable ‘sudo’ for the user.
+    # dialout is needed to access serial devices without sudo
+    extraGroups = [ "wheel" "networkmanager" "plugdev" "dialout" ]; # Enable ‘sudo’ for the user.
     shell = pkgs.zsh;
   };
 
@@ -63,6 +62,7 @@ in
     vim
     git
     firefox
+    google-chrome
     lm_sensors
     wirelesstools
     pciutils

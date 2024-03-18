@@ -22,6 +22,7 @@
       inputs.home-manager.nixosModule
       inputs.self.nixosModules.sound
       inputs.self.nixosModules.bluetooth
+      inputs.self.nixosModules.android
     ];
 
   home-manager = {

@@ -1,6 +1,7 @@
 _:
 {
   flake.nixosModules = {
+    android = ./android.nix;
     gnome = ./gnome-wayland;
     games = ./games;
     cache = ./cache.nix;
