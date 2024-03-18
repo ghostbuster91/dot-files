@@ -11,7 +11,7 @@
         nvim-treesitter-textobjects =
           import ./nvim-treesitter-textobjects.nix { pkgs = prev; };
         vimPlugins = prev.vimPlugins // nvimPlugins;
-        slack = prev.slack.overrideAttrs (oldAttrs: {
+        slack = prev.slack.overrideAttrs (_oldAttrs: {
 
           fixupPhase = ''
             sed -i -e 's/,"WebRTCPipeWireCapturer"/,"LebRTCPipeWireCapturer"/' $out/lib/slack/resources/app.asar

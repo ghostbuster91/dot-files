@@ -90,8 +90,8 @@ require("nvim-next").setup({
     },
     items = {
         nvim_next_builtins.f,
-        nvim_next_builtins.t
-    }
+        nvim_next_builtins.t,
+    },
 })
 
 local next_move = require("nvim-next.move")

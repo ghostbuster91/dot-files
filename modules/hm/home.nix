@@ -1,4 +1,4 @@
-{ pkgs, username, lib, pkgs-stable, ... }: {
+{ pkgs, username, pkgs-stable, ... }: {
 
   home = {
     inherit username;

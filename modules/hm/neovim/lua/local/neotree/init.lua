@@ -75,14 +75,14 @@ local setup = function()
                         local node = state.tree:get_node()
                         local filename = node.name
                         vim.fn.setreg('"', filename)
-                        vim.fn.setreg('*', filename)
+                        vim.fn.setreg("*", filename)
                         vim.notify("Copied: " .. filename)
                     end,
                     ["Y"] = function(state)
                         local node = state.tree:get_node()
                         local filepath = node:get_id()
                         vim.fn.setreg('"', filepath)
-                        vim.fn.setreg('*', filepath)
+                        vim.fn.setreg("*", filepath)
                         vim.notify("Copied: " .. filepath)
                     end,
                 },
@@ -141,8 +141,8 @@ local setup = function()
                 {
                     "container",
                     content = {
-                        { "name",       zindex = 10 },
-                        { "clipboard",  zindex = 10 },
+                        { "name", zindex = 10 },
+                        { "clipboard", zindex = 10 },
                         { "git_status", zindex = 10, hide_when_expanded = true },
                         {
                             "diagnostics",
@@ -151,10 +151,10 @@ local setup = function()
                             align = "right",
                             hide_when_expanded = true,
                         },
-                        { "file_size",     zindex = 10, align = "right" },
-                        { "type",          zindex = 10, align = "right" },
+                        { "file_size", zindex = 10, align = "right" },
+                        { "type", zindex = 10, align = "right" },
                         { "last_modified", zindex = 10, align = "right" },
-                        { "created",       zindex = 10, align = "right" },
+                        { "created", zindex = 10, align = "right" },
                     },
                 },
             },
@@ -164,16 +164,16 @@ local setup = function()
                 {
                     "container",
                     content = {
-                        { "name",          zindex = 10 },
-                        { "clipboard",     zindex = 10 },
-                        { "bufnr",         zindex = 10 },
-                        { "git_status",    zindex = 10 },
-                        { "modified",      zindex = 20, align = "right" },
-                        { "diagnostics",   zindex = 20, align = "right" },
-                        { "file_size",     zindex = 10, align = "right" },
-                        { "type",          zindex = 10, align = "right" },
+                        { "name", zindex = 10 },
+                        { "clipboard", zindex = 10 },
+                        { "bufnr", zindex = 10 },
+                        { "git_status", zindex = 10 },
+                        { "modified", zindex = 20, align = "right" },
+                        { "diagnostics", zindex = 20, align = "right" },
+                        { "file_size", zindex = 10, align = "right" },
+                        { "type", zindex = 10, align = "right" },
                         { "last_modified", zindex = 10, align = "right" },
-                        { "created",       zindex = 10, align = "right" },
+                        { "created", zindex = 10, align = "right" },
                     },
                 },
             },

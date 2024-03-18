@@ -1,4 +1,4 @@
-{ pkgs, username, inputs, lib, ... }:
+{ pkgs, username, inputs, ... }:
 {
   imports = [
     inputs.hyprland.nixosModules.default
