@@ -136,10 +136,13 @@ in
       nvim-neoclip-lua
       indent-blankline-nvim
       p_nvim-neotree
+      p_nvim-nio
+      p_nvim-image
+      p_nvim-pathlib
       vim-tmux-clipboard
       telescope-ui-select-nvim
       noice-nvim
-      nui-nvim
+      p_nvim-nui-nvim
       fidget-nvim
       nvim-lightbulb
       p_nvim-next

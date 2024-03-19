@@ -68,7 +68,23 @@
         flake = false;
       };
       p_nvim-neotree = {
-        url = "github:nvim-neo-tree/neo-tree.nvim/v3.x";
+        url = "github:pysan3/neo-tree.nvim/v4-dev";
+        flake = false;
+      };
+      p_nvim-nio = {
+        url = "github:nvim-neotest/nvim-nio";
+        flake = false;
+      };
+      p_nvim-image = {
+        url = "github:3rd/image.nvim";
+        flake = false;
+      };
+      p_nvim-pathlib = {
+        url = "github:pysan3/pathlib.nvim";
+        flake = false;
+      };
+      p_nvim-nui-nvim = {
+        url = "github:MunifTanjim/nui.nvim";
         flake = false;
       };
       p_nvim-telescope-livegrep-args = {
