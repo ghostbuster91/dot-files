@@ -1,36 +1,28 @@
-{ pkgs-unstable, ... }:
+{ pkgs-unstable, pkgs, ... }:
 {
   imports = [ ./bloop.nix ];
 
-  home.packages = with pkgs-unstable; [
-    jdk11
-    scala
-    ammonite
-    scalafmt
-    coursier
-    scala-cli
-    sbt
-    maven3
-  ];
+  home = {
+    packages = with pkgs-unstable; [
+      ammonite
+      scalafmt
+      coursier
+      scala-cli
+    ] ++ (with pkgs; [
+      jdk17
+      scala
+      (sbt.override {
+        jre = jdk17;
+      })
+      (maven3.override {
+        jdk = jdk17;
+      })
+    ]);
 
-  home.sessionVariables = {
-    JAVA_HOME = "${pkgs-unstable.jdk}";
-    JVM_DEBUG =
+    sessionVariables.JAVA_HOME = "${pkgs.jdk17}";
+    sessionVariables.JVM_DEBUG =
       "-J-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005";
-  };
 
-  programs.sbt = {
-    enable = false;
-    plugins =
-      let
-        projectGraph = {
-          org = "com.dwijnand";
-          artifact = "sbt-project-graph";
-          version = "0.4.0";
-        };
-      in
-      [ projectGraph ];
+    file.".sbt/1.0/global.sbt".text = builtins.readFile ./global.sbt;
   };
-
-  home.file.".sbt/1.0/global.sbt".text = builtins.readFile ./global.sbt;
 }
