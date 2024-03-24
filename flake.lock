@@ -465,11 +465,11 @@
     "p_nvim-neotree": {
       "flake": false,
       "locked": {
-        "lastModified": 1710800735,
-        "narHash": "sha256-ihpHvuSfMk+HDPip6a0A6nGamDWFQf7kRXIHGwcSpJ0=",
+        "lastModified": 1710901557,
+        "narHash": "sha256-8gEbjp1N42x0Ga3DYQLp47+Ad6qnBDRK+7k2gyndnpw=",
         "owner": "pysan3",
         "repo": "neo-tree.nvim",
-        "rev": "2dc787eb6ea3d96a502cdd53bdcc260eb32dfdbe",
+        "rev": "d1d8219d6a697fc63a84da1eb2f302200e3e448b",
         "type": "github"
       },
       "original": {
