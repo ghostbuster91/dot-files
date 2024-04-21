@@ -257,11 +257,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1706460243,
-        "narHash": "sha256-ItXLCSZKb2VNJfVZNlZ3b6E++WaWa3AG8kJ5cjpplzw=",
+        "lastModified": 1711649782,
+        "narHash": "sha256-03y0HYBNnEhZa3KkETsojKXiT7y+Ek7o+J3zZiYKuCM=",
         "ref": "refs/heads/main",
-        "rev": "1f7bb33060f42a643e2a7f4460091642eb27edea",
-        "revCount": 3,
+        "rev": "e8f9b34579dab0783bc17fd432afc020f24df63b",
+        "revCount": 5,
         "type": "git",
         "url": "file:///home/kghost/dev/nix-work"
       },
@@ -417,11 +417,11 @@
     "p_nvim-metals": {
       "flake": false,
       "locked": {
-        "lastModified": 1706339065,
-        "narHash": "sha256-j8Udb/0Kck268GMHT2uUmygbNmC5iiOOaZgo/LK8o+I=",
+        "lastModified": 1709368177,
+        "narHash": "sha256-0v3kcosNthhdOrdD825a0eLPqBXIsBJpJxYY7bzZohU=",
         "owner": "scalameta",
         "repo": "nvim-metals",
-        "rev": "d90ea43ded7ec651606b0a533ae9740083436e58",
+        "rev": "4f9bf0c821092f20dd34c1a4ea5b07b0500ff089",
         "type": "github"
       },
       "original": {
@@ -594,11 +594,11 @@
     "p_treesitter-scala": {
       "flake": false,
       "locked": {
-        "lastModified": 1695610335,
-        "narHash": "sha256-93uWT5KMqCUwntdL5U2Vc71ci+uP3OdP9y6kVZ3bYLo=",
+        "lastModified": 1710309607,
+        "narHash": "sha256-ZwrsEhlZGVJMP+GRIlaxGqS1b7HtiQelg3QBwJT9Igk=",
         "owner": "tree-sitter",
         "repo": "tree-sitter-scala",
-        "rev": "1b4c2fa5c55c5fd83cbb0d2f818f916aba221a42",
+        "rev": "70b4fe63c4973b04cc7bd40c6b7646d9c2430db8",
         "type": "github"
       },
       "original": {
