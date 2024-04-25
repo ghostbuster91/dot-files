@@ -7,7 +7,7 @@
       ammonite
       scalafmt
       coursier
-      scala-cli
+      (scala-cli.override { jre = jdk17; })
     ] ++ (with pkgs; [
       jdk17
       scala
