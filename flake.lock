@@ -337,11 +337,11 @@
     "p_nvim-actions-preview": {
       "flake": false,
       "locked": {
-        "lastModified": 1692778077,
-        "narHash": "sha256-5HzyrYWGTdorG4JXMv0iQNj9EM702+8g7E18Oct1JiY=",
+        "lastModified": 1715088001,
+        "narHash": "sha256-jf2Jw10HOIA91lMouKNvVYACbTxOaXAxc00AB2HydNs=",
         "owner": "aznhe21",
         "repo": "actions-preview.nvim",
-        "rev": "5650c76abfb84d6498330dd045657ba630ecdbba",
+        "rev": "e8d41b608e24319548637685c7cfa66fadaff2b2",
         "type": "github"
       },
       "original": {
