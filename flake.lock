@@ -369,11 +369,11 @@
     "p_nvim-gp-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1701362739,
-        "narHash": "sha256-NBlcufQdJnXMjwd81X+5EhQvwhP9LKI/qoGxOYx9YHk=",
+        "lastModified": 1711465726,
+        "narHash": "sha256-nowrrgdRxxJ81xsmuUYKsbPNLTGVKO6KbSpU0U98lWE=",
         "owner": "Robitx",
         "repo": "gp.nvim",
-        "rev": "d1ce1df50e504e7aeeb65653b76cc9c8345e9a87",
+        "rev": "52938ffbd47b5e06d0f9b7c8b146f26d6021fbac",
         "type": "github"
       },
       "original": {
