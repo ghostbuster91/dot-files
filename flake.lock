@@ -562,11 +562,11 @@
     "p_treesitter-devicetree": {
       "flake": false,
       "locked": {
-        "lastModified": 1693778550,
-        "narHash": "sha256-r23ycLCR79Ow4eI8rK03B3M1loU8/7K8dDrqBIPSAS0=",
+        "lastModified": 1710565885,
+        "narHash": "sha256-DKC+aUkdz2eGrXCXzW751aleG4Fxwmjn2KetTCOQRDY=",
         "owner": "joelspadin",
         "repo": "tree-sitter-devicetree",
-        "rev": "cc26cbf2121a27eaa72a05a795ce38aba4e0f86e",
+        "rev": "fb07e6044ffd36932c57a5be01ba5d6b8a9337bb",
         "type": "github"
       },
       "original": {
