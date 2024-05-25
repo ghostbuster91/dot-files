@@ -108,7 +108,7 @@
         flake = false;
       };
       p_treesitter-xml = {
-        url = "github:ObserverOfTime/tree-sitter-xml";
+        url = "github:tree-sitter-grammars/tree-sitter-xml";
         flake = false;
       };
       nix-work = {

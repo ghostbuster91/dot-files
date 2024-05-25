@@ -10,7 +10,7 @@ let
   treesitterGrammars = pkgs.lib.attrsets.mapAttrs
     (k: v: v // rec {
       language = lib.strings.removePrefix prefix k;
-      location = if language == "xml" then "tree-sitter-xml" else null;
+      location = if language == "xml" then "xml" else null;
     })
     (pkgs.lib.attrsets.filterAttrs (k: _v: lib.strings.hasPrefix prefix k) inputs);
 in

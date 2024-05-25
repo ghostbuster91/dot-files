@@ -610,15 +610,15 @@
     "p_treesitter-xml": {
       "flake": false,
       "locked": {
-        "lastModified": 1691653663,
-        "narHash": "sha256-3ryZXRgsBaNKBBHUhJ8ANHYunOUMzthMI7gw+6lnooQ=",
-        "owner": "ObserverOfTime",
+        "lastModified": 1715323308,
+        "narHash": "sha256-O40z5VYmFeE8pkJ85Vu5DWV31YslIrwD80+4qnpoRNY=",
+        "owner": "tree-sitter-grammars",
         "repo": "tree-sitter-xml",
-        "rev": "9deacbfb79cb3527a0396255beb17e1bba3f2052",
+        "rev": "648183d86f6f8ffb240ea11b4c6873f6f45d8b67",
         "type": "github"
       },
       "original": {
-        "owner": "ObserverOfTime",
+        "owner": "tree-sitter-grammars",
         "repo": "tree-sitter-xml",
         "type": "github"
       }
