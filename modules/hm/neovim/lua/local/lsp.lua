@@ -121,9 +121,9 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, b
             })
         end
         -- Enable inlay hints if the client supports it.
-        if client.server_capabilities.inlayHintProvider then
-            vim.lsp.inlay_hint(bufnr, true)
-        end
+        -- if client.server_capabilities.inlayHintProvider then
+        --     vim.lsp.inlay_hint(bufnr, true)
+        -- end
     end
 
     local null_ls = require("null-ls")
