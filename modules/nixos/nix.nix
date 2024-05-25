@@ -2,6 +2,10 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-25.9.0"
+  ];
+
   # Nix daemon config
   nix = {
     # Automate garbage collection

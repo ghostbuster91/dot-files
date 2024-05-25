@@ -108,6 +108,7 @@
     powertop
     signal-desktop
     vscode-fhs
+    obsidian
   ]);
 
   programs = {
