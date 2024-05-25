@@ -84,7 +84,7 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, b
             telescope_builtin.lsp_definitions(vertical_layout)
         end, "[lsp] goto definition")
         mapB("n", "<leader>nD", function()
-            telescope_builtin.lsp_type_definition(vertical_layout)
+            telescope_builtin.lsp_type_definitions(vertical_layout)
         end, "[lsp] goto type definition")
         mapB("n", "<leader>ni", function()
             telescope_builtin.lsp_implementations(vertical_layout)
