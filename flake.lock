@@ -530,11 +530,11 @@
     "p_nvim-substitute": {
       "flake": false,
       "locked": {
-        "lastModified": 1697000469,
-        "narHash": "sha256-EBhCzpkrLF2+7y6ej9bbj9pfklSCrQrDjeTA1mHcOmw=",
+        "lastModified": 1700202535,
+        "narHash": "sha256-gR2WaBnqTSeBxMuUTjii+BOI0T8+C+poAofk17/Jxkk=",
         "owner": "gbprod",
         "repo": "substitute.nvim",
-        "rev": "cf35db50188f3d7de624ae391c9bb9f2e9de5610",
+        "rev": "17ffaeb5a1dc2dbef39cf0865d8a4b6000836714",
         "type": "github"
       },
       "original": {
