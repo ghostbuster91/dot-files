@@ -385,11 +385,11 @@
     "p_nvim-hover": {
       "flake": false,
       "locked": {
-        "lastModified": 1700651509,
-        "narHash": "sha256-oEXj/45k9DWoZSuz4RgPNXZ2U3CTiEkO5Rx1Xsgnujo=",
+        "lastModified": 1714924161,
+        "narHash": "sha256-UQg/z7CCv5wWBlfX1wdASGfG6/bbJZVTOqUQQ51O7rQ=",
         "owner": "lewis6991",
         "repo": "hover.nvim",
-        "rev": "0a0dd1baf1bb9415e3358207b6ab35747fb5f3ba",
+        "rev": "82684ebd5f2a812d6d05a629b14109618b54cbfc",
         "type": "github"
       },
       "original": {
