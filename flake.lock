@@ -546,11 +546,11 @@
     "p_nvim-telescope-livegrep-args": {
       "flake": false,
       "locked": {
-        "lastModified": 1693245982,
-        "narHash": "sha256-L2STMQude8DalHF4fYaJZNjvQHB1UtnQx8Gx2fPKcDA=",
+        "lastModified": 1716197506,
+        "narHash": "sha256-a5IaLd7q9vRJmfiXux7xvXg6vPNouV2+ShdqY/vbHnw=",
         "owner": "nvim-telescope",
         "repo": "telescope-live-grep-args.nvim",
-        "rev": "851c0997d55601f2afd7290db0f90dc364e29f58",
+        "rev": "4122e146d199c0d6d1cfb359c76bc1250d522460",
         "type": "github"
       },
       "original": {
