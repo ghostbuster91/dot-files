@@ -12,5 +12,6 @@ _:
     hyprland = ./hyprland;
     sound = ./sound;
     bluetooth = ./bluetooth;
+    ledger = ./ledger.nix;
   };
 }

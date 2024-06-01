@@ -23,6 +23,7 @@
       inputs.self.nixosModules.sound
       inputs.self.nixosModules.bluetooth
       inputs.self.nixosModules.android
+      inputs.self.nixosModules.ledger
     ];
 
   home-manager = {
