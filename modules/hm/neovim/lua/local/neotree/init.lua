@@ -6,51 +6,9 @@ local setup = function()
     local treeutils = require("local/neotree/treeutils")
     local api = require "nvim-tree.api"
     local explorer_node = require "nvim-tree.explorer.node"
-    local utils = require "nvim-tree.utils"
-    local filters = require "nvim-tree.explorer.filters"
-    local builders = require "nvim-tree.explorer.node-builders"
-    local Watcher = require "nvim-tree.watcher"
-    local log = require "nvim-tree.log"
     local git = require "nvim-tree.git"
-
-    local function populate_children(handle, cwd, node, git_status)
-        local node_ignored = explorer_node.is_git_ignored(node)
-        local nodes_by_path = utils.bool_record(node.nodes, "absolute_path")
-        local filter_status = filters.prepare(git_status)
-        while true do
-            local name, t = vim.loop.fs_scandir_next(handle)
-            if not name then
-                break
-            end
-
-            local abs = utils.path_join { cwd, name }
-            local profile = log.profile_start("explore populate_children %s", abs)
-
-            ---@type uv.fs_stat.result|nil
-            local stat = vim.loop.fs_stat(abs)
-
-            if not filters.should_filter(abs, stat, filter_status) and not nodes_by_path[abs] and Watcher.is_fs_event_capable(abs) then
-                local child = nil
-                if t == "directory" and vim.loop.fs_access(abs, "R") then
-                    child = builders.folder(node, abs, name, stat)
-                elseif t == "file" then
-                    child = builders.file(node, abs, name, stat)
-                elseif t == "link" then
-                    local link = builders.link(node, abs, name, stat)
-                    if link.link_to ~= nil then
-                        child = link
-                    end
-                end
-                if child then
-                    table.insert(node.nodes, child)
-                    nodes_by_path[child.absolute_path] = true
-                    explorer_node.update_git_status(child, node_ignored, git_status)
-                end
-            end
-
-            log.profile_end(profile)
-        end
-    end
+    local explorer = require "nvim-tree.explorer.explore"
+    local lib = require "nvim-tree.lib"
 
     local function my_on_attach(bufnr)
         local function opts(desc)
@@ -76,7 +34,7 @@ local setup = function()
                 return false, stop_expansion
             end
             local status = git.load_project_status(cwd)
-            populate_children(handle, cwd, node, status)
+            explorer.explore(node, status)
             local child_folder_only = explorer_node.has_one_child_folder(node) and node.nodes[1]
             if count > 1 and not child_folder_only then
                 return true, stop_expansion
@@ -86,10 +44,24 @@ local setup = function()
                 return false, stop_expansion
             end
         end
-        map('n', 'E', function()
-            api.tree.expand_all(nil, expand_until_non_single)
-        end, opts("Expand until not single"))
 
+        local function wrap_node(fn)
+            return function(node, ...)
+                node = node or lib.get_node_at_cursor()
+                if node then
+                    fn(node, ...)
+                end
+            end
+        end
+
+        local f = function(node)
+            if node.open then
+                lib.expand_or_collapse(node, nil)
+            else
+                api.tree.expand_all(node, expand_until_non_single)
+            end
+        end
+        map('n', '<CR>', wrap_node(f), opts("Expand until not single or collapse"))
         map('n', 'Z', api.tree.expand_all, opts("Expand until not single"))
     end
 
