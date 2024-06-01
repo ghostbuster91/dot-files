@@ -211,11 +211,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1707334145,
-        "narHash": "sha256-dPlFQGeKgsG3bpJMiTseZPMoJh7Ky1lbe9TsjhDw+JM=",
+        "lastModified": 1716106041,
+        "narHash": "sha256-XMV8vANh3DjVF3l33C+sA91qXjlWFJMYH9QFGk26LtU=",
         "owner": "ghostbuster91",
         "repo": "nix-metals",
-        "rev": "bd886fb0c5f828d9419256c32eacdb63c96654dd",
+        "rev": "23b20a4283b8cc2819c0e77c35aef8f12bcdda1c",
         "type": "github"
       },
       "original": {

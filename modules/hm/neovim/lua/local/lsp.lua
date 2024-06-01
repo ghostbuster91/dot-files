@@ -357,6 +357,7 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, b
 
     metals_config.settings = {
         metalsBinaryPath = binaries.metals_binary_path,
+        -- serverVersion = "1.3.1-SNAPSHOT",
         showImplicitArguments = true,
         superMethodLensesEnabled = false,
         excludedPackages = {
