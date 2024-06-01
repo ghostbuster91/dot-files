@@ -67,8 +67,8 @@
         url = "github:NeogitOrg/neogit";
         flake = false;
       };
-      p_nvim-neotree = {
-        url = "github:nvim-neo-tree/neo-tree.nvim/v3.x";
+      p_nvim-tree-lua = {
+        url = "github:ghostbuster91/nvim-tree.lua/expand_until";
         flake = false;
       };
       p_nvim-telescope-livegrep-args = {

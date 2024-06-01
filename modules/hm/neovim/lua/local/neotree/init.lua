@@ -1,190 +1,137 @@
 local map = vim.keymap.set
 
 local setup = function()
-    -- If you want icons for diagnostic errors, you'll need to define them somewhere:
-    vim.fn.sign_define("DiagnosticSignError", { text = " ", texthl = "DiagnosticSignError" })
-    vim.fn.sign_define("DiagnosticSignWarn", { text = " ", texthl = "DiagnosticSignWarn" })
-    vim.fn.sign_define("DiagnosticSignInfo", { text = " ", texthl = "DiagnosticSignInfo" })
-    vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "DiagnosticSignHint" })
+    vim.g.loaded_netrw = 1
+    vim.g.loaded_netrwPlugin = 1
+    local treeutils = require("local/neotree/treeutils")
+    local api = require "nvim-tree.api"
+    local explorer_node = require "nvim-tree.explorer.node"
+    local utils = require "nvim-tree.utils"
+    local filters = require "nvim-tree.explorer.filters"
+    local builders = require "nvim-tree.explorer.node-builders"
+    local Watcher = require "nvim-tree.watcher"
+    local log = require "nvim-tree.log"
+    local git = require "nvim-tree.git"
 
-    local renderer = require("neo-tree.ui.renderer")
-
-    --- Recursively open the current folder and all folders it contains.
-    local function expand_all_filesystem(state)
-        local node = state.tree:get_node()
-        require("neo-tree.sources.filesystem.commands").expand_all_nodes(state, node)
-    end
-
-    --- Recursively open the current folder and all folders it contains.
-    local function expand_all_default(state)
-        local node = state.tree:get_node()
-        ---@diagnostic disable-next-line: missing-parameter
-        require("neo-tree.sources.common.commands").expand_all_nodes(state, node)
-    end
-
-    local function collapse_all_under_cursor(state)
-        local active_node = state.tree:get_node()
-        local stack = { active_node }
-
-        while next(stack) ~= nil do
-            local node = table.remove(stack)
-            local children = state.tree:get_nodes(node:get_id())
-            for _, v in ipairs(children) do
-                table.insert(stack, v)
+    local function populate_children(handle, cwd, node, git_status)
+        local node_ignored = explorer_node.is_git_ignored(node)
+        local nodes_by_path = utils.bool_record(node.nodes, "absolute_path")
+        local filter_status = filters.prepare(git_status)
+        while true do
+            local name, t = vim.loop.fs_scandir_next(handle)
+            if not name then
+                break
             end
 
-            if node.type == "directory" and node:is_expanded() then
-                node:collapse()
+            local abs = utils.path_join { cwd, name }
+            local profile = log.profile_start("explore populate_children %s", abs)
+
+            ---@type uv.fs_stat.result|nil
+            local stat = vim.loop.fs_stat(abs)
+
+            if not filters.should_filter(abs, stat, filter_status) and not nodes_by_path[abs] and Watcher.is_fs_event_capable(abs) then
+                local child = nil
+                if t == "directory" and vim.loop.fs_access(abs, "R") then
+                    child = builders.folder(node, abs, name, stat)
+                elseif t == "file" then
+                    child = builders.file(node, abs, name, stat)
+                elseif t == "link" then
+                    local link = builders.link(node, abs, name, stat)
+                    if link.link_to ~= nil then
+                        child = link
+                    end
+                end
+                if child then
+                    table.insert(node.nodes, child)
+                    nodes_by_path[child.absolute_path] = true
+                    explorer_node.update_git_status(child, node_ignored, git_status)
+                end
             end
+
+            log.profile_end(profile)
+        end
+    end
+
+    local function my_on_attach(bufnr)
+        local function opts(desc)
+            return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
         end
 
-        renderer.redraw(state)
-        renderer.focus_node(state, active_node:get_id())
+        -- default mappings
+        api.config.mappings.default_on_attach(bufnr)
+
+        -- custom mappings
+        map('n', '?', api.tree.toggle_help, opts('NvimTree help'))
+
+        map('n', '<leader>tf', treeutils.launch_find_files, opts('Launch Find Files'))
+        map('n', '<leader>ti', treeutils.launch_live_grep, opts('Launch Live Grep'))
+        -- map('n', 'ze', api.tree.expand_all, opts("Expand all"))
+        local function stop_expansion(_, _)
+            return false, stop_expansion
+        end
+        local function expand_until_non_single(count, node)
+            local cwd = node.link_to or node.absolute_path
+            local handle = vim.loop.fs_scandir(cwd)
+            if not handle then
+                return false, stop_expansion
+            end
+            local status = git.load_project_status(cwd)
+            populate_children(handle, cwd, node, status)
+            local child_folder_only = explorer_node.has_one_child_folder(node) and node.nodes[1]
+            if count > 1 and not child_folder_only then
+                return true, stop_expansion
+            elseif child_folder_only then
+                return true, expand_until_non_single
+            else
+                return false, stop_expansion
+            end
+        end
+        map('n', 'E', function()
+            api.tree.expand_all(nil, expand_until_non_single)
+        end, opts("Expand until not single"))
+
+        map('n', 'Z', api.tree.expand_all, opts("Expand until not single"))
     end
 
-    require("neo-tree").setup({
-        sources = { "filesystem", "git_status", "buffers", "document_symbols" },
-        git_status_async = true,
-        enable_diagnostics = false,
-        close_if_last_window = true,
-        use_popups_for_input = false,
-        filesystem = {
-            scan_mode = "deep",
-            async_directory_scan = "auto",
-            hijack_netrw_behavior = "disabled",
-            filtered_items = {
-                --These filters are applied to both browsing and searching
-                hide_dotfiles = false,
-                hide_gitignored = false,
-                never_show = {
-                    ".git",
-                },
-            },
-            window = {
-                mappings = {
-                    ["<C-x>"] = "clear_filter",
-                    ["<bs>"] = "noop",
-                    ["."] = "noop",
-                    ["/"] = "noop",
-                    ["<space>"] = "noop",
-                    ["c"] = "copy_to_clipboard",
-                    ["C"] = "copy",
-                    ["zO"] = expand_all_filesystem,
-                    -- from https://github.com/nvim-neo-tree/neo-tree.nvim/discussions/370
-                    ["y"] = function(state)
-                        local node = state.tree:get_node()
-                        local filename = node.name
-                        vim.fn.setreg('"', filename)
-                        vim.fn.setreg("*", filename)
-                        vim.notify("Copied: " .. filename)
-                    end,
-                    ["Y"] = function(state)
-                        local node = state.tree:get_node()
-                        local filepath = node:get_id()
-                        vim.fn.setreg('"', filepath)
-                        vim.fn.setreg("*", filepath)
-                        vim.notify("Copied: " .. filepath)
-                    end,
-                },
-            },
-            use_libuv_file_watcher = true,
+
+    require("nvim-tree").setup({
+        on_attach = my_on_attach,
+        sort = {
+            sorter = "case_sensitive",
         },
-        default_component_configs = {
-            icon = {
-                folder_empty = "󰜌",
-                folder_empty_open = "󰜌",
-            },
-            git_status = {
-                symbols = {
-                    modified = "",
-                    renamed = "󰁕",
-                    unstaged = "✗",
-                    staged = "✓",
-                    deleted = "",
-                },
-                align = "left",
-            },
-            name = {
-                use_git_status_colors = false,
-            },
-            file_size = {
-                enabled = false,
-            },
-            type = {
-                enabled = false,
-            },
-            last_modified = {
-                enabled = false,
-            },
-            created = {
-                enabled = false,
-            },
-            symlink_target = {
-                enabled = false,
-            },
+        view = {
+            width = 30,
         },
-        window = {
-            auto_expand_width = true,
-            mappings = {
-                ["t"] = "noop",
-                ["Z"] = "noop",
-                ["z"] = "none",
-                ["zO"] = expand_all_default,
-                ["zm"] = collapse_all_under_cursor,
+        renderer = {
+            group_empty = false,
+            icons = {
+                git_placement = "after",
             },
+            root_folder_label = ":~:s?$?/"
         },
-        renderers = {
-            directory = {
-                { "indent" },
-                { "icon" },
-                { "current_filter" },
-                {
-                    "container",
-                    content = {
-                        { "name", zindex = 10 },
-                        { "clipboard", zindex = 10 },
-                        { "git_status", zindex = 10, hide_when_expanded = true },
-                        {
-                            "diagnostics",
-                            errors_only = true,
-                            zindex = 20,
-                            align = "right",
-                            hide_when_expanded = true,
-                        },
-                        { "file_size", zindex = 10, align = "right" },
-                        { "type", zindex = 10, align = "right" },
-                        { "last_modified", zindex = 10, align = "right" },
-                        { "created", zindex = 10, align = "right" },
-                    },
-                },
-            },
-            file = {
-                { "indent" },
-                { "icon" },
-                {
-                    "container",
-                    content = {
-                        { "name", zindex = 10 },
-                        { "clipboard", zindex = 10 },
-                        { "bufnr", zindex = 10 },
-                        { "git_status", zindex = 10 },
-                        { "modified", zindex = 20, align = "right" },
-                        { "diagnostics", zindex = 20, align = "right" },
-                        { "file_size", zindex = 10, align = "right" },
-                        { "type", zindex = 10, align = "right" },
-                        { "last_modified", zindex = 10, align = "right" },
-                        { "created", zindex = 10, align = "right" },
-                    },
-                },
-            },
+        filters = {
+            dotfiles = false,
+            custom = function(absolute_path)
+                return ".git" == vim.fn.fnamemodify(absolute_path, ":t")
+            end,
         },
     })
-    map(
-        "n",
-        "<leader>et",
-        "<Cmd>:Neotree source=filesystem reveal=true position=left<CR>",
-        { desc = "nvim_tree toggle" }
-    )
+
+    map('n', '<leader>et', function()
+        api.tree.open({ find_file = true })
+    end, { desc = "NvimTree Focus", noremap = true })
+
+    -- from https://github.com/nvim-tree/nvim-tree.lua/issues/1368
+    vim.api.nvim_create_autocmd("BufEnter", {
+        group = vim.api.nvim_create_augroup("NvimTreeClose", { clear = true }),
+        pattern = "NvimTree_*",
+        callback = function()
+            local layout = vim.api.nvim_call_function("winlayout", {})
+            if layout[1] == "leaf" and vim.api.nvim_buf_get_option(vim.api.nvim_win_get_buf(layout[2]), "filetype") == "NvimTree" and layout[3] == nil then
+                vim.cmd("confirm quit")
+            end
+        end
+    })
 end
 
 return { setup = setup }

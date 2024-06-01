@@ -446,23 +446,6 @@
         "type": "github"
       }
     },
-    "p_nvim-neotree": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1716286572,
-        "narHash": "sha256-FIMdd8LJyqXBNZ38TrHmUqy05w3YKMQ6ijxau3YRCxw=",
-        "owner": "nvim-neo-tree",
-        "repo": "neo-tree.nvim",
-        "rev": "29f7c215332ba95e470811c380ddbce2cebe2af4",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nvim-neo-tree",
-        "ref": "v3.x",
-        "repo": "neo-tree.nvim",
-        "type": "github"
-      }
-    },
     "p_nvim-next": {
       "flake": false,
       "locked": {
@@ -559,6 +542,23 @@
         "type": "github"
       }
     },
+    "p_nvim-tree-lua": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1717246294,
+        "narHash": "sha256-TdecJ13Nw188g2idPxUsWC+FVS/J63X+RAW7iBRKqJw=",
+        "owner": "ghostbuster91",
+        "repo": "nvim-tree.lua",
+        "rev": "8cdcde4e253e76ff033c3a241097ec4e12866c6d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ghostbuster91",
+        "ref": "expand_until",
+        "repo": "nvim-tree.lua",
+        "type": "github"
+      }
+    },
     "p_treesitter-devicetree": {
       "flake": false,
       "locked": {
@@ -645,13 +645,13 @@
         "p_nvim-leap": "p_nvim-leap",
         "p_nvim-metals": "p_nvim-metals",
         "p_nvim-neogit": "p_nvim-neogit",
-        "p_nvim-neotree": "p_nvim-neotree",
         "p_nvim-next": "p_nvim-next",
         "p_nvim-portal": "p_nvim-portal",
         "p_nvim-scratch": "p_nvim-scratch",
         "p_nvim-smart-splits-nvim": "p_nvim-smart-splits-nvim",
         "p_nvim-substitute": "p_nvim-substitute",
         "p_nvim-telescope-livegrep-args": "p_nvim-telescope-livegrep-args",
+        "p_nvim-tree-lua": "p_nvim-tree-lua",
         "p_treesitter-devicetree": "p_treesitter-devicetree",
         "p_treesitter-hocon": "p_treesitter-hocon",
         "p_treesitter-scala": "p_treesitter-scala",
