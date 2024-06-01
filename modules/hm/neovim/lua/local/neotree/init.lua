@@ -9,6 +9,7 @@ local setup = function()
     local git = require "nvim-tree.git"
     local explorer = require "nvim-tree.explorer.explore"
     local lib = require "nvim-tree.lib"
+    local actions = require "nvim-tree.actions"
 
     local function my_on_attach(bufnr)
         local function opts(desc)
@@ -53,12 +54,23 @@ local setup = function()
                 end
             end
         end
+        local function edit(mode, node)
+            local path = node.absolute_path
+            if node.link_to and not node.nodes then
+                path = node.link_to
+            end
+            actions.node.open_file.fn(mode, path)
+        end
 
         local f = function(node)
             if node.open then
                 lib.expand_or_collapse(node, nil)
             else
-                api.tree.expand_all(node, expand_until_non_single)
+                if node.nodes then
+                    api.tree.expand_all(node, expand_until_non_single)
+                else
+                    edit("edit", node)
+                end
             end
         end
         map('n', '<CR>', wrap_node(f), opts("Expand until not single or collapse"))
