@@ -17,13 +17,14 @@
       inputs.self.nixosModules.nix
       inputs.self.nixosModules.qmk
       inputs.self.nixosModules.virtualisation
-      inputs.self.nixosModules.nixbuild
+      # inputs.self.nixosModules.nixbuild
       ./custom.nix
       inputs.home-manager.nixosModule
       inputs.self.nixosModules.sound
       inputs.self.nixosModules.bluetooth
       inputs.self.nixosModules.android
       inputs.self.nixosModules.ledger
+      inputs.self.nixosModules.rpiBuilder
     ];
 
   home-manager = {

@@ -140,6 +140,10 @@
         Host surfer
           HostName surfer.lan
           User kghost
+        Host rpi5
+          IdentitiesOnly yes
+          IdentityFile /home/kghost/.ssh/nixremote
+          User nixremote
       '';
     };
   };

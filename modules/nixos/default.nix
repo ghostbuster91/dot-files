@@ -13,5 +13,6 @@ _:
     sound = ./sound;
     bluetooth = ./bluetooth;
     ledger = ./ledger.nix;
+    rpiBuilder = ./rpi-builder.nix;
   };
 }
