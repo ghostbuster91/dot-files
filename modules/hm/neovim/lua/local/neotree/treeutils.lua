@@ -12,7 +12,7 @@ local view_selection = function(prompt_bufnr, map)
         if (filename == nil) then
             filename = selection[1]
         end
-        openfile.fn('preview', filename)
+        openfile.fn('edit', filename)
     end)
     return true
 end
@@ -33,9 +33,6 @@ function M.launch_telescope(func_name, opts)
     local node = api.tree.get_node_under_cursor()
     local is_folder = node.fs_stat and node.fs_stat.type == 'directory' or false
     local basedir = is_folder and node.absolute_path or vim.fn.fnamemodify(node.absolute_path, ":h")
-    if (node.name == '..' and TreeExplorer ~= nil) then
-        basedir = TreeExplorer.cwd
-    end
     opts = opts or {}
     opts.cwd = basedir
     opts.search_dirs = { basedir }
