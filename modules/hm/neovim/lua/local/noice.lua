@@ -32,6 +32,8 @@ local setup = function(telescope)
     telescope.load_extension("noice")
 
     -- TODO: for some reason it stopped working
+    -- it should be fixed in newer version of alacritty. The current one on 23.11 is 0.12.3
+    -- 24.05 uses 0.13.2
     vim.keymap.set("c", "<S-Enter>", function()
         noice.redirect(vim.fn.getcmdline())
     end, { desc = "Redirect Cmdline" })
