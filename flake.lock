@@ -542,6 +542,22 @@
         "type": "github"
       }
     },
+    "p_nvim-tree-lsp": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1706139094,
+        "narHash": "sha256-eXOqhfzDK+Jv5bV1wdWT4IA/wBAdkhWV+75HoNcYaR8=",
+        "owner": "antosha417",
+        "repo": "nvim-lsp-file-operations",
+        "rev": "223aca86b737dc66e9c51ebcda8788a8d9cc6cf2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "antosha417",
+        "repo": "nvim-lsp-file-operations",
+        "type": "github"
+      }
+    },
     "p_nvim-tree-lua": {
       "flake": false,
       "locked": {
@@ -651,6 +667,7 @@
         "p_nvim-smart-splits-nvim": "p_nvim-smart-splits-nvim",
         "p_nvim-substitute": "p_nvim-substitute",
         "p_nvim-telescope-livegrep-args": "p_nvim-telescope-livegrep-args",
+        "p_nvim-tree-lsp": "p_nvim-tree-lsp",
         "p_nvim-tree-lua": "p_nvim-tree-lua",
         "p_treesitter-devicetree": "p_treesitter-devicetree",
         "p_treesitter-hocon": "p_treesitter-hocon",

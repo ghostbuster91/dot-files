@@ -139,6 +139,7 @@ local setup = function()
             custom = { "^.git$" },
         },
     })
+    require("lsp-file-operations").setup()
 
     map('n', '<leader>et', function()
         api.tree.open({ find_file = true })

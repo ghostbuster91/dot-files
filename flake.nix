@@ -95,6 +95,10 @@
         url = "github:Robitx/gp.nvim";
         flake = false;
       };
+      p_nvim-tree-lsp = {
+        url = "github:antosha417/nvim-lsp-file-operations";
+        flake = false;
+      };
       p_treesitter-scala = {
         url = "github:tree-sitter/tree-sitter-scala";
         flake = false;
