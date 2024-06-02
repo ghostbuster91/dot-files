@@ -12,17 +12,18 @@ local setup = function()
     local actions = require "nvim-tree.actions"
 
     local VIEW_WIDTH_FIXED = 30
-    local view_width_max = VIEW_WIDTH_FIXED -- fixed to start
+    local VIEW_WIDTH_ADAPTIVE = -1
+    local view_width_max = VIEW_WIDTH_ADAPTIVE -- fixed to start
     -- get current view width
     local function get_view_width_max()
         return view_width_max
     end
     -- toggle the width and redraw
     local function toggle_width_adaptive()
-        if view_width_max == -1 then
+        if view_width_max == VIEW_WIDTH_ADAPTIVE then
             view_width_max = VIEW_WIDTH_FIXED
         else
-            view_width_max = -1
+            view_width_max = VIEW_WIDTH_ADAPTIVE
         end
 
         require("nvim-tree.api").tree.reload()
