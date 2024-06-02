@@ -136,6 +136,17 @@ local setup = function()
             end
         end
     })
+
+    -- based on https://github.com/nvim-neo-tree/neo-tree.nvim/discussions/1490#discussioncomment-9632938
+    vim.api.nvim_create_autocmd({ "BufLeave" }, {
+        pattern = { "*NeogitStatus*" },
+        group = vim.api.nvim_create_augroup("git_refresh_nvim-tree", { clear = true }),
+        callback = function()
+            vim.schedule(function()
+                api.git.reload()
+            end)
+        end,
+    })
 end
 
 return { setup = setup }
