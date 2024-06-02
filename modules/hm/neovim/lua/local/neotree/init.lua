@@ -27,6 +27,27 @@ local setup = function()
 
         require("nvim-tree.api").tree.reload()
     end
+    local telescope_actions = require("telescope.actions")
+    local function find_directory_and_focus()
+        local action_state = require("telescope.actions.state")
+
+        local function open_nvim_tree(prompt_bufnr, _)
+            telescope_actions.select_default:replace(function()
+                telescope_actions.close(prompt_bufnr)
+                local selection = action_state.get_selected_entry()
+                api.tree.open()
+                api.tree.find_file(selection.cwd .. "/" .. selection.value)
+            end)
+            return true
+        end
+
+        require("telescope.builtin").find_files({
+            find_command = { "fd", "--type", "directory", "--hidden", "--exclude", ".git/*" },
+            attach_mappings = open_nvim_tree,
+        })
+    end
+
+    vim.keymap.set("n", "<leader>id", find_directory_and_focus, { desc = "telescope focus directory" })
 
     local function my_on_attach(bufnr)
         local function opts(desc)
