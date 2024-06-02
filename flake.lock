@@ -433,11 +433,11 @@
     "p_nvim-neogit": {
       "flake": false,
       "locked": {
-        "lastModified": 1716151803,
-        "narHash": "sha256-fqMC0GpPinE+4gFNbnWDN0tv0brkVrKvleN0cJrM5o0=",
+        "lastModified": 1717324427,
+        "narHash": "sha256-uWticZuJv1/xC+gXif0A7FMZ8m/qUSJZ6DrRMSpIvf8=",
         "owner": "NeogitOrg",
         "repo": "neogit",
-        "rev": "b93316d15c590377f50ca61e70e9129e4aa9b848",
+        "rev": "be09dcbac8af93e03d8af24339c99b0b995d5acd",
         "type": "github"
       },
       "original": {
