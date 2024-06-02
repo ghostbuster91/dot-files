@@ -465,11 +465,11 @@
     "p_nvim-portal": {
       "flake": false,
       "locked": {
-        "lastModified": 1679764852,
-        "narHash": "sha256-n5v0FoVndkPQ18ZPP1aLcg5rvCGD7AH5POpIUoZzfTo=",
+        "lastModified": 1711985078,
+        "narHash": "sha256-QCdyJ5in3Dm4IVlBUtbGWRZxl87gKHhRiGmZcIGEHm0=",
         "owner": "cbochs",
         "repo": "portal.nvim",
-        "rev": "a108a87639a43f5386dd70bdf512de3806a71f7d",
+        "rev": "77d9d53fec945bfa407d5fd7120f1b4f117450ed",
         "type": "github"
       },
       "original": {

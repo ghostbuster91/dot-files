@@ -1,3 +1,108 @@
+local function buffer_generator(opts, settings)
+    local Content = require("portal.content")
+    local Iterator = require("portal.iterator")
+    local Search = require("portal.search")
+
+    local Path = require "plenary.path"
+    ---@return boolean
+    local function buf_in_cwd(bufname, cwd)
+        if cwd:sub(-1) ~= Path.path.sep then
+            cwd = cwd .. Path.path.sep
+        end
+        local bufname_prefix = bufname:sub(1, #cwd)
+        return bufname_prefix == cwd
+    end
+
+    local bufnrs = vim.tbl_filter(function(bufnr)
+        if 1 ~= vim.fn.buflisted(bufnr) then
+            return false
+        end
+        -- only hide unloaded buffers if opts.show_all_buffers is false, keep them listed if true or nil
+        if not vim.api.nvim_buf_is_loaded(bufnr) then
+            return false
+        end
+        if bufnr == vim.api.nvim_get_current_buf() then
+            return false
+        end
+
+        local bufname = vim.api.nvim_buf_get_name(bufnr)
+
+        if not buf_in_cwd(bufname, vim.loop.cwd()) then
+            return false
+        end
+        return true
+    end, vim.api.nvim_list_bufs())
+
+    local buffers = {}
+    for _, bufnr in ipairs(bufnrs) do
+        local flag = bufnr == vim.fn.bufnr "" and "%" or (bufnr == vim.fn.bufnr "#" and "#" or " ")
+
+        local element = {
+            bufnr = bufnr,
+            flag = flag,
+            info = vim.fn.getbufinfo(bufnr)[1],
+        }
+
+        if (flag == "#" or flag == "%") then
+            local idx = ((buffers[1] ~= nil and buffers[1].flag == "%") and 2 or 1)
+            table.insert(buffers, idx, element)
+        else
+            table.insert(buffers, element)
+        end
+    end
+
+    opts = vim.tbl_extend("force", {
+        direction = "forward",
+        max_results = #settings.labels,
+    }, opts or {})
+
+    if settings.max_results then
+        opts.max_results = math.min(opts.max_results, settings.max_results)
+    end
+
+    -- stylua: ignore
+    local iter = Iterator:new(buffers)
+        :take(settings.lookback)
+
+    if opts.start then
+        iter = iter:start_at(opts.start)
+    end
+    if opts.direction == Search.direction.backward then
+        iter = iter:reverse()
+    end
+
+    iter = iter:map(function(v, _)
+        return Content:new({
+            type = "recent buffers",
+            buffer = v.bufnr,
+            cursor = { row = v.info.lnum, col = 1 },
+            callback = function(content)
+                vim.api.nvim_win_set_buf(0, content.buffer)
+                vim.api.nvim_win_set_cursor(0, { content.cursor.row, content.cursor.col })
+            end,
+        })
+    end)
+
+    iter = iter:filter(function(v)
+        return vim.api.nvim_buf_is_valid(v.buffer)
+    end)
+    if settings.filter then
+        iter = iter:filter(settings.filter)
+    end
+    if opts.filter then
+        iter = iter:filter(opts.filter)
+    end
+    if not opts.slots then
+        iter = iter:take(opts.max_results)
+    end
+
+    return {
+        source = iter,
+        slots = opts.slots,
+    }
+end
+
+
 local setup = function()
     local portal = require("portal")
     portal.setup({
@@ -43,98 +148,14 @@ local setup = function()
         },
     })
 
-    ---@type Portal.QueryGenerator
-    local function generate(opts, settings)
-        local opts = {}
-        local filter = vim.tbl_filter
-        local bufnrs = filter(function(b)
-            if 1 ~= vim.fn.buflisted(b) then
-                return false
-            end
-            -- only hide unloaded buffers if opts.show_all_buffers is false, keep them listed if true or nil
-            if opts.show_all_buffers == false and not vim.api.nvim_buf_is_loaded(b) then
-                return false
-            end
-            if opts.ignore_current_buffer and b == vim.api.nvim_get_current_buf() then
-                return false
-            end
-            if opts.cwd_only and not string.find(vim.api.nvim_buf_get_name(b), vim.loop.cwd(), 1, true) then
-                return false
-            end
-            if not opts.cwd_only and opts.cwd and not string.find(vim.api.nvim_buf_get_name(b), opts.cwd, 1, true) then
-                return false
-            end
-            return true
-        end, vim.api.nvim_list_bufs())
-        if not next(bufnrs) then
-            return
-        end
-        if opts.sort_mru then
-            table.sort(bufnrs, function(a, b)
-                return vim.fn.getbufinfo(a)[1].lastused > vim.fn.getbufinfo(b)[1].lastused
-            end)
-        end
-
-        local buffers = {}
-        local default_selection_idx = 1
-        for _, bufnr in ipairs(bufnrs) do
-            local flag = bufnr == vim.fn.bufnr("") and "%" or (bufnr == vim.fn.bufnr("#") and "#" or " ")
-
-            if opts.sort_lastused and not opts.ignore_current_buffer and flag == "#" then
-                default_selection_idx = 2
-            end
-
-            local element = {
-                bufnr = bufnr,
-                flag = flag,
-                info = vim.fn.getbufinfo(bufnr)[1],
-            }
-
-            if opts.sort_lastused and (flag == "#" or flag == "%") then
-                local idx = ((buffers[1] ~= nil and buffers[1].flag == "%") and 2 or 1)
-                table.insert(buffers, idx, element)
-            else
-                table.insert(buffers, element)
-            end
-        end
-
-        local Content = require("portal.content")
-        local Iterator = require("portal.iterator")
-
-        local iter = Iterator:new(buffers):take(100)
-
-        iter = iter:map(function(v, _)
-            return Content:new({
-                type = "buffers",
-                buffer = v.bufnr,
-                cursor = { row = v.info.lnum, col = 0 },
-                callback = function(content)
-                    vim.api.nvim_win_set_buf(0, content.buffer)
-                    vim.api.nvim_win_set_cursor(0, { content.cursor.row, content.cursor.col })
-                end,
-            })
-        end)
-
-        iter = iter:filter(function(v)
-            return vim.api.nvim_buf_is_valid(v.buffer) and v.buffer ~= vim.fn.bufnr()
-        end)
-
-        return {
-            source = iter,
-            slots = opts.slots,
-        }
-    end
-
     local query = function(opts)
         local Settings = require("portal.settings")
-        return generate(opts or {}, Settings)
+        return buffer_generator(opts or {}, Settings)
     end
 
-    -- TODO: there is a bug which prevents buffers from being displayed correctly in certain circumestances
-    -- https://github.com/cbochs/portal.nvim/issues/43
-    -- vim.keymap.set('n', '<BS>n', function()
-    --     portal.tunnel(query({ max_results = 5 }))
-    -- end)
+    vim.keymap.set('n', '<BS>n', function()
+        portal.tunnel(query({ max_results = 5 }))
+    end)
 end
 
 return {
