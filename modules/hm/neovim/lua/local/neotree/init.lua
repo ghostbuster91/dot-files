@@ -136,9 +136,7 @@ local setup = function()
         },
         filters = {
             dotfiles = false,
-            custom = function(absolute_path)
-                return ".git" == vim.fn.fnamemodify(absolute_path, ":t")
-            end,
+            custom = { "^.git$" },
         },
     })
 
