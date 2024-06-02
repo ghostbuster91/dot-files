@@ -11,6 +11,23 @@ local setup = function()
     local lib = require "nvim-tree.lib"
     local actions = require "nvim-tree.actions"
 
+    local VIEW_WIDTH_FIXED = 30
+    local view_width_max = VIEW_WIDTH_FIXED -- fixed to start
+    -- get current view width
+    local function get_view_width_max()
+        return view_width_max
+    end
+    -- toggle the width and redraw
+    local function toggle_width_adaptive()
+        if view_width_max == -1 then
+            view_width_max = VIEW_WIDTH_FIXED
+        else
+            view_width_max = -1
+        end
+
+        require("nvim-tree.api").tree.reload()
+    end
+
     local function my_on_attach(bufnr)
         local function opts(desc)
             return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
@@ -75,8 +92,8 @@ local setup = function()
         end
         map('n', '<CR>', wrap_node(f), opts("Expand until not single or collapse"))
         map('n', 'Z', api.tree.expand_all, opts("Expand until not single"))
+        map('n', 'e', toggle_width_adaptive, opts("Toggle adaptive width"))
     end
-
 
     require("nvim-tree").setup({
         on_attach = my_on_attach,
@@ -84,7 +101,10 @@ local setup = function()
             sorter = "case_sensitive",
         },
         view = {
-            width = 30,
+            width = {
+                min = 30,
+                max = get_view_width_max,
+            }
         },
         renderer = {
             group_empty = false,
