@@ -72,6 +72,8 @@ in
     globalprotect-openconnect
     sops
     nvtop
+    pv # stdout generic progress (useful for dd)
+    minicom # for UART
   ];
 
   environment.shells = with pkgs; [ zsh ];
