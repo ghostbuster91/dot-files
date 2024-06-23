@@ -74,6 +74,8 @@ in
     nvtop
     pv # stdout generic progress (useful for dd)
     minicom # for UART
+    sysstat
+    iotop
   ];
 
   environment.shells = with pkgs; [ zsh ];
