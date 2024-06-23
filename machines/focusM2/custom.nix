@@ -110,5 +110,20 @@ in
 
     # lorri is a nix-shell replacement for project development.
     lorri.enable = true;
+
+    avahi = {
+      enable = true;
+      nssmdns = true;
+      publish = {
+        enable = true;
+        userServices = true;
+      };
+    };
+  };
+
+  networking.firewall = {
+    allowedUDPPorts = [
+      5353 # mDNS for avahi
+    ];
   };
 }

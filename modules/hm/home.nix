@@ -114,7 +114,6 @@
   programs = {
     eza = {
       enable = true;
-      enableAliases = true;
     };
     fzf = {
       enable = true;
@@ -141,6 +140,7 @@
           HostName surfer.lan
           User kghost
         Host rpi5
+          HostName rpi5.local
           IdentitiesOnly yes
           IdentityFile /home/kghost/.ssh/nixremote
           User nixremote
