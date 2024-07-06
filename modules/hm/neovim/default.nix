@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-unstable, lib, ... }:
+{ config, pkgs, pkgs-stable, pkgs-unstable, lib, ... }:
 let
   leaderKey = "\\<Space>";
 in
@@ -192,6 +192,8 @@ in
       p_nvim-scratch
       p_nvim-hover
       p_nvim-gp-nvim
+      nvim-spectre
+      ssr-nvim
     ];
   };
 }
