@@ -133,7 +133,6 @@ local setup = function(binaries)
         { "BufNewFile", "BufRead" },
         { group = hocon_group, pattern = "*.conf", command = "set ft=hocon" }
     )
-    require('spectre').setup()
     require("ssr").setup {
         border = "rounded",
         min_width = 50,

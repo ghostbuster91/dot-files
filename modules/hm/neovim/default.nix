@@ -192,7 +192,6 @@ in
       p_nvim-scratch
       p_nvim-hover
       p_nvim-gp-nvim
-      nvim-spectre
       ssr-nvim
     ];
   };
