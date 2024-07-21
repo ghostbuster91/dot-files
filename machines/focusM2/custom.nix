@@ -122,9 +122,7 @@ in
     };
   };
 
-  networking.firewall = {
-    allowedUDPPorts = [
-      5353 # mDNS for avahi
-    ];
-  };
+  services.udev.packages = with pkgs; [
+    via
+  ];
 }
