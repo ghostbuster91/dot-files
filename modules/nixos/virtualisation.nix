@@ -13,11 +13,12 @@
     };
 
     virtualbox.host = {
-      enable = false;
+      enable = true;
       enableExtensionPack = false;
     };
   };
 
+  users.extraGroups.vboxusers.members = [ username ];
   users.extraGroups.docker.members = [ username ];
   # virtualisation.docker.rootless = {
   #   enable = true;
