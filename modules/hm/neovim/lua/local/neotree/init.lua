@@ -63,20 +63,16 @@ local setup = function()
         map('n', '<leader>ti', treeutils.launch_live_grep, opts('Launch Live Grep'))
         -- map('n', 'ze', api.tree.expand_all, opts("Expand all"))
 
-        local function has_no_siblings(node)
-            print("parent of " .. vim.inspect(node.name) .. " is " .. vim.inspect(node.parent.name))
-            return explorer_node.has_one_child_folder(node.parent)
-        end
-
         local function expand_until_non_single(count, node, populate_node)
             populate_node(node)
             if (node.nodes == nil or not node.parent.open) then
                 return false
             end
             local has_one_child_folder = explorer_node.has_one_child_folder(node)
-            if has_one_child_folder and (count == 0 or has_no_siblings(node)) then
+            local has_no_siblings = explorer_node.has_one_child_folder(node.parent)
+            if has_one_child_folder and count == 0 then
                 return true
-            elseif has_no_siblings(node) then
+            elseif has_no_siblings then
                 return true
             else
                 return false
