@@ -85,7 +85,8 @@ local setup = function()
             end
             local status = git.load_project_status(cwd)
 
-            if #node.nodes == 0 then
+            -- check if it is not a file
+            if node.nodes ~= nil and #node.nodes == 0 then
                 core.get_explorer():expand(node, status)
             end
         end
@@ -99,9 +100,7 @@ local setup = function()
                 -- but if its child has more directories
                 return true, function(_, cn)
                     -- then load the child's children
-                    if cn.nodes ~= nil and #cn.nodes == 0 then
-                        core.get_explorer():expand(cn, status)
-                    end
+                    load_node(cn)
                     -- expand if it is a directory that does not have any further directories and stop execution
                     return cn.node ~= nil and has_only_files(cn), stop_expansion
                 end
