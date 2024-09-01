@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ ... }:
 
 {
   # You can see the resulting builder-strings of this NixOS-configuration with "cat /etc/nix/machines".

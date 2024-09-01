@@ -1,7 +1,7 @@
 { self, inputs, lib, ... }:
 let
   system = "x86_64-linux";
-  languageServers =  {
+  languageServers = {
     inherit (inputs.nix-metals.packages.${system}) metals;
     inherit (inputs.nix-smithy-ls.packages.${system}) disney-smithy-ls;
   };
@@ -10,11 +10,12 @@ let
     overlays = [ self.overlays.default ];
     config.allowUnfree = true;
   }) // languageServers;
-  pkgs-stable = import inputs.nixpkgs-stable {
-    inherit system;
-    overlays = [ self.overlays.default ];
-    config.allowUnfree = true;
-  } // languageServers;
+  pkgs-stable = import inputs.nixpkgs-stable
+    {
+      inherit system;
+      overlays = [ self.overlays.default ];
+      config.allowUnfree = true;
+    } // languageServers;
   username = "kghost";
 in
 {

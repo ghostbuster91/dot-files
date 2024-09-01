@@ -4,10 +4,10 @@ local setup = function()
     vim.g.loaded_netrw = 1
     vim.g.loaded_netrwPlugin = 1
     local treeutils = require("local/neotree/treeutils")
-    local api = require "nvim-tree.api"
-    local explorer_node = require "nvim-tree.explorer.node"
-    local lib = require "nvim-tree.lib"
-    local actions = require "nvim-tree.actions"
+    local api = require("nvim-tree.api")
+    local explorer_node = require("nvim-tree.explorer.node")
+    local lib = require("nvim-tree.lib")
+    local actions = require("nvim-tree.actions")
 
     local VIEW_WIDTH_FIXED = 30
     local VIEW_WIDTH_ADAPTIVE = -1
@@ -57,15 +57,15 @@ local setup = function()
         api.config.mappings.default_on_attach(bufnr)
 
         -- custom mappings
-        map('n', '?', api.tree.toggle_help, opts('NvimTree help'))
+        map("n", "?", api.tree.toggle_help, opts("NvimTree help"))
 
-        map('n', '<leader>tf', treeutils.launch_find_files, opts('Launch Find Files'))
-        map('n', '<leader>ti', treeutils.launch_live_grep, opts('Launch Live Grep'))
+        map("n", "<leader>tf", treeutils.launch_find_files, opts("Launch Find Files"))
+        map("n", "<leader>ti", treeutils.launch_live_grep, opts("Launch Live Grep"))
         -- map('n', 'ze', api.tree.expand_all, opts("Expand all"))
 
         local function expand_until_non_single(count, node, populate_node)
             populate_node(node)
-            if (node.nodes == nil or not node.parent.open) then
+            if node.nodes == nil or not node.parent.open then
                 return false
             end
             local has_one_child_folder = explorer_node.has_one_child_folder(node)
@@ -106,9 +106,9 @@ local setup = function()
                 end
             end
         end
-        map('n', '<CR>', wrap_node(f), opts("Expand until not single or collapse"))
-        map('n', 'Z', api.tree.expand_all, opts("Expand until not single"))
-        map('n', 'e', toggle_width_adaptive, opts("Toggle adaptive width"))
+        map("n", "<CR>", wrap_node(f), opts("Expand until not single or collapse"))
+        map("n", "Z", api.tree.expand_all, opts("Expand until not single"))
+        map("n", "e", toggle_width_adaptive, opts("Toggle adaptive width"))
     end
 
     require("nvim-tree").setup({
@@ -120,14 +120,14 @@ local setup = function()
             width = {
                 min = 30,
                 max = get_view_width_max,
-            }
+            },
         },
         renderer = {
             group_empty = false,
             icons = {
                 git_placement = "after",
             },
-            root_folder_label = ":~:s?$?/"
+            root_folder_label = ":~:s?$?/",
         },
         filters = {
             dotfiles = false,
@@ -136,7 +136,7 @@ local setup = function()
     })
     require("lsp-file-operations").setup()
 
-    map('n', '<leader>et', function()
+    map("n", "<leader>et", function()
         api.tree.open({ find_file = true })
     end, { desc = "NvimTree Focus", noremap = true })
 
@@ -146,10 +146,14 @@ local setup = function()
         pattern = "NvimTree_*",
         callback = function()
             local layout = vim.api.nvim_call_function("winlayout", {})
-            if layout[1] == "leaf" and vim.api.nvim_buf_get_option(vim.api.nvim_win_get_buf(layout[2]), "filetype") == "NvimTree" and layout[3] == nil then
+            if
+                layout[1] == "leaf"
+                and vim.api.nvim_buf_get_option(vim.api.nvim_win_get_buf(layout[2]), "filetype") == "NvimTree"
+                and layout[3] == nil
+            then
                 vim.cmd("confirm quit")
             end
-        end
+        end,
     })
 
     -- based on https://github.com/nvim-neo-tree/neo-tree.nvim/discussions/1490#discussioncomment-9632938

@@ -73,10 +73,9 @@ local setup = function(binaries)
 
     require("fidget").setup()
 
-    require("nvim-lightbulb")
-        .setup({
-            autocmd = { enabled = true },
-        })
+    require("nvim-lightbulb").setup({
+        autocmd = { enabled = true },
+    })
 
     require("goto-preview").setup({
         default_mappings = true,
@@ -133,7 +132,7 @@ local setup = function(binaries)
         { "BufNewFile", "BufRead" },
         { group = hocon_group, pattern = "*.conf", command = "set ft=hocon" }
     )
-    require("ssr").setup {
+    require("ssr").setup({
         border = "rounded",
         min_width = 50,
         min_height = 5,
@@ -147,7 +146,7 @@ local setup = function(binaries)
             replace_confirm = "<cr>",
             replace_all = "<leader><cr>",
         },
-    }
+    })
 
     require("local/trouble").setup()
     local diffview = require("local/diffview").setup(next_integrations)

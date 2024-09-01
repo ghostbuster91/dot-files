@@ -3,12 +3,12 @@ local map = vim.keymap.set
 local setup = function()
     require("scratch").setup({
         scratch_file_dir = vim.fn.stdpath("cache") .. "/scratch.nvim",
-        window_cmd = "edit",              -- 'vsplit' | 'split' | 'edit' | 'tabedit' | 'rightbelow vsplit'
+        window_cmd = "edit", -- 'vsplit' | 'split' | 'edit' | 'tabedit' | 'rightbelow vsplit'
         filetypes = { "go", "py", "sc" }, -- you can simply put filetype here
-        filetype_details = {              -- or, you can have more control here
+        filetype_details = { -- or, you can have more control here
             go = {
-                requireDir = true,        -- true if each scratch file requires a new directory
-                filename = "main.go",     -- the filename of the scratch file in the new directory
+                requireDir = true, -- true if each scratch file requires a new directory
+                filename = "main.go", -- the filename of the scratch file in the new directory
                 content = { "package main", "", "func main() {", "  ", "}" },
                 cursor = {
                     location = { 4, 2 },

@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-stable, pkgs-unstable, lib, ... }:
+{ config, pkgs, pkgs-unstable, lib, ... }:
 let
   leaderKey = "\\<Space>";
 in

@@ -12,10 +12,10 @@ local setup = function(telescope)
             view = "mini",
         },
         messages = {
-            enabled = true,      -- enables the Noice messages UI
-            view = "mini",       -- default view for messages
+            enabled = true, -- enables the Noice messages UI
+            view = "mini", -- default view for messages
             view_error = "mini", -- view for errors
-            view_warn = "mini",  -- view for warnings
+            view_warn = "mini", -- view for warnings
         },
         presets = {
             long_message_to_split = true,

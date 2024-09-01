@@ -3,7 +3,7 @@ local function buffer_generator(opts, settings)
     local Iterator = require("portal.iterator")
     local Search = require("portal.search")
 
-    local Path = require "plenary.path"
+    local Path = require("plenary.path")
     ---@return boolean
     local function buf_in_cwd(bufname, cwd)
         if cwd:sub(-1) ~= Path.path.sep then
@@ -35,7 +35,7 @@ local function buffer_generator(opts, settings)
 
     local buffers = {}
     for _, bufnr in ipairs(bufnrs) do
-        local flag = bufnr == vim.fn.bufnr "" and "%" or (bufnr == vim.fn.bufnr "#" and "#" or " ")
+        local flag = bufnr == vim.fn.bufnr("") and "%" or (bufnr == vim.fn.bufnr("#") and "#" or " ")
 
         local element = {
             bufnr = bufnr,
@@ -43,7 +43,7 @@ local function buffer_generator(opts, settings)
             info = vim.fn.getbufinfo(bufnr)[1],
         }
 
-        if (flag == "#" or flag == "%") then
+        if flag == "#" or flag == "%" then
             local idx = ((buffers[1] ~= nil and buffers[1].flag == "%") and 2 or 1)
             table.insert(buffers, idx, element)
         else
@@ -102,7 +102,6 @@ local function buffer_generator(opts, settings)
     }
 end
 
-
 local setup = function()
     local portal = require("portal")
     portal.setup({
@@ -153,7 +152,7 @@ local setup = function()
         return buffer_generator(opts or {}, Settings)
     end
 
-    vim.keymap.set('n', '<BS>n', function()
+    vim.keymap.set("n", "<BS>n", function()
         portal.tunnel(query({ max_results = 5 }))
     end)
 end
