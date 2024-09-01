@@ -63,45 +63,23 @@ local setup = function()
         map('n', '<leader>ti', treeutils.launch_live_grep, opts('Launch Live Grep'))
         -- map('n', 'ze', api.tree.expand_all, opts("Expand all"))
 
-        local function has_only_files(node)
-            local only_files = true
-            for _, child in ipairs(node.nodes or {}) do
-                if child.nodes then
-                    only_files = false
-                end
-            end
-            return only_files
+        local function has_no_siblings(node)
+            print("parent of " .. vim.inspect(node.name) .. " is " .. vim.inspect(node.parent.name))
+            return explorer_node.has_one_child_folder(node.parent)
         end
-        local function stop_expansion(_, _)
-            return false, stop_expansion
-        end
-        local function expand_only_child(count, node, populate_node)
-            populate_node(node)
-            local has_one_child_folder = explorer_node.has_one_child_folder(node)
-            -- we are handling a single directory child so we should always expand
-            if has_one_child_folder then
-                return true, expand_only_child
-            else
-                -- but if its child has more directories
-                return true, function(_, cn)
-                    -- then load the child's children
-                    populate_node(cn)
-                    -- expand if it is a directory that does not have any further directories and stop execution
-                    return cn.node ~= nil and has_only_files(cn), stop_expansion
-                end
-            end
-        end
+
         local function expand_until_non_single(count, node, populate_node)
             populate_node(node)
+            if (node.nodes == nil or not node.parent.open) then
+                return false
+            end
             local has_one_child_folder = explorer_node.has_one_child_folder(node)
-            if has_one_child_folder then
-                -- if there is only one child and it is a directory
-                return true, expand_only_child
-            elseif count == 1 then
-                -- special case for expanding node under the cursor
-                return true, expand_until_non_single
+            if has_one_child_folder and (count == 0 or has_no_siblings(node)) then
+                return true
+            elseif has_no_siblings(node) then
+                return true
             else
-                return false, stop_expansion
+                return false
             end
         end
 
