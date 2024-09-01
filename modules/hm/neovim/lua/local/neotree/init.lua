@@ -6,8 +6,6 @@ local setup = function()
     local treeutils = require("local/neotree/treeutils")
     local api = require "nvim-tree.api"
     local explorer_node = require "nvim-tree.explorer.node"
-    local git = require "nvim-tree.git"
-    local core = require "nvim-tree.core"
     local lib = require "nvim-tree.lib"
     local actions = require "nvim-tree.actions"
 
@@ -77,21 +75,8 @@ local setup = function()
         local function stop_expansion(_, _)
             return false, stop_expansion
         end
-        local function load_node(node)
-            local cwd = node.link_to or node.absolute_path
-            local handle = vim.loop.fs_scandir(cwd)
-            if not handle then
-                return false, stop_expansion
-            end
-            local status = git.load_project_status(cwd)
-
-            -- check if it is not a file
-            if node.nodes ~= nil and #node.nodes == 0 then
-                core.get_explorer():expand(node, status)
-            end
-        end
-        local function expand_only_child(count, node)
-            load_node(node)
+        local function expand_only_child(count, node, populate_node)
+            populate_node(node)
             local has_one_child_folder = explorer_node.has_one_child_folder(node)
             -- we are handling a single directory child so we should always expand
             if has_one_child_folder then
@@ -100,14 +85,14 @@ local setup = function()
                 -- but if its child has more directories
                 return true, function(_, cn)
                     -- then load the child's children
-                    load_node(cn)
+                    populate_node(cn)
                     -- expand if it is a directory that does not have any further directories and stop execution
                     return cn.node ~= nil and has_only_files(cn), stop_expansion
                 end
             end
         end
-        local function expand_until_non_single(count, node)
-            load_node(node)
+        local function expand_until_non_single(count, node, populate_node)
+            populate_node(node)
             local has_one_child_folder = explorer_node.has_one_child_folder(node)
             if has_one_child_folder then
                 -- if there is only one child and it is a directory
