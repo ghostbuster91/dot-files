@@ -7,7 +7,7 @@ local setup = function()
     local api = require "nvim-tree.api"
     local explorer_node = require "nvim-tree.explorer.node"
     local git = require "nvim-tree.git"
-    local explorer = require "nvim-tree.explorer.explore"
+    local core = require "nvim-tree.core"
     local lib = require "nvim-tree.lib"
     local actions = require "nvim-tree.actions"
 
@@ -64,21 +64,57 @@ local setup = function()
         map('n', '<leader>tf', treeutils.launch_find_files, opts('Launch Find Files'))
         map('n', '<leader>ti', treeutils.launch_live_grep, opts('Launch Live Grep'))
         -- map('n', 'ze', api.tree.expand_all, opts("Expand all"))
+
+        local function has_only_files(node)
+            local only_files = true
+            for _, child in ipairs(node.nodes or {}) do
+                if child.nodes then
+                    only_files = false
+                end
+            end
+            return only_files
+        end
         local function stop_expansion(_, _)
             return false, stop_expansion
         end
-        local function expand_until_non_single(count, node)
+        local function load_node(node)
             local cwd = node.link_to or node.absolute_path
             local handle = vim.loop.fs_scandir(cwd)
             if not handle then
                 return false, stop_expansion
             end
             local status = git.load_project_status(cwd)
-            explorer.explore(node, status)
-            local child_folder_only = explorer_node.has_one_child_folder(node) and node.nodes[1]
-            if count > 1 and not child_folder_only then
-                return true, stop_expansion
-            elseif child_folder_only then
+
+            if #node.nodes == 0 then
+                core.get_explorer():expand(node, status)
+            end
+        end
+        local function expand_only_child(count, node)
+            load_node(node)
+            local has_one_child_folder = explorer_node.has_one_child_folder(node)
+            -- we are handling a single directory child so we should always expand
+            if has_one_child_folder then
+                return true, expand_only_child
+            else
+                -- but if its child has more directories
+                return true, function(_, cn)
+                    -- then load the child's children
+                    if cn.nodes ~= nil and #cn.nodes == 0 then
+                        core.get_explorer():expand(cn, status)
+                    end
+                    -- expand if it is a directory that does not have any further directories and stop execution
+                    return cn.node ~= nil and has_only_files(cn), stop_expansion
+                end
+            end
+        end
+        local function expand_until_non_single(count, node)
+            load_node(node)
+            local has_one_child_folder = explorer_node.has_one_child_folder(node)
+            if has_one_child_folder then
+                -- if there is only one child and it is a directory
+                return true, expand_only_child
+            elseif count == 1 then
+                -- special case for expanding node under the cursor
                 return true, expand_until_non_single
             else
                 return false, stop_expansion
