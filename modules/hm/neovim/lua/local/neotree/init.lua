@@ -63,20 +63,17 @@ local setup = function()
         map("n", "<leader>ti", treeutils.launch_live_grep, opts("Launch Live Grep"))
         -- map('n', 'ze', api.tree.expand_all, opts("Expand all"))
 
-        local function expand_until_non_single(count, node, populate_node)
+        local function has_one_child_folder(node)
+            return #node.nodes == 1 and node.nodes[1].nodes and
+                vim.loop.fs_access(node.nodes[1].absolute_path, "R") or false
+        end
+
+        local function expand_until_non_single(_, node, populate_node)
             populate_node(node)
             if node.nodes == nil or not node.parent.open then
                 return false
             end
-            local has_one_child_folder = explorer_node.has_one_child_folder(node)
-            local has_no_siblings = explorer_node.has_one_child_folder(node.parent)
-            if has_one_child_folder and count == 0 then
-                return true
-            elseif has_no_siblings then
-                return true
-            else
-                return false
-            end
+            return has_one_child_folder(node.parent)
         end
 
         local function wrap_node(fn)
@@ -100,7 +97,7 @@ local setup = function()
                 lib.expand_or_collapse(node, nil)
             else
                 if node.nodes then
-                    api.tree.expand_all(node, expand_until_non_single)
+                    api.tree.expand_all(node, { expand_until = expand_until_non_single})
                 else
                     edit("edit", node)
                 end
