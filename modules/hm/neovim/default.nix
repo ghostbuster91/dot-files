@@ -100,6 +100,7 @@ in
             tree-sitter-javascript
             tree-sitter-nix
             tree-sitter-typescript
+            tree-sitter-tsx
             tree-sitter-c
             tree-sitter-java
             tree-sitter-kotlin
