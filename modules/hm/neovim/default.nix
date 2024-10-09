@@ -39,8 +39,6 @@ in
     '';
     # TODO: language server binaries should be passed explicitly to nvim lua configuration
     extraPackages = with pkgs-unstable; [
-      nodePackages.typescript
-      nodePackages.typescript-language-server
       nodePackages.bash-language-server
       nodePackages.vim-language-server
       nodePackages.yaml-language-server

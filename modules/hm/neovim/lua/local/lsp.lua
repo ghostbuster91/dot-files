@@ -211,16 +211,14 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, b
 
     require("lspconfig")["tsserver"].setup({
         on_attach = function(client, buffer)
-            client.resolved_capabilities.document_formatting = false
-            client.resolved_capabilities.document_range_formatting = false
+            client.server_capabilities.document_formatting = false
+            client.server_capabilities.document_range_formatting = false
             on_attach(client, buffer)
         end,
         capabilities = capabilities_no_format,
         cmd = {
             binaries.tsserver_path,
             "--stdio",
-            "--tsserver-path",
-            binaries.typescript_path,
         },
     })
     local library = vim.api.nvim_get_runtime_file("*.lua", true)
