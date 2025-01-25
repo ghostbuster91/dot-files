@@ -1,4 +1,4 @@
-{ ... }:
+_:
 
 {
   # You can see the resulting builder-strings of this NixOS-configuration with "cat /etc/nix/machines".
@@ -8,7 +8,7 @@
     # Will be used to call "ssh builder" to connect to the builder machine.
     # The details of the connection (user, port, url etc.)
     # are taken from your "~/.ssh/config" file.
-    hostName = "rpi5";
+    hostName = "malina5.local";
     # CPU architecture of the builder, and the operating system it runs.
     # Replace the line by the architecture of your builder, e.g.
     # - Normal Intel/AMD CPUs use "x86_64-linux"

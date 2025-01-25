@@ -139,11 +139,10 @@
         Host surfer
           HostName surfer.lan
           User kghost
-        Host rpi5
-          HostName rpi5.local
+        Host malina5 malina5.local
+          HostName malina5.local
           IdentitiesOnly yes
-          IdentityFile /home/kghost/.ssh/nixremote
-          User nixremote
+          User kghost
       '';
     };
   };
