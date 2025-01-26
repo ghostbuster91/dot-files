@@ -18,7 +18,8 @@ in
         efiSysMountPoint = "/boot";
       };
     };
-
+  # TODO https://wiki.nixos.org/wiki/WireGuard
+  # networking.wg-quick.interfaces.wg0.configFile = "/home/kghost/Downloads/wg0.conf";
   networking = {
     hostId = "d1084363";
     hostName = "focus";
