@@ -25,7 +25,9 @@ in
   programs.starship = import ./starship.nix { inherit lib; };
   programs.zsh = {
     enable = true;
-    enableAutosuggestions = true;
+    autosuggestion = {
+      enable = true;
+    };
     syntaxHighlighting = {
       enable = true;
     };

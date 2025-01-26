@@ -64,8 +64,8 @@ local setup = function()
         -- map('n', 'ze', api.tree.expand_all, opts("Expand all"))
 
         local function has_one_child_folder(node)
-            return #node.nodes == 1 and node.nodes[1].nodes and
-                vim.loop.fs_access(node.nodes[1].absolute_path, "R") or false
+            return #node.nodes == 1 and node.nodes[1].nodes and vim.loop.fs_access(node.nodes[1].absolute_path, "R")
+                or false
         end
 
         local function expand_until_non_single(_, node, populate_node)
@@ -97,7 +97,7 @@ local setup = function()
                 lib.expand_or_collapse(node, nil)
             else
                 if node.nodes then
-                    api.tree.expand_all(node, { expand_until = expand_until_non_single})
+                    api.tree.expand_all(node, { expand_until = expand_until_non_single })
                 else
                     edit("edit", node)
                 end

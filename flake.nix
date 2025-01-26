@@ -39,28 +39,12 @@
         inputs.nixpkgs.follows = "nixpkgs";
       };
       # Neovim plugins
-      p_nvim-actions-preview = {
-        url = "github:aznhe21/actions-preview.nvim";
-        flake = false;
-      };
-      p_nvim-metals = {
-        url = "github:scalameta/nvim-metals";
-        flake = false;
-      };
       p_nvim-next = {
         url = "github:ghostbuster91/nvim-next";
         flake = false;
       };
       p_nvim-portal = {
         url = "github:cbochs/portal.nvim";
-        flake = false;
-      };
-      p_nvim-smart-splits-nvim = {
-        url = "github:mrjones2014/smart-splits.nvim";
-        flake = false;
-      };
-      p_nvim-neogit = {
-        url = "github:NeogitOrg/neogit";
         flake = false;
       };
       p_nvim-tree-lua = {
@@ -71,20 +55,8 @@
         url = "github:nvim-telescope/telescope-live-grep-args.nvim";
         flake = false;
       };
-      p_nvim-substitute = {
-        url = "github:gbprod/substitute.nvim";
-        flake = false;
-      };
-      p_nvim-baleia = {
-        url = "github:m00qek/baleia.nvim";
-        flake = false;
-      };
       p_nvim-scratch = {
         url = "github:ghostbuster91/scratch.nvim";
-        flake = false;
-      };
-      p_nvim-hover = {
-        url = "github:lewis6991/hover.nvim";
         flake = false;
       };
       p_nvim-gp-nvim = {
@@ -93,10 +65,6 @@
       };
       p_nvim-tree-lsp = {
         url = "github:antosha417/nvim-lsp-file-operations";
-        flake = false;
-      };
-      p_treesitter-scala = {
-        url = "github:tree-sitter/tree-sitter-scala";
         flake = false;
       };
       p_treesitter-devicetree = {

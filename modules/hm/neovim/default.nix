@@ -102,7 +102,7 @@ in
             tree-sitter-c
             tree-sitter-java
             tree-sitter-kotlin
-            pkgs-unstable.p_treesitter-scala
+            tree-sitter-scala
             pkgs-unstable.p_treesitter-devicetree
             pkgs-unstable.p_treesitter-hocon
             pkgs-unstable.p_treesitter-xml
@@ -144,7 +144,7 @@ in
       nvim-lightbulb
       p_nvim-next
       neoscroll-nvim
-      p_nvim-neogit
+      neogit
       undotree
       diffview-nvim
       goto-preview
@@ -165,12 +165,12 @@ in
         '';
       }
       telescope-dap-nvim
-      p_nvim-metals
+      nvim-metals
       trouble-nvim
       vim-repeat
       flash-nvim
       gitlinker-nvim
-      p_nvim-actions-preview
+      actions-preview-nvim
       p_nvim-portal
       {
         plugin = nvim-dap-virtual-text;
@@ -182,14 +182,14 @@ in
       }
       telescope-undo-nvim
       dial-nvim
-      p_nvim-smart-splits-nvim
+      smart-splits-nvim
       neodev-nvim
       hydra-nvim
       p_nvim-telescope-livegrep-args
-      p_nvim-substitute
-      p_nvim-baleia
+      substitute-nvim
+      baleia-nvim
       p_nvim-scratch
-      p_nvim-hover
+      hover-nvim
       p_nvim-gp-nvim
       ssr-nvim
     ];
