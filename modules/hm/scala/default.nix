@@ -14,9 +14,7 @@
       (sbt.override {
         jre = jdk17;
       })
-      (maven3.override {
-        jdk = jdk17;
-      })
+      maven3 # todo override jdk
     ]);
 
     sessionVariables.JAVA_HOME = "${pkgs.jdk17}";
