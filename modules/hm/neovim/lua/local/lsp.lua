@@ -209,7 +209,7 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, b
     capabilities_no_format.textDocument.rangeFormatting = false
     capabilities_no_format.textDocument.range_formatting = false
 
-    require("lspconfig")["tsserver"].setup({
+    require("lspconfig")["ts_ls"].setup({
         on_attach = function(client, buffer)
             client.server_capabilities.document_formatting = false
             client.server_capabilities.document_range_formatting = false
