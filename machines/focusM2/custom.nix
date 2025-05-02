@@ -106,6 +106,12 @@ in
     globalprotect = {
       enable = true;
     };
+    # clamav = {
+    #   daemon.enable = true;
+    #   scanner.enable = true;
+    #   updater.enable = true;
+    #   fangfrisch.enable = true;
+    # };
 
     # lorri is a nix-shell replacement for project development.
     lorri.enable = true;

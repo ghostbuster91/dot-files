@@ -16,6 +16,7 @@ local setup = function(binaries)
     vim.cmd([[au BufRead,BufNewFile *.log setfiletype log]])
     vim.cmd([[au BufRead,BufNewFile flake.lock setfiletype json]])
     vim.cmd([[au BufRead,BufNewFile package.lock setfiletype json]])
+    vim.cmd([[au BufRead,BufNewFile *.mill setfiletype scala]])
 
     -- <CTRL> + a and <CTRL> + e move to the beginning and the end of the line
     map("c", "<C-a>", "<HOME>", { noremap = true })

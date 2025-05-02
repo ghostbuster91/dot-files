@@ -1,6 +1,6 @@
 { pkgs-unstable, pkgs-stable, ... }: {
   home.packages = [
-    (pkgs-unstable.bloop.override
+    (pkgs-stable.bloop.override
       {
         jre = pkgs-stable.jdk17;
       })

@@ -211,8 +211,7 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, b
 
     require("lspconfig")["ts_ls"].setup({
         on_attach = function(client, buffer)
-            client.server_capabilities.document_formatting = false
-            client.server_capabilities.document_range_formatting = false
+            client.server_capabilities.documentFormattingProvider = false
             on_attach(client, buffer)
         end,
         capabilities = capabilities_no_format,
@@ -375,7 +374,7 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, b
         -- NOTE: You may or may not want java included here. You will need it if you
         -- want basic Java support but it may also conflict if you are using
         -- something like nvim-jdtls which also works on a java filetype autocmd.
-        pattern = { "scala", "sbt", "java" },
+        pattern = { "scala", "sbt", "java", "mill" },
         callback = function()
             metals.initialize_or_attach(metals_config)
         end,
