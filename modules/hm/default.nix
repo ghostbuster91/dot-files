@@ -17,7 +17,7 @@
       system = "x86_64-linux";
       languageServers = {
         inherit (inputs.nix-metals.packages.${system}) metals;
-        inherit (inputs.nix-smithy-ls.packages.${system}) disney-smithy-ls;
+        inherit (inputs.nix-smithy-ls.packages.${system}) smithy-lang-smithy-ls;
       };
       pkgs-unstable = (import inputs.nixpkgs-unstable {
         inherit system;

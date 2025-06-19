@@ -27,7 +27,7 @@ in
           tsserver_path = "${pkgs-unstable.nodePackages.typescript-language-server}/bin/typescript-language-server",
           typescript_path = "${pkgs-unstable.nodePackages.typescript}/lib/node_modules/typescript/lib",
           metals_binary_path = "${pkgs-unstable.metals}/bin/metals",
-          smithy_ls_path = "${pkgs-unstable.disney-smithy-ls}/bin/smithy_ls",
+          smithy_ls_path = "${pkgs-unstable.smithy-lang-smithy-ls}/bin/smithy_ls",
           lua_language_server = "${pkgs-unstable.sumneko-lua-language-server}/bin/lua-language-server",
           nodejs = "${lib.getExe pkgs-unstable.nodejs}", -- required for copilot
           nix_fmt = "${lib.getExe pkgs-unstable.nixpkgs-fmt}",
