@@ -79,7 +79,7 @@
     # nix stuff
     nix-du
     nix-tree
-    nixfmt
+    nixfmt-classic
     nix-prefetch
     nurl # better prefetch
     nvd # compare nix derivations
@@ -100,7 +100,7 @@
 
     gnomeExtensions.tray-icons-reloaded
     # gnomeExtensions.appindicator # TODO test if both are needed
-    gnome.gnome-tweaks
+    gnome-tweaks
     jetbrains.idea-community
     pkgs.kooha # screen recorder
     clapper # video player

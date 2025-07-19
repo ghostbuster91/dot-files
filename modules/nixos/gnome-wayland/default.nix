@@ -1,24 +1,30 @@
 { pkgs, ... }: {
+  services = {
+    xserver = {
+      enable = true;
+      videoDrivers = [ "nvidia" ];
+      desktopManager.gnome.enable = true;
+      displayManager.gdm.enable = true;
+      displayManager.gdm.wayland = true;
+    };
+    displayManager.defaultSession = "gnome";
 
-  services.xserver = {
-    enable = true;
-    videoDrivers = [ "nvidia" ];
+    udev.packages = with pkgs; [
+      gnome-settings-daemon
+    ];
+
+    # Configure keymap in X11
+    xserver.xkb.layout = "pl";
+    gnome = {
+      gnome-keyring.enable = true;
+    };
   };
-  services.xserver.desktopManager.gnome.enable = true;
-
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.displayManager.gdm.wayland = true;
-  services.xserver.displayManager.defaultSession = "gnome";
-
-  services.udev.packages = with pkgs; [
-    gnome.gnome-settings-daemon
-  ];
 
   environment.gnome.excludePackages = (with pkgs; [
     gnome-photos
     gedit # text editor
     gnome-tour
-  ]) ++ (with pkgs.gnome; [
+  ]) ++ (with pkgs; [
     cheese # webcam tool
     gnome-music
     epiphany # web browser
@@ -48,12 +54,6 @@
       #enable if using an external GPU
       allowExternalGpu = false;
     };
-  };
-
-  # Configure keymap in X11
-  services.xserver.layout = "pl";
-  services.gnome = {
-    gnome-keyring.enable = true;
   };
   security = {
     pam = {

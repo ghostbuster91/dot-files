@@ -34,7 +34,7 @@ in
   hardware = {
     bluetooth.enable = true;
     flipperzero.enable = true;
-    opengl.enable = true;
+    graphics.enable = true;
   };
 
   # Set your time zone.
@@ -70,7 +70,7 @@ in
     libva-utils
     globalprotect-openconnect
     sops
-    nvtop
+    nvtopPackages.full
     pv # stdout generic progress (useful for dd)
     minicom # for UART
     sysstat

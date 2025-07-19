@@ -59,10 +59,6 @@
         url = "github:ghostbuster91/scratch.nvim";
         flake = false;
       };
-      p_nvim-gp-nvim = {
-        url = "github:Robitx/gp.nvim";
-        flake = false;
-      };
       p_nvim-tree-lsp = {
         url = "github:antosha417/nvim-lsp-file-operations";
         flake = false;

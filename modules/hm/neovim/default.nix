@@ -134,8 +134,8 @@ in
 
       nvim-neoclip-lua
       indent-blankline-nvim
-      p_nvim-tree-lua
-      p_nvim-tree-lsp
+      (p_nvim-tree-lua.overrideAttrs { doCheck = false; })
+      (p_nvim-tree-lsp.overrideAttrs { doCheck = false; })
       vim-tmux-clipboard
       telescope-ui-select-nvim
       noice-nvim
@@ -185,12 +185,13 @@ in
       smart-splits-nvim
       neodev-nvim
       hydra-nvim
-      p_nvim-telescope-livegrep-args
+      (p_nvim-telescope-livegrep-args.overrideAttrs {
+        doCheck = false;
+      })
       substitute-nvim
       baleia-nvim
       p_nvim-scratch
       hover-nvim
-      p_nvim-gp-nvim
       ssr-nvim
     ];
   };

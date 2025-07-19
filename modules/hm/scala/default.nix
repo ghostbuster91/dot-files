@@ -4,7 +4,7 @@
 
   home = {
     packages = with pkgs-unstable; [
-      ammonite
+      # ammonite
       scalafmt
       coursier
       (scala-cli.override { jre = jdk17; })
