@@ -125,6 +125,7 @@ in
       };
       allowInterfaces = [ "enp15s0" "wlp0s20f3" ];
     };
+    tailscale.enable = true;
   };
 
   services.udev.packages = with pkgs; [

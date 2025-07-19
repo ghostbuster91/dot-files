@@ -1,4 +1,4 @@
-{ pkgs-unstable, pkgs-stable, ... }: {
+{ pkgs-stable, ... }: {
   home.packages = [
     (pkgs-stable.bloop.override
       {
