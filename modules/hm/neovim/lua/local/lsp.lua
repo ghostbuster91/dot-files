@@ -126,41 +126,6 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, b
         -- end
     end
 
-    local null_ls = require("null-ls")
-    null_ls.setup({
-        sources = {
-            null_ls.builtins.formatting.shfmt,
-            null_ls.builtins.formatting.prettier,
-            null_ls.builtins.diagnostics.eslint,
-            null_ls.builtins.code_actions.eslint,
-            null_ls.builtins.diagnostics.cspell.with({
-                -- Force the severity to be HINT
-                diagnostics_postprocess = function(diagnostic)
-                    diagnostic.severity = diag.severity.HINT
-                end,
-            }),
-            null_ls.builtins.code_actions.cspell,
-            null_ls.builtins.code_actions.statix,
-            null_ls.builtins.diagnostics.statix,
-        },
-        on_attach = function(client, bufnr)
-            local function mapB(mode, l, r, desc)
-                local opts = { noremap = true, silent = true, buffer = bufnr, desc = desc }
-                map(mode, l, r, opts)
-            end
-
-            local nndiag = next_integrations.diagnostic()
-            on_attach(client, bufnr)
-            mapB(
-                "n",
-                "[s",
-                nndiag.goto_prev({ wrap = false, severity = diag.severity.HINT }),
-                "previous misspelled word"
-            )
-            mapB("n", "]s", nndiag.goto_next({ wrap = false, severity = diag.severity.HINT }), "next misspelled word")
-        end,
-    })
-
     M.spell_check = {
         enabled = false,
         toggle = function()
@@ -171,19 +136,14 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, b
             end
         end,
         enable = function()
-            null_ls.enable({ name = "cspell" })
             M.spell_check.enabled = true
-            vim.notify("Spell check enabled", vim.log.levels.INFO, { title = "null_ls" })
+            vim.notify("Spell check enabled", vim.log.levels.INFO, { title = "SpellCheck" })
         end,
         disable = function()
-            null_ls.disable({ name = "cspell" })
             M.spell_check.enabled = false
-            vim.notify("Spell check disabled", vim.log.levels.INFO, { title = "null_ls" })
+            vim.notify("Spell check disabled", vim.log.levels.INFO, { title = "SpellCheck" })
         end,
     }
-    if not M.spell_check.enabled then
-        null_ls.disable({ name = "cspell" })
-    end
 
     -- Use a loop to conveniently call 'setup' on multiple servers and
     -- map buffer local keybindings when the language server attaches

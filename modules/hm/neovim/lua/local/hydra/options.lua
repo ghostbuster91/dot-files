@@ -26,7 +26,7 @@ local setup = function(hydra, lsp)
   ^
   _v_ %{ve} virtual edit
   _i_ %{list} invisible characters
-  _s_ %{spell_check} null_ls spell check
+  _s_ %{spell_check} spell check
   _w_ %{wrap} wrap
   _c_ %{cul} cursor line
   _n_ %{nu} number
@@ -118,7 +118,7 @@ local setup = function(hydra, lsp)
                 function()
                     lsp.spell_check.toggle()
                 end,
-                { exit = true, desc = "null_ls spell check" },
+                { exit = true, desc = "spell check" },
             },
             {
                 "w",
