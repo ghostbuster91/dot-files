@@ -197,6 +197,7 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, b
     })
     require("lspconfig").nil_ls.setup({
         capabilities = capabilities,
+        on_attach = on_attach,
         settings = {
             ["nil"] = {
                 formatting = {
