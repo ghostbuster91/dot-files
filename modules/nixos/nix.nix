@@ -1,4 +1,4 @@
-{ pkgs, username, config, inputs, ... }: {
+{ pkgs, username, inputs, ... }: {
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -31,6 +31,8 @@
       # Avoid unwanted garbage collection when using nix-direnv
       keep-outputs = true;
       keep-derivations = true;
+
+      download-buffer-size = 1024 * 1024 * 1024; # 1GB
     };
   };
 
