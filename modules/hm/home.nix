@@ -90,7 +90,8 @@
     htop
     neofetch
 
-    xsel # for tmux-yank
+    # xsel # for tmux-yank
+    wl-clipboard
     unzip # also for vim
 
     sublime
