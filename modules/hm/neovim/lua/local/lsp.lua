@@ -163,11 +163,9 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, b
     end
 
     -- metals
-
     local capabilities_no_format = lsp.protocol.make_client_capabilities()
-    capabilities_no_format.textDocument.formatting = false
-    capabilities_no_format.textDocument.rangeFormatting = false
-    capabilities_no_format.textDocument.range_formatting = false
+    capabilities_no_format.textDocument.formatting.dynamicRegistration = false
+    capabilities_no_format.textDocument.rangeFormatting.dynamicRegistration = false
 
     require("lspconfig")["ts_ls"].setup({
         on_attach = function(client, buffer)
