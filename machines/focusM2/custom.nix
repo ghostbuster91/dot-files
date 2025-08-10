@@ -131,4 +131,5 @@ in
   services.udev.packages = with pkgs; [
     via
   ];
+  services.printing.enable = true;
 }
