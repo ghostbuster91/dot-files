@@ -16,6 +16,7 @@ in
         plugin = pkgs-unstable.tmuxPlugins.yank;
         extraConfig = ''
           set -g @yank_action 'copy-pipe'
+          set -g @custom_copy_command '${pkgs.wl-clipboard}/bin/wl-copy'
         '';
       }
       pkgs-unstable.tmuxPlugins.better-mouse-mode
