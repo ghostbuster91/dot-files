@@ -1,4 +1,4 @@
-{ pkgs, username, pkgs-stable, ... }: {
+{ pkgs, username, pkgs-stable, pkgs-unstable, ... }: {
 
   home = {
     inherit username;
@@ -107,7 +107,7 @@
     clapper # video player
     asciinema # terminal recorder
     powertop
-    signal-desktop
+    pkgs-unstable.signal-desktop
     vscode-fhs
     obsidian
   ]);
