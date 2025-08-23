@@ -75,6 +75,13 @@ in
     minicom # for UART
     sysstat
     iotop
+    # needed for decoding videos from gopro
+    gst_all_1.gstreamer
+    gst_all_1.gst-plugins-base
+    gst_all_1.gst-plugins-good
+    gst_all_1.gst-plugins-bad
+    gst_all_1.gst-plugins-ugly
+    gst_all_1.gst-libav
   ];
 
   environment.shells = with pkgs; [ zsh ];
