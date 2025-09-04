@@ -1,11 +1,4 @@
 { pkgs, username, ... }:
-let
-  customFonts = pkgs.nerdfonts.override {
-    fonts = [
-      "JetBrainsMono"
-    ];
-  };
-in
 {
   boot.loader =
     {
@@ -43,8 +36,10 @@ in
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
   fonts.packages = with pkgs; [
-    customFonts
     font-awesome
+    pkgs.nerd-fonts._0xproto
+    pkgs.nerd-fonts.droid-sans-mono
+    pkgs.nerd-fonts.jetbrains-mono
   ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.

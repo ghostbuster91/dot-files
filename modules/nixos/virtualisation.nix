@@ -14,14 +14,15 @@
 
     virtualbox.host = {
       enable = true;
-      enableExtensionPack = false;
+      enableExtensionPack = true;
     };
   };
+  # turn off libvirtd as it conflicts with virtualbox
+  virtualisation.libvirtd.enable = false;
+
+  # block kvm module as it conflicts with virtualbox
+  boot.blacklistedKernelModules = [ "kvm" "kvm_intel" "kvm_amd" ];
 
   users.extraGroups.vboxusers.members = [ username ];
   users.extraGroups.docker.members = [ username ];
-  # virtualisation.docker.rootless = {
-  #   enable = true;
-  #   setSocketVariable = true;
-  # };
 }

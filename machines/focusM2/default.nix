@@ -19,7 +19,7 @@
       inputs.self.nixosModules.virtualisation
       # inputs.self.nixosModules.nixbuild
       ./custom.nix
-      inputs.home-manager.nixosModule
+      inputs.home-manager.nixosModules.home-manager
       inputs.self.nixosModules.sound
       inputs.self.nixosModules.bluetooth
       inputs.self.nixosModules.android

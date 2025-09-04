@@ -52,8 +52,10 @@
     # DOCKER_HOST = "unix://$XDG_RUNTIME_DIR/docker.sock";
   };
 
+
+
   home.packages = [ pkgs-stable.slack ] ++ (with pkgs; [
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    # (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     bat # better cat
     tokei # better cloc
     fd # faster find
@@ -131,21 +133,14 @@
       enable = true;
       enableZshIntegration = true;
     };
-    ssh = {
-      enable = true;
-      extraConfig = ''
-        Host deckard
-          HostName deckard.lan
-          User kghost
-        Host surfer
-          HostName surfer.lan
-          User kghost
-        Host malina5 malina5.local
-          HostName malina5.local
-          IdentitiesOnly yes
-          User kghost
-      '';
-    };
+    # ssh = {
+    #   enable = true;
+    #   extraConfig = ''
+    #     Host malina5 malina5.local
+    #       HostName 192.168.1.20
+    #       User kghost
+    #   '';
+    # };
   };
   xdg.configFile."mimeapps.list".force = true;
   xdg.mimeApps = {
