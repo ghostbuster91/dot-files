@@ -36,4 +36,11 @@ _:
   nix.extraOptions = ''
     builders-use-substitutes = false
   '';
+
+  programs.ssh.knownHosts = {
+    rpiBuilder = {
+      hostNames = [ "malina5.local" ];
+      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJp2gih8SY9S8pZrUqSqbOf71KLjtU7Ts9SNWrZ3M37y";
+    };
+  };
 }
