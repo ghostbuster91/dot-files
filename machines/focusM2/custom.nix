@@ -133,5 +133,8 @@
   services.udev.packages = with pkgs; [
     via
   ];
-  services.printing.enable = true;
+  services.printing = {
+    enable = true;
+    drivers = [ pkgs.brlaser ];
+  };
 }
