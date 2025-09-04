@@ -52,10 +52,7 @@
     # DOCKER_HOST = "unix://$XDG_RUNTIME_DIR/docker.sock";
   };
 
-
-
   home.packages = [ pkgs-stable.slack ] ++ (with pkgs; [
-    # (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     bat # better cat
     tokei # better cloc
     fd # faster find
@@ -133,14 +130,6 @@
       enable = true;
       enableZshIntegration = true;
     };
-    # ssh = {
-    #   enable = true;
-    #   extraConfig = ''
-    #     Host malina5 malina5.local
-    #       HostName 192.168.1.20
-    #       User kghost
-    #   '';
-    # };
   };
   xdg.configFile."mimeapps.list".force = true;
   xdg.mimeApps = {
@@ -152,16 +141,6 @@
       "text/plain" = [ "sublime2.desktop" ];
     };
   };
-
-  # xdg.desktopEntries.firefox = {
-  #   name = "firefox";
-  #   exec = "${lib.getExe pkgs.firefox} -P";
-  # };
-  #
-  # xdg.desktopEntries.alacritty = {
-  #   name = "alacritty";
-  #   exec = "nvidia-offload ${lib.getExe pkgs.alacritty}";
-  # };
 
   dconf = {
     enable = true;
@@ -195,21 +174,6 @@
         };
     };
   };
-  #
-  #services.redshift = {
-  #  enable = true;
-  #  latitude = "52.2370";
-  #  longitude = "21.0175";
-  #  temperature.night = 3000;
-  #  temperature.day = 5000;
-  #};
-  #
-  #services.unclutter = {
-  #  enable = true;
-  #  extraOptions = [ "ignore-scrolling" ];
-  #};
-  #
-  #systemd.user.startServices = "sd-switch";
 }
 
 
