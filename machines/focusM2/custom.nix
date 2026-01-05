@@ -132,6 +132,7 @@
 
   services.udev.packages = with pkgs; [
     via
+    platformio-core.udev
   ];
   services.printing = {
     enable = true;
