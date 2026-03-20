@@ -2,11 +2,11 @@
 {
   nix.settings = {
     substituters = [
-      "https://cache.garnix.io"
       "https://cache.nixos.org/"
+      "https://nixos-raspberrypi.cachix.org"
     ];
     trusted-public-keys = [
-      "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
+      "nixos-raspberrypi.cachix.org-1:4iMO9LXa8BqhU+Rpg6LQKiGa2lsNh/j2oiYLNOQ5sPI="
     ];
   };
 }

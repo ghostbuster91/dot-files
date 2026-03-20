@@ -3,9 +3,12 @@ local map = vim.keymap.set
 local setup = function()
     vim.g.loaded_netrw = 1
     vim.g.loaded_netrwPlugin = 1
+
+    local local_plugin = vim.fn.expand("~/workspace/nvim-tree.lua")
+    vim.opt.runtimepath:prepend(local_plugin)
+
     local treeutils = require("local/neotree/treeutils")
     local api = require("nvim-tree.api")
-    local explorer_node = require("nvim-tree.explorer.node")
     local lib = require("nvim-tree.lib")
     local actions = require("nvim-tree.actions")
 
@@ -68,44 +71,36 @@ local setup = function()
                 or false
         end
 
-        local function expand_until_non_single(_, node, populate_node)
-            populate_node(node)
+        local function descend_until_non_single(_, node)
             if node.nodes == nil or not node.parent.open then
                 return false
             end
             return has_one_child_folder(node.parent)
         end
 
-        local function wrap_node(fn)
-            return function(node, ...)
-                node = node or lib.get_node_at_cursor()
-                if node then
-                    fn(node, ...)
-                end
-            end
-        end
-        local function edit(mode, node)
-            local path = node.absolute_path
-            if node.link_to and not node.nodes then
-                path = node.link_to
-            end
-            actions.node.open_file.fn(mode, path)
-        end
-
-        local f = function(node)
-            if node.open then
-                lib.expand_or_collapse(node, nil)
-            else
-                if node.nodes then
-                    api.tree.expand_all(node, { expand_until = expand_until_non_single })
-                else
-                    edit("edit", node)
-                end
-            end
-        end
-        map("n", "<CR>", wrap_node(f), opts("Expand until not single or collapse"))
-        map("n", "Z", api.tree.expand_all, opts("Expand until not single"))
+        -- map("n", "<CR>", function() api.tree.toggle_descend_until(nil, descend_until_non_single) end,
+        --     opts("Expand until not single or collapse"))
+        map("n", "Z", function()
+            api.tree.expand_all(nil, nil)
+        end, opts("Expand until not single"))
         map("n", "e", toggle_width_adaptive, opts("Toggle adaptive width"))
+
+
+        ---@type ApiTreeExpandAllOpts
+        local expand_all_opts = {
+            expand_until = function(i, node)
+                print(i .. " " .. node.name)
+                return node.name ~= "stop" and node.name ~= ".git" and node.name ~= "7"
+            end
+        }
+
+        vim.keymap.set("n", "A", function()
+            api.tree.expand_all(nil, expand_all_opts)
+        end, opts("expand"))
+
+        vim.keymap.set("n", "N", function()
+            api.node.expand(nil, expand_all_opts)
+        end, opts("expand"))
     end
 
     require("nvim-tree").setup({

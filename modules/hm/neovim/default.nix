@@ -3,6 +3,9 @@ let
   leaderKey = "\\<Space>";
 in
 {
+  home.packages = (with pkgs; [
+    go
+  ]);
   xdg.configFile."nvim/lua" = {
     recursive = true;
     source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/workspace/dot-files/modules/hm/neovim/lua";
@@ -28,7 +31,7 @@ in
           typescript_path = "${pkgs-unstable.nodePackages.typescript}/lib/node_modules/typescript/lib",
           metals_binary_path = "${pkgs-unstable.metals}/bin/metals",
           smithy_ls_path = "${pkgs-unstable.smithy-lang-smithy-ls}/bin/smithy_ls",
-          lua_language_server = "${pkgs-unstable.sumneko-lua-language-server}/bin/lua-language-server",
+          lua_language_server = "${pkgs-unstable.lua-language-server}/bin/lua-language-server",
           nodejs = "${lib.getExe pkgs-unstable.nodejs}", -- required for copilot
           nix_fmt = "${lib.getExe pkgs-unstable.nixpkgs-fmt}",
           nix = "${lib.getExe pkgs.nix}"
@@ -43,7 +46,7 @@ in
       nodePackages.vim-language-server
       nodePackages.yaml-language-server
       nil
-      sumneko-lua-language-server
+      lua-language-server
       stylua
       shfmt
       nodePackages.eslint
@@ -117,9 +120,9 @@ in
             tree-sitter-smithy
           ]
       ))
-      playground
-      nvim-treesitter-textobjects
-      nvim-treesitter-refactor
+      # TODO
+      # (nvim-treesitter-textobjects.overrideAttrs { doCheck = false; })
+      # (nvim-treesitter-refactor.overrideAttrs { doCheck = false; })
 
       nvim-web-devicons
       lualine-nvim
@@ -133,7 +136,7 @@ in
 
       nvim-neoclip-lua
       indent-blankline-nvim
-      (p_nvim-tree-lua.overrideAttrs { doCheck = false; })
+      # (p_nvim-tree-lua.overrideAttrs { doCheck = false; })
       (p_nvim-tree-lsp.overrideAttrs { doCheck = false; })
       vim-tmux-clipboard
       telescope-ui-select-nvim
@@ -192,6 +195,7 @@ in
       p_nvim-scratch
       hover-nvim
       ssr-nvim
+      vim-go
     ];
   };
 }
