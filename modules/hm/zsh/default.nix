@@ -1,6 +1,6 @@
 { pkgs, config, lib, pkgs-unstable, ... }:
 let
-  omz = "${pkgs-unstable.oh-my-zsh}/share/oh-my-zsh/";
+  omz = "${pkgs.oh-my-zsh}/share/oh-my-zsh/";
   z-rupa = pkgs.fetchFromGitHub {
     owner = "ghostbuster91";
     repo = "z";
@@ -104,36 +104,6 @@ in
         file = "zsh-autopair.plugin.zsh";
       }
     ];
-    initExtraFirst = ''
-      zmodload zsh/zprof
-      ZSH_TMUX_CONFIG=${config.xdg.configHome}/tmux/tmux.conf
-    '';
-    initExtraBeforeCompInit = ''
-      # fix delete key
-      bindkey "^[[3~" delete-char
-
-      # turn off beeping
-      unsetopt BEEP
-
-      # ctrl-d drop stash entry
-      FORGIT_STASH_FZF_OPTS='--bind="ctrl-d:reload(git stash drop $(cut -d: -f1 <<<{}) 1>/dev/null && git stash list)"'
-      setopt HIST_IGNORE_ALL_DUPS
-      autoload -U edit-command-line
-
-      # Emacs style
-      zle -N edit-command-line
-      bindkey '^xe' edit-command-line
-      bindkey '^x^e' edit-command-line
-
-      autoload -U select-word-style
-      select-word-style bash
-
-      # needed for plugins from omz
-      if [[ ! -f "$ZSH_CACHE_DIR/completions" ]]; then
-        mkdir -p "$ZSH_CACHE_DIR/completions"
-      fi
-    '';
-
     localVariables = {
       ZSH_CACHE_DIR = "${config.xdg.cacheHome}/zsh";
       FZF_DEFAULT_COMMAND = "${pkgs-unstable.fd}/bin/fd --type f --hidden --exclude .git --exclude node_modules --exclude '*.class'";
@@ -147,10 +117,40 @@ in
     shellAliases = {
       lsd = "${pkgs-unstable.eza}/bin/exa --long --header --git --all";
     };
-    initExtra = ''
-      if test -f "$HOME/.secrets.sh"; then
-        source ~/.secrets.sh
-      fi
-    '';
+    initContent = lib.mkMerge [
+      (lib.mkBefore ''
+        ZSH_TMUX_CONFIG=${config.xdg.configHome}/tmux/tmux.conf
+      '')
+
+      (lib.mkOrder 550 ''
+        # fix delete key
+        bindkey "^[[3~" delete-char
+
+        # turn off beeping
+        unsetopt BEEP
+
+        # ctrl-d drop stash entry
+        FORGIT_STASH_FZF_OPTS='--bind="ctrl-d:reload(git stash drop $(cut -d: -f1 <<<{}) 1>/dev/null && git stash list)"'
+        setopt HIST_IGNORE_ALL_DUPS
+        autoload -U edit-command-line
+
+        # Emacs style
+        zle -N edit-command-line
+        bindkey '^xe' edit-command-line
+        bindkey '^x^e' edit-command-line
+
+        autoload -U select-word-style
+        select-word-style bash
+
+        # needed for plugins from omz
+        if [[ ! -f "$ZSH_CACHE_DIR/completions" ]]; then
+          mkdir -p "$ZSH_CACHE_DIR/completions"
+        fi
+
+        if test -f "$HOME/.secrets.sh"; then
+          source ~/.secrets.sh
+        fi
+      '')
+    ];
   };
 }

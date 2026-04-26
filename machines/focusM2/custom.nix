@@ -61,9 +61,7 @@
     wirelesstools
     pciutils
     usbutils
-    glxinfo
     libva-utils
-    globalprotect-openconnect
     sops
     nvtopPackages.full
     pv # stdout generic progress (useful for dd)
@@ -106,9 +104,6 @@
       CPU_HWP_ON_AC = "performance";
     };
 
-    globalprotect = {
-      enable = true;
-    };
     # clamav = {
     #   daemon.enable = true;
     #   scanner.enable = true;

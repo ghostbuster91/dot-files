@@ -14,7 +14,7 @@
 
     virtualbox.host = {
       enable = true;
-      enableExtensionPack = true;
+      # enableExtensionPack = true;
     };
   };
   # turn off libvirtd as it conflicts with virtualbox

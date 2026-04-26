@@ -96,12 +96,11 @@
     sublime
     gh
     tig
-    zoom-us
 
     gnomeExtensions.tray-icons-reloaded
     # gnomeExtensions.appindicator # TODO test if both are needed
     gnome-tweaks
-    jetbrains.idea-community
+    jetbrains.idea-oss
     pkgs.kooha # screen recorder
     clapper # video player
     asciinema # terminal recorder

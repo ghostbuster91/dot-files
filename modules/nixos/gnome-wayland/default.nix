@@ -1,11 +1,11 @@
 { pkgs, ... }: {
   services = {
+    desktopManager.gnome.enable = true;
+    displayManager.gdm.enable = true;
+    displayManager.gdm.wayland = true;
     xserver = {
       enable = true;
       videoDrivers = [ "nvidia" ];
-      desktopManager.gnome.enable = true;
-      displayManager.gdm.enable = true;
-      displayManager.gdm.wayland = true;
     };
     displayManager.defaultSession = "gnome";
 
@@ -38,7 +38,7 @@
     atomix # puzzle game
   ]);
 
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   hardware.nvidia = {
     powerManagement = {
       enable = true;
@@ -62,5 +62,4 @@
       };
     };
   };
-  programs.ssh.startAgent = true;
 }
