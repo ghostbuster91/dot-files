@@ -105,9 +105,12 @@
     clapper # video player
     asciinema # terminal recorder
     powertop
-    pkgs-unstable.signal-desktop
+    pkgs.signal-desktop
     vscode-fhs
     obsidian
+
+    mattermost-desktop
+    opencode
   ]);
 
   programs = {

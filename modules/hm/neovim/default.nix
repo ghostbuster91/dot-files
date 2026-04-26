@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-unstable, lib, ... }:
+{ config, pkgs, pkgs-unstable, pkgs-stable, lib, ... }:
 let
   leaderKey = "\\<Space>";
 in
@@ -16,7 +16,7 @@ in
   # };
   programs.neovim = {
     enable = true;
-    package = pkgs-unstable.neovim-unwrapped;
+    # package = pkgs-unstable.neovim-unwrapped;
     viAlias = true;
     vimAlias = true;
     defaultEditor = true;
@@ -27,13 +27,13 @@ in
     ''
       lua << EOF
         local binaries = {
-          tsserver_path = "${pkgs-unstable.nodePackages.typescript-language-server}/bin/typescript-language-server",
-          typescript_path = "${pkgs-unstable.nodePackages.typescript}/lib/node_modules/typescript/lib",
-          metals_binary_path = "${pkgs-unstable.metals}/bin/metals",
-          smithy_ls_path = "${pkgs-unstable.smithy-lang-smithy-ls}/bin/smithy_ls",
-          lua_language_server = "${pkgs-unstable.lua-language-server}/bin/lua-language-server",
-          nodejs = "${lib.getExe pkgs-unstable.nodejs}", -- required for copilot
-          nix_fmt = "${lib.getExe pkgs-unstable.nixpkgs-fmt}",
+          tsserver_path = "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server",
+          typescript_path = "${pkgs.nodePackages.typescript}/lib/node_modules/typescript/lib",
+          metals_binary_path = "${pkgs.metals}/bin/metals",
+          smithy_ls_path = "${pkgs-stable.smithy-lang-smithy-ls}/bin/smithy_ls",
+          lua_language_server = "${pkgs.lua-language-server}/bin/lua-language-server",
+          nodejs = "${lib.getExe pkgs.nodejs}", -- required for copilot
+          nix_fmt = "${lib.getExe pkgs.nixpkgs-fmt}",
           nix = "${lib.getExe pkgs.nix}"
         }
         
@@ -41,7 +41,7 @@ in
       EOF
     '';
     # TODO: language server binaries should be passed explicitly to nvim lua configuration
-    extraPackages = with pkgs-unstable; [
+    extraPackages = with pkgs; [
       nodePackages.bash-language-server
       nodePackages.vim-language-server
       nodePackages.yaml-language-server
@@ -57,7 +57,7 @@ in
       gopls
       go # for gopls
     ];
-    plugins = with pkgs-unstable.vimPlugins; [
+    plugins = with pkgs-stable.vimPlugins; [
       rec {
         plugin = kanagawa-nvim;
         config = ''
@@ -105,9 +105,9 @@ in
             tree-sitter-java
             tree-sitter-kotlin
             tree-sitter-scala
-            pkgs-unstable.p_treesitter-devicetree
-            pkgs-unstable.p_treesitter-hocon
-            pkgs-unstable.p_treesitter-xml
+            pkgs-stable.p_treesitter-devicetree
+            pkgs-stable.p_treesitter-hocon
+            pkgs-stable.p_treesitter-xml
             tree-sitter-query # for the tree-sitter itself
             tree-sitter-python
             tree-sitter-go
