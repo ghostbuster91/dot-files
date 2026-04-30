@@ -321,6 +321,8 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, b
             "com.github.swagger.akka.javadsl",
         },
         enableSemanticHighlighting = false,
+        startMcpServer = true,
+        mcpClient = "claude"
     }
     metals_config.handlers["textDocument/publishDiagnostics"] = lsp.with(lsp.diagnostic.on_publish_diagnostics, {
         virtual_text = {
