@@ -110,7 +110,8 @@
     obsidian
 
     mattermost-desktop
-    opencode
+    pkgs-unstable.opencode
+    pkgs-unstable.claude-code
   ]);
 
   programs = {
