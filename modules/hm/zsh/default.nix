@@ -23,6 +23,14 @@ let
 in
 {
   programs.starship = import ./starship.nix { inherit lib; };
+  programs.atuin = {
+    enable = true;
+    enableZshIntegration = true;
+    settings = {
+      filter_mode = "directory";
+      style = "compact";
+    };
+  };
   programs.zsh = {
     enable = true;
     autosuggestion = {
@@ -113,7 +121,12 @@ in
     sessionVariables = {
       EDITOR = "nvim";
     };
-    history = { extended = true; };
+    history = {
+      extended = true;
+      size = 100000;
+      save = 100000;
+      share = true;
+    };
     shellAliases = {
       lsd = "${pkgs-unstable.eza}/bin/exa --long --header --git --all";
     };
