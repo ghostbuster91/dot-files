@@ -1,4 +1,4 @@
-{ pkgs, home-manager, username, ... }:
+{ pkgs, username, ... }:
 {
   environment.systemPackages = with pkgs; [ waybar ];
 

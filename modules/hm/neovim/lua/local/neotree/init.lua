@@ -85,13 +85,12 @@ local setup = function()
         end, opts("Expand until not single"))
         map("n", "e", toggle_width_adaptive, opts("Toggle adaptive width"))
 
-
         ---@type ApiTreeExpandAllOpts
         local expand_all_opts = {
             expand_until = function(i, node)
                 print(i .. " " .. node.name)
                 return node.name ~= "stop" and node.name ~= ".git" and node.name ~= "7"
-            end
+            end,
         }
 
         vim.keymap.set("n", "A", function()

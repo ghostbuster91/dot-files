@@ -27,7 +27,7 @@ in
       };
   };
 
-  perSystem = { pkgs, lib, system, ... }:
+  perSystem = { lib, system, ... }:
     let
       # Only check the configurations for the current system
       sysConfigs = lib.filterAttrs (_name: value: value.pkgs.system == system) self.nixosConfigurations;

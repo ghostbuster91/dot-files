@@ -11,7 +11,7 @@ local setup = function(next_integrations)
             lint_events = { "BufWrite", "CursorHold" },
         },
         highlight = {
-            enable = true
+            enable = true,
         },
         incremental_selection = {
             enable = true,
