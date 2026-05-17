@@ -1,10 +1,11 @@
-{ pkgs, username, inputs, ... }: {
+{ pkgs, username, inputs, self, ... }: {
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.permittedInsecurePackages = [
     "electron-25.9.0"
   ];
+  nixpkgs.overlays = [ self.overlays.default ];
 
   # Nix daemon config
   nix = {

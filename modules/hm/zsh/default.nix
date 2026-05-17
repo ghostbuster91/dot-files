@@ -1,4 +1,4 @@
-{ pkgs, config, lib, pkgs-unstable, ... }:
+{ pkgs, config, lib, pkgs-unstable, pkgs-stable, ... }:
 let
   omz = "${pkgs.oh-my-zsh}/share/oh-my-zsh/";
   z-rupa = pkgs.fetchFromGitHub {
@@ -22,15 +22,10 @@ let
 
 in
 {
+  # Needed in path for zsh-histdb
+  home.packages = [ pkgs.sqlite-interactive ];
+
   programs.starship = import ./starship.nix { inherit lib; };
-  programs.atuin = {
-    enable = true;
-    enableZshIntegration = true;
-    settings = {
-      filter_mode = "directory";
-      style = "compact";
-    };
-  };
   programs.zsh = {
     enable = true;
     autosuggestion = {
@@ -48,12 +43,12 @@ in
       }
       {
         name = "zsh-you-should-use";
-        src = pkgs-unstable.zsh-you-should-use;
+        src = pkgs.zsh-you-should-use;
         file = "share/zsh/plugins/you-should-use/you-should-use.plugin.zsh";
       }
       {
         name = "zsh-nix-shell";
-        src = pkgs-unstable.zsh-nix-shell;
+        src = pkgs.zsh-nix-shell;
         file = "share/zsh-nix-shell/nix-shell.plugin.zsh";
       }
       {
@@ -111,6 +106,20 @@ in
         src = zsh-autopair;
         file = "zsh-autopair.plugin.zsh";
       }
+      {
+        name = "zsh-histdb";
+        src = pkgs.fetchFromGitHub {
+          owner = "larkery";
+          repo = "zsh-histdb";
+          rev = "90a6c104d0fcc0410d665e148fa7da28c49684eb";
+          hash = "sha256-vtG1poaRVbfb/wKPChk1WpPgDq+7udLqLfYfLqap4Vg=";
+        };
+        file = "sqlite-history.zsh";
+      }
+      {
+        name = "zsh-histdb-skim";
+        src = "${pkgs.zsh-histdb-skim}/share/zsh-histdb-skim";
+      }
     ];
     localVariables = {
       ZSH_CACHE_DIR = "${config.xdg.cacheHome}/zsh";
@@ -163,6 +172,15 @@ in
         if test -f "$HOME/.secrets.sh"; then
           source ~/.secrets.sh
         fi
+      '')
+
+      (lib.mkAfter ''
+        # fzf's zsh integration rebinds ^R to fzf-history-widget; restore the histdb-skim widget.
+        bindkey '^R' histdb-skim-widget
+
+        # Eagerly initialize HISTDB_SESSION; otherwise the skim picker's "session"
+        # filter builds invalid SQL (`... and session = and ...`) until the first command runs.
+        _histdb_init
       '')
     ];
   };

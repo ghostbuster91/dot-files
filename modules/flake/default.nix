@@ -6,10 +6,13 @@
         nvimPlugins = import ./nvimPlugins.nix { pkgs = prev; inherit inputs; };
         treesitter-grammars =
           import ./treesitter-grammars.nix { pkgs = prev; inherit inputs; };
+        zsh-histdb-skim = prev.callPackage ./zsh-skim-histdb.nix { };
       in
       {
         nvim-treesitter-textobjects =
-          import ./nvim-treesitter-textobjects.nix { pkgs = prev; };
+          import ./nvim-treesitter-textobjects.nix {
+            pkgs = prev;
+          };
         vimPlugins = prev.vimPlugins // nvimPlugins;
         slack = prev.slack.overrideAttrs (_oldAttrs: {
 
@@ -23,6 +26,7 @@
               --add-flags "--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations,WebRTCPipeWireCapturer"
           '';
         });
+        inherit zsh-histdb-skim;
       } // treesitter-grammars;
   };
 
