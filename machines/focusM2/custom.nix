@@ -93,6 +93,9 @@
     };
     zsh.enable = true;
     wireshark.enable = true;
+    # Default-on; sets environment.variables.EDITOR = "nano", which beats
+    # programs.zsh.sessionVariables in subshells where its sentinel guard skips re-export.
+    nano.enable = false;
   };
   services = {
     # power management features
