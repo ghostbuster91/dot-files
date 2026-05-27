@@ -83,7 +83,7 @@ in
       }
       {
         name = "zsh-forgit";
-        src = pkgs-unstable.zsh-forgit;
+        src = pkgs.zsh-forgit;
         file = "share/zsh/zsh-forgit/forgit.plugin.zsh";
       }
       {
