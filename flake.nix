@@ -22,10 +22,6 @@
         url = "github:hercules-ci/flake-parts";
         inputs.nixpkgs-lib.follows = "nixpkgs";
       };
-      sops = {
-        url = "github:Mic92/sops-nix";
-        inputs.nixpkgs.follows = "nixpkgs";
-      };
       treefmt-nix = {
         url = "github:numtide/treefmt-nix";
         inputs.nixpkgs.follows = "nixpkgs";

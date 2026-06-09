@@ -63,7 +63,6 @@
     pciutils
     usbutils
     libva-utils
-    sops
     nvtopPackages.full
     pv # stdout generic progress (useful for dd)
     minicom # for UART
