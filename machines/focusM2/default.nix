@@ -18,6 +18,7 @@
       inputs.self.nixosModules.virtualisation
       # inputs.self.nixosModules.nixbuild
       ./custom.nix
+      ./attic-pusher.nix
       inputs.home-manager.nixosModules.home-manager
       inputs.self.nixosModules.sound
       inputs.self.nixosModules.bluetooth

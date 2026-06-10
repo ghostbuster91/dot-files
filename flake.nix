@@ -76,6 +76,14 @@
         inputs.nixpkgs.follows = "nixpkgs";
         inputs.home-manager.follows = "home-manager";
       };
+      nixos-server = {
+        url = "github:ghostbuster91/nixos-server";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
+      agenix = {
+        url = "github:ryantm/agenix";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
     };
 
   outputs = inputs@{ flake-parts, ... }:
