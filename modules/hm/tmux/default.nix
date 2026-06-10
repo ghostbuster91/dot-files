@@ -5,7 +5,7 @@ in
 {
   programs.tmux = {
     enable = true;
-    package = pkgs-unstable.tmux;
+    package = pkgs.tmux;
     terminal = "tmux-256color";
     baseIndex = 1;
     escapeTime = 0;
@@ -13,29 +13,29 @@ in
     sensibleOnTop = true;
     plugins = [
       {
-        plugin = pkgs-unstable.tmuxPlugins.yank;
+        plugin = pkgs.tmuxPlugins.yank;
         extraConfig = ''
           set -g @yank_action 'copy-pipe'
           set -g @custom_copy_command '${pkgs.wl-clipboard}/bin/wl-copy'
         '';
       }
-      pkgs-unstable.tmuxPlugins.better-mouse-mode
+      pkgs.tmuxPlugins.better-mouse-mode
       onedark-theme
       {
-        plugin = pkgs-unstable.tmuxPlugins.prefix-highlight;
+        plugin = pkgs.tmuxPlugins.prefix-highlight;
         extraConfig = ''
           set -g @prefix_highlight_show_copy_mode 'on'
         '';
       }
       {
-        plugin = pkgs-unstable.tmuxPlugins.tmux-thumbs;
+        plugin = pkgs.tmuxPlugins.tmux-thumbs;
         extraConfig = ''
           set -g @thumbs-key BSpace
           set -g @thumbs-command 'echo -n {} | ${pkgs.wl-clipboard}/bin/wl-copy'
           set -g @thumbs-regexp-1 'sha256-\S{43}=' # Match nix sha256
         '';
       }
-      pkgs-unstable.tmuxPlugins.jump
+      pkgs.tmuxPlugins.jump
     ];
     extraConfig = ''
       set -g mouse on
