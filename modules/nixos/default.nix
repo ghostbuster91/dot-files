@@ -14,5 +14,6 @@ _:
     bluetooth = ./bluetooth;
     ledger = ./ledger.nix;
     rpiBuilder = ./rpi-builder.nix;
+    beastBuilder = ./beast-builder.nix;
   };
 }

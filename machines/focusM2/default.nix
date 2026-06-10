@@ -25,6 +25,7 @@
       inputs.self.nixosModules.android
       inputs.self.nixosModules.ledger
       inputs.self.nixosModules.rpiBuilder
+      inputs.self.nixosModules.beastBuilder
     ];
 
   home-manager = {

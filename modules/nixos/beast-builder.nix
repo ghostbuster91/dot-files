@@ -1,25 +1,24 @@
 {
   nix.buildMachines = [{
-    hostName = "malina5";
+    hostName = "beast";
     sshUser = "nix-remote-builder";
     sshKey = "/home/kghost/.ssh/nixremote";
-    system = "aarch64-linux";
+    system = "x86_64-linux";
     protocol = "ssh-ng";
-    maxJobs = 3;
-    speedFactor = 2;
+    maxJobs = 8;
+    speedFactor = 4;
     supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
     mandatoryFeatures = [ ];
   }];
-  # required, otherwise remote buildMachines above aren't used
   nix.distributedBuilds = true;
   nix.extraOptions = ''
     builders-use-substitutes = false
   '';
 
   programs.ssh.knownHosts = {
-    rpiBuilder = {
-      hostNames = [ "malina5" ];
-      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBa0PJR7s0hD8Ht+obNNGavut8WlNNlX+Kax0bq83Xu1";
+    beastBuilder = {
+      hostNames = [ "beast" ];
+      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDwcg1+0/b3eIKQUBwSNMHpo8dNIFCZmEWCEsmS3v6R3";
     };
   };
 }
