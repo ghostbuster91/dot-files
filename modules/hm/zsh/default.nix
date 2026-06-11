@@ -1,4 +1,4 @@
-{ pkgs, config, lib, pkgs-unstable, pkgs-stable, ... }:
+{ pkgs, config, lib, pkgs-unstable, ... }:
 let
   omz = "${pkgs.oh-my-zsh}/share/oh-my-zsh/";
   z-rupa = pkgs.fetchFromGitHub {
