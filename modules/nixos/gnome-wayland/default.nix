@@ -44,7 +44,7 @@
       enable = true;
       finegrained = true;
     };
-    nvidiaPersistenced = true;
+    nvidiaPersistenced = false;
     # Reverse sync is not compatible with the open source kernel module
     open = false;
 
