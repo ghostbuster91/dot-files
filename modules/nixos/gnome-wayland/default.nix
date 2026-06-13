@@ -38,6 +38,18 @@
     atomix # puzzle game
   ]);
 
+  environment.systemPackages = [
+    (pkgs.writeShellScriptBin "wake-dgpu" ''
+      # Wake the NVIDIA dGPU from runtime-suspend and re-probe its outputs, so
+      # external displays connected after boot get detected (reverse-PRIME: all
+      # external connectors are wired to the dGPU, which can't see hotplug while
+      # in D3cold). nvidia-smi is on PATH via videoDrivers = [ "nvidia" ].
+      nvidia-smi -q >/dev/null
+      cat /sys/class/drm/card0-*/status >/dev/null
+      echo "dGPU woken and outputs re-probed."
+    '')
+  ];
+
   services.pulseaudio.enable = false;
   hardware.nvidia = {
     powerManagement = {
