@@ -2,9 +2,7 @@
 
   programs.git = {
     enable = true;
-    userName = "ghostbuster91";
-    userEmail = "ghostbuster91@users.noreply.github.com";
-    extraConfig = {
+    settings = {
       merge = { conflictStyle = "diff3"; };
       core = {
         editor = "nvim";
@@ -17,6 +15,8 @@
       alias = { gone = "!${pkgs.git-gone}/bin/git-gone"; };
       submodule = { recurse = true; };
       user = {
+        name = "ghostbuster91";
+        email = "ghostbuster91@users.noreply.github.com";
         signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFFeU4GXH+Ae00DipGGJN7uSqPJxWFmgRo9B+xjV3mK4";
       };
       gpg.format = "ssh";
