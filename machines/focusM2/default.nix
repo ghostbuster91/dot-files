@@ -1,4 +1,4 @@
-{ inputs, username, pkgs-unstable, pkgs-stable, ... }:
+{ inputs, username, pkgs-unstable, pkgs-stable, lib, ... }:
 {
   imports =
     [
@@ -45,6 +45,12 @@
       ];
     };
     extraSpecialArgs = { inherit username; inherit pkgs-unstable; inherit pkgs-stable; };
+  };
+
+  specialisation = {
+    local-build.configuration = {
+      nix.settings.max-jobs = lib.mkForce "auto";
+    };
   };
 
   # This value determines the NixOS release from which the default

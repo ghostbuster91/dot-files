@@ -11,6 +11,7 @@
     mandatoryFeatures = [ ];
   }];
   nix.distributedBuilds = true;
+  nix.settings.max-jobs = 0;
   nix.extraOptions = ''
     builders-use-substitutes = false
   '';
