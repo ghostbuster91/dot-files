@@ -17,7 +17,7 @@
         slack = prev.slack.overrideAttrs (_oldAttrs: {
 
           fixupPhase = ''
-            sed -i -e 's/,"WebRTCPipeWireCapturer"/,"LebRTCPipeWireCapturer"/' $out/lib/slack/resources/app.asar
+            sed -i -e 's/"WebRTCPipeWireCapturer"/"LebRTCPipeWireCapturer"/' $out/lib/slack/resources/app.asar
 
             rm $out/bin/slack
             makeWrapper $out/lib/slack/slack $out/bin/slack \
