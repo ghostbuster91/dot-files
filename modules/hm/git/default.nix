@@ -28,6 +28,7 @@
       ".metals"
       "metals.sbt"
       ".claude/settings.local.json"
+      ".cellar"
     ];
   };
 
