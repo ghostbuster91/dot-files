@@ -14,12 +14,12 @@
     };
 
     virtualbox.host = {
-      enable = true;
-      enableExtensionPack = true;
+      enable = false;
+      enableExtensionPack = false;
     };
   };
-  # turn off libvirtd as it conflicts with virtualbox
-  virtualisation.libvirtd.enable = false;
+  # note: libvirtd conflicts with virtualbox
+  virtualisation.libvirtd.enable = true;
 
   # block kvm module as it conflicts with virtualbox
   boot.blacklistedKernelModules = [ "kvm" "kvm_intel" "kvm_amd" ];

@@ -1,4 +1,4 @@
-{ pkgs, config, lib, pkgs-unstable, ... }:
+{ pkgs, config, lib, ... }:
 let
   omz = "${pkgs.oh-my-zsh}/share/oh-my-zsh/";
   z-rupa = pkgs.fetchFromGitHub {
@@ -123,9 +123,9 @@ in
     ];
     localVariables = {
       ZSH_CACHE_DIR = "${config.xdg.cacheHome}/zsh";
-      FZF_DEFAULT_COMMAND = "${pkgs-unstable.fd}/bin/fd --type f --hidden --exclude .git --exclude node_modules --exclude '*.class'";
-      FZF_CTRL_T_OPTS = "--ansi --preview '${pkgs-unstable.bat}/bin/bat --style=numbers --color=always --line-range :500 {}'";
-      FZF_CTRL_T_COMMAND = "${pkgs-unstable.fd}/bin/fd -I --type file";
+      FZF_DEFAULT_COMMAND = "${pkgs.fd}/bin/fd --type f --hidden --exclude .git --exclude node_modules --exclude '*.class'";
+      FZF_CTRL_T_OPTS = "--ansi --preview '${pkgs.bat}/bin/bat --style=numbers --color=always --line-range :500 {}'";
+      FZF_CTRL_T_COMMAND = "${pkgs.fd}/bin/fd -I --type file";
     };
     sessionVariables = {
       EDITOR = "nvim";
@@ -137,7 +137,7 @@ in
       share = true;
     };
     shellAliases = {
-      lsd = "${pkgs-unstable.eza}/bin/exa --long --header --git --all";
+      lsd = "${pkgs.eza}/bin/exa --long --header --git --all";
     };
     initContent = lib.mkMerge [
       (lib.mkBefore ''
