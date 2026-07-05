@@ -4,13 +4,8 @@ local setup = function()
     vim.g.loaded_netrw = 1
     vim.g.loaded_netrwPlugin = 1
 
-    local local_plugin = vim.fn.expand("~/workspace/nvim-tree.lua")
-    vim.opt.runtimepath:prepend(local_plugin)
-
     local treeutils = require("local/neotree/treeutils")
     local api = require("nvim-tree.api")
-    local lib = require("nvim-tree.lib")
-    local actions = require("nvim-tree.actions")
 
     local VIEW_WIDTH_FIXED = 30
     local VIEW_WIDTH_ADAPTIVE = -1
@@ -78,28 +73,23 @@ local setup = function()
             return has_one_child_folder(node.parent)
         end
 
-        -- map("n", "<CR>", function() api.tree.toggle_descend_until(nil, descend_until_non_single) end,
-        --     opts("Expand until not single or collapse"))
+        -- <CR>: open a file, collapse an open directory, or expand a closed
+        -- directory through single-child folder chains using the upstream
+        -- expand_until feature (nvim-tree/nvim-tree.lua#3166).
+        local function edit_or_expand_until()
+            local node = api.tree.get_node_under_cursor()
+            if node and node.nodes ~= nil and not node.open then
+                api.node.expand(node, { expand_until = descend_until_non_single })
+            else
+                api.node.open.edit()
+            end
+        end
+        map("n", "<CR>", edit_or_expand_until, opts("Open / expand until non-single"))
+
         map("n", "Z", function()
             api.tree.expand_all(nil, nil)
-        end, opts("Expand until not single"))
+        end, opts("Expand all"))
         map("n", "e", toggle_width_adaptive, opts("Toggle adaptive width"))
-
-        ---@type ApiTreeExpandAllOpts
-        local expand_all_opts = {
-            expand_until = function(i, node)
-                print(i .. " " .. node.name)
-                return node.name ~= "stop" and node.name ~= ".git" and node.name ~= "7"
-            end,
-        }
-
-        vim.keymap.set("n", "A", function()
-            api.tree.expand_all(nil, expand_all_opts)
-        end, opts("expand"))
-
-        vim.keymap.set("n", "N", function()
-            api.node.expand(nil, expand_all_opts)
-        end, opts("expand"))
     end
 
     require("nvim-tree").setup({

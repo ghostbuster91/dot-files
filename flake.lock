@@ -1114,23 +1114,6 @@
         "type": "github"
       }
     },
-    "p_nvim-tree-lua": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1725356311,
-        "narHash": "sha256-w8WJfKjrva83b8Yixaljca8WbvTit22gSri/5SiMaIQ=",
-        "owner": "ghostbuster91",
-        "repo": "nvim-tree.lua",
-        "rev": "b506e05cd7394c6f4711df03067befd008d579bf",
-        "type": "github"
-      },
-      "original": {
-        "owner": "ghostbuster91",
-        "ref": "expand_until",
-        "repo": "nvim-tree.lua",
-        "type": "github"
-      }
-    },
     "p_treesitter-devicetree": {
       "flake": false,
       "locked": {
@@ -1214,7 +1197,6 @@
         "p_nvim-scratch": "p_nvim-scratch",
         "p_nvim-telescope-livegrep-args": "p_nvim-telescope-livegrep-args",
         "p_nvim-tree-lsp": "p_nvim-tree-lsp",
-        "p_nvim-tree-lua": "p_nvim-tree-lua",
         "p_treesitter-devicetree": "p_treesitter-devicetree",
         "p_treesitter-hocon": "p_treesitter-hocon",
         "p_treesitter-xml": "p_treesitter-xml",

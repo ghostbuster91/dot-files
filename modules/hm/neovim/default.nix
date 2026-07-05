@@ -139,7 +139,7 @@ in
 
       nvim-neoclip-lua
       indent-blankline-nvim
-      # (p_nvim-tree-lua.overrideAttrs { doCheck = false; })
+      nvim-tree-lua
       (p_nvim-tree-lsp.overrideAttrs { doCheck = false; })
       vim-tmux-clipboard
       telescope-ui-select-nvim

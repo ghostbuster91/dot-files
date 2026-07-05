@@ -39,10 +39,6 @@
         url = "github:cbochs/portal.nvim";
         flake = false;
       };
-      p_nvim-tree-lua = {
-        url = "github:ghostbuster91/nvim-tree.lua/expand_until";
-        flake = false;
-      };
       p_nvim-telescope-livegrep-args = {
         url = "github:nvim-telescope/telescope-live-grep-args.nvim";
         flake = false;
