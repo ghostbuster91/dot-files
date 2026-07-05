@@ -58,8 +58,6 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, b
             end
         end,
     })
-    local lspconfig = require("lspconfig")
-
     -- Use an on_attach function to only map the following keys
     -- after the language server attaches to the current buffer
     local lsp_group = api.nvim_create_augroup("lsp", { clear = true })
@@ -145,29 +143,27 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, b
         end,
     }
 
-    -- Use a loop to conveniently call 'setup' on multiple servers and
-    -- map buffer local keybindings when the language server attaches
+    -- Servers use Neovim's built-in vim.lsp.config/vim.lsp.enable (Neovim
+    -- 0.11+). nvim-lspconfig only ships the per-server defaults under
+    -- lsp/<name>.lua nowadays; the old require("lspconfig")[name].setup{}
+    -- framework is deprecated. Shared config goes through the "*" pseudo-name;
+    -- capabilities are set per-server so ts_ls can keep its own set below.
     -- local capabilities = vim.lsp.protocol.make_client_capabilities()
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
+    vim.lsp.config("*", { on_attach = on_attach })
+
     local servers = { "bashls", "vimls", "yamlls", "rust_analyzer", "gopls" }
-    for _, lsp in ipairs(servers) do
-        lspconfig[lsp].setup({
-            on_attach = on_attach,
-            capabilities = capabilities,
-            -- after 150ms of no calls to lsp, send call
-            -- compare with throttling that is done by default in compe
-            -- flags = {
-            --   debounce_text_changes = 150,
-            -- }
-        })
+    for _, name in ipairs(servers) do
+        vim.lsp.config(name, { capabilities = capabilities })
     end
+    vim.lsp.enable(servers)
 
     -- metals
     local capabilities_no_format = lsp.protocol.make_client_capabilities()
     capabilities_no_format.textDocument.formatting.dynamicRegistration = false
     capabilities_no_format.textDocument.rangeFormatting.dynamicRegistration = false
 
-    require("lspconfig")["ts_ls"].setup({
+    vim.lsp.config("ts_ls", {
         on_attach = function(client, buffer)
             client.server_capabilities.documentFormattingProvider = false
             on_attach(client, buffer)
@@ -178,9 +174,10 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, b
             "--stdio",
         },
     })
+    vim.lsp.enable("ts_ls")
+
     local library = vim.api.nvim_get_runtime_file("*.lua", true)
-    require("lspconfig").lua_ls.setup({
-        on_attach = on_attach,
+    vim.lsp.config("lua_ls", {
         capabilities = capabilities,
         cmd = { binaries.lua_language_server },
         settings = {
@@ -193,9 +190,10 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, b
             },
         },
     })
-    require("lspconfig").nil_ls.setup({
+    vim.lsp.enable("lua_ls")
+
+    vim.lsp.config("nil_ls", {
         capabilities = capabilities,
-        on_attach = on_attach,
         settings = {
             ["nil"] = {
                 formatting = {
@@ -210,6 +208,7 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, b
             },
         },
     })
+    vim.lsp.enable("nil_ls")
 
     -- Scala nvim-metals config
     local metals = require("metals")
@@ -358,14 +357,13 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, b
 
     -- metals end
 
-    lspconfig.smithy_ls.setup({
+    -- root_markers from lspconfig's lsp/smithy_ls.lua default already include
+    -- "smithy-build.json"; on_attach is inherited from the "*" config above.
+    vim.lsp.config("smithy_ls", {
         capabilities = capabilities,
-        on_attach = function(client, bufnr)
-            on_attach(client, bufnr)
-        end,
         cmd = { binaries.smithy_ls_path, "0" },
-        root_dir = lspconfig.util.root_pattern("smithy-build.json"),
     })
+    vim.lsp.enable("smithy_ls")
 
     local misc_group = api.nvim_create_augroup("misc", { clear = true })
     api.nvim_create_autocmd("FileType", {
