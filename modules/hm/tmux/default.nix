@@ -1,4 +1,4 @@
-{ pkgs, config, pkgs-unstable, ... }:
+{ pkgs, config, ... }:
 let
   onedark-theme = import ./tmux-onedark-theme.nix { inherit pkgs; };
 in
