@@ -323,11 +323,10 @@ local setup = function(telescope, telescope_builtin, navic, next_integrations, b
         startMcpServer = true,
         mcpClient = "claude",
     }
-    metals_config.handlers["textDocument/publishDiagnostics"] = lsp.with(lsp.diagnostic.on_publish_diagnostics, {
-        virtual_text = {
-            prefix = "",
-        },
-    })
+    -- NOTE: diagnostic virtual_text is controlled globally via diag.config()
+    -- (see M.virtual_text above). The old per-server publishDiagnostics handler
+    -- (vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, ...)) was both
+    -- deprecated and dead, as metals_config.handlers is reassigned below.
     -- Autocmd that will actually be in charging of starting the whole thing
     local nvim_metals_group = api.nvim_create_augroup("nvim-metals", { clear = true })
     api.nvim_create_autocmd("FileType", {
