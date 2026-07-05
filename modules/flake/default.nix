@@ -20,6 +20,13 @@
             pkgs = prev;
           };
         vimPlugins = prev.vimPlugins // nvimPlugins;
+        # Drop the ~645 MiB mbrola voice database from speech-dispatcher's
+        # closure. speechd only pulls mbrola when its espeak (espeak-ng) is
+        # built with mbrolaSupport; espeak-ng's built-in voices remain, so
+        # Orca / TTS still works.
+        speechd = prev.speechd.override {
+          espeak = prev.espeak.override { mbrolaSupport = false; };
+        };
         slack = prev.slack.overrideAttrs (_oldAttrs: {
 
           fixupPhase = ''
