@@ -5,7 +5,7 @@
   nixpkgs.config.permittedInsecurePackages = [
     "electron-25.9.0"
   ];
-  nixpkgs.overlays = [ self.overlays.default ];
+  nixpkgs.overlays = [ inputs.scala-cli-nix.overlays.default self.overlays.default ];
 
   # Nix daemon config
   nix = {

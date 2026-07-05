@@ -1,7 +1,7 @@
 { self, inputs, lib, ... }:
 {
   flake.overlays = {
-    default = _final: prev:
+    default = final: prev:
       let
         nvimPlugins = import ./nvimPlugins.nix { pkgs = prev; inherit inputs; };
         treesitter-grammars =
@@ -9,6 +9,11 @@
         zsh-histdb-skim = prev.callPackage ./zsh-skim-histdb.nix { };
       in
       {
+        # Metals built from Maven coordinates (org.scalameta::metals:1.6.7) via
+        # scala-cli-nix's buildCoursierApp. `final.scala-cli-nix` is provided by
+        # inputs.scala-cli-nix.overlays.default, composed alongside this overlay
+        # wherever pkgs is built (machines/, modules/hm/, and perSystem below).
+        metals = final.callPackage ./metals/derivation.nix { };
         nvim-treesitter-textobjects =
           import ./nvim-treesitter-textobjects.nix {
             pkgs = prev;
@@ -37,6 +42,7 @@
         allowUnfree = true;
       };
       overlays = [
+        inputs.scala-cli-nix.overlays.default
         self.overlays.default
       ];
     };

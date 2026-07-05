@@ -26,8 +26,8 @@
         url = "github:numtide/treefmt-nix";
         inputs.nixpkgs.follows = "nixpkgs";
       };
-      nix-metals = {
-        url = "github:ghostbuster91/nix-metals/stable";
+      scala-cli-nix = {
+        url = "github:scala-nix/scala-cli-nix";
         inputs.nixpkgs.follows = "nixpkgs";
       };
       nix-smithy-ls = {
