@@ -87,7 +87,7 @@
 
     # Overview
     htop
-    neofetch
+    fastfetch
 
     # xsel # for tmux-yank
     wl-clipboard

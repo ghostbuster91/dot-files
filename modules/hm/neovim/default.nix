@@ -27,8 +27,8 @@ in
     ''
       lua << EOF
         local binaries = {
-          tsserver_path = "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server",
-          typescript_path = "${pkgs.nodePackages.typescript}/lib/node_modules/typescript/lib",
+          tsserver_path = "${pkgs.typescript-language-server}/bin/typescript-language-server",
+          typescript_path = "${pkgs.typescript}/lib/node_modules/typescript/lib",
           metals_binary_path = "${pkgs-stable.metals}/bin/metals",
           smithy_ls_path = "${pkgs-stable.smithy-lang-smithy-ls}/bin/smithy_ls",
           lua_language_server = "${pkgs.lua-language-server}/bin/lua-language-server",
@@ -42,16 +42,16 @@ in
     '';
     # TODO: language server binaries should be passed explicitly to nvim lua configuration
     extraPackages = with pkgs; [
-      nodePackages.bash-language-server
-      nodePackages.vim-language-server
-      nodePackages.yaml-language-server
+      bash-language-server
+      vim-language-server
+      yaml-language-server
       nil
       lua-language-server
       stylua
       shfmt
-      nodePackages.eslint
-      nodePackages.prettier
-      nodePackages.cspell
+      eslint
+      prettier
+      cspell
       rust-analyzer
       rustfmt
       gopls

@@ -2,7 +2,6 @@
   services = {
     desktopManager.gnome.enable = true;
     displayManager.gdm.enable = true;
-    displayManager.gdm.wayland = true;
     xserver = {
       enable = true;
       videoDrivers = [ "nvidia" ];
