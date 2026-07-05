@@ -20,6 +20,8 @@ in
     viAlias = true;
     vimAlias = true;
     defaultEditor = true;
+    withRuby = false;
+    withPython3 = false;
     extraConfig = ''
       	let mapleader = "${leaderKey}"
     '' +
@@ -60,6 +62,7 @@ in
     plugins = with pkgs-stable.vimPlugins; [
       rec {
         plugin = kanagawa-nvim;
+        type = "viml";
         config = ''
           packadd! ${plugin.pname}
           colorscheme kanagawa
@@ -153,6 +156,7 @@ in
       nvim-dap
       {
         plugin = nvim-dap-ui;
+        type = "viml";
         config = ''
           lua << EOF
             require("dapui").setup()
@@ -176,6 +180,7 @@ in
       p_nvim-portal
       {
         plugin = nvim-dap-virtual-text;
+        type = "viml";
         config = ''
           lua <<EOF
             require("nvim-dap-virtual-text").setup()

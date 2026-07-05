@@ -1,5 +1,6 @@
 { pkgs, username, ... }:
 {
+  boot.zfs.forceImportRoot = false;
   boot.loader =
     {
       systemd-boot = {

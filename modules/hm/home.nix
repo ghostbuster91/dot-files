@@ -78,7 +78,7 @@
     # nix stuff
     nix-du
     nix-tree
-    nixfmt-classic
+    nixfmt
     nix-prefetch
     nurl # better prefetch
     nvd # compare nix derivations
