@@ -65,7 +65,7 @@
     },
     "comfyui-nix": {
       "inputs": {
-        "flake-parts": "flake-parts_3",
+        "flake-parts": "flake-parts_2",
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
@@ -277,27 +277,6 @@
     },
     "flake-parts_2": {
       "inputs": {
-        "nixpkgs-lib": [
-          "nix-work",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1704982712,
-        "narHash": "sha256-2Ptt+9h8dczgle2Oo6z5ni5rt/uLMG47UFTR1ry/wgg=",
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "rev": "07f6395285469419cf9d078f59b5b49993198c00",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "type": "github"
-      }
-    },
-    "flake-parts_3": {
-      "inputs": {
         "nixpkgs-lib": "nixpkgs-lib"
       },
       "locked": {
@@ -314,7 +293,7 @@
         "type": "github"
       }
     },
-    "flake-parts_4": {
+    "flake-parts_3": {
       "inputs": {
         "nixpkgs-lib": [
           "nixos-server",
@@ -335,7 +314,7 @@
         "type": "github"
       }
     },
-    "flake-parts_5": {
+    "flake-parts_4": {
       "inputs": {
         "nixpkgs-lib": [
           "nixos-server",
@@ -357,7 +336,7 @@
         "type": "github"
       }
     },
-    "flake-parts_6": {
+    "flake-parts_5": {
       "inputs": {
         "nixpkgs-lib": "nixpkgs-lib_2"
       },
@@ -393,7 +372,7 @@
     "ghostbuster91-blog": {
       "inputs": {
         "devshell": "devshell_2",
-        "flake-parts": "flake-parts_5",
+        "flake-parts": "flake-parts_4",
         "hugo-coder": "hugo-coder",
         "nixpkgs": "nixpkgs_7",
         "paper-mod": "paper-mod",
@@ -641,7 +620,7 @@
     },
     "nix-topology": {
       "inputs": {
-        "flake-parts": "flake-parts_6",
+        "flake-parts": "flake-parts_5",
         "nixpkgs": [
           "nixos-server",
           "nixpkgs"
@@ -659,27 +638,6 @@
         "owner": "oddlama",
         "repo": "nix-topology",
         "type": "github"
-      }
-    },
-    "nix-work": {
-      "inputs": {
-        "flake-parts": "flake-parts_2",
-        "home-manager": [
-          "home-manager"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1733790315,
-        "narHash": "sha256-+Pt6cuO3ADq755fyfGN7+hvN5+/U6gEHGukPEzusiL4=",
-        "path": "/home/kghost/dev/nix-work",
-        "type": "path"
-      },
-      "original": {
-        "path": "/home/kghost/dev/nix-work",
-        "type": "path"
       }
     },
     "nixlib": {
@@ -810,7 +768,7 @@
         "deploy-rs": "deploy-rs",
         "devshell": "devshell",
         "disko": "disko_2",
-        "flake-parts": "flake-parts_4",
+        "flake-parts": "flake-parts_3",
         "flake-root": "flake-root",
         "ghostbuster91-blog": "ghostbuster91-blog",
         "home-manager": "home-manager_4",
@@ -1245,7 +1203,6 @@
         "hardware": "hardware",
         "home-manager": "home-manager_2",
         "hyprland": "hyprland",
-        "nix-work": "nix-work",
         "nixos-server": "nixos-server",
         "nixpkgs": [
           "nixpkgs-stable"

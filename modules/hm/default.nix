@@ -1,5 +1,8 @@
-{ self, inputs, ... }:
+{ ... }:
 {
+  # home-manager modules, consumed by the NixOS-embedded home-manager on the
+  # `focus` host (see machines/focusM2/default.nix). There is no standalone
+  # homeConfigurations output — this host wires home-manager in via NixOS.
   flake.homeModules = {
     base = ./home.nix;
     nvim = ./neovim;
@@ -10,37 +13,4 @@
     scala = ./scala;
     foot = ./foot;
   };
-
-  flake.homeConfigurations =
-    let
-      username = "kghost";
-      system = "x86_64-linux";
-      # metals and smithy-lang-smithy-ls are provided by self.overlays.default,
-      # built from Maven coords via scala-cli-nix (see modules/flake/{metals,smithy-ls}).
-      overlays = [ inputs.scala-cli-nix.overlays.default self.overlays.default ];
-      pkgs-unstable = import inputs.nixpkgs-unstable {
-        inherit system overlays;
-        config.allowUnfree = true;
-      };
-
-      pkgs-stable = import inputs.nixpkgs {
-        inherit system overlays;
-        config.allowUnfree = true;
-      };
-    in
-    {
-      focus = inputs.home-manager.lib.homeManagerConfiguration {
-        extraSpecialArgs = { inherit username; inherit pkgs-unstable; inherit pkgs-stable; };
-        pkgs = pkgs-stable;
-        modules = [
-          self.homeModules.base
-          self.homeModules.nvim
-          self.homeModules.git
-          self.homeModules.zsh
-          self.homeModules.tmux
-          self.homeModules.alacritty
-          self.homeModules.scala
-        ];
-      };
-    };
 }
