@@ -11,6 +11,6 @@ pkgs.tmuxPlugins.mkTmuxPlugin {
     owner = "ghostbuster91";
     repo = pname;
     rev = version;
-    sha256 = "sha256-XQRGY5oYnn+Np/cc0gE2jhqOSOcKAC20AGZa78dK/F0=";
+    sha256 = "sha256-pqdZOVPE46xrkdKEjoaX/riX+3TYvrl7rXscj57kY1I=";
   };
 }
