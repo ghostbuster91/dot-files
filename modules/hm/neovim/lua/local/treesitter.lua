@@ -105,12 +105,24 @@ local setup = function(_next_integrations)
             vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 
             local opts = { buffer = args.buf }
-            vim.keymap.set("n", "<CR>", init_selection,
-                vim.tbl_extend("force", opts, { desc = "Treesitter: init selection" }))
-            vim.keymap.set("x", "<CR>", node_incremental,
-                vim.tbl_extend("force", opts, { desc = "Treesitter: increment selection" }))
-            vim.keymap.set("x", "<BS>", node_decremental,
-                vim.tbl_extend("force", opts, { desc = "Treesitter: decrement selection" }))
+            vim.keymap.set(
+                "n",
+                "<CR>",
+                init_selection,
+                vim.tbl_extend("force", opts, { desc = "Treesitter: init selection" })
+            )
+            vim.keymap.set(
+                "x",
+                "<CR>",
+                node_incremental,
+                vim.tbl_extend("force", opts, { desc = "Treesitter: increment selection" })
+            )
+            vim.keymap.set(
+                "x",
+                "<BS>",
+                node_decremental,
+                vim.tbl_extend("force", opts, { desc = "Treesitter: decrement selection" })
+            )
         end,
     })
 end
