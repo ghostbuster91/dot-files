@@ -31,7 +31,7 @@
           "nixos-server",
           "nixpkgs"
         ],
-        "systems": "systems_4"
+        "systems": "systems_3"
       },
       "locked": {
         "lastModified": 1770165109,
@@ -390,24 +390,6 @@
         "type": "github"
       }
     },
-    "flake-utils": {
-      "inputs": {
-        "systems": "systems_3"
-      },
-      "locked": {
-        "lastModified": 1681202837,
-        "narHash": "sha256-H+Rh19JDwRtpVPAWp64F+rlEtxUWBAQW28eAi3SRSzg=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "cfacdce06f30d2b68473a46042957675eebb3401",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
     "ghostbuster91-blog": {
       "inputs": {
         "devshell": "devshell_2",
@@ -651,27 +633,6 @@
       "original": {
         "owner": "Mic92",
         "repo": "nix-index-database",
-        "type": "github"
-      }
-    },
-    "nix-smithy-ls": {
-      "inputs": {
-        "flake-utils": "flake-utils",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1750336853,
-        "narHash": "sha256-gQmzfucRxqCgjCamFv3FmBe/1tpRGIhOp9MLTBLlX9k=",
-        "owner": "ghostbuster91",
-        "repo": "nix-smithy-ls",
-        "rev": "b512f0c265f737a7e82b6240c06e69f4ff6718dd",
-        "type": "github"
-      },
-      "original": {
-        "owner": "ghostbuster91",
-        "repo": "nix-smithy-ls",
         "type": "github"
       }
     },
@@ -1268,7 +1229,6 @@
         "hardware": "hardware",
         "home-manager": "home-manager_2",
         "hyprland": "hyprland",
-        "nix-smithy-ls": "nix-smithy-ls",
         "nix-work": "nix-work",
         "nixos-server": "nixos-server",
         "nixpkgs": [
@@ -1369,21 +1329,6 @@
         "type": "github"
       }
     },
-    "systems_5": {
-      "locked": {
-        "lastModified": 1681028828,
-        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
-        "owner": "nix-systems",
-        "repo": "default",
-        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-systems",
-        "repo": "default",
-        "type": "github"
-      }
-    },
     "treefmt-nix": {
       "inputs": {
         "nixpkgs": [
@@ -1449,7 +1394,7 @@
     },
     "utils": {
       "inputs": {
-        "systems": "systems_5"
+        "systems": "systems_4"
       },
       "locked": {
         "lastModified": 1731533236,

@@ -30,10 +30,6 @@
         url = "github:scala-nix/scala-cli-nix";
         inputs.nixpkgs.follows = "nixpkgs";
       };
-      nix-smithy-ls = {
-        url = "github:ghostbuster91/nix-smithy-ls";
-        inputs.nixpkgs.follows = "nixpkgs";
-      };
       # Neovim plugins
       p_nvim-next = {
         url = "github:ghostbuster91/nvim-next";

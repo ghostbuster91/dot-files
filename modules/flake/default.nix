@@ -9,11 +9,12 @@
         zsh-histdb-skim = prev.callPackage ./zsh-skim-histdb.nix { };
       in
       {
-        # Metals built from Maven coordinates (org.scalameta::metals:1.6.7) via
-        # scala-cli-nix's buildCoursierApp. `final.scala-cli-nix` is provided by
+        # Language servers built from Maven coordinates via scala-cli-nix's
+        # buildCoursierApp. `final.scala-cli-nix` is provided by
         # inputs.scala-cli-nix.overlays.default, composed alongside this overlay
         # wherever pkgs is built (machines/, modules/hm/, and perSystem below).
         metals = final.callPackage ./metals/derivation.nix { };
+        smithy-lang-smithy-ls = final.callPackage ./smithy-ls/derivation.nix { };
         nvim-treesitter-textobjects =
           import ./nvim-treesitter-textobjects.nix {
             pkgs = prev;

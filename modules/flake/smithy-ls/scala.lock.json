@@ -1,0 +1,53 @@
+{
+  "dependencies": [
+    {
+      "sha256": "LL0Rm/GWHCh4gxCWPcgLpl9Yze7B3ROci9sSQPqiw28=",
+      "url": "https://repo1.maven.org/maven2/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar"
+    },
+    {
+      "sha256": "tJxclYMW7WegnGmd2pqnScr0NNUdhj3qWZ7zakm5yFU=",
+      "url": "https://repo1.maven.org/maven2/com/google/errorprone/error_prone_annotations/2.48.0/error_prone_annotations-2.48.0.jar"
+    },
+    {
+      "sha256": "ThqndHTeF5HZbcVZMvtG799TIzVI849iunN2+LC8ZlA=",
+      "url": "https://repo1.maven.org/maven2/org/eclipse/lsp4j/org.eclipse.lsp4j.jsonrpc/0.23.1/org.eclipse.lsp4j.jsonrpc-0.23.1.jar"
+    },
+    {
+      "sha256": "sWu8YjKjlG4D1Te7m+dOGEidvGqLjFq2y3mAhU34RA8=",
+      "url": "https://repo1.maven.org/maven2/org/eclipse/lsp4j/org.eclipse.lsp4j/0.23.1/org.eclipse.lsp4j-0.23.1.jar"
+    },
+    {
+      "sha256": "jjO2SlDpvNqFNvT720eQZ7gW0lQcI0l2KnIjCZhTzEM=",
+      "url": "https://repo1.maven.org/maven2/software/amazon/smithy/smithy-build/1.68.0/smithy-build-1.68.0.jar"
+    },
+    {
+      "sha256": "IabwZiV89U5AQkZv0cQnyXTNZCpI2XcJ9OlAYj1o1XY=",
+      "url": "https://repo1.maven.org/maven2/software/amazon/smithy/smithy-cli/1.68.0/smithy-cli-1.68.0.jar"
+    },
+    {
+      "sha256": "eZ3fy+OZn6QxSDn/LELbgMY2pnjK+FhOoaS+fjEEbfI=",
+      "url": "https://repo1.maven.org/maven2/software/amazon/smithy/smithy-diff/1.68.0/smithy-diff-1.68.0.jar"
+    },
+    {
+      "sha256": "y4Orw86ksjXQtuBkTjvooLxtbNQqDndLQyzHColx/EE=",
+      "url": "https://repo1.maven.org/maven2/software/amazon/smithy/smithy-language-server/0.7.0/smithy-language-server-0.7.0.jar"
+    },
+    {
+      "sha256": "4HXHc0szmymYEdeXf+OWY/TaP38hBrKYdnbwBh4ANC8=",
+      "url": "https://repo1.maven.org/maven2/software/amazon/smithy/smithy-model/1.68.0/smithy-model-1.68.0.jar"
+    },
+    {
+      "sha256": "kl5nzmvjPPR1qXe6NL0rByouA70Fuv9fxTSbgyDhEkQ=",
+      "url": "https://repo1.maven.org/maven2/software/amazon/smithy/smithy-syntax/1.68.0/smithy-syntax-1.68.0.jar"
+    },
+    {
+      "sha256": "tQ91hFZPUn6fJai+2IDZIa4JsR6LXEpMr7L06pXuMJI=",
+      "url": "https://repo1.maven.org/maven2/software/amazon/smithy/smithy-utils/1.68.0/smithy-utils-1.68.0.jar"
+    }
+  ],
+  "javaOptions": [
+  ],
+  "kind": "coursier-app",
+  "mainClass": "software.amazon.smithy.lsp.Main",
+  "version": 9
+}
