@@ -1,4 +1,4 @@
-{ pkgs, username, pkgs-stable, pkgs-unstable, ... }: {
+{ pkgs, lib, username, pkgs-stable, pkgs-unstable, ... }: {
 
   home = {
     inherit username;
@@ -111,10 +111,27 @@
 
     mattermost-desktop
     pkgs-unstable.opencode
-    pkgs-unstable.claude-code
+    # claude-code is installed (wrapped) via programs.claude-code below.
   ]);
 
   programs = {
+    # Declarative Claude Code. The module wraps the `claude` binary with a
+    # home-manager-managed plugin dir holding a generated .mcp.json, so MCP
+    # servers are registered without touching the CLI-owned (mutable)
+    # ~/.claude.json. Registers the nvim-mcp server for every project.
+    claude-code = {
+      enable = true;
+      package = pkgs-unstable.claude-code;
+      mcpServers.nvim = {
+        type = "stdio";
+        # Absolute store path — no reliance on the binary being on PATH.
+        command = lib.getExe pkgs-stable.nvim-mcp;
+        # --connect auto pre-connects to any nvim socket already open in the
+        # git root at server startup; get_targets/connect handle the rest
+        # on demand. The p_nvim-mcp plugin opens that socket via serverstart().
+        args = [ "--connect" "auto" ];
+      };
+    };
     eza = {
       enable = true;
     };

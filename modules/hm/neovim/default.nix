@@ -201,6 +201,7 @@ in
       hover-nvim
       ssr-nvim
       vim-go
+      p_nvim-mcp # setup() called from lua/local/mcp.lua (guards transient git editors)
     ];
   };
 }

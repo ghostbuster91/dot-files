@@ -51,6 +51,15 @@
         url = "github:antosha417/nvim-lsp-file-operations";
         flake = false;
       };
+      # nvim-mcp ships both a Lua plugin and a Rust MCP-server binary. The
+      # `p_nvim` prefix makes the overlay auto-build the Lua plugin as
+      # vimPlugins.p_nvim-mcp; the binary is built separately from this same
+      # source in modules/flake/default.nix. flake = false so we don't drag in
+      # its fenix/nixpkgs inputs — we build the binary against our own rust.
+      p_nvim-mcp = {
+        url = "github:linw1995/nvim-mcp";
+        flake = false;
+      };
       p_treesitter-devicetree = {
         url = "github:joelspadin/tree-sitter-devicetree";
         flake = false;

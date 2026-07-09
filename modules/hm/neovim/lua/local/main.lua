@@ -172,6 +172,7 @@ local setup = function(binaries)
     require("local/flash").setup()
     require("local/scratch").setup()
     require("local/hover").setup()
+    require("local/mcp").setup()
 end
 
 return { setup = setup }

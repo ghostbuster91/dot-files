@@ -1034,6 +1034,22 @@
         "type": "github"
       }
     },
+    "p_nvim-mcp": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1782953394,
+        "narHash": "sha256-6S2v92RLWO2eDzA3i8+zTrZbqs55Zok0IWJtzR0r9wA=",
+        "owner": "linw1995",
+        "repo": "nvim-mcp",
+        "rev": "45384581660dd7566773d39eb00770168a0aeed1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "linw1995",
+        "repo": "nvim-mcp",
+        "type": "github"
+      }
+    },
     "p_nvim-next": {
       "flake": false,
       "locked": {
@@ -1192,6 +1208,7 @@
         ],
         "nixpkgs-stable": "nixpkgs-stable_2",
         "nixpkgs-unstable": "nixpkgs-unstable_2",
+        "p_nvim-mcp": "p_nvim-mcp",
         "p_nvim-next": "p_nvim-next",
         "p_nvim-portal": "p_nvim-portal",
         "p_nvim-scratch": "p_nvim-scratch",
