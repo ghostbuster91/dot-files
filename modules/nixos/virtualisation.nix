@@ -1,5 +1,6 @@
 { username, pkgs, ... }: {
 
+  environment.systemPackages = with pkgs; [ virt-viewer ];
   virtualisation = {
     docker = {
       package = pkgs.docker_29;
