@@ -143,7 +143,11 @@ local setup = function()
         group = vim.api.nvim_create_augroup("git_refresh_nvim-tree", { clear = true }),
         callback = function()
             vim.schedule(function()
-                api.git.reload()
+                -- Use tree.reload() (goes through reload_explorer) instead of
+                -- git.reload() (reload_git): the latter reads git.config.git.enable
+                -- which nvim-tree never populates, so it errors when the tree is
+                -- open. reload_explorer refreshes git status via a safe path.
+                api.tree.reload()
             end)
         end,
     })

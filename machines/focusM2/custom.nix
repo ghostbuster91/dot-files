@@ -78,6 +78,8 @@
     gst_all_1.gst-libav
 
     python3
+    bitwarden-cli
+    bitwarden-desktop
   ];
 
   environment.shells = with pkgs; [ zsh ];

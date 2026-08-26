@@ -3,7 +3,7 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.permittedInsecurePackages = [
-    "electron-25.9.0"
+    "electron-39.8.10"
   ];
   nixpkgs.overlays = [ inputs.scala-cli-nix.overlays.default self.overlays.default ];
 
